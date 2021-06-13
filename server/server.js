@@ -16,6 +16,4 @@ server.on("listening", () => {
 
 process.on("SIGTERM", () => server.close(() => disconnectDb()));
 
-// connectDb().then(() => server.listen(port));
-
-() => server.listen(port)
+connectDb().then(() => server.listen(port));

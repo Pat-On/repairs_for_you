@@ -1,0 +1,18 @@
+.navigationItems {
+  font-size: 1.4rem;
+  list-style: none;
+  display: flex;
+  // flex-flow: column;
+  height: 100%;
+  width: 100%;
+
+  align-items: center;
+  justify-content: flex-end;
+}
+
+@media (max-width: 800px) {
+  .navigationItems {
+    flex-flow: column;
+    padding-top: 2rem;
+  }
+}

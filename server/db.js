@@ -1,10 +1,11 @@
 import { Pool } from "pg";
 
-const dbUrl = process.env.DATABASE_URL || "postgres://localhost:5432/cyf";
+require('dotenv').config()
+
+const dbUrl = process.env.DATABASE_URL || "postgres://localhost:5432/cyf_hotel";
 
 require('dotenv').config()
 
-console.log(process.env.USER_SQL)
 // local machine 
 let configObject = {
 	user: process.env.USER_SQL,
@@ -25,8 +26,10 @@ if (process.env.DATABASE_URL) {
 	}
 }
 
-const pool = new Pool(configObject);
 
+export const pool = new Pool(configObject);
+
+//const pool = new Pool(configObject);
 
 
 export const connectDb = async () => {
@@ -43,4 +46,4 @@ export const connectDb = async () => {
 
 export const disconnectDb = () => pool.close();
 
-export default { query: pool.query };
+// export default { query: pool.query };

@@ -20,7 +20,7 @@ if (process.env.DATABASE_URL) {
 	}
 }
 
-const pool = new Pool(configObject);
+export const pool = new Pool(configObject);
 
 export const connectDb = async () => {
 	let client;
@@ -36,4 +36,4 @@ export const connectDb = async () => {
 
 export const disconnectDb = () => pool.close();
 
-export default { query: pool.query };
+// export default { query: pool.query };

@@ -5,6 +5,7 @@ import InputFields from "../handyPeopleList/InputFields";
 
 
 export default function HandyPeople() {
+
 	return (
 		<div className="App">
 			<header className="card"></header>

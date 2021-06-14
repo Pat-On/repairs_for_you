@@ -10,25 +10,9 @@ margin-top: 10em;
 }
 /*****************************************************************header styling ***********************************************/
 header {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-    background-color: rgb(209, 195, 195);
+    background-color: black;
 }
 
-header > .btn-primary{
-    margin-top: 1.2em;
-    margin-bottom: 1.2em;
-    background-color: rgb(231, 224, 224);
-    border: none;
-    font-size: larger;
-    padding-top: 0.2em;
-    padding-bottom: 0.2em;
-    margin-left: 1.2em;
-    margin-right: 1.2em;
-    color: black;
-
-}
 /*****************************************************************hire from  styling ***********************************************/
 .hire-from{
     font-style: italic;
@@ -48,26 +32,36 @@ header > .btn-primary{
 /*****************************************************************input fields  styling ***********************************************/
 
 .form-group{
-    margin-top: 6em;
     display: flex;
-    width: 80%;
+    flex-direction: row;
     margin-left: auto;
+    margin-right: auto;
+    width: 80%;
     font-size: larger;
     margin-bottom: 3em;
+    justify-content: center;
+
+} 
+.form-group :first-child, .form-group :nth-child(2){
+    display: flex;
+    flex-direction: column;
 
 }
 .form-group  > div > input{
     width: 20em;
     height: 3em;
     margin-left: 2em;
+    margin-right: 2em;
     
 }
 .form-group  > div > label{
     margin-left: 2em;
 
 }
-.btn-search{
-    align-self: flex-end;
+
+.btn-primary{
+  margin-top: 2.4em;  
+
 }
 
 /*****************************************************************cards container styling ***********************************************/

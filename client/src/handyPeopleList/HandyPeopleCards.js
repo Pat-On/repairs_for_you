@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import HandyPeopleCard from "./HandyPeopleCard";
-import HandyPeopleTestData from "./HandypeopleTestData.json";
+import HandyPeopleTestData from "./HandyPeopleTestData.json";
 
 
 
 export default function HandyPeopleCards() {
 	const 	[list,setList]=useState(HandyPeopleTestData);
-	console.log(list);
+
 
 	return (
 		<div className="cards-container">

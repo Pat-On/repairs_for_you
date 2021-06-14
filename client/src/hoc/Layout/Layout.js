@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import Aux from "../Auxillary/Auxillary";
 import Toolbar from "../../components/navigation/Toolbar/Toolbar";
-// import SideDrawer from "../../components/navigation/Sidedrwer/Sidedrawer";
+import SideDrawer from "../../components/navigation/Sidedrwer/Sidedrawer";
 // import Footer from "../../components/Footer/Footer";
 
 import classes from "./Layout.module.scss";
@@ -21,7 +21,7 @@ const Layout = (props) => {
 	return (
 		<Aux>
 			<Toolbar drawerToggleClicked={sideDrawerToggleHandler} />
-			{/* <SideDrawer open={sideDrawerIsVisible} closed={sideDrawerClosedHandler} /> */}
+			<SideDrawer open={sideDrawerIsVisible} closed={sideDrawerClosedHandler} />
 
 			<main className={classes.content}>{props.children}</main>
 			{/* <Footer /> */}

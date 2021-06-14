@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 
-import Aux from "../Auxillary/Auxillary.js";
-import Toolbar from "../../components/navigation/Toolbar/Toolbar.js";
-import SideDrawer from "../../components/Navigation/Sidedrwer/Sidedrawer.js";
-import Footer from "../../components/Footer/Footer.js";
+import Aux from "./../Auxillary/Auxillary.js";
+import Toolbar from "./../../components/navigation/Toolbar/Toolbar.js";
+import SideDrawer from "./../../components/Navigation/Sidedrwer/Sidedrawer.js";
+import Footer from "./../../components/Footer/Footer.js";
 
 import classes from "./Layout.module.scss";
 

@@ -1,0 +1,97 @@
+
+ body,html{
+    width: 100%;
+} 
+.App{
+
+}
+/*****************************************************************header styling ***********************************************/
+header {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    background-color: rgb(209, 195, 195);
+}
+
+header > .btn-primary{
+    margin-top: 1.2em;
+    margin-bottom: 1.2em;
+    background-color: rgb(231, 224, 224);
+    border: none;
+    font-size: larger;
+    padding-top: 0.2em;
+    padding-bottom: 0.2em;
+    margin-left: 1.2em;
+    margin-right: 1.2em;
+    color: black;
+
+}
+/*****************************************************************hire from  styling ***********************************************/
+.hire-from{
+    font-style: italic;
+    text-align: center;
+    margin-top: 3em;
+    width: 80%;
+    height: 10rem;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: rgb(3, 122, 67);
+    color: rgb(236, 230, 230);
+    padding-top: 3em;
+   
+
+
+}
+/*****************************************************************input fields  styling ***********************************************/
+
+.form-group{
+    margin-top: 6em;
+    display: flex;
+    width: 80%;
+    margin-left: auto;
+    font-size: larger;
+    margin-bottom: 3em;
+
+}
+.form-group  > div > input{
+    width: 20em;
+    height: 3em;
+    margin-left: 2em;
+    
+}
+.form-group  > div > label{
+    margin-left: 2em;
+
+}
+.btn-search{
+    align-self: flex-end;
+}
+
+/*****************************************************************cards container styling ***********************************************/
+
+.cards-container{
+    margin-left: 1em;
+    margin-right: 1em;
+    display: grid;
+    grid-template-columns: auto;
+    gap: 0.2em;
+  
+}
+/*****************************************************************individual card styling ***********************************************/
+
+.card-body{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.name-image{
+    display: flex;
+    flex-direction: column;
+}
+.image{
+    width: 90px;
+    height: 60px;
+}
+.bio{
+    width: 60%;
+}

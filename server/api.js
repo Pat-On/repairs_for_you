@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { pool } from "./db";
 // using hard coded json file data for now
+import HandyPeopleTestData from "../client/src/handyPeopleList/HandyPeopleTestData.json";
 
 // console.log(query)
 
@@ -27,5 +28,7 @@ router.get("/", async (_, res) => {
 	// res.json({ message: "Hello, world!" });
 });
 
-
+router.get("/handyPeople", (_, res) => {
+	res.json(HandyPeopleTestData);
+});
 export default router;

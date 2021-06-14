@@ -5,7 +5,7 @@ export default function handyPeopleCard({ onelist }) {
 
 		<div className="card" >
 			<div className="name-image">
-				{/* <img className="image" src={onelist.img} alt="profile" /> */}
+				<img className="image" src={onelist.img} alt="profile" />
 				<span className="card-text">{onelist.firstName}</span>
 				<span className="card-text">{onelist.lastName}</span>
 			</div>

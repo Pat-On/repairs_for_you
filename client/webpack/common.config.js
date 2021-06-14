@@ -22,6 +22,12 @@ module.exports = {
 				test: /\.css$/,
 				use: ["style-loader", "css-loader"],
 			},
+			    // New rule: start SASS
+			{
+				test: /\.scss$/,
+				use: ["style-loader", "css-loader", "sass-loader"],
+			},
+				// end
 		],
 	},
 	output: {

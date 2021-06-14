@@ -1,15 +1,36 @@
 import { Pool } from "pg";
-//const dbUrl = process.env.DATABASE_URL || "postgres://localhost:5432/cyf";
 
-const pool = new Pool({
-	/* connectionString: dbUrl,
-	connectionTimeoutMillis: 5000, */
-	port:5432,
-	user:"cyf",
-	password:"CYFStudent123",
-	database:"repairs_for_you",
-	host:"localhost",
-});
+require('dotenv').config()
+
+const dbUrl = process.env.DATABASE_URL || "postgres://localhost:5432/cyf_hotel";
+
+require('dotenv').config()
+
+// local machine 
+let configObject = {
+	user: process.env.USER_SQL,
+	host: process.env.HOST_SQL,
+	database: process.env.DATABASE_SQL,
+	password: process.env.PASSWORD_SQL,
+	port: process.env.PORT_SQL,
+}
+
+// modify object in production - HEROKU SOLUTION
+if (process.env.DATABASE_URL) {
+	configObject = {
+		connectionString: dbUrl,
+		ssl: {
+			rejectUnauthorized: false,
+		  },
+		connectionTimeoutMillis: 5000,
+	}
+}
+
+
+export const pool = new Pool(configObject);
+
+//const pool = new Pool(configObject);
+
 
 export const connectDb = async () => {
 	let client;
@@ -25,4 +46,4 @@ export const connectDb = async () => {
 
 export const disconnectDb = () => pool.close();
 
-export default { query: pool.query };
+// export default { query: pool.query };

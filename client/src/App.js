@@ -14,7 +14,7 @@ const App = () => (
 			<Switch>
 				<Route path="/" exact component={Home} />
 				<Route path="/buyers" exact component={() => <div><h1>PLACEHOLDER buyers</h1></div>} />
-				<Route path="/handy" exact component={() => <div><h1>PLACEHOLDER handy</h1></div>} />
+				<Route path="/handy" exact component={HandyPeople} />
 				<Route path="/contact" exact component={() => <div><h1>PLACEHOLDER CONTACTS</h1></div>} />
 
 				<Route path="/about/this/site"><About /></Route>

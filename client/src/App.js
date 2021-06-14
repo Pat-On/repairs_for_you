@@ -5,6 +5,7 @@ import Layout from "./hoc/Layout/Layout";
 
 import "./App.scss";
 
+
 const App = () => (
 	<div className="App container">
 		<Layout>

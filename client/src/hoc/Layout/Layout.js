@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import Aux from "../Auxillary/Auxillary";
 import Toolbar from "../../components/navigation/Toolbar/Toolbar";
-import SideDrawer from "../../components/navigation/Sidedrwer/Sidedrawer";
+import SideDrawer from "../../components/Navigation/Sidedrwer/Sidedrawer.js";
 import Footer from "../../components/Footer/Footer";
 
 import classes from "./Layout.module.scss";

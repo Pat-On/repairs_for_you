@@ -3,7 +3,6 @@
       "id": 1,
       "firstName": "Michael",
       "lastName": "Biruk",
-      "img": "https://dogtime.com/assets/uploads/2011/03/puppy-development.jpg",
       "skills": [
         "Electric Installation",
         "Plastering"
@@ -43,7 +42,6 @@
       "id": 1,
       "firstName": "Patryk",
       "lastName": "Novak",
-      "img": "https://dogtime.com/assets/uploads/2011/03/puppy-development.jpg",
       "skills": [
         "Plastering",
         "Plumbing"
@@ -82,7 +80,6 @@
       "id": 1,
       "firstName": "Senait",
       "lastName": "Ekubai",
-      "img": "https://dogtime.com/assets/uploads/2011/03/puppy-development.jpg",
       "skills": [
         "Painting",
         "Decorating"

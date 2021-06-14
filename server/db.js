@@ -4,6 +4,9 @@ const dbUrl = process.env.DATABASE_URL || "postgres://localhost:5432/cyf";
 
 const pool = new Pool({
 	connectionString: dbUrl,
+	ssl: {
+		rejectUnauthorized: false,
+	  },
 	connectionTimeoutMillis: 5000,
 });
 

@@ -1,12 +1,12 @@
 import React from "react";
-import HandyPeopleCard from "../handyPeopleList/handyPeopleCard";
-import HireFrom from "../handyPeopleList/HireFrom";
+import HandyPeopleCards from "../handyPeopleList/HandyPeopleCards";
+import "../handyPeopleList/app.css";
+
 
 export default function Handypeople() {
 	return (
-		<div>
-			<HireFrom />
-			<HandyPeopleCard />
+		<div className="App">
+			<HandyPeopleCards />
 		</div>
 	);
 }

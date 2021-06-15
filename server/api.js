@@ -12,7 +12,7 @@ const router = new Router();
 router.get("/", async (_, res) => {
 	 const client = await pool.connect()
 	//  console.log(client)
-	client.query(`SELECT * FROM test`).then( response => {
+	client.query(`SELECT * FROM users`).then( response => {
 		res.status(200).json({
 			data: response.rows
 		})

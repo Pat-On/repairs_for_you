@@ -1,6 +1,8 @@
 import { Router } from "express";
 
 import { pool } from "./db";
+
+import bookingRouter from "./routers/bookingRouter"
 // console.log(query)
 
 // const poolQuery = pool

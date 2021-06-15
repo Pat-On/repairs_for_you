@@ -1,6 +1,10 @@
 const express = require("express");
 const router = express.Router();
 
+/*
+    the main root of this router is: "/api/v1/booking"
+*/
+
 router
     .route("/")
     .get(async (req, res, next) => {
@@ -12,7 +16,7 @@ router
     .post(async (req, res, next) => {
         res.status(200).json({
             status: "success",
-            msg: 'get method bookingRouter "/"',
+            msg: 'post method bookingRouter "/"',
         });
     });
 
@@ -26,7 +30,7 @@ router
 
         res.status(200).json({
             status: "success",
-            msg: `get method bookingRouter "/:id" You sent${id}`,
+            msg: `get method bookingRouter "/:id" You sent ${id}`,
         });
     })
     .patch(async (req, res, next) => {
@@ -37,17 +41,19 @@ router
 
         res.status(200).json({
             status: "success",
-            msg: `patch method bookingRouter "/:id" You sent${id}`,
+            msg: `patch method bookingRouter "/:id" You sent ${id}`,
         });
     })
     .delete(async (req, res, next) => {
 
-        const {id} = req.params
-        
-                res.status(200).json({
-                    status: "success",
-                    msg: `delete method bookingRouter "/:id" You sent${id}`,
-                });
-            });
+        const {
+            id
+        } = req.params
+
+        res.status(200).json({
+            status: "success",
+            msg: `delete method bookingRouter "/:id" You sent ${id}`,
+        });
+    });
 
 module.exports = router;

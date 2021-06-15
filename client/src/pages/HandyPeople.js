@@ -1,7 +1,7 @@
 import React from "react";
-import HandyPeopleCards from "../handyPeopleList/HandyPeopleCards";
-import "../handyPeopleList/HandyPeopleList.css";
-import InputFields from "../handyPeopleList/InputFields";
+import HandyPeopleCards from "../components/handyPeopleList/HandyPeopleCards";
+import "../components/handyPeopleList/HandyPeopleList.css";
+import InputFields from "../components/handyPeopleList/InputFields";
 
 
 export default function HandyPeople() {

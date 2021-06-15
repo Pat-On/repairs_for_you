@@ -1,11 +1,13 @@
 const express = require('express');
 const router = express.Router();
 
-// router.use('/:offerId/reviews', reviewRouter);
+import reviewRouter from "./reviewRouter"
 
 /*
     the main root of this router is: "/api/v1/offers"
 */
+router.use('/:offerId/reviews', reviewRouter);
+
 router
     .route('/')
     .get(async (req, res, next) => {

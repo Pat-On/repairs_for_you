@@ -1,6 +1,8 @@
 const express = require("express");
 const router = express.Router();
-
+import {
+    pool
+} from "./../db";
 /*
     the main root of this router is: "/api/v1/booking"
 */
@@ -8,6 +10,19 @@ const router = express.Router();
 router
     .route("/")
     .get(async (req, res, next) => {
+        try {
+            const bookingsAll = await pool.query("SELECT * FROM offers");
+
+            res.status(200).json({
+                status: "success",
+                msg: "bookings route was not created yet",
+            });
+        } catch (error) {
+            res.status(400).json({
+                status: "fail",
+                msg: error.message,
+            });
+        }
         res.status(200).json({
             status: "success",
             msg: 'get method bookingRouter "/"',
@@ -23,21 +38,35 @@ router
 router
     .route("/:bookingId")
     .get(async (req, res, next) => {
+        try {
+            const {
+                bookingId
+            } = req.params;
 
-        const {
-            bookingId
-        } = req.params
+            const bookingsAll = await pool.query(
+                `SELECT * FROM offers WHERE offer_id = $1`,
+                [bookingId]
+            );
 
+            res.status(200).json({
+                status: "success",
+                msg: "bookings route was not created yet",
+            });
+        } catch (error) {
+            res.status(400).json({
+                status: "fail",
+                msg: error.message,
+            });
+        }
         res.status(200).json({
             status: "success",
-            msg: `get method bookingRouter "/:bookingId" You sent ${bookingId}`,
+            msg: 'get method bookingRouter "/"',
         });
     })
     .patch(async (req, res, next) => {
-
         const {
             bookingId
-        } = req.params
+        } = req.params;
 
         res.status(200).json({
             status: "success",
@@ -45,10 +74,9 @@ router
         });
     })
     .delete(async (req, res, next) => {
-
         const {
             bookingId
-        } = req.params
+        } = req.params;
 
         res.status(200).json({
             status: "success",

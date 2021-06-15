@@ -1,6 +1,10 @@
 const express = require('express');
 const router = express.Router();
 
+import {
+    pool
+} from "./../db";
+
 /* 
 /signup
 /login
@@ -76,10 +80,22 @@ router.delete(
 router
     .route('/')
     .get(async (req, res, next) => {
-        res.status(200).json({
-            status: "success",
-            msg: 'get method usersRouter "/"',
-        });
+        try {
+            const bookingsAll = await pool.query("SELECT * FROM users")
+
+            res.status(200).json({
+                status: "success",
+                length: bookingsAll.rowCount,
+                data: bookingsAll.rows
+            });
+
+        } catch (error) {
+
+            res.status(400).json({
+                status: "fail",
+                msg: error.message,
+              });
+        }
     })
     .post(async (req, res, next) => {
         res.status(200).json({
@@ -90,15 +106,28 @@ router
 router
     .route('/:userId')
     .get(async (req, res, next) => {
+        try {
+            const {
+                userId
+            } = req.params;
 
-        const {
-            userId
-        } = req.params
+            const bookingsAll = await pool.query(
+                `SELECT * FROM offers WHERE offer_id = $1`,
+                [userId]
+            );
 
-        res.status(200).json({
-            status: "success",
-            msg: `get method usersRouter "/:offerId" You sent ${userId}`,
-        });
+            res.status(200).json({
+                status: "success",
+                status: "success",
+                length: bookingsAll.rowCount,
+                data: bookingsAll.rows[0]
+            });
+        } catch (error) {
+            res.status(400).json({
+                status: "fail",
+                msg: error.message,
+            });
+        }
     })
     .patch(async (req, res, next) => {
 

@@ -1,5 +1,8 @@
 const express = require('express');
 const router = express.Router();
+import {
+    pool
+} from "./../db";
 
 /*
     the main root of this router is: "/api/v1/reviews"
@@ -16,30 +19,53 @@ const router = express.Router();
 router
     .route("/")
     .get(async (req, res, next) => {
+        try {
+            const bookingsAll = await pool.query("SELECT * FROM reviews")
+
+            res.status(200).json({
+                status: "success",
+                length: bookingsAll.rowCount,
+                data: bookingsAll.rows
+            });
+
+        } catch (error) {
+
+            res.status(400).json({
+                status: "fail",
+                msg: error.message,
+              });
+        }
         res.status(200).json({
             status: "success",
-            msg: 'get method reviewRouter "/"',
-        });
-    })
-    .post(async (req, res, next) => {
-        res.status(200).json({
-            status: "success",
-            msg: 'post method reviewRouter "/"',
+            msg: 'get method bookingRouter "/"',
         });
     });
 
 router
     .route("/:reviewId")
     .get(async (req, res, next) => {
+        try {
+            const {
+                reviewId
+            } = req.params;
 
-        const {
-            reviewId
-        } = req.params
+            const bookingsAll = await pool.query(
+                `SELECT * FROM offers WHERE offer_id = $1`,
+                [reviewId]
+            );
 
-        res.status(200).json({
-            status: "success",
-            msg: `get method reviewRouter "/:reviewId" You sent ${reviewId}`,
-        });
+            res.status(200).json({
+                status: "success",
+                status: "success",
+                length: bookingsAll.rowCount,
+                data: bookingsAll.rows[0]
+            });
+        } catch (error) {
+            res.status(400).json({
+                status: "fail",
+                msg: error.message,
+            });
+        }
     })
     .patch(async (req, res, next) => {
 

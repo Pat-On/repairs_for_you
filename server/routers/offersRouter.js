@@ -46,7 +46,7 @@ router
 
             res.status(200).json({
                 status: "success",
-                msg: `get method offersRouter "/:offerId" You sent ${offerId}`,
+                msg: `patch method offersRouter "/:offerId" You sent ${offerId}`,
             });
         }
 
@@ -59,7 +59,7 @@ router
 
             res.status(200).json({
                 status: "success",
-                msg: `get method offersRouter "/:offerId" You sent ${offerId}`,
+                msg: `delete method offersRouter "/:offerId" You sent ${offerId}`,
             });
         }
     );

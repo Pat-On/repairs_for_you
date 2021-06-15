@@ -32,7 +32,7 @@ router.patch(
 
         res.status(200).json({
             status: "success",
-            msg: `get method usersRouter "/updateMyPassword"`,
+            msg: `patch method usersRouter "/updateMyPassword"`,
         });
     }
 );
@@ -52,7 +52,7 @@ router.patch(
 
         res.status(200).json({
             status: "success",
-            msg: `get method usersRouter "/updateMe"`,
+            msg: `patch method usersRouter "/updateMe"`,
         });
     }
 );
@@ -62,7 +62,7 @@ router.delete(
 
         res.status(200).json({
             status: "success",
-            msg: `get method usersRouter "/deleteMe"`,
+            msg: `delete method usersRouter "/deleteMe"`,
         });
     }
 );
@@ -108,7 +108,7 @@ router
 
         res.status(200).json({
             status: "success",
-            msg: `get method usersRouter "/:offerId" You sent ${userId}`,
+            msg: `patch method usersRouter "/:offerId" You sent ${userId}`,
         });
     })
     .delete(async (req, res, next) => {
@@ -119,7 +119,7 @@ router
 
         res.status(200).json({
             status: "success",
-            msg: `get method usersRouter "/:offerId" You sent ${userId}`,
+            msg: `delete method usersRouter "/:offerId" You sent ${userId}`,
         });
     });
 

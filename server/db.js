@@ -1,18 +1,20 @@
 import { Pool } from "pg";
 
-const dbUrl = process.env.DATABASE_URL || "postgres://localhost:5432/cyf";
 
-require('dotenv').config()
+require("dotenv").config();
 
-console.log(process.env.USER_SQL)
-// local machine 
+const dbUrl = process.env.DATABASE_URL || "postgres://localhost:5432/repairs_for_you";
+
+
+
+// local machine
 let configObject = {
 	user: process.env.USER_SQL,
 	host: process.env.HOST_SQL,
 	database: process.env.DATABASE_SQL,
 	password: process.env.PASSWORD_SQL,
 	port: process.env.PORT_SQL,
-}
+};
 
 // modify object in production - HEROKU SOLUTION
 if (process.env.DATABASE_URL) {
@@ -20,13 +22,15 @@ if (process.env.DATABASE_URL) {
 		connectionString: dbUrl,
 		ssl: {
 			rejectUnauthorized: false,
-		  },
+		},
 		connectionTimeoutMillis: 5000,
-	}
+	};
 }
 
-const pool = new Pool(configObject);
 
+export const pool = new Pool(configObject);
+
+//const pool = new Pool(configObject);
 
 
 export const connectDb = async () => {
@@ -43,4 +47,4 @@ export const connectDb = async () => {
 
 export const disconnectDb = () => pool.close();
 
-export default { query: pool.query };
+// export default { query: pool.query };

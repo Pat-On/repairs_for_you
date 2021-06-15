@@ -23,10 +23,6 @@ router
                 msg: error.message,
             });
         }
-        res.status(200).json({
-            status: "success",
-            msg: 'get method bookingRouter "/"',
-        });
     })
     .post(async (req, res, next) => {
         res.status(200).json({
@@ -58,10 +54,6 @@ router
                 msg: error.message,
             });
         }
-        res.status(200).json({
-            status: "success",
-            msg: 'get method bookingRouter "/"',
-        });
     })
     .patch(async (req, res, next) => {
         const {

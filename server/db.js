@@ -1,17 +1,20 @@
 import { Pool } from "pg";
 
-const dbUrl = process.env.DATABASE_URL || "postgres://localhost:5432/cyf_hotel";
 
-// require('dotenv').config()
+require("dotenv").config();
 
-// local machine 
+const dbUrl = process.env.DATABASE_URL || "postgres://localhost:5432/repairs_for_you";
+
+
+
+// local machine
 let configObject = {
 	user: process.env.USER_SQL,
 	host: process.env.HOST_SQL,
 	database: process.env.DATABASE_SQL,
 	password: process.env.PASSWORD_SQL,
 	port: process.env.PORT_SQL,
-}
+};
 
 // modify object in production - HEROKU SOLUTION
 if (process.env.DATABASE_URL) {
@@ -19,9 +22,9 @@ if (process.env.DATABASE_URL) {
 		connectionString: dbUrl,
 		ssl: {
 			rejectUnauthorized: false,
-		  },
+		},
 		connectionTimeoutMillis: 5000,
-	}
+	};
 }
 
 

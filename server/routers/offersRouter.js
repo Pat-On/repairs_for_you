@@ -35,7 +35,7 @@ router
 
         res.status(200).json({
             status: "success",
-            msg: `get method offersRouter "/:id" You sent ${offerId}`,
+            msg: `get method offersRouter "/:offerId" You sent ${offerId}`,
         });
     })
     .patch(async (req, res, next) => {
@@ -46,7 +46,7 @@ router
 
             res.status(200).json({
                 status: "success",
-                msg: `get method offersRouter "/:id" You sent ${offerId}`,
+                msg: `get method offersRouter "/:offerId" You sent ${offerId}`,
             });
         }
 
@@ -59,12 +59,9 @@ router
 
             res.status(200).json({
                 status: "success",
-                msg: `get method offersRouter "/:id" You sent ${offerId}`,
+                msg: `get method offersRouter "/:offerId" You sent ${offerId}`,
             });
         }
-
     );
-
-
 
 module.exports = router;

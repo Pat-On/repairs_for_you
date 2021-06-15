@@ -12,6 +12,8 @@ import {
 
 import bookingRouter from "./routers/bookingRouter";
 import offersRouter from "./routers/offersRouter";
+import reviewRouter from "./routers/reviewRouter";
+import usersRouter from "./routers/usersRouter";
 
 const apiRoot = "/api";
 const staticDir = path.join(__dirname, "static");
@@ -31,6 +33,8 @@ if (app.get("env") === "production") {
 // our router
 app.use("/api/v1/booking", bookingRouter);
 app.use("/api/v1/offers", offersRouter);
+app.use("/api/v1/reviews", reviewRouter);
+app.use("/api/v1/users", usersRouter);
 
 app.use(express.static(staticDir));
 app.use(pushStateRouting(apiRoot, staticDir));

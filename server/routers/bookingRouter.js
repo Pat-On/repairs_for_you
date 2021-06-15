@@ -21,38 +21,38 @@ router
     });
 
 router
-    .route("/:id")
+    .route("/:bookingId")
     .get(async (req, res, next) => {
 
         const {
-            id
+            bookingId
         } = req.params
 
         res.status(200).json({
             status: "success",
-            msg: `get method bookingRouter "/:id" You sent ${id}`,
+            msg: `get method bookingRouter "/:bookingId" You sent ${bookingId}`,
         });
     })
     .patch(async (req, res, next) => {
 
         const {
-            id
+            bookingId
         } = req.params
 
         res.status(200).json({
             status: "success",
-            msg: `patch method bookingRouter "/:id" You sent ${id}`,
+            msg: `patch method bookingRouter "/:bookingId" You sent ${bookingId}`,
         });
     })
     .delete(async (req, res, next) => {
 
         const {
-            id
+            bookingId
         } = req.params
 
         res.status(200).json({
             status: "success",
-            msg: `delete method bookingRouter "/:id" You sent ${id}`,
+            msg: `delete method bookingRouter "/:bookingId" You sent ${bookingId}`,
         });
     });
 

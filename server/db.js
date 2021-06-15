@@ -1,10 +1,8 @@
 import { Pool } from "pg";
 
-require('dotenv').config()
-
 const dbUrl = process.env.DATABASE_URL || "postgres://localhost:5432/cyf_hotel";
 
-require('dotenv').config()
+// require('dotenv').config()
 
 // local machine 
 let configObject = {

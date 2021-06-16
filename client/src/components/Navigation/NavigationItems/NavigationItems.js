@@ -14,6 +14,7 @@ const navigationItems = (props) => (
     <NavigationItem link="/handy">Handypeople</NavigationItem>
     <NavigationItem link="/contact">Contact</NavigationItem>
     <NavigationItem link="/admin-panel">Admin Panel</NavigationItem>
+    <NavigationItem link="/login">Login</NavigationItem>
 
   </ul>
 );

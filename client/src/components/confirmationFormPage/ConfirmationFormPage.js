@@ -1,7 +1,7 @@
 import React from "react";
 
-import UnorderedList from "../UI/unorderedList/UnorderedList";
-import Button from "../UI/button/Button";
+import UnorderedList from "../../UI/unorderedList/UnorderedList";
+import Button from "../../UI/button/Button";
 
 import classes from "./ConfirmationFormPage.module.css";
 

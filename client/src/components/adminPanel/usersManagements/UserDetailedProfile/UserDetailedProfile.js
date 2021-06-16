@@ -4,11 +4,10 @@ import { Route, Redirect, useRouteMatch } from "react-router-dom";
 const UserDetailedProfile = (props) => {
   let { path, url } = useRouteMatch();
 
-  const [singleUser, setSingleUser] = useState();
-  console.log(path, url);
+  const [singleUser, setSingleUser] = useState("");
   const userId = props.match.params.id;
 
-  console.log(userId)
+
   useEffect(async () => {
     try {
       const userRaw = await fetch(`/api/v1/users/${userId}`);
@@ -34,9 +33,6 @@ const UserDetailedProfile = (props) => {
         <p> last name: {singleUser.last_name} </p>
         <p> user role: {singleUser.user_role} </p>
         <p> created at: {singleUser.created_data} </p>
-        {/* {singleUser.skills.map((item) => (
-          <span>item</span>
-        ))} */}
       </div>
     );
   }

@@ -6,10 +6,10 @@ const UserManagements = (props) => {
 
   return (
     <li>
-      <p> name: {props.user.first_name} </p>{" "}
-      <p> name: {props.user.last_name} </p>{" "}
-      <p> name: {props.user.user_role} </p>{" "}
-      <p> name: {props.user.created_data} </p>{" "}
+      <p> first name: {props.user.first_name} </p>{" "}
+      <p> last name: {props.user.last_name} </p>{" "}
+      <p> user role: {props.user.user_role} </p>{" "}
+      <p> created at: {props.user.created_data} </p>{" "}
       <Link to={`${url}/${props.user.user_id}`}> Users Management Panel </Link>{" "}
     </li>
   );

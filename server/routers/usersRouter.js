@@ -112,7 +112,7 @@ router
             } = req.params;
 
             const bookingsAll = await pool.query(
-                `SELECT * FROM offers WHERE offer_id = $1`,
+                `SELECT * FROM users WHERE user_id = $1`,
                 [userId]
             );
 

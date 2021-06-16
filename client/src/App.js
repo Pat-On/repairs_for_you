@@ -4,6 +4,8 @@ import HandyPeople from "./pages/HandyPeople";
 import Home from "./pages/Home";
 import Layout from "./hoc/Layout/Layout";
 import AdminPanel from "./components/adminPanel/AdminPanel"
+import Login from "./containers/signUp/SignUp"
+
 
 import "./App.scss";
 
@@ -21,6 +23,8 @@ const App = () => (
 
 				<Route path="/about/this/site"><About /></Route>
 				<Route path="/admin-panel" component={(props) => <AdminPanel {...props} />} />
+				<Route path="/login" component={(props) => <Login {...props} />} />
+
 			</Switch>
 		</Layout>
 	</div>

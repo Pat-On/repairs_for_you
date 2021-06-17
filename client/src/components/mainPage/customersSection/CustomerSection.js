@@ -20,6 +20,8 @@ const CustomerSection = (props) => {
       exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
        in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.`,
       review: 5,
+      user_name: "Name1",
+      user_surname: "Surname1"
     },
     {
       photo: customer2,
@@ -28,6 +30,8 @@ const CustomerSection = (props) => {
     exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
      in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.`,
       review: 3,
+      user_name: "Name2",
+      user_surname: "Surname2"
     },
     {
       photo: customer3,
@@ -36,6 +40,8 @@ const CustomerSection = (props) => {
   exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
    in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.`,
       review: 4,
+      user_name: "Name3",
+      user_surname: "Surname3"
     },
   ];
 
@@ -60,8 +66,10 @@ const CustomerSection = (props) => {
           Your browser is not supported!
         </video>
       </div>
-      <h2 className={classes.customers__heading} > Happy Customers </h2>
-      <div className={classes.customers__commentContainer}> {usersComments} </div>
+      <h2 className={classes.customers__heading}> Happy Customers </h2>
+      <div className={classes.customers__commentContainer}>
+        {usersComments}
+      </div>
     </div>
   );
 };

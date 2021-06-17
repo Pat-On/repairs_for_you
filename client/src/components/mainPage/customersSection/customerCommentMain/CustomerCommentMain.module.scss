@@ -1,14 +1,22 @@
-.customer  {
-    text-align: center;
-    width: 24%;
-    box-shadow: 0 1.5rem 4rem rgba(black, 0.15);
-    padding: 1rem;
+.customer {
+  text-align: center;
+  width: 24%;
+  box-shadow: 0 1.5rem 4rem rgba(black, 0.15);
+  padding: 1rem;
 
+  &__figure {
     img {
-        width: 16rem;
+      width: 16rem;
     }
 
-    p {
-        font-size: 1.5rem;
-    }
+  }
+
+  &__figcaption {
+    font-size: 2rem;
+    font-weight: bold;
+  }
+  p {
+    font-size: 1.5rem;
+  }
+
 }

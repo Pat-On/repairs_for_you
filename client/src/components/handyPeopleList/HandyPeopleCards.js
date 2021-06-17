@@ -10,7 +10,7 @@ export default function HandyPeopleCards() {
 	const 	[list,setList]=useState(HandyPeopleTestData);
 
 	useEffect(() => {
-		fetch("/api/handyPeople")
+		fetch("/api/users/handyman")
 			.then((res) => {
 				if (!res.ok) {
 					throw new Error(res.statusText);

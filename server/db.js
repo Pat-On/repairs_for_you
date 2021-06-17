@@ -1,10 +1,11 @@
 import { Pool } from "pg";
 
+
 require("dotenv").config();
 
 const dbUrl = process.env.DATABASE_URL || "postgres://localhost:5432/repairs_for_you";
 
-require("dotenv").config();
+
 
 // local machine
 let configObject = {

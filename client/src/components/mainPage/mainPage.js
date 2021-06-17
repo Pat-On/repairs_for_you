@@ -1,6 +1,6 @@
 import React from "react";
 
-import classes from "./MainPage.module.scss";
+import classes from "./mainPage.module.scss";
 import PrimarySection from "./primarySection/PrimarySection";
 import AboutSection from "./aboutSection/AboutSection";
 import CustomersSection from "./customersSection/CustomerSection";

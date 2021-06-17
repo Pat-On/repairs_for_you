@@ -1,12 +1,20 @@
-import React, { useEffect, useState } from "react";
-import { Route, Redirect, useRouteMatch, Switch, Link } from "react-router-dom";
+import React from "react";
 
 import classes from "./CustomerCommentMain.module.scss";
 
+import fullStart from "../../../../public/starFullColor.svg";
+import star from "../../../../public/star.svg";
+
 const CustomerCommentMain = (props) => {
   let stars = [];
-  for (let i = 0; i < props.item.review; i++) {
-    stars.push("   *   ");
+  for (let i = 0; i < 6; i++) {
+    if (i < props.item.review) {
+      console.log(i)
+      stars.push(<img className={classes.customer__star} key={i}src={fullStart} alt="Star icon made by Freepik" />);
+    }
+    if (i > props.item.review) {
+      stars.push(<img className={classes.customer__star} key={i} src={star} alt="Star icon made by Pixel Perfect" />);
+    }
   }
   return (
     <div className={classes.customer}>
@@ -18,7 +26,7 @@ const CustomerCommentMain = (props) => {
       </figure>
 
       <p>{props.item.comment}</p>
-      <p>{stars}</p>
+      <div className={classes.customer__starContainer}>{stars}</div>
     </div>
   );
 };

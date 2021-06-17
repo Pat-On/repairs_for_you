@@ -5,19 +5,11 @@
   box-shadow: 0 1.5rem 4rem rgba(black, 0.15);
   padding: 1rem;
 
-
-
-
   &__figure {
     width: 16rem;
     height: 16rem;
     position: relative;
-margin: 0 auto;
-    // grid-column: 2 / 3;
-    // grid-row: 2 / 3;
-    // justify-self: center;
-    // align-self: center;
-
+    margin: 0 auto;
     display: flex;
     align-items: center;
 
@@ -36,7 +28,6 @@ margin: 0 auto;
       transform: translateX(0rem) scale(1.2);
       filter: blur(3px) brightness(80%);
     }
-
   }
 
   &__figcaption {
@@ -69,14 +60,13 @@ margin: 0 auto;
     margin: 0 auto;
   }
 
-&__starContainer {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-}
-&__star {
-  width: 2rem;
-  height: 2rem;
-}
-
+  &__starContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+  &__star {
+    width: 2rem;
+    height: 2rem;
+  }
 }

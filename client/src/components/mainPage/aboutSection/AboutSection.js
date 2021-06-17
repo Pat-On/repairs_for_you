@@ -1,12 +1,9 @@
-import React, { useEffect, useState } from "react";
-import { Route, Redirect, useRouteMatch, Switch, Link } from "react-router-dom";
+import React from "react";
 
 import classes from "./AboutSection.module.scss";
 
 import cyfLogo from "./../../../public/cyf_brand.png"
 import coventryRefLogo from "./../../../public/coventryRefugeeCenter.jpg"
-
-// !TODO: decomposition of this elements in next stage
 
 const AboutSection = (props) => {
   return (

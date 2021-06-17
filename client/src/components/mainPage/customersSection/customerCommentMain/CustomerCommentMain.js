@@ -5,15 +5,16 @@ import classes from "./CustomerCommentMain.module.scss";
 import fullStart from "../../../../public/starFullColor.svg";
 import star from "../../../../public/star.svg";
 
+const imgItem = (link, i) => <img className={classes.customer__star} key={i}src={link} alt="Star icon made by Freepik" />
+
 const CustomerCommentMain = (props) => {
   let stars = [];
   for (let i = 0; i < 6; i++) {
     if (i < props.item.review) {
-      console.log(i)
-      stars.push(<img className={classes.customer__star} key={i}src={fullStart} alt="Star icon made by Freepik" />);
+      stars.push(imgItem(fullStart, i));
     }
     if (i > props.item.review) {
-      stars.push(<img className={classes.customer__star} key={i} src={star} alt="Star icon made by Pixel Perfect" />);
+      stars.push(imgItem(star, i));
     }
   }
   return (

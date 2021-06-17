@@ -7,9 +7,6 @@ import linkedin from "../../public/linkedin.svg"
 import locato from "../../public/locato.svg"
 import email from "../../public/email.svg"
 
-
-
-
 const Footer = (props) => {
   return (
     <footer className={classes.footer}>

@@ -1,9 +1,6 @@
-import React, { useEffect, useState } from "react";
-import { Route, Redirect, useRouteMatch, Switch, Link } from "react-router-dom";
+import React from "react";
 
 import classes from "./Explanation.module.scss";
-
-// !TODO: decomposition of this elements in next stage
 
 const Explanation = (props) => {
   return (

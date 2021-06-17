@@ -10,5 +10,3 @@ const logo = (props) => (
 );
 
 export default logo;
-
-// style={{ height: props.height }}

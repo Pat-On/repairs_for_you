@@ -45,6 +45,7 @@ const CustomerSection = (props) => {
     },
   ];
 
+  //!TODO: proper spinner
   let usersComments = <p> LOADING... </p>;
 
   if (commentArray.length === 3) {

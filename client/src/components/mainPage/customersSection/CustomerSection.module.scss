@@ -5,10 +5,8 @@
     display: grid;
     justify-items: center;
     align-items: center;
-
     width: 100%;
     height: 100%;
-
     z-index: 20;
 
     &__bgVideo {
@@ -17,22 +15,19 @@
         left: 0;
         height: 100%;
         width: 100%;
-      
-        // z-index: -;
         opacity: 0.15;
         overflow: hidden;
+
         &__video {
             height: 100%;
             width: 100%;
-        
-            //similar to cover in relation to background images properties
             object-fit: cover;
         }
     }
+
     &__heading {
         font-size: 4rem;
     }
-
 
     &__commentContainer {
         display: flex;

@@ -1,10 +1,10 @@
 import React from "react";
 
-import classes from "./MainPage.module.scss";
+import classes from "./mainPage.module.scss";
 import PrimarySection from "./primarySection/PrimarySection";
 import AboutSection from "./aboutSection/AboutSection";
 import CustomersSection from "./customersSection/CustomerSection";
-import Explanation from "./explanaTion/Explanation";
+import Explanation from "./explanation/explanation";
 
 
 /**
@@ -12,14 +12,14 @@ import Explanation from "./explanaTion/Explanation";
  * It is using four other components as a sub components PrimarySection AboutSection CustomersSection Explanation
  */
 const MainPage = (props) => {
-  return (
-    <div className={classes.mainPage}>
-      <PrimarySection />
-      <AboutSection />
-      <CustomersSection />
-      <Explanation />
-    </div>
-  );
+	return (
+		<div className={classes.mainPage}>
+			<PrimarySection />
+			<AboutSection />
+			<CustomersSection />
+			<Explanation />
+		</div>
+	);
 };
 
 export default MainPage;

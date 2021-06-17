@@ -1,6 +1,6 @@
 import React from "react";
 
-import classes from "./Explanation.module.scss";
+import classes from "./explanation.module.scss";
 
 
 /**
@@ -8,11 +8,11 @@ import classes from "./Explanation.module.scss";
  * !TODO: component is not yet implemented it is just placeholder
  */
 const Explanation = (props) => {
-  return (
-    <div className={classes.explanation}>
-      <p>I am explanation - how it works</p>
-    </div>
-  );
+	return (
+		<div className={classes.explanation}>
+			<p>I am explanation - how it works</p>
+		</div>
+	);
 };
 
 export default Explanation;

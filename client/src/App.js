@@ -3,9 +3,9 @@ import About from "./pages/About";
 import HandyPeople from "./pages/HandyPeople";
 import Home from "./pages/Home";
 import Layout from "./hoc/Layout/Layout";
-import AdminPanel from "./components/adminPanel/AdminPanel"
-import Login from "./containers/signUp/SignUp"
-import MainPage from "./components/mainPage/MainPage";
+import AdminPanel from "./components/adminPanel/AdminPanel";
+import Login from "./containers/signUp/SignUp";
+import MainPage from "./components/mainPage/mainPage";
 
 import "./App.scss";
 import HandymanProfile from "./pages/HandymanProfile";

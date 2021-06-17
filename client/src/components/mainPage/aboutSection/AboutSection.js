@@ -4,6 +4,8 @@ import { Route, Redirect, useRouteMatch, Switch, Link } from "react-router-dom";
 import classes from "./AboutSection.module.scss";
 
 import cyfLogo from "./../../../public/cyf_brand.png"
+import rmcLogo from "./../../../public/rmc-logo.png"
+import coventryRefLogo from "./../../../public/coventryRefugeeCenter.jpg"
 
 // !TODO: decomposition of this elements in next stage
 
@@ -20,6 +22,11 @@ const AboutSection = (props) => {
         realise their entrepreneurial potential by providing home repairs
         services for customers across the city of Coventry.
       </p>
+      <ul>
+          <li><img src={cyfLogo}/></li>
+          <li><img src={rmcLogo} /></li>
+          <li><img src={coventryRefLogo} /></li>
+      </ul>
     </div>
   );
 };

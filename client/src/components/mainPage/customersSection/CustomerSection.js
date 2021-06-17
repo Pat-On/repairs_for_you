@@ -4,7 +4,7 @@ import { Route, Redirect, useRouteMatch, Switch, Link } from "react-router-dom";
 import classes from "./CustomerSection.module.scss";
 
 import backgroundVideo from "../../../public/ConstructionWorkersDESKTOP.mp4"
-// import CustomerCommentMain from "./customerCommentMain/CustomerCommentMain.scss";
+import CustomerCommentMain from "./customerCommentMain/CustomerCommentMain";
 
 const CustomerSection = (props) => {
   // !TODO: background video is good candidate for independent component

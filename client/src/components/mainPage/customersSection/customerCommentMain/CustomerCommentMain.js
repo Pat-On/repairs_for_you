@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Route, Redirect, useRouteMatch, Switch, Link } from "react-router-dom";
 
-import classes from "./CustomerCommentMain.module.scss";
+// import classes from "./CustomerCommentMain.module.scss";
 
 const CustomerCommentMain = (props) => {
   return (

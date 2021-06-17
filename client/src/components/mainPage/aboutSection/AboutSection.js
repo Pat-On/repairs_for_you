@@ -12,8 +12,8 @@ import coventryRefLogo from "./../../../public/coventryRefugeeCenter.jpg"
 const AboutSection = (props) => {
   return (
     <div className={classes.about}>
-      <h2>About US</h2>
-      <p>
+      <h2 className={classes.about__heading}>About US</h2>
+      <p className={classes.about__description}>
         After the success of last year's project to help refugees and migrants
         find work as cleaners, CYF is partnering with the Coventry Refugee and
         Migrant Centre again to build another site aimed at helping migrants
@@ -22,10 +22,10 @@ const AboutSection = (props) => {
         realise their entrepreneurial potential by providing home repairs
         services for customers across the city of Coventry.
       </p>
-      <ul>
-          <li><img src={cyfLogo}/></li>
-          <li><img src={rmcLogo} /></li>
-          <li><img src={coventryRefLogo} /></li>
+      <ul className={classes.about__list}>
+          <li className={classes.about__list__element}><img src={cyfLogo}/></li>
+          <li className={classes.about__list__element}><img src={rmcLogo} /></li>
+          <li className={classes.about__list__element}><img src={coventryRefLogo} /></li>
       </ul>
     </div>
   );

@@ -1,12 +1,48 @@
 .about {
-    grid-row: 2 / 3;
-    grid-column: 1 / -1;
-    background-color: lightgrey;
+  grid-row: 2 / 3;
+  grid-column: 1 / -1;
+  background-color: lightgrey;
 
-    justify-items: center;
-    align-items: center;
-  
-    height: 100%;
+  display: grid;
+  grid-template-columns: 0.3fr repeat(2, 1fr) 0.3fr;
+  grid-template-rows: repeat(3, 1fr) ;
+
+  justify-items: center;
+  align-items: center;
+
+  height: 100%;
+  width: 100%;
+  text-align: center;
+  &__heading {
+    grid-row: 1 / 2;
+    grid-column: 1 / -1;
+    font-size: 4rem;
+  }
+
+  &__description {
+    grid-row: 2 / 3;
+    grid-column: 2 / 4;
+
+    font-size: 2rem;
+  }
+
+  &__list {
+    list-style: none;
     width: 100%;
-    text-align: center;
+    display: flex;
+    grid-row: 3 / 4;
+    grid-column: 2 / 4;
+    justify-content: space-evenly;
+
+    &__element {
+      background-color: white;
+      width: 20rem; // simple trick to make all logos the same size.
+
+      img {
+        margin: 0 auto;
+        display: block;
+        height: 5rem;
+      }
+    }
+  }
 }

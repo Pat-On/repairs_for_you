@@ -1,6 +1,13 @@
 import React from "react";
 
 import classes from "./Footer.module.scss";
+import twitter from "../../public/twitter.svg"
+import facebook from "../../public/facebook.svg"
+import linkedin from "../../public/linkedin.svg"
+import locato from "../../public/locato.svg"
+import email from "../../public/email.svg"
+
+
 
 
 const Footer = (props) => {
@@ -10,7 +17,7 @@ const Footer = (props) => {
 <ul className={classes.footer__listOfIcons}>
         <li>
           <a className={classes.links} href="mailto: patryk.nowak@gmail.com">
-            <img src="" alt="" />
+            <img src={email} alt="Email icon made by Pixel Perfect" />
           </a>
         </li>
         <li>
@@ -20,7 +27,7 @@ const Footer = (props) => {
             href=""
             target="_blank"
           >
-            <img src="" alt="" />
+            <img src={twitter} alt="Twitter icon made by Pixel Perfect" />
           </a>
         </li>
         <li>
@@ -30,7 +37,27 @@ const Footer = (props) => {
             target="_blank"
             href=""
           >
-            <img src="" alt="" />
+            <img src={facebook} alt="Facebook icon made by Pixel Perfect" />
+          </a>
+        </li>
+        <li>
+          <a
+            rel="noreferrer"
+            className={classes.links}
+            target="_blank"
+            href=""
+          >
+            <img src={linkedin} alt="LinkedIn icon made by Pixel Perfect" />
+          </a>
+        </li>
+        <li>
+          <a
+            rel="noreferrer"
+            className={classes.links}
+            target="_blank"
+            href=""
+          >
+            <img src={locato} alt="Locato icon made by Freepik" />
           </a>
         </li>
       </ul>
@@ -60,10 +87,3 @@ const Footer = (props) => {
 };
 
 export default Footer;
-
-
-
-// Twitter icon made by Freepik
-// LinkedIn icon made by Pixel perfect
-// Google pointer icon made by Freepik
-//Facebook icon made by Pixel perfect

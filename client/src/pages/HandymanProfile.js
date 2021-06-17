@@ -24,7 +24,7 @@ const HandymanProfile = ({ id }) => {
 	return !user ? (
 		<h1 className="loading message-loading">{message}</h1>
 	) : (
-		<Handyman userData={user}/>
+		<Handyman userData={user} />
 	);
 };
 export default HandymanProfile;

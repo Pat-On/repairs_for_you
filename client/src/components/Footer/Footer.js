@@ -75,7 +75,7 @@ const Footer = (props) => {
 
 <div className={classes.footer__end}>
   <p>
-    2021 by Repairs For You Company 
+  &copy; 2021 by Repairs For You Company 
   </p>
   <p>
   A Social enterprise founded by Coventry Refugee and Migrant Centre

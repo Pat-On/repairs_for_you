@@ -5,6 +5,7 @@ import classes from "./MainPage.module.scss";
 import PrimarySection from "./primarySection/PrimarySection";
 import AboutSection from "./aboutSection/AboutSection";
 import CustomersSection from "./customersSection/CustomerSection";
+import Explanation from "./explanaTion/Explanation";
 
 // !TODO: decomposition of this elements in next stage
 
@@ -14,7 +15,7 @@ const MainPage = (props) => {
       <PrimarySection />
       <AboutSection />
       <CustomersSection />
-      <div className={classes.mainPage__explanation}>Explanation</div>
+      <Explanation />
     </div>
   );
 };

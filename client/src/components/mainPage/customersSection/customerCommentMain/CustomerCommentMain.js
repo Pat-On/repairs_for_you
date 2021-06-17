@@ -11,7 +11,7 @@ const CustomerCommentMain = (props) => {
   return (
     <div className={classes.customer}>
       <figure className={classes.customer__figure}>
-        <img src={props.item.photo} />
+        <img className={classes.customer__img} src={props.item.photo} />
         <figcaption className={classes.customer__figcaption}>
           {props.item.user_name} {props.item.user_surname[0]}.
         </figcaption>

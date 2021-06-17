@@ -1,19 +1,13 @@
 .mainPage {
+
   position: relative;
   display: grid;
   height: 100%;
   grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: 80vh repeat(3, minmax(min-content, max-content));
+  grid-template-rows: repeat(4, 80vh) ; // repeat(3, minmax(min-content, max-content))
   justify-items: center;
   align-items: center;
   grid-row-gap: 3.5rem;
-
-
-
-&__about {
-    grid-row: 2 / 3;
-    grid-column: 1 / -1;
-}
 
 &__customers {
     grid-row: 3 / 4;

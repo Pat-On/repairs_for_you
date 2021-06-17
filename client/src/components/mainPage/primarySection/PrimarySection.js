@@ -3,8 +3,6 @@ import { Route, Redirect, useRouteMatch, Switch, Link } from "react-router-dom";
 
 import classes from "./PrimarySection.module.scss";
 
-// !TODO: decomposition of this elements in next stage
-
 const PrimarySection = (props) => {
   return (
     <div className={classes.primary}>
@@ -17,7 +15,7 @@ const PrimarySection = (props) => {
           <span className={classes.primary__heading__sub}>WE FIX IT RIGHT</span>
         </h1>
         <Link to="/" className={`${classes.primary__button} ${classes.primary__button__publish}`}>Publish Offer</Link>
-        <Link to="/" className={`${classes.primary__button} ${classes.primary__button__hire}`}>Publish Offer</Link>
+        <Link to="/" className={`${classes.primary__button} ${classes.primary__button__hire}`}>Hire Handyperson</Link>
       </div>
     </div>
   );

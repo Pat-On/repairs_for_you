@@ -10,6 +10,11 @@ import customer1 from "../../../public/5.jpg";
 import customer2 from "../../../public/17.jpg";
 import customer3 from "../../../public/81.jpg";
 
+
+
+/**
+ * @DescriptionFunction Sub component used in MainPage component
+ */
 const CustomerSection = (props) => {
   // !TODO: HARD CODED CUSTOMER next step randomize comments from DB
   const commentArray = [

@@ -7,6 +7,10 @@ import linkedin from "../../public/linkedin.svg"
 import locato from "../../public/locato.svg"
 import email from "../../public/email.svg"
 
+
+/**
+ * @DescriptionFunction Footer is one of the part of the layout which are not changing in entire application. 
+ */
 const Footer = (props) => {
   return (
     <footer className={classes.footer}>

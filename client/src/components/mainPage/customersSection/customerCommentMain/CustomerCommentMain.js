@@ -7,6 +7,16 @@ import star from "../../../../public/star.svg";
 
 const imgItem = (link, i) => <img className={classes.customer__star} key={i}src={link} alt="Star icon made by Freepik" />
 
+
+/**
+ * @DescriptionFunction sub component used by CustomerSection to create the review of users widget which is going to be displayed on main page.
+ * @params component is getting object <item> passed though parent component, which contain:
+ *  - review: integer
+ *  - photo: string which point to directory where is stored picture
+ *  - user_name: string with name of the user
+ *  - user_surname: string with surname of the user
+ *  - comment: comment provided by user regarding service   
+ */
 const CustomerCommentMain = (props) => {
   let stars = [];
   for (let i = 0; i < 6; i++) {

@@ -3,6 +3,10 @@ import { Link } from "react-router-dom";
 
 import classes from "./PrimarySection.module.scss";
 
+
+/**
+ * @DescriptionFunction Sub component used in MainPage component
+ */
 const PrimarySection = (props) => {
   return (
     <div className={classes.primary}>

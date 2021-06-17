@@ -5,6 +5,10 @@ import classes from "./AboutSection.module.scss";
 import cyfLogo from "./../../../public/cyf_brand.png"
 import coventryRefLogo from "./../../../public/coventryRefugeeCenter.jpg"
 
+
+/**
+ * @DescriptionFunction Sub component used in MainPage component
+ */
 const AboutSection = (props) => {
   return (
     <div className={classes.about}>

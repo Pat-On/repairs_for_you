@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Route, Redirect, useRouteMatch } from "react-router-dom";
 
+
+/**
+ * @DescriptionFunction Component which is used in UsersManagement component to provide to admin graphical representation of users data. 
+ * Base on it, admin can chose user and decide the next steps
+ */
 const UserDetailedProfile = (props) => {
-  let { path, url } = useRouteMatch();
 
   const [singleUser, setSingleUser] = useState("");
   const userId = props.match.params.id;

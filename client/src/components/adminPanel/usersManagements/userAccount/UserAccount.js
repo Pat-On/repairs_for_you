@@ -1,6 +1,11 @@
 import React from "react";
 import { Route, Redirect, Switch, useRouteMatch, Link } from "react-router-dom";
 
+
+/**
+ * @DescriptionFunction Detailed profile of user where admin can use his privileges 
+ * !TODO: this component is not implemented, regarding functionality it is like placeholder
+ */
 const UserManagements = (props) => {
   let { path, url } = useRouteMatch();
 

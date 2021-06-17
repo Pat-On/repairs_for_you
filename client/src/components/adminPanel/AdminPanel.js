@@ -4,15 +4,20 @@ import { Route, Redirect, useRouteMatch, Switch, Link } from "react-router-dom";
 import UserManagements from "./usersManagements/UsersManagements";
 import UserDetailedProfile from "./usersManagements/UserDetailedProfile/UserDetailedProfile";
 
+
+/**
+ * @DescriptionFunction Main component of the entire react root in react related to the adminPanel and admins features of managing entire application.
+ * This components has implemented 3 sub routes 1 - "/", 2 - "/usersmanagement/:id`" 3: "/usersmanagement" Base url for this routes is "/admin-panel "
+ * which is parent route for this component in App.js
+ * @link /admin-panel 
+ * @access route is going to be protected by authorization on server
+ */
 const AdminPanel = (props) => {
   let { path, url } = useRouteMatch();
 
   /* 
     It need to go to global state
 */
-
-  console.log(path, url);
-
   return (
     <div>
       <h1>Welcome in Admin Panel</h1>

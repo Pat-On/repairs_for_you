@@ -3,6 +3,10 @@ import { Route, Redirect } from "react-router-dom";
 
 import UserAccount from "./userAccount/UserAccount";
 
+/**
+ * @DescriptionFunction component which is sub element in relation to AdminPanel component. This component is first component where we can manage users accounts.
+
+ */
 const UserManagements = (props) => {
   const [allUsers, SetAllUsers] = useState([]);
 

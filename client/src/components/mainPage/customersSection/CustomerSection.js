@@ -49,7 +49,7 @@ const CustomerSection = (props) => {
 
   if (commentArray.length === 3) {
     usersComments = commentArray.map((item) => (
-      <CustomerCommentMain item={item} />
+      <CustomerCommentMain key={item.user_name} item={item} />
     ));
   }
 

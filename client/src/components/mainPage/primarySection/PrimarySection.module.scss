@@ -35,10 +35,11 @@
   }
 
   &__button {
-
+// display: block;
     text-transform: uppercase;
     text-decoration: none;
     padding: 1.5rem 4rem;
+    
 
     &__publish {
         margin-right: 1rem;
@@ -48,6 +49,7 @@
     &__hire {
         margin-left: 1rem;
         background-color: red;
+        padding: 1.5rem 8rem;
     }
   }
 }

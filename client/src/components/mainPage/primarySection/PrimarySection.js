@@ -14,8 +14,8 @@ const PrimarySection = (props) => {
           </span>
           <span className={classes.primary__heading__sub}>WE FIX IT RIGHT</span>
         </h1>
-        <Link to="/" className={`${classes.primary__button} ${classes.primary__button__publish}`}>Publish Offer</Link>
-        <Link to="/" className={`${classes.primary__button} ${classes.primary__button__hire}`}>Hire Handyperson</Link>
+        <Link to="/" className={`${classes.primary__button} ${classes.primary__button__publish}`}>Become Handyperson</Link>
+        <Link to="/" className={`${classes.primary__button} ${classes.primary__button__hire}`}>Sign Up</Link>
       </div>
     </div>
   );

@@ -10,7 +10,7 @@ const CustomerSection = (props) => {
 
   return (
     <div className={classes.customers}>
-      <div className={classes.customers_bgVideo}>
+      <div className={classes.customers__bgVideo}>
         <video className={classes.customers__bgVideo__video} autoPlay muted loop>
           <source src={backgroundVideo} type="video/mp4" />
           Your browser is not supported!

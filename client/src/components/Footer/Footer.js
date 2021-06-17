@@ -60,3 +60,10 @@ const Footer = (props) => {
 };
 
 export default Footer;
+
+
+
+// Twitter icon made by Freepik
+// LinkedIn icon made by Pixel perfect
+// Google pointer icon made by Freepik
+//Facebook icon made by Pixel perfect

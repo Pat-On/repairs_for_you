@@ -16,6 +16,8 @@ const CustomerSection = (props) => {
           Your browser is not supported!
         </video>
       </div>
+
+      <h2>Happy Customers</h2>
     </div>
   );
 };

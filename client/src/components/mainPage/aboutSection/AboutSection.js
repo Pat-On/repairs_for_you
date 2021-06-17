@@ -24,7 +24,6 @@ const AboutSection = (props) => {
       </p>
       <ul className={classes.about__list}>
           <li className={classes.about__list__element}><a href="https://codeyourfuture.io/" target="_blank"><img src={cyfLogo}/></a></li>
-          <li className={classes.about__list__element}><a href="https://rmcentre.org.uk/" target="_blank"><img src={rmcLogo} /></a></li>
           <li className={classes.about__list__element}><a href="https://www.covrefugee.org/" target="_blank" ><img src={coventryRefLogo} /></a></li>
       </ul>
     </div>

@@ -5,7 +5,7 @@ import Home from "./pages/Home";
 import Layout from "./hoc/Layout/Layout";
 import AdminPanel from "./components/adminPanel/AdminPanel"
 import Login from "./containers/signUp/SignUp"
-import MainPage from "./components/mainPage/mainPage";
+import MainPage from "./components/mainPage/MainPage";
 
 import "./App.scss";
 

@@ -1,0 +1,53 @@
+.primary {
+  grid-row: 1 / 2;
+  grid-column: 1 / -1;
+
+  display: grid;
+  justify-items: center;
+  align-items: center;
+
+  height: 100%;
+  width: 100%;
+  text-align: center;
+
+  background-image: linear-gradient(
+      to right,
+      rgba(lightblue, 0.8),
+      rgba(blue, 0.8)
+    ),
+    url("../../../public/emmanuel-ikwuegbu-zWOgsj3j0wA-unsplash.jpg");
+  background-size: cover;
+  background-position: top;
+
+  &__heading {
+    color: white;
+    text-transform: uppercase;
+    margin-bottom: 6rem;
+    font-size: 4rem;
+
+    &__main {
+      display: block;
+    }
+
+    &__sub {
+      display: block;
+    }
+  }
+
+  &__button {
+
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 1.5rem 4rem;
+
+    &__publish {
+        margin-right: 1rem;
+        background-color: green;
+    }
+
+    &__hire {
+        margin-left: 1rem;
+        background-color: red;
+    }
+  }
+}

@@ -3,6 +3,7 @@ import morgan from "morgan";
 import path from "path";
 
 import router from "./api";
+
 import {
 	configuredHelmet,
 	httpsOnly,
@@ -14,6 +15,7 @@ import bookingRouter from "./routers/bookingRouter";
 import offersRouter from "./routers/offersRouter";
 import reviewRouter from "./routers/reviewRouter";
 import usersRouter from "./routers/usersRouter";
+import handymanRouter from "./routers/handymanRouter";
 
 const apiRoot = "/api";
 const staticDir = path.join(__dirname, "static");
@@ -35,6 +37,7 @@ app.use("/api/v1/booking", bookingRouter);
 app.use("/api/v1/offers", offersRouter);
 app.use("/api/v1/reviews", reviewRouter);
 app.use("/api/v1/users", usersRouter);
+app.use("/api/users/handyman", handymanRouter);
 
 app.use(express.static(staticDir));
 app.use(pushStateRouting(apiRoot, staticDir));

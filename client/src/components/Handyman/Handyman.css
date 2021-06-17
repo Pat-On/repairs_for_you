@@ -1,16 +1,16 @@
-.card * {
+div.card * {
   /* border:2px solid black; */
   padding: 0;
   margin: 0;
   box-sizing: border-box;
 }
-.card {
+div.card {
   display: grid;
   grid-template-columns: 3% 20% 7% 50% 10% 10%;
   background-color: rgba(28, 28, 46, 0.308);
 }
 
-.site-header{
+div.site-header{
   width: 100%;
   grid-column: 1/7;
   grid-row: 1/2;
@@ -18,50 +18,42 @@
   margin-bottom: 3rem;
 }
 
-.site-header img{
+div.site-header img{
   width: 100%;
   grid-column: 1/2;
 }
 
-.site-header h1{
+div.site-header h1{
   width: 100%;
   grid-column: 2/7;
   justify-self: start;
 }
 
-.profile-image {
+div.profile-image {
   width: 100%;
   grid-column: 2/3;
   grid-row: 2/3;
   text-align: center;
 }
 
-figcaption {
+divfigcaption {
   font-size: 1.2em;
   font-weight: 600;
 }
 
-.bio {
+div.bio {
   width: 100%;
   grid-column: 4/5;
   grid-row: 2/3;
 }
 
-/* .details {
-  width: 100%;
-  grid-column: 2/6;
-  grid-row: 2/3;
-  display:flex;
-  justify-content: space-between;
-} */
-
-.ratings{
+div.ratings{
   width: 100%;
   grid-column: 2/3;
   grid-row: 3/4;
 }
 
-.skills{
+div.skills{
   width: 100%;
   grid-column: 4/6;
   grid-row: 3/4;
@@ -71,19 +63,16 @@ img {
   max-width: 100%;
 }
 
-span.label {
-}
-
-.skills {
+div.skills {
   display: flex;
   align-items: center;
 }
 
-.skills h3 {
+div.skills h3 {
   margin-right: 0.5rem;
 }
 
-.skills-list {
+ul.skills-list {
   list-style-type: none;
 }
 
@@ -96,17 +85,17 @@ ul.skills-list li {
   border-radius: 0.3rem;
 }
 
-.user-reviews{
+div.user-reviews{
   grid-column: 4/6;
   grid-row: 4/5;
   margin-top:2em;
 }
 
-.user-reviews .review{
+div.user-reviews .review{
   margin-top:2em;
 }
 
-.user-reviews form{
+div.user-reviews form{
   margin-top: 3em;
   display: grid;
 }

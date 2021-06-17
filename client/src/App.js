@@ -5,7 +5,7 @@ import Home from "./pages/Home";
 import Layout from "./hoc/Layout/Layout";
 import AdminPanel from "./components/adminPanel/AdminPanel"
 import Login from "./containers/signUp/SignUp"
-
+import MainPage from "./components/mainPage/mainPage";
 
 import "./App.scss";
 
@@ -15,7 +15,7 @@ const App = () => (
 	<div className="App container">
 		<Layout>
 			<Switch>
-				<Route path="/" exact component={Home} />
+				<Route path="/" exact component={(props) => <MainPage {...props} />} />
 				<Route path="/buyers" exact component={() => <div><h1>PLACEHOLDER buyers</h1></div>} />
 				<Route path="/handy" exact component={() => <div><HandyPeople /> </div>} />
 

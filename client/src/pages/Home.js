@@ -28,7 +28,7 @@ export function Home() {
 			<div>
 				<img className={classes.logo} data-qa="logo" src={logo} alt="Just the React logo" />
 				<h1 className="message" data-qa="message">{message}</h1>
-				<Link to="/about/this/site">About</Link>
+				<Link to="/users/handyman/register">Looking For Work</Link>
 			</div>
 		</main>
 	);

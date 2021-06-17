@@ -1,0 +1,89 @@
+.title {
+    display: inline-block;
+    font-size: 36px;
+    line-height: 1.8;
+    margin-top: 55px;
+    width: 90%;
+
+}
+
+.subTitle {
+    display: inline-block;
+    font-size: 20px;
+    line-height: 1.5;
+    margin-top: 14px;
+    width: 70%;
+}
+
+.container {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
+    display: relative;
+    height: 72vh;
+    margin: 15vh auto;
+    max-height: 550px;
+    min-height: 480px;
+    padding-top: 20px;
+    text-align: center;
+    width: 90%;
+}
+
+.flexContainerGeneral {
+    bottom: 0;
+    display: flex;
+    justify-content: flex-end; 
+    margin-top: 6vh;
+}
+
+.flexContainerCentered {
+    justify-content: space-around; 
+    padding: 0 5%;
+}
+
+@media  (max-width: 480px) and (min-width: 320px) {
+    .container {
+        padding-top: 10px;
+    }
+
+    .title {
+        margin-top: 5px;
+    }
+}
+
+@media (max-width: 700px) and (min-width: 481px){
+    .container {
+        width: 70%;
+    }
+}
+
+@media (max-width: 1000px) and (min-width: 701px){
+    .container {
+        width: 70%;
+    }
+}
+
+@media (min-width: 1001px) {
+    .title {
+        width: 70%;
+    }
+
+    .subTitle {
+        width: 50%;
+    }
+
+    .container {
+        max-width: 500px;
+        width: 50%;
+    }
+
+    .flexContainerCentered {
+        justify-content: space-evenly; 
+        padding: 0 5%;
+    }
+
+    .flexContainerToRight {
+        justify-content: flex-end; 
+        padding-right: 19.2%;
+    }
+}

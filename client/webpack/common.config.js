@@ -3,8 +3,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 module.exports = {
 	entry: "./client/src/index.js",
 	module: {
-		rules: [
-			{
+		rules: [{
 				test: /\.js$/,
 				exclude: /node_modules/,
 				use: {
@@ -15,7 +14,7 @@ module.exports = {
 				},
 			},
 			{
-				test: /\.(png|svg|jpe?g|gif)$/,
+				test: /\.(png|svg|jpe?g|gif|mp4)$/,
 				loader: "file-loader",
 			},
 			{

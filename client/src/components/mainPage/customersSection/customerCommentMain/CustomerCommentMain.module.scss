@@ -1,0 +1,72 @@
+.customer {
+  text-align: center;
+  position: relative;
+  width: 24%;
+  box-shadow: 0 1.5rem 4rem rgba(black, 0.15);
+  padding: 1rem;
+
+  &__figure {
+    width: 16rem;
+    height: 16rem;
+    position: relative;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+
+    shape-outside: circle(50% at 50% 50%);
+    clip-path: circle(50% at 50% 50%);
+    overflow: hidden;
+
+    position: relative;
+
+    &:hover figcaption {
+      opacity: 1;
+      transform: translate(-50%, -50%);
+    }
+
+    &:hover img {
+      transform: translateX(0rem) scale(1.2);
+      filter: blur(3px) brightness(80%);
+    }
+  }
+
+  &__figcaption {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 30%);
+    color: white;
+    text-transform: uppercase;
+
+    font-size: 2rem;
+    text-align: center;
+    font-weight: 400;
+    opacity: 0;
+    transition: all 0.5s;
+    z-index: 20;
+  }
+
+  &__img {
+    width: 100%;
+    height: auto;
+    transform: translateX(0rem) scale(1.1);
+    transition: all 0.2s;
+  }
+
+  p {
+    display: inline block;
+    font-size: 1.5rem;
+    width: 85%;
+    margin: 0 auto;
+  }
+
+  &__starContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+  &__star {
+    width: 2rem;
+    height: 2rem;
+  }
+}

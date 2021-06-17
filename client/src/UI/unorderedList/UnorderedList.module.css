@@ -1,0 +1,15 @@
+.NoneStyle {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.listElementsChildrens {
+    font-size: 20px;
+    margin: 0;
+    padding: 3px;
+}
+
+.bolded {
+    font-weight: bold;
+}

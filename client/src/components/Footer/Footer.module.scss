@@ -1,5 +1,58 @@
 .footer {
-  background-color:limegreen;
+  background-color:lightblue;
   grid-column: main-start / main-end;
   grid-row: 4 / 5;
+
+  box-shadow: 0 0.1rem 0.8rem rgba(0, 0, 0, 0.25);
+
+  display: grid;
+  grid-template-rows: 1fr 0.5fr ;
+  grid-template-columns: 1fr 1fr;
+
+  align-items: center;
+  justify-items: center;
+
+  &__listOfIcons {
+    list-style: none;
+
+    grid-column: 2 / 3;
+    grid-row: 1 / 2;
+
+    display: flex;
+
+
+    li:hover img {
+      transform: translateY(-4px);
+    }
+
+    img {
+      display: block;
+      height: 3.5rem;
+      width: 3.5rem;
+      margin: 0 1rem;
+
+    }
+  }
+
+  &__contactList {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    li {
+      font-size: 1.3rem;
+    }
+  }
+  
+  &__end {
+    grid-column: 1/ 3;
+    grid-row: 2 / 3;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    p{
+      font-size: 1.3rem;
+    }
+  }
 }

@@ -18,5 +18,5 @@ const navigationItems = (props) => (
 
   </ul>
 );
-
+ 
 export default navigationItems;

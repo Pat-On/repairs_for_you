@@ -1,9 +1,6 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import SignUpForm from "../../components/signUpForm/SignUpForm";
-import ConfirmationFormPage from "../../components/confirmationFormPage/ConfirmationFormPage";
-import CompletionFormScreen from "../../components/completionFormScreen/CompletionFormScreen";
-
 import { checkValidity } from "../../utility/utility";
 
 const SignIn = (props) => {

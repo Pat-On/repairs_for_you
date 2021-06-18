@@ -25,7 +25,7 @@ const PrimarySection = (props) => {
           Become Handyperson
 				</Link>
 				<Link
-					to="/"
+					to="/login"
 					className={`${classes.primary__button} ${classes.primary__button__hire}`}
 				>
           Sign Up

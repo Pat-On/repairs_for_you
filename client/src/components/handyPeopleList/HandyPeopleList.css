@@ -1,34 +1,5 @@
-/* 
- body,html{
-    width: 100%;
-} 
-.App{
-color: rgb(17, 17, 17);
-background-color: rgb(245, 238, 238);
-margin-top: 10em;
-
-} */
-/*****************************************************************header styling ***********************************************/
-/* header {
-    background-color: black;
-} */
-
-/*****************************************************************hire from  styling ***********************************************/
-.hire-from{
-    font-style: italic;
-    text-align: center;
-    margin-top: 3em;
-    width: 80%;
-    height: 10rem;
-    margin-left: auto;
-    margin-right: auto;
-    background-color: rgb(3, 122, 67);
-    color: rgb(236, 230, 230);
-    padding-top: 3em;
-   
 
 
-}
 /*****************************************************************input fields  styling ***********************************************/
 
 .form-group{
@@ -38,8 +9,9 @@ margin-top: 10em;
     margin-right: auto;
     width: 80%;
     font-size: larger;
-    margin-bottom: 3em;
     justify-content: center;
+    margin-top: 7rem;
+    margin-bottom: 7rem;
 
 } 
 .form-group :first-child, .form-group :nth-child(2){
@@ -49,7 +21,7 @@ margin-top: 10em;
 }
 .form-group  > div > input{
     width: 20em;
-    height: 3em;
+    height: 4.3rem;
     margin-left: 2em;
     margin-right: 2em;
     
@@ -61,6 +33,21 @@ margin-top: 10em;
 
 .btn-primary{
   margin-top: 2.4em;  
+  color: white;
+  background-color: blue;
+  width: 10rem;
+  height: 4.3rem;
+  padding-left: 2.5rem;
+  padding-right: 2.5rem;
+  padding-top: 1rem;
+ font-size: larger;
+ font-weight: 600;
+
+  margin: 2rem auto;
+  border: none;
+  border-radius: .3rem;
+  text-align: end;
+
 
 }
 
@@ -71,25 +58,32 @@ margin-top: 10em;
     margin-right: 1em;
     display: grid;
     grid-template-columns: auto;
-    gap: 2em;
-
+    gap: 2rem;
   
 }
 /*****************************************************************individual card styling ***********************************************/
+.one-card-container{
+    font-size: medium;
+    display: flex;
+    background-color: rgba(143, 168, 168, 0.541);
+    border-radius: 1rem;
+}
 
-.card{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+.one-card-container :nth-child(3){
+    list-style: none;
 }
-.name-image{
-    display: flex;
-    flex-direction: column;
+.name-image img{
+    height: 15rem;
+    width: 20rem;
+    border-radius: 1rem;
+
 }
-.image{
-    width: 90px;
-    height: 60px;
+.name-image a {
+    text-decoration: none;
 }
 .bio{
-    width: 60%;
+    width: 50%;
+    margin-left: 5rem;
+    margin-right: 5rem;
+    text-align: justify;
 }

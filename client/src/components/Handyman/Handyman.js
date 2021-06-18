@@ -3,16 +3,20 @@ import "./Handyman.css";
 const Handyman = ({ userData }) => {
 	return (
 		<div className="card handy-man">
-			<figure className="profile-image">
-				<img src={userData.img} alt={`${userData.firstName} ${userData.lastName}`} />
-				<figcaption>{`${userData.firstName} ${userData.lastName}`}</figcaption>
-			</figure>
-			<div className="ratings">
-				<span className="label">Rating:</span>&nbsp;
-				<span className="stars">{userData.rating}&nbsp;stars</span>{" "}
-				<span className="label">Reviews:</span>&nbsp;
-				<span className="stars">{userData.reviews.length}</span>
+			<div className="profile-image-bio">
+				<figure className="profile-image">
+					<figcaption>{`${userData.firstName} ${userData.lastName}`}</figcaption>
+					<img src={userData.img} alt={`${userData.firstName} ${userData.lastName}`} />
+					<span className="label">Rating:</span>&nbsp;
+					<span className="stars">{userData.rating}&nbsp;stars</span>{" "}
+				</figure>
+				<div className="bio bio-handy-man">
+					<h2>About Me</h2>
+					<p>{userData.bio}</p>
+				</div>
 			</div>
+
+
 			<div className="skills">
 				<h3>Skills</h3>
 				<ul className="skills-list">
@@ -21,12 +25,10 @@ const Handyman = ({ userData }) => {
 					))}
 				</ul>
 			</div>
-			<div className="bio bio-handy-man">
-				<h2>About Me</h2>
-				<p>{userData.bio}</p>
-			</div>
+
 			<div className="user-reviews">
-				<h2>Reviews</h2>
+				<span className="label">Reviews:</span>&nbsp;
+				<span className="stars">{userData.reviews.length}</span>
 				<div>
 					<a href="#customer-review">Add a review</a>
 				</div>

@@ -12,7 +12,7 @@
 
   background-image: linear-gradient(
       to right,
-      rgba(lightblue, 0.8),
+      rgba(rgb(57, 151, 182), 0.8),
       rgba(darkblue, 0.8)
     ),
     url("../../../public/emmanuel-ikwuegbu-zWOgsj3j0wA-unsplash.jpg");
@@ -42,13 +42,19 @@
 
     &__publish {
         margin-right: 1rem;
-        background-color: green;
+        background-color: #F49A34;
+        color: rgb(3, 3, 3);
+        font-size: 1.6rem;
     }
 
     &__hire {
         margin-left: 1rem;
-        background-color: red;
+        background-color: #F49A34;
         padding: 1.5rem 8rem;
+        color: rgb(7, 7, 7);
+        font-size: 1.7rem;
+
+
     }
   }
 }

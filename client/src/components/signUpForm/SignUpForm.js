@@ -54,7 +54,7 @@ const signUpForm = (props) => {
       {props.back && (
         <div className={classes.buttonWrapper}>
           <Button assignedClass={"backButton"} clicked={props.back}>
-            Back
+            {props.leftButtonName}
           </Button>
         </div>
       )}
@@ -65,7 +65,7 @@ const signUpForm = (props) => {
             clicked={props.next}
             buttonDisable={props.buttonDisable}
           >
-            Next
+            {props.rightButtonName}
           </Button>
         </div>
       )}
@@ -74,7 +74,7 @@ const signUpForm = (props) => {
 
   return (
     <div className={classes.container}>
-      <h1 className={classes.title}>Sign-Up</h1>
+      <h1 className={classes.title}>{props.nameOfTheForm}</h1>
       {inputForms}
       {buttonsPart}
     </div>

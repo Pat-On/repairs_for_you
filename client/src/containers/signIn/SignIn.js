@@ -1,15 +1,13 @@
 import React, { useState } from "react";
-
+import { useHistory } from "react-router-dom";
 import SignUpForm from "../../components/signUpForm/SignUpForm";
 import ConfirmationFormPage from "../../components/confirmationFormPage/ConfirmationFormPage";
 import CompletionFormScreen from "../../components/completionFormScreen/CompletionFormScreen";
 
 import { checkValidity } from "../../utility/utility";
 
-
-
-const SignIn = () => {
-
+const SignIn = (props) => {
+  const history = useHistory();
   /**
    * State: responsible for controlling the process of displaying the http req in UI
    */
@@ -56,8 +54,9 @@ const SignIn = () => {
    * @input no input
    * @return nothing
    */
-  const backFunction = () => {
-    console.log("Placeholder");
+  const backFunction = (props) => {
+    //TODO: to home page
+    history.goBack();
   };
 
   /**
@@ -68,7 +67,8 @@ const SignIn = () => {
    * @return nothing
    */
   const nextFunction = () => {
-    console.log("Placeholder");
+    // !TODO: if logged success main page + auth if not error -> wrong password or email
+    history.replace("/");
   };
 
   /**
@@ -102,15 +102,16 @@ const SignIn = () => {
     });
   }
 
-  let form = "";
-
-  form = (
+  const form = (
     <SignUpForm
       form={formElementKeyArray}
       formInputHandler={inputChangeHandler}
       next={nextFunction}
       back={backFunction}
       buttonDisable={!(signForm.password.valid && signForm.email.valid)}
+      nameOfTheForm="Sign-in"
+      leftButtonName="Cancel"
+      rightButtonName="Log In"
     />
   );
 

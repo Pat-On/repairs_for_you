@@ -200,6 +200,7 @@ const SignUp = () => {
           formInputHandler={inputChangeHandler}
           next={nextFunction}
           buttonDisable={!(signForm.name.valid && signForm.number.valid)}
+          nameOfTheForm="Sign-up"
         />
       );
       break;
@@ -213,6 +214,7 @@ const SignUp = () => {
           back={backFunction}
           next={nextFunction}
           buttonDisable={!(signForm.email.valid && signForm.dateOfBirth.valid)}
+          nameOfTheForm="Sign-up"
         />
       );
       break;

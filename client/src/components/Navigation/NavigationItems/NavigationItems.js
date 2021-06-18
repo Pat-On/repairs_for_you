@@ -14,9 +14,9 @@ const navigationItems = (props) => (
     <NavigationItem link="/users/handyman">Handypeople</NavigationItem>
     <NavigationItem link="/contact">Contact</NavigationItem>
     <NavigationItem link="/admin-panel">Admin Panel</NavigationItem>
-    <NavigationItem link="/login">Login</NavigationItem>
+    <NavigationItem link="/signin">Sign-In</NavigationItem>
 
   </ul>
 );
-
+ 
 export default navigationItems;

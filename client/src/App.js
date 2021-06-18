@@ -1,4 +1,4 @@
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, Redirect, withRouter } from "react-router-dom";
 
 import "./App.scss";
 import About from "./pages/About";
@@ -9,6 +9,7 @@ import Login from "./containers/signUp/SignUp";
 import MainPage from "./components/mainPage/mainPage";
 import HandymanProfile from "./pages/HandymanProfile";
 import RegistrationForm from "./pages/RegistrationForm";
+import SignIn from "./containers/signIn/SignIn";
 
 const App = () => (
   <div className="App container">
@@ -44,6 +45,10 @@ const App = () => (
           )}
         />
 
+        <Route path="/signin"    component={(props) => <SignIn {...props} />}/>
+     
+    
+
         <Route path="/about/this/site">
           <About />
         </Route>
@@ -70,10 +75,10 @@ const App = () => (
           exact
           render={({ match }) => <HandymanProfile id={match.params.id} />}
         />
+           <Redirect to="/" />
       </Switch>
     </Layout>
   </div>
-
 );
 
-export default App;
+export default withRouter(App);

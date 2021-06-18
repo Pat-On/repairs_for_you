@@ -15,10 +15,15 @@
 .input-field-bio :nth-child(2) {
   width:100%;
   overflow-x: hidden;
-overflow-y: scroll;
-height: 10rem;
+  overflow-y: scroll;
+  height: 10rem;
 }
-.input-field-bio :nth-child(2)::-webkit-input-placeholder {
-  color: red;
-  
+.submit-button-div input{
+  background-color: rgb(40, 129, 245);
+  width: 7rem;
+  height: 4rem;
+  color: white;
+  border: none;
+  border-radius: .5rem;
+  font-size: medium;
 }

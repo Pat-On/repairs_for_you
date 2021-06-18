@@ -1,20 +1,39 @@
 import { useState } from "react";
 import "./HandymanRegistrationForm.css";
 import Skills from "./Skills";
+import { send } from "emailjs-com";
 
 const HandymanRegistrationForm = (props) => {
 	const [errors, setErrors] = useState([]);
+	const [toSend, setToSend] = useState({
+		first_name: "",
+		last_name: "",
+		address_line_one:"",
+		address_line_two:"",
+		city:"",
+		postcode:"",
+		country:"",
+		email:"",
+		phone_number:"",
+		bio:"",
+	});
+
 	// EVENT HANDLERS
-	const sendFormData = (event) => {
-		event.preventDefault();
-		const errors = validateForm(event.target);
-		if (errors.length > 0) {
-			return setErrors(errors);
-		}
-		setErrors([]);
-		const formData = getFormData(event.target.id);
-		props.onAddHandyman(formData);
+
+	const handleChange = (e) => {
+		setToSend({ ...toSend, [e.target.name]: e.target.value });
+		console.log(toSend.email);
 	};
+
+	const sendFormData = (e) => {
+		e.preventDefault();
+		send("service_l0m5rpd","template_ybb8yxc",toSend,"user_Z6650OqueHooRxmmi5Geo").then((response) => {
+			console.log("SUCCESS!", response.status, response.text);
+		}).catch((err) => {
+			console.log("FAILED...", err);
+		});
+	};
+
 
 	return (
 		<form id="form-add-handyman"   className="registration-form" onSubmit={sendFormData}>
@@ -30,10 +49,11 @@ const HandymanRegistrationForm = (props) => {
 					<input
 						type="text"
 						id="first-name"
-						name="form-add-handyman"
+						name="first_name"
 						max={50}
 						required
 						placeholder="Enter your first name here"
+						onChange={handleChange}
 					/>
 				</div>
 				<div className="input-field">
@@ -41,10 +61,12 @@ const HandymanRegistrationForm = (props) => {
 					<input
 						type="text"
 						id="last-name"
-						name="form-add-handyman"
+						name="last_name"
 						max={50}
 						required
 						placeholder="Enter your last name here"
+						onChange={handleChange}
+
 					/>
 				</div>
 				<div className="input-field-group">
@@ -54,10 +76,12 @@ const HandymanRegistrationForm = (props) => {
 						<input
 							type="number"
 							id="address-line-one"
-							name="form-add-handyman"
+							name="address_line_one"
 							max={50}
 							required
 							placeholder="Enter your building or flat number"
+							onChange={handleChange}
+
 						/>
 					</div>
 					<div className="input-field">
@@ -65,10 +89,12 @@ const HandymanRegistrationForm = (props) => {
 						<input
 							type="text"
 							id="address-line-two"
-							name="form-add-handyman"
+							name="address_line_two"
 							max={50}
 							required
 							placeholder="Enter your street name here"
+							onChange={handleChange}
+
 						/>
 					</div>
 					<div className="input-field">
@@ -76,10 +102,11 @@ const HandymanRegistrationForm = (props) => {
 						<input
 							type="text"
 							id="city"
-							name="form-add-handyman"
-							max={50}
+							name="city"
 							required
 							placeholder="Enter your city, district or county name here"
+							onChange={handleChange}
+
 						/>
 					</div>
 					<div className="input-field">
@@ -87,10 +114,12 @@ const HandymanRegistrationForm = (props) => {
 						<input
 							type="text"
 							id="Postcode"
-							name="form-add-handyman"
+							name="Postcode"
 							max={50}
 							required
 							placeholder="Enter your postcode here"
+							onChange={handleChange}
+
 						/>
 					</div>
 				</div>
@@ -99,10 +128,12 @@ const HandymanRegistrationForm = (props) => {
 					<input
 						type="text"
 						id="country"
-						name="form-add-handyman"
+						name="country"
 						max={50}
 						required
 						placeholder="Enter your country name here"
+						onChange={handleChange}
+
 					/>
 				</div>
 				<div className="input-field">
@@ -110,10 +141,12 @@ const HandymanRegistrationForm = (props) => {
 					<input
 						type="email"
 						id="email"
-						name="form-add-handyman"
+						name="email"
 						max={50}
 						required
 						placeholder="someone@example.com"
+						onChange={handleChange}
+
 					/>
 				</div>
 				<div className="input-field">
@@ -121,9 +154,11 @@ const HandymanRegistrationForm = (props) => {
 					<input
 						type="tel"
 						id="phone-number"
-						name="form-add-handyman"
+						name="phone_number"
 						max={50}
 						required
+						onChange={handleChange}
+
 					/>
 				</div>
 			</div>
@@ -133,10 +168,12 @@ const HandymanRegistrationForm = (props) => {
 				<textarea
 					type="text-area"
 					id="bio"
-					name="form-add-handyman"
+					name="bio"
 					max={500}
 					required
 					placeholder="Short introduction about you or what you do..."
+					onChange={handleChange}
+
 				/>
 			</div>
 			<div className="submit-button-div">

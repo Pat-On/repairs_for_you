@@ -7,8 +7,10 @@ import Footer from "./../../components/Footer/Footer.js";
 
 import classes from "./Layout.module.scss";
 
+/**
+ * @DescriptionFunction Main Layout of application, where <main> is used as a widget to display other parts of application required by specification. 
+ */
 const Layout = (props) => {
-	//!TODO SIDE DRAWER
 	const [sideDrawerIsVisible, setSideDrawerVisible] = useState(false);
 
 	const sideDrawerClosedHandler = () => {

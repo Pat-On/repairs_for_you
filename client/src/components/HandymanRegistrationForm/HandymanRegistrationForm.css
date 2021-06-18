@@ -1,0 +1,24 @@
+
+.registration-form{
+  width: 75%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 3rem;
+  padding-left: 10rem;
+  padding-right: 10rem;
+  font-size: medium;
+}
+.registration-form :nth-child(n+2){
+  margin-top: 0.5rem;
+  margin-bottom: .5rem;
+}
+.input-field-bio :nth-child(2) {
+  width:100%;
+  overflow-x: hidden;
+overflow-y: scroll;
+height: 10rem;
+}
+.input-field-bio :nth-child(2)::-webkit-input-placeholder {
+  color: red;
+  
+}

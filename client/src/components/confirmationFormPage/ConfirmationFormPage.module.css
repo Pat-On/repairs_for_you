@@ -1,0 +1,71 @@
+.title {
+    font-size: 36px;
+    margin-bottom: 10px;
+    margin-top: 25px;
+}
+
+.container {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
+    display: relative;
+    height: 72vh;
+    margin: 15vh auto ;
+    max-height: 550px;
+    min-height: 480px;
+    padding-top: 2vh;
+    text-align: center;
+    width: 90%;
+}
+
+.flexContainerGeneral {
+    bottom: 0;
+    display: flex;
+    justify-content: flex-end; 
+    margin-top: 2vh;
+}
+
+.flexContainerToRight {
+    justify-content: flex-end; 
+    padding-right: 5%;
+}
+
+.flexContainerCentered {
+    justify-content: space-around; 
+    padding: 0 5%;
+}
+
+.buttonWrapper {
+    display: flex;
+    padding: 0;
+    margin: 0;
+}
+
+@media (max-width: 700px) and (min-width: 481px){
+    .container {
+        width: 70%;
+    }
+}
+
+@media (max-width: 1000px) and (min-width: 701px){
+    .container {
+        width: 70%;
+    }
+}
+
+@media (min-width: 1001px) {
+    .container {
+        max-width: 500px;
+        width: 50%;
+    }
+
+    .flexContainerCentered {
+        justify-content: space-evenly; 
+        padding: 0 5%;
+    }
+    
+    .flexContainerToRight {
+        justify-content: flex-end; 
+        padding-right: 19.2%;
+    }
+}

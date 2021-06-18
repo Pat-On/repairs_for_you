@@ -18,7 +18,7 @@ const PrimarySection = (props) => {
           <span className={classes.primary__heading__sub}>WE FIX IT RIGHT</span>
         </h1>
         <Link
-          to="/"
+          to="/users/handyman/register"
           className={`${classes.primary__button} ${classes.primary__button__publish}`}
         >
           Become Handyperson

@@ -106,7 +106,7 @@ const SignIn = (props) => {
       next={nextFunction}
       back={backFunction}
       buttonDisable={!(signForm.password.valid && signForm.email.valid)}
-      nameOfTheForm="Sign-in"
+      nameOfTheForm="Sign-In"
       leftButtonName="Cancel"
       rightButtonName="Log In"
     />

@@ -1,13 +1,14 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
 import SignUpForm from "../../components/signUpForm/SignUpForm";
 import { checkValidity } from "../../utility/utility";
 
 const SignIn = (props) => {
-  const history = useHistory();
+//   const history = useHistory();
   /**
    * State: responsible for controlling the process of displaying the http req in UI
    */
+
+  console.log(props.history)
   const [loadingControl, setLoadingControl] = useState(false);
 
   /**
@@ -51,9 +52,9 @@ const SignIn = (props) => {
    * @input no input
    * @return nothing
    */
-  const backFunction = (props) => {
+  const backFunction = () => {
     //TODO: to home page
-    history.goBack();
+    props.history.goBack();
   };
 
   /**
@@ -65,7 +66,7 @@ const SignIn = (props) => {
    */
   const nextFunction = () => {
     // !TODO: if logged success main page + auth if not error -> wrong password or email
-    history.replace("/");
+    props.history.replace("/");
   };
 
   /**

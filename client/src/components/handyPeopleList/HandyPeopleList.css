@@ -65,7 +65,7 @@
 .one-card-container{
     font-size: medium;
     display: flex;
-    background-color: rgba(143, 168, 168, 0.541);
+    background-color: rgba(255, 255, 255, 0.514);
     border-radius: 1rem;
 }
 
@@ -80,6 +80,7 @@
 }
 .name-image a {
     text-decoration: none;
+    color: black;
 }
 .bio{
     width: 50%;

@@ -36,7 +36,7 @@ export default function HandyPeopleCards() {
 
 				)
 			}
-			<Link to="/about/this/site/handyPeople">HandyPeople</Link>
+			<Link to="/about/this/site/handyPeople"></Link>
 
 		</div>
 	);

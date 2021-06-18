@@ -5,6 +5,9 @@ import Button from "../../UI/button/Button";
 
 import classes from "./SignUpForm.module.css";
 
+// I left it because we may decide to use logo, but it was not looking good in that version
+// import LogoRFY from "../logo/Logo"
+
 /**
  * @DescriptionFunction Component responsible for rendering the sign-up forms including the input fields
  * @param {Function} props.back [function which should return user to previous page. Function is attached to button to "onClick" event]
@@ -54,7 +57,7 @@ const signUpForm = (props) => {
       {props.back && (
         <div className={classes.buttonWrapper}>
           <Button assignedClass={"backButton"} clicked={props.back}>
-            Back
+            {props.leftButtonName}
           </Button>
         </div>
       )}
@@ -65,7 +68,7 @@ const signUpForm = (props) => {
             clicked={props.next}
             buttonDisable={props.buttonDisable}
           >
-            Next
+            {props.rightButtonName}
           </Button>
         </div>
       )}
@@ -74,7 +77,8 @@ const signUpForm = (props) => {
 
   return (
     <div className={classes.container}>
-      <h1 className={classes.title}>Sign-Up</h1>
+      {/* <LogoRFY /> */}
+      <h1 className={classes.title}>{props.nameOfTheForm}</h1>
       {inputForms}
       {buttonsPart}
     </div>

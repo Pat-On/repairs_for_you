@@ -9,6 +9,7 @@ import Login from "./containers/signUp/SignUp";
 import MainPage from "./components/mainPage/mainPage";
 import HandymanProfile from "./pages/HandymanProfile";
 import RegistrationForm from "./pages/RegistrationForm";
+import SignIn from "./containers/signIn/SignIn";
 
 const App = () => (
   <div className="App container">
@@ -44,6 +45,10 @@ const App = () => (
           )}
         />
 
+        <Route path="/signin">
+          <SignIn />
+        </Route>
+
         <Route path="/about/this/site">
           <About />
         </Route>
@@ -73,7 +78,6 @@ const App = () => (
       </Switch>
     </Layout>
   </div>
-
 );
 
 export default App;

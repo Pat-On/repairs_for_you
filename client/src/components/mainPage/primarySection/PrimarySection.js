@@ -14,13 +14,14 @@ const PrimarySection = (props) => {
 				<h1 className={classes.primary__heading}>
 					<span className={classes.primary__heading__main}>
             REPAIRS FOR YOU
-					</span>
-					<span className={classes.primary__heading__sub}>WE FIX IT RIGHT</span>
-				</h1>
-				<Link
-					to="/register"
-					className={`${classes.primary__button} ${classes.primary__button__publish}`}
-				>
+
+          </span>
+          <span className={classes.primary__heading__sub}>WE FIX IT RIGHT</span>
+        </h1>
+        <Link
+          to="/users/handyman/register"
+          className={`${classes.primary__button} ${classes.primary__button__publish}`}
+        >
           Become Handyperson
 				</Link>
 				<Link

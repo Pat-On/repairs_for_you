@@ -9,6 +9,7 @@ import MainPage from "./components/mainPage/mainPage";
 
 import "./App.scss";
 import HandymanProfile from "./pages/HandymanProfile";
+import HandymanRegistrationForm from "./components/HandymanRegistrationForm/HandymanRegistrationForm";
 
 const App = () => (
 	<div className="App container">
@@ -24,6 +25,7 @@ const App = () => (
 				<Route path="/about/this/site"><About /></Route>
 				<Route path="/admin-panel" component={(props) => <AdminPanel {...props} />} />
 				<Route path="/login" component={(props) => <Login {...props} />} />
+				<Route path="/register"> <HandymanRegistrationForm /> </Route>
 
 				<Route path="/about/this/site">
 					<About />

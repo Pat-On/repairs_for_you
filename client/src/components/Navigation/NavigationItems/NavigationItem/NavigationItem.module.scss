@@ -4,7 +4,7 @@
   width: 16rem;
   height: auto;
   // font-family: $font-display;
-  font-weight: 400;
+  font-weight: 600;
   text-align: center;
   position: relative;
   margin: 0 1rem;
@@ -30,7 +30,8 @@
 
     transition: transform 0.4s, width 0.4s cubic-bezier(1, 0, 0, 1) 0.2s,
       background-color 0.1s;
-    color: rgba(5, 5, 5,1);
+      color: rgb(221, 92, 17);
+
 
   }
 
@@ -39,7 +40,9 @@
   a.active::before {
     transform: scaleX(1) scaleY(1);
     height: 100%;
-    background-color: rgba(rgb(245, 205, 165), 0.5);
+    background-color: rgba(241, 146, 38, 0.151);
+ 
+
   }
 
   @media only screen and (max-width: 800px) {
@@ -50,7 +53,7 @@
     width: 100%;
     // background-color: transparent;
     height: 20%;
-    background-color: rgba(245, 243, 238, 0.363);
+    //background-color: rgba(245, 243, 238, 0.363);
     text-decoration: none;
     text-transform: uppercase;
     display: block;

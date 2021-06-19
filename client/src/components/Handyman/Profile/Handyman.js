@@ -1,8 +1,9 @@
-import { useRouteMatch } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./Handyman.css";
 
 const Handyman = ({ userData }) => {
-	// const {url}=useRouteMatch()
+  const { id, firstName, lastName, skills } = userData;
+  const data = { id, firstName, lastName, skills };
   return (
     <div className="card handy-man">
       <div className="profile-image-bio">
@@ -20,7 +21,11 @@ const Handyman = ({ userData }) => {
           <p>{userData.bio}</p>
         </div>
       </div>
-
+      <Link to={{pathname:"/forms/request-for-quote",state:data}}>
+        <button id="btn-quote" >
+          Get a Quote
+        </button>
+      </Link>
       <div className="skills">
         <h3>Skills</h3>
         <ul className="skills-list">

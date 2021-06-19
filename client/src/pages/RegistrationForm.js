@@ -1,5 +1,5 @@
 import { useState } from "react";
-import HandymanRegistrationForm from "../components/HandymanRegistrationForm/HandymanRegistrationForm";
+import HandymanRegistrationForm from "../components/Handyman/RegistrationForm/HandymanRegistrationForm";
 
 const RegistrationForm = ({ formId }) => {
   const [message, setMessage] = useState();

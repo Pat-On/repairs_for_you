@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "./HandymanRegistrationForm.css";
-import Skills from "./Skills";
+import Skills from "../SubComponents/Skills";
 import { send } from "emailjs-com";
 
 const HandymanRegistrationForm = (props) => {

@@ -33,7 +33,6 @@ Are going to be implemented later with authentication
 router.patch(
     '/updateMyPassword',
     async (req, res, next) => {
-
         res.status(200).json({
             status: "success",
             msg: `patch method usersRouter "/updateMyPassword"`,

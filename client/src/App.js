@@ -10,6 +10,7 @@ import MainPage from "./components/mainPage/mainPage";
 import HandymanProfile from "./pages/HandymanProfile";
 import RegistrationForm from "./pages/RegistrationForm";
 import SignIn from "./containers/signIn/SignIn";
+import RequestForQuote from "./pages/RequestForQuote";
 
 const App = () => (
   <div className="App container">
@@ -45,9 +46,7 @@ const App = () => (
           )}
         />
 
-        <Route path="/signin"    component={(props) => <SignIn {...props} />}/>
-     
-    
+        <Route path="/signin" component={(props) => <SignIn {...props} />} />
 
         <Route path="/about/this/site">
           <About />
@@ -75,7 +74,12 @@ const App = () => (
           exact
           render={({ match }) => <HandymanProfile id={match.params.id} />}
         />
-           <Redirect to="/" />
+        <Route
+          path="/forms/request-for-quote"
+          render={(props) => <RequestForQuote {...props} isAuthed={true} />}
+        />
+
+        <Redirect to="/" />
       </Switch>
     </Layout>
   </div>

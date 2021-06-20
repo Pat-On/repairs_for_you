@@ -42,7 +42,7 @@ exports.logInUser = async (userCredential) => {
     );
 
     if (newUserArray.rowCount === 0)
-      if (!testBoolean) throw new Error("Incorrect email or password");
+      throw new Error("Incorrect email or password");
 
     const newUser = newUserArray.rows[0];
 
@@ -52,6 +52,24 @@ exports.logInUser = async (userCredential) => {
     if (!testBoolean) throw new Error("Incorrect email or password");
 
     // 3) if success inform user
+    return newUser;
+  } catch (error) {
+    throw error;
+  }
+};
+
+exports.findUserByEmail = async (email) => {
+  try {
+    const newUserArray = await pool.query(
+      `SELECT * FROM users WHERE user_id = $1`,
+      [email]
+    );
+
+    if (newUserArray.rowCount === 0)
+      throw new Error("Incorrect email or password");
+
+    const newUser = newUserArray.rows[0];
+
     return newUser;
   } catch (error) {
     throw error;

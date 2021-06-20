@@ -1,9 +1,9 @@
 import { useState } from "react";
-import RequestForQuoteForm from "../components/Handyman/RequestForQuoteForm/RequestForQuoteForm";
+import RequestForQuoteForm from "../components/RequestForQuoteForm/RequestForQuoteForm";
 
 const RequestForQuote = (props) => {
   const [message, setMessage] = useState();
-  console.log(props)
+  
   // EVENT HANDLERS
   const getRequestForQuoteData = async (fromData) => {
     const result = await sendRegistrationRequest(fromData);

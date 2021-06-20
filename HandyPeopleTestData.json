@@ -15,8 +15,9 @@
       }
     ],
     "address": {
-      "postCode": "B12",
-      "streetName": "New Street"
+      "area": "CV1",
+      "postcode": "CV1 1AA3",
+      "streetName": "123 high street"
     },
     "rating": 5,
     "reviews": [
@@ -60,8 +61,9 @@
       }
     ],
     "address": {
-      "postCode": "B3",
-      "streetName": "New Road"
+      "area": "CV1",
+      "postcode": "CV1 1AA3",
+      "streetName": "123 high street"
     },
     "rating": 5,
     "reviews": [
@@ -105,8 +107,9 @@
       }
     ],
     "address": {
-      "streetName": "123 high street",
-      "postCode": "B3"
+      "area": "CV1",
+      "postcode": "CV1 1AA3",
+      "streetName": "123 high street"
     },
     "rating": 5,
     "reviews": [

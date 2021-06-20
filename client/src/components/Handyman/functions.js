@@ -1,4 +1,4 @@
-import emailValidator from "email-validator";
+import {emailValidator} from "email-validator";
 
 export function validateForm(form) {
   const id = form.id;

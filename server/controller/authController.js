@@ -8,16 +8,18 @@ import userModel from "../model/userModel";
 //   .update("I love cupcakes")
 //   .digest("hex");
 
+const signToken = (id) => {
+  return jwt.sign({ id }, process.env.JWT_SECRET, {
+    expiresIn: process.env.JWT_EXPIRES_IN,
+  });
+};
+
 exports.signup = async (req, res, next) => {
   try {
     // Is it logical to pass req.body or just to split data here to?
     const newUser = await userModel.signUpQuery(req.body);
 
-    const token = jwt.sign({ id: newUser.user_id }, process.env.JWT_SECRET, {
-      expiresIn: process.env.JWT_EXPIRES_IN,
-    });
-
-    console.log(newUser);
+    const token = signToken(newUser.user_id);
 
     res.status(201).json({
       status: "success",
@@ -44,16 +46,16 @@ exports.login = async (req, res, next) => {
       throw new Error("Please provide email and password");
 
     // correctness of password and email
-    const token = "";
+    const newUser = await userModel.logInUser(req.body);
 
     // all ok - > send token
-
+    const token = signToken(newUser.user_id)
     res.status(200).json({
       status: "success",
       token,
     });
   } catch (error) {
-    res.status(400).json({
+    res.status(401).json({
       status: "fail",
       msg: error.message,
     });

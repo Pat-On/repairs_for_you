@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useRouteMatch } from "react-router-dom";
+import { useRouteMatch } from "react-router-dom";
 
 export default function handyPeopleCard({ onelist }) {
 	const { url } = useRouteMatch();
@@ -24,12 +24,11 @@ export default function handyPeopleCard({ onelist }) {
 
 			<ul className="list-group list-group-flush">
 				{onelist.skills.map((skill, index) => (
-					<li key={index} className="list-group-item">
-						{skill}
+					<li key={index} id={skill.id} className="list-group-item">
+						{skill.name}
 					</li>
 				))}
 			</ul>
-			{/* 	<Link to={`${url}/${onelist.id}`}>Details</Link> */}
 		</div>
 	);
 }

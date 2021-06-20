@@ -75,30 +75,39 @@ exports.login = async (req, res, next) => {
 
  */
 exports.protect = async (req, res, next) => {
+  try {
   // 1 - getting token and check if it exist
   let token;
   if (
     req.headers.authorization &&
     req.headers.authorization.startsWith("Bearer")
   ) {
-     token = req.headers.authorization.split(" ")[1];
+    token = req.headers.authorization.split(" ")[1];
   }
-  console.log(token)
-
-
-  if(!token) {
+  console.log(token);
+  if (!token) {
+    //!TODO: next step it would be great to implement global error handling!
     res.status(401).json({
       status: "fail",
       msg: "You are not logged in! Please log in to get access.",
     });
   }
   // 2 verification of token <- the most important jwt is going to do it
+  const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
+  console.log(decoded)
 
   // 3 check if the user still exist
 
   // 4 if user changed password after jwt token was sent to him
 
   next();
+  } catch(error) {
+    res.status(401).json({
+      status: "fail",
+      msg: error.message,
+    });
+  }
+
 };
 
 //   npm install jsonwebtoken

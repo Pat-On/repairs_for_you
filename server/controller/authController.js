@@ -3,19 +3,26 @@ const jwt = require("jsonwebtoken");
 const { promisify } = require("util");
 import userModel from "../model/userModel";
 
-const secret = "abcdefg";
-const hash = createHmac("sha256", secret)
-  .update("I love cupcakes")
-  .digest("hex");
+// const secret = "abcdefg";
+// const hash = createHmac("sha256", secret)
+//   .update("I love cupcakes")
+//   .digest("hex");
 
 exports.signup = async (req, res, next) => {
   try {
+    // Is it logical to pass req.body or just to split data here to?
     const newUser = await userModel.signUpQuery(req.body);
+
+    const token = jwt.sign({ id: newUser.user_id}, process.env.JWT_SECRET, {
+      expiresIn: process.env.JWT_EXPIRES_IN,
+    })
 
     console.log(newUser)
 
     res.status(201).json({
+
       status: "success",
+      token,
       data: {
         //envelope
         user: newUser.rows[0],

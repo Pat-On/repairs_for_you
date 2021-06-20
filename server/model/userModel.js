@@ -27,7 +27,6 @@ exports.signUpQuery = async (userObj) => {
 
         // 3)
 
-
         // !TODO: returning * is not best solution in my opinion / temporary
         const newUser = pool.query(
             `INSERT INTO users (first_name, email, user_password) VALUES ($1, $2, $3) RETURNING * `,

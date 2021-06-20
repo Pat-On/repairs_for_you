@@ -3,7 +3,7 @@ const bcrypt = require("bcryptjs");
 import { pool } from "../db";
 
 // !IMPORTANT: WHAT ABOUT SECURITY HOOKS IN postgres
-exports.signUpQuery = async (userObj) => {
+exports.signUpUser = async (userObj) => {
   try {
     // 1) TO CHECK IF INPUT HAS WHAT WE NEED plus SANITIZATION
     const { name, email, password, passwordConfirm } = userObj;

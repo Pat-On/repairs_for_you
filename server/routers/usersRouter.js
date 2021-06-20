@@ -1,9 +1,10 @@
 const express = require("express");
 const router = express.Router();
 
+
 import { pool } from "./../db";
 
-import authController from "../controller/authController"
+import authController from "./../controller/authController"
 
 /* 
 /signup
@@ -63,7 +64,7 @@ router.delete("/deleteMe", async (req, res, next) => {
 
 router
   .route("/")
-  .get(async (req, res, next) => {
+  .get(authController.protect, async (req, res, next) => {
     try {
       const bookingsAll = await pool.query("SELECT * FROM users");
 

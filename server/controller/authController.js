@@ -14,10 +14,14 @@ const signToken = (id) => {
   });
 };
 
+/**
+ *  * @Description this is the controller responsible for signing up the user.
+ * this controller importing signUpUser from userModel.js
+ * */
 exports.signup = async (req, res, next) => {
   try {
     // Is it logical to pass req.body or just to split data here to?
-    const newUser = await userModel.signUpQuery(req.body);
+    const newUser = await userModel.signUpUser(req.body);
 
     const token = signToken(newUser.user_id);
 
@@ -37,6 +41,10 @@ exports.signup = async (req, res, next) => {
   }
 };
 
+/**
+ *  * @Description this is the controller responsible for login  the user.
+ * this controller importing logInUser from userModel.js
+ * */
 exports.login = async (req, res, next) => {
   try {
     const { email, password } = req.body;
@@ -49,7 +57,7 @@ exports.login = async (req, res, next) => {
     const newUser = await userModel.logInUser(req.body);
 
     // all ok - > send token
-    const token = signToken(newUser.user_id)
+    const token = signToken(newUser.user_id);
     res.status(200).json({
       status: "success",
       token,
@@ -60,6 +68,37 @@ exports.login = async (req, res, next) => {
       msg: error.message,
     });
   }
+};
+
+/**
+ * @description Middleware used to protection of routes
+
+ */
+exports.protect = async (req, res, next) => {
+  // 1 - getting token and check if it exist
+  let token;
+  if (
+    req.headers.authorization &&
+    req.headers.authorization.startsWith("Bearer")
+  ) {
+     token = req.headers.authorization.split(" ")[1];
+  }
+  console.log(token)
+
+
+  if(!token) {
+    res.status(401).json({
+      status: "fail",
+      msg: "You are not logged in! Please log in to get access.",
+    });
+  }
+  // 2 verification of token <- the most important jwt is going to do it
+
+  // 3 check if the user still exist
+
+  // 4 if user changed password after jwt token was sent to him
+
+  next();
 };
 
 //   npm install jsonwebtoken

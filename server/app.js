@@ -32,6 +32,13 @@ if (app.get("env") === "production") {
   app.use(httpsOnly());
 }
 
+app.use((req, res, next) => {
+  req.requestTime = new Date().toISOString();
+  console.log(req.headers)
+  next()
+})
+
+
 // our router
 app.use("/api/v1/booking", bookingRouter);
 app.use("/api/v1/offers", offersRouter);

@@ -2,8 +2,8 @@ import { Link } from "react-router-dom";
 import "./Handyman.css";
 
 const Handyman = ({ userData }) => {
-  const { id, firstName, lastName, skills } = userData;
-  const data = { id, firstName, lastName, skills };
+  const { id, firstName, lastName, address, skills } = userData;
+  const data = { id, firstName, lastName, address, skills };
   return (
     <div className="card handy-man">
       <div className="profile-image-bio">
@@ -30,7 +30,7 @@ const Handyman = ({ userData }) => {
         <h3>Skills</h3>
         <ul className="skills-list">
           {userData.skills.map((skill, index) => (
-            <li key={index}>{skill}</li>
+            <li key={index} id={skill.id}>{skill.name}</li>
           ))}
         </ul>
       </div>

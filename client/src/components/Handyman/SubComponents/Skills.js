@@ -1,9 +1,17 @@
-const Skills = ({ skills }) => {
+const Skills = ({ skills, formId }) => {
   return (
-    <div className="button-style-labels">
-      {skills.map((skill,index) => 
-        <span key={index}>{skill}{" "}</span>
-      )}
+    <div>
+      {skills.map((skill, index) => (
+        <div key={index} className="input-field">
+          <input
+            type="checkbox"
+            id={skill.id}
+            name={formId}
+            value={skill.name}
+          />{" "}
+          <label htmlFor="carpentry">Carpentry</label>
+        </div>
+      ))}
     </div>
   );
 };

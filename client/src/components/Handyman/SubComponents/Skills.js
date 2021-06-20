@@ -1,4 +1,5 @@
 const Skills = ({ skills, formId }) => {
+  console.log(skills)
   return (
     <div>
       {skills.map((skill, index) => (
@@ -9,7 +10,7 @@ const Skills = ({ skills, formId }) => {
             name={formId}
             value={skill.name}
           />{" "}
-          <label htmlFor="carpentry">Carpentry</label>
+          <label htmlFor="carpentry">{skill.name}</label>
         </div>
       ))}
     </div>

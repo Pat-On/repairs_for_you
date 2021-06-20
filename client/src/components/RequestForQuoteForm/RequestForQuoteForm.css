@@ -1,4 +1,4 @@
-#form-add-quote {
+#form-send-quote {
   width: 75%;
   margin-left: auto;
   margin-right: auto;
@@ -8,15 +8,20 @@
   font-size: medium;
 }
 
-#form-add-quote :nth-child(n + 2) {
+#form-send-quote :nth-child(n + 2) {
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
 }
 
-#form-add-quote fieldset.input-field-group{
+#form-send-quote fieldset.input-field-group{
   border:1.5px solid black;
   margin:1.5rem 0;
   padding:0.5rem 2rem;
+}
+
+.title{
+  text-align: center;
+  margin-bottom: 3rem;
 }
 
 .subtitle{
@@ -24,18 +29,8 @@
   font-weight: 600;
 }
 
-.required{
+.required,.error{
   color:red;
-}
-
-.button-style-labels span {
-  background-color: rgb(68, 104, 91);
-  margin-right: 0.3rem;
-  padding: 0.5rem 1rem;
-  color: white;
-  border: none;
-  border-radius: 0.3rem;
-  font-size: medium;
 }
 
 .input-field textarea {
@@ -51,4 +46,8 @@
   border: none;
   border-radius: 0.5rem;
   font-size: medium;
+}
+
+.submit-button-div input:hover{
+  cursor: pointer;
 }

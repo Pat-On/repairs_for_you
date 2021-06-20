@@ -1,33 +1,39 @@
 import { useState } from "react";
 import "./RequestForQuoteForm.css";
-import Skills from "../SubComponents/Skills";
-import { validateForm } from "../functions";
+import Skills from "../Handyman/SubComponents/Skills";
+import { validateForm, sendQuoteRequest } from "../Handyman/functions";
 
 const RequestForQuoteForm = (props) => {
   const data = props.data.location.state;
-  console.log(data.skills);
   const [errors, setErrors] = useState([]);
+  
   // EVENT HANDLERS
   const sendFormData = (event) => {
     event.preventDefault();
-    const errors = validateForm(event.target);
+    const form = event.target;
+    const errors = validateForm(form);
     if (errors.length > 0) {
       return setErrors(errors);
     }
+    const formData = [...new FormData(form).entries()];
     setErrors([]);
-    alert(
-      "Thank you, your request has been sent. We will get back to you as soon as possible"
-    );
+    sendQuoteRequest(formData);
+    form.reset();
   };
 
   return (
-    <form id="form-add-quote" className="form" onSubmit={sendFormData}>
+    <form
+      id="form-send-quote"
+      name="form-send-quote"
+      className="form"
+      onSubmit={sendFormData}
+    >
       {errors.map((e, index) => (
         <p key={index} className="error">
           {e}
         </p>
       ))}
-      <h1>Request For Quote</h1>
+      <h1 className="title">Request For Quote</h1>
       <em className="required">
         <span className="required">*</span>&nbsp;Required field
       </em>
@@ -50,9 +56,9 @@ const RequestForQuoteForm = (props) => {
             <input
               type="text"
               id="buyer-name"
-              name="form-add-quote"
-              max={60}
-              // required
+              name="buyer-name"
+              maxLength={60}
+              required
               placeholder="Enter your name here"
             />
           </div>
@@ -62,9 +68,9 @@ const RequestForQuoteForm = (props) => {
             <input
               type="email"
               id="email"
-              name="form-add-quote"
-              max={50}
-              // required
+              name="email"
+              maxLength={50}
+              required
               placeholder="someone@example.com"
             />
           </div>
@@ -73,8 +79,8 @@ const RequestForQuoteForm = (props) => {
             <input
               type="tel"
               id="phone-number"
-              name="form-add-quote"
-              max={50}
+              name="phone-number"
+              maxLength={13}
             />
           </div>
         </fieldset>
@@ -84,20 +90,20 @@ const RequestForQuoteForm = (props) => {
         <div className="input-field-group">
           <div className="input-field">
             <h3>
-              Job Description
+              Description
               <span className="required">*</span>&nbsp;
             </h3>
             <textarea
               id="job-description"
-              name="form-add-quote"
-              max={1000}
-              // required
+              name="job-description"
+              maxLength={1000}
+              required
               placeholder="Short summary of the job"
             ></textarea>
           </div>
           <div className="handyman-skills">
             <h3>Required Skill(s) (optional)</h3>
-            <Skills skills={data.skills} formId="form-add-quote" />
+            <Skills skills={data.skills} />
           </div>
           <div className="input-field">
             <label htmlFor="date-start">Expected Start Date</label>
@@ -105,39 +111,29 @@ const RequestForQuoteForm = (props) => {
             <input
               type="date"
               id="date-start"
-              name="form-add-quote"
-              max={new Date().toLocaleDateString()}
-              // required
+              name="date-start"
+              required
             />
           </div>
           <div>
+            <h3>Additional Information</h3>
             <em className="required">
-              Please provide estimate for at least one of the following:
+              Please provide at least one of the following additional
+              information:
             </em>
             <div className="input-field">
-              <label htmlFor="job-duration-days">
-                Estimated Number of Hours:
-              </label>{" "}
-              <input
-                type="number"
-                id="job-duration-days"
-                name="form-add-quote"
-              />
+              <label htmlFor="job-duration-days">Estimated Man-hours:</label>{" "}
+              <input type="number" id="man-hours" name="man-hours" />
             </div>
             <div className="input-field">
-              <label htmlFor="price">I am willing to pay £</label>{" "}
-              <input type="number" id="price" name="form-add-quote" />
+              <label htmlFor="price">Willing to Pay £</label>{" "}
+              <input type="number" id="price" name="price" />
             </div>
           </div>
         </div>
       </fieldset>
       <div className="submit-button-div">
-        <input
-          type="submit"
-          id="btn-submit"
-          name="form-add-quote"
-          value="Submit"
-        />
+        <input type="submit" id="btn-submit" name="btn-submit" value="Submit" />
       </div>
     </form>
   );

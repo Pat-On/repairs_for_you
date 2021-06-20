@@ -1,5 +1,4 @@
 const Skills = ({ skills, formId }) => {
-  console.log(skills)
   return (
     <div>
       {skills.map((skill, index) => (

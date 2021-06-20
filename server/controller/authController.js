@@ -22,8 +22,8 @@ exports.signup = async (req, res, next) => {
   try {
     // Is it logical to pass req.body or just to split data here to?
     const newUser = await userModel.signUpUser(req.body);
-
-    const token = signToken(newUser.user_id);
+    console.log(newUser.rows[0].user_id);
+    const token = signToken(newUser.rows[0].user_id);
 
     res.status(201).json({
       status: "success",
@@ -97,10 +97,12 @@ exports.protect = async (req, res, next) => {
     console.log(decoded);
 
     // 3 check if the user still exist
-    const fetchedUser = await userModel.findUserByEmail(decoded.id);
-    console.log(fetchedUser);
     // 4 if user changed password after jwt token was sent to him
+    const fetchedUser = await userModel.findUserByTokenDecoded(decoded);
+    console.log(fetchedUser);
 
+    //GRANTING ACCESS TO PROTECTED ROUTE
+    req.user = fetchedUser;
     next();
   } catch (error) {
     res.status(401).json({

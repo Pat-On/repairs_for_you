@@ -13,14 +13,13 @@ exports.signup = async (req, res, next) => {
     // Is it logical to pass req.body or just to split data here to?
     const newUser = await userModel.signUpQuery(req.body);
 
-    const token = jwt.sign({ id: newUser.user_id}, process.env.JWT_SECRET, {
+    const token = jwt.sign({ id: newUser.user_id }, process.env.JWT_SECRET, {
       expiresIn: process.env.JWT_EXPIRES_IN,
-    })
+    });
 
-    console.log(newUser)
+    console.log(newUser);
 
     res.status(201).json({
-
       status: "success",
       token,
       data: {
@@ -36,10 +35,30 @@ exports.signup = async (req, res, next) => {
   }
 };
 
+exports.login = async (req, res, next) => {
+  try {
+    const { email, password } = req.body;
 
+    // to check email and password
+    if (!email || !password)
+      throw new Error("Please provide email and password");
 
+    // correctness of password and email
+    const token = "";
 
+    // all ok - > send token
 
+    res.status(200).json({
+      status: "success",
+      token,
+    });
+  } catch (error) {
+    res.status(400).json({
+      status: "fail",
+      msg: error.message,
+    });
+  }
+};
 
 //   npm install jsonwebtoken
 // npm WARN acorn-jsx@5.3.1 requires a peer of acorn@^6.0.0 || ^7.0.0 || ^8.0.0 but none is installed. You must install peer dependencies yourself.

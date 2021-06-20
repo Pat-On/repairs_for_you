@@ -19,7 +19,7 @@ Are going to be implemented later with authentication
 // like authorization, that is why we are going to have special routes
 // signup - is like special case so it is not suitable to other endpoints - divide by philosophy :>
 router.post('/signup', authController.signup);
-// router.post('/login', /* FUNCTION*/);
+router.post('/login', authController.login);
 // router.get('/logout', /* FUNCTION*/);
 
 // router.post('/forgotPassword', /* FUNCTION*/);

@@ -19,14 +19,22 @@ const HandymanRegistrationForm = (props) => {
   });
 
   const allSkills = [
-    "Brick laying",
-    "Carpentry",
-    "Electrical Work",
-    "Appliance installation and repair",
-    "Interior and exterior property maintenance",
-    "Tiling",
-    "Plastering",
-    "Plumbing",
+    { id: 1, name: "Brick laying" },
+    { id: 2, name: "Carpentry" },
+    { id: 3, name: "Electrical Work" },
+    {
+      id: 4,
+      name: "Appliance installation and repair",
+    },
+    {
+      id: 5,
+      name: "Interior and exterior property maintenance",
+    },
+    { id: 6, name: "Tiling" },
+    { id: 7, name: "Plastering" },
+    { id: 8, name: "Plumbing" },
+    { id: 9, name: "Painting" },
+    { id: 10, name: "Decorating" },
   ];
 
   // EVENT HANDLERS
@@ -70,8 +78,7 @@ const HandymanRegistrationForm = (props) => {
           <input
             type="text"
             id="first-name"
-            name="first_name"
-            max={50}
+            name="form-add-handyman"
             required
             placeholder="Enter your first name here"
             onChange={handleChange}
@@ -82,7 +89,7 @@ const HandymanRegistrationForm = (props) => {
           <input
             type="text"
             id="last-name"
-            name="last_name"
+            name="form-add-handyman"
             max={50}
             required
             placeholder="Enter your last name here"
@@ -96,7 +103,7 @@ const HandymanRegistrationForm = (props) => {
             <input
               type="number"
               id="address-line-one"
-              name="address_line_one"
+              name="form-add-handyman"
               required
               placeholder="Enter your building or flat number"
               onChange={handleChange}
@@ -107,7 +114,7 @@ const HandymanRegistrationForm = (props) => {
             <input
               type="text"
               id="address-line-two"
-              name="address_line_two"
+              name="form-add-handyman"
               max={50}
               required
               placeholder="Enter your street name here"
@@ -119,7 +126,7 @@ const HandymanRegistrationForm = (props) => {
             <input
               type="text"
               id="city"
-              name="city"
+              name="form-add-handyman"
               defaultValue="Coventry"
               placeholder="Enter your city, district or county name here"
               onChange={handleChange}
@@ -130,7 +137,7 @@ const HandymanRegistrationForm = (props) => {
             <input
               type="text"
               id="Postcode"
-              name="Postcode"
+              name="form-add-handyman"
               max={50}
               required
               placeholder="Enter your postcode here"
@@ -143,7 +150,7 @@ const HandymanRegistrationForm = (props) => {
           <input
             type="text"
             id="country"
-            name="country"
+            name="form-add-handyman"
             max={50}
             required
             placeholder="Enter your country name here"
@@ -155,7 +162,7 @@ const HandymanRegistrationForm = (props) => {
           <input
             type="email"
             id="email"
-            name="email"
+            name="form-add-handyman"
             max={50}
             required
             placeholder="someone@example.com"
@@ -167,7 +174,7 @@ const HandymanRegistrationForm = (props) => {
           <input
             type="tel"
             id="phone-number"
-            name="phone_number"
+            name="form-add-handyman"
             max={50}
             required
             onChange={handleChange}
@@ -176,7 +183,7 @@ const HandymanRegistrationForm = (props) => {
       </div>
       <fieldset className="input-field-group skills-group">
         <legend className="subtitle">Skills</legend>
-        <Skills skills={allSkills} />
+        <Skills skills={allSkills} formId="form-add-handyman" />
       </fieldset>
       <div className="input-field-bio">
         <h2 className="subtitle">Bio: </h2>

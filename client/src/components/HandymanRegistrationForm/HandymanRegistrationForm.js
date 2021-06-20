@@ -1,10 +1,14 @@
 import { useState } from "react";
 import "./HandymanRegistrationForm.css";
-import Skills from "./Skills";
 import { send } from "emailjs-com";
 
 const HandymanRegistrationForm = (props) => {
 	const [errors, setErrors] = useState([]);
+	const skills =["Brick laying","Carpentry","Electrical Work","Appliance installation and repair","Plastering","Plumbing"];
+	const [checkedState, setCheckedState] = useState(
+		new Array(skills.length).fill(false)
+	);
+	const [selected,setSelected]=useState([]);
 	const [toSend, setToSend] = useState({
 		first_name: "",
 		last_name: "",
@@ -16,13 +20,15 @@ const HandymanRegistrationForm = (props) => {
 		email:"",
 		phone_number:"",
 		bio:"",
+
 	});
 
 	// EVENT HANDLERS
 
 	const handleChange = (e) => {
 		setToSend({ ...toSend, [e.target.name]: e.target.value });
-		console.log(toSend.email);
+		console.log(toSend);
+		setSelected(selected.concat(e.target.value));
 	};
 
 	const sendFormData = (e) => {
@@ -34,6 +40,20 @@ const HandymanRegistrationForm = (props) => {
 		});
 	};
 
+	const handleOnChange = (position,e) => {
+
+
+		// updates button states if checked
+		const updatedCheckedState = checkedState.map((item, index) =>
+			index === position ? !item : item
+		);
+		setCheckedState(updatedCheckedState);
+
+		setSelected(selected.concat(e.target.value));
+		//setToSend({ ...toSend, ...[selected] });
+		/* console.log(e.target.name); */
+		handleChange(e);
+	};
 
 	return (
 		<form id="form-add-handyman"   className="registration-form" onSubmit={sendFormData}>
@@ -162,7 +182,19 @@ const HandymanRegistrationForm = (props) => {
 					/>
 				</div>
 			</div>
-			<Skills formId="form-add-handyman" />
+			{skills.map((skill,index)=> <div key={index}>
+				<input
+					type="checkbox"
+					id={`${skill+" " +index}`}
+					name={skill}
+					value={skill}
+					onChange={(e)=>handleOnChange(index,e)}
+					checked={checkedState[index]}
+				/>
+				<label htmlFor="bricklaying">{skill}</label>
+
+			</div>)}
+			<input type="text" name="other" onChange={handleChange}></input>
 			<div className="input-field-bio">
 				<h2 className="subtitle">Bio: {" "}</h2>
 				<textarea

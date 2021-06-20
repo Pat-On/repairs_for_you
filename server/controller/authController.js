@@ -12,6 +12,8 @@ exports.signup = async (req, res, next) => {
   try {
     const newUser = await userModel.signUpQuery(req.body);
 
+    console.log(newUser)
+
     res.status(201).json({
       status: "success",
       data: {
@@ -26,6 +28,11 @@ exports.signup = async (req, res, next) => {
     });
   }
 };
+
+
+
+
+
 
 //   npm install jsonwebtoken
 // npm WARN acorn-jsx@5.3.1 requires a peer of acorn@^6.0.0 || ^7.0.0 || ^8.0.0 but none is installed. You must install peer dependencies yourself.

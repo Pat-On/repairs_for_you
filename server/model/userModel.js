@@ -153,3 +153,29 @@ exports.findUserBaseOnResetToken = async (token) => {
   }
 };
 
+exports.updatePasswordAfterRecovery = async (user, password, passwordConfirm) => {
+try {
+//!TODO: is it logical tu put it earlier? I think so - do in refactor
+if (!password || !passwordConfirm)throw new Error("You need to provide password and password confirmation");
+
+
+if (password !== passwordConfirm) throw new Error("Password and password confirmation must be equal");
+
+const encryptedPassword = await bcrypt.hash(password, 12); //.hash() is async
+const dataOfCreation = new Date();
+
+
+
+const newUserArray = await pool.query(
+  `UPDATE users SET user_password = $1, password_changed_at = $2 WHERE email = $3`,
+  [encryptedPassword, dataOfCreation, user.email]
+);
+
+//!TODO: dummy return
+return ""
+} catch(error) {
+throw error
+
+}
+ 
+}

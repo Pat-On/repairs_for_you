@@ -5,7 +5,6 @@ const { promisify } = require("util");
 import userModel from "../model/userModel";
 const sendEmail = require("../utils/email");
 
-
 // const secret = "abcdefg";
 // const hash = createHmac("sha256", secret)
 //   .update("I love cupcakes")
@@ -167,26 +166,36 @@ exports.forgotPassword = async (req, res, next) => {
 };
 exports.resetPassword = async (req, res, next) => {
   try {
-    console.log(req.params.token)
-  // get user base on the token
-  const hashedToken = createHash("sha256")
-    .update(req.params.token)
-    .digest("hex");
-  //set new password only if the token is not expired and there is the user - set new password
-  await userModel.findUserBaseOnResetToken(hashedToken)
-  // update changedPasswordAt for the current user
-  res.status(200).json({
-    status: "success",
-    message: "password reset",
-  });
-  //log the user in
-  }catch(error) {
+    console.log(req.params.token);
+    // get user base on the token
+    const hashedToken = createHash("sha256")
+      .update(req.params.token)
+      .digest("hex");
+    //set new password only if the token is not expired and there is the user - set new password
+    const user = await userModel.findUserBaseOnResetToken(hashedToken);
+    console.log(user);
+    // update changedPasswordAt for the current user
+    // - it looks very repetitive. There must be better way
+    // - I need to hash the new password as well.
+
+    await userModel.updatePasswordAfterRecovery(
+      user,
+      req.body.password,
+      req.body.passwordConfirm
+    );
+
+    //login user in
+    const token = signToken(user.user_id);
+    res.status(200).json({
+      status: "success",
+      token,
+    });
+  } catch (error) {
     res.status(404).json({
       status: "fail",
       msg: error.message,
     });
   }
-
 };
 
 //   npm install jsonwebtoken

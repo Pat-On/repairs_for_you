@@ -109,7 +109,7 @@ exports.createPasswordResetToken = async (userObject) => {
   try {
     const resetToken = randomBytes(32).toString("hex");
 
-    const passwordResetTokenToDB = await createHash("sha256")
+    const passwordResetTokenToDB = createHash("sha256")
       .update(resetToken)
       .digest("hex");
 
@@ -117,7 +117,7 @@ exports.createPasswordResetToken = async (userObject) => {
     const expirationTime = new Date()
     expirationTime.setMinutes(expirationTime.getMinutes() + 10);
 
-    console.log(expirationTime)
+    // console.log({resetToken}, {passwordResetTokenToDB})
 
     const newUserArray = await pool.query(
       `UPDATE users SET password_reset_token = $1, password_reset_expires = $2 WHERE email = $3`,

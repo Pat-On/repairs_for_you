@@ -1,9 +1,10 @@
-import { createHmac } from "crypto";
+import { createHmac, randomBytes, createHash } from "crypto";
 import { send } from "process";
 const jwt = require("jsonwebtoken");
 const { promisify } = require("util");
 import userModel from "../model/userModel";
 const sendEmail = require("../utils/email");
+
 
 // const secret = "abcdefg";
 // const hash = createHmac("sha256", secret)
@@ -157,18 +158,34 @@ exports.forgotPassword = async (req, res, next) => {
       message: "Token sent to email",
     });
   } catch (error) {
+    // !TODO in this place in case of error we have to undone the changes in DB in users -> password token and expire token - delete it
     res.status(404).json({
       status: "fail",
       msg: error.message,
     });
   }
 };
-exports.resetPassword = (req, res, next) => {
-console.log(req)
-res.status(200).json({
-  status: "success",
-  message: "reset",
-});
+exports.resetPassword = async (req, res, next) => {
+  try {
+    console.log(req.params.token)
+  // get user base on the token
+  const hashedToken = createHash("sha256")
+    .update(req.params.token)
+    .digest("hex");
+  //set new password only if the token is not expired and there is the user - set new password
+  await userModel.findUserBaseOnResetToken(hashedToken)
+  // update changedPasswordAt for the current user
+  res.status(200).json({
+    status: "success",
+    message: "password reset",
+  });
+  //log the user in
+  }catch(error) {
+    res.status(404).json({
+      status: "fail",
+      msg: error.message,
+    });
+  }
 
 };
 

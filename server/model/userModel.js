@@ -89,7 +89,7 @@ exports.findUserByTokenDecoded = async (decoded) => {
 
 exports.findOneUser = async (userCredential) => {
   try {
-    console.log(userCredential)
+    console.log(userCredential);
     const { email } = userCredential;
 
     const newUserArray = await pool.query(
@@ -113,8 +113,7 @@ exports.createPasswordResetToken = async (userObject) => {
       .update(resetToken)
       .digest("hex");
 
-
-    const expirationTime = new Date()
+    const expirationTime = new Date();
     expirationTime.setMinutes(expirationTime.getMinutes() + 10);
 
     // console.log({resetToken}, {passwordResetTokenToDB})
@@ -125,6 +124,30 @@ exports.createPasswordResetToken = async (userObject) => {
     );
 
     return resetToken;
+  } catch (error) {
+    throw error;
+  }
+};
+
+exports.findUserBaseOnResetToken = async (token) => {
+  try {
+    console.log("this is token", token);
+    const userToResetPassword = await pool.query(
+      `SELECT * FROM users WHERE password_reset_token=$1;`,
+      [token]
+    );
+    console.log(userToResetPassword.rows);
+    if (userToResetPassword.rowCount === 0)
+      throw new Error("There is no user related to that token");
+    const user = userToResetPassword.rows[0];
+    // check if the token did not expires.
+
+    const date = new Date(user.password_reset_expires);
+    const milliseconds = date.getTime();
+
+    if (milliseconds < Date.now()) throw new Error("Token already expired");
+
+    return user;
   } catch (error) {
     throw error;
   }

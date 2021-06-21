@@ -28,7 +28,7 @@ const HandymanRegistrationForm = (props) => {
     { id: 7, name: "plastering", value: "Plastering" },
     { id: 8, name: "plumbing", value: "Plumbing" },
     { id: 9, name: "painting", value: "Painting" },
-    { id: 10, name: "pecorating", value: "Decorating" },
+    { id: 10, name: "decorating", value: "Decorating" },
   ];
 
   // EVENT HANDLERS
@@ -75,6 +75,7 @@ const HandymanRegistrationForm = (props) => {
               type="text"
               id="firstName"
               name="firstName"
+              maxLength={50}
               required
               placeholder="Enter your first name here"
             />
@@ -129,6 +130,7 @@ const HandymanRegistrationForm = (props) => {
               type="text"
               id="city"
               name="city"
+              maxLength={50}
               defaultValue="Coventry"
               placeholder="City, county or district name"
             />
@@ -141,7 +143,7 @@ const HandymanRegistrationForm = (props) => {
               type="text"
               id="postcode"
               name="postcode"
-              maxLength={50}
+              maxLength={12}
               required
               placeholder="Enter your postcode here"
             />
@@ -170,7 +172,8 @@ const HandymanRegistrationForm = (props) => {
               type="tel"
               id="phoneNumber"
               name="phoneNumber"
-              maxLength={50}
+              minLength={11}
+              maxLength={13}
               required
             />
           </div>

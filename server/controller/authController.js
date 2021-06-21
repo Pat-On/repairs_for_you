@@ -172,6 +172,7 @@ exports.resetPassword = async (req, res, next) => {
       .update(req.params.token)
       .digest("hex");
     //set new password only if the token is not expired and there is the user - set new password
+    // ANOTHER APPROACH IS TO BUILD ERROR BASE ON FETCHING OR NOT FETCHING USERS (?)
     const user = await userModel.findUserBaseOnResetToken(hashedToken);
     console.log(user);
     // update changedPasswordAt for the current user

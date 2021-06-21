@@ -153,29 +153,31 @@ exports.findUserBaseOnResetToken = async (token) => {
   }
 };
 
-exports.updatePasswordAfterRecovery = async (user, password, passwordConfirm) => {
-try {
-//!TODO: is it logical tu put it earlier? I think so - do in refactor
-if (!password || !passwordConfirm)throw new Error("You need to provide password and password confirmation");
+exports.updatePasswordAfterRecovery = async (
+  user,
+  password,
+  passwordConfirm
+) => {
+  try {
+    //!TODO: is it logical tu put it earlier? I think so - do in refactor
+    if (!password || !passwordConfirm)
+      throw new Error("You need to provide password and password confirmation");
 
+    if (password !== passwordConfirm)
+      throw new Error("Password and password confirmation must be equal");
 
-if (password !== passwordConfirm) throw new Error("Password and password confirmation must be equal");
+    const encryptedPassword = await bcrypt.hash(password, 12); //.hash() is async
+    const dataOfCreation = new Date();
 
-const encryptedPassword = await bcrypt.hash(password, 12); //.hash() is async
-const dataOfCreation = new Date();
+    //!TODO: what about cleaning the fields in DB? null? empty string?
+    const _ = await pool.query(
+      `UPDATE users SET user_password = $1, password_changed_at = $2, password_reset_token=$3, password_reset_expires=$4 WHERE email = $5`,
+      [encryptedPassword, dataOfCreation, "", "1970-06-21 15:46:38.799+01", user.email]
+    );
 
-
-
-const newUserArray = await pool.query(
-  `UPDATE users SET user_password = $1, password_changed_at = $2 WHERE email = $3`,
-  [encryptedPassword, dataOfCreation, user.email]
-);
-
-//!TODO: dummy return
-return ""
-} catch(error) {
-throw error
-
-}
- 
-}
+    //!TODO: dummy return
+    return "";
+  } catch (error) {
+    throw error;
+  }
+};

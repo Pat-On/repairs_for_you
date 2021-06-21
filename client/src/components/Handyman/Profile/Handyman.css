@@ -156,14 +156,14 @@ div.user-reviews form{
 .profile-image img{
   width: 40rem;
 }
-.skills :nth-child(2){
+.handy-man .skills :nth-child(2){
   list-style: none;
   width: 30rem;
   display: grid;
   grid-template-columns: auto;
   gap:2rem
 }
-.skills :nth-child(2) > li{
+.handy-man .skills :nth-child(2) > li{
   display: inline-block; 
   margin-right: 0.3rem;
   padding: 0.3rem 0.5rem;

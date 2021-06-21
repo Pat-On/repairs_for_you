@@ -96,7 +96,7 @@ const RequestForQuoteForm = (props) => {
             <textarea
               id="job-description"
               name="job-description"
-              maxLength={1000}
+              maxLength={500}
               required
               placeholder="Short summary of the job"
             ></textarea>
@@ -113,6 +113,7 @@ const RequestForQuoteForm = (props) => {
               id="date-start"
               name="date-start"
               required
+              min={new Date().toLocaleDateString()}
             />
           </div>
           <div>

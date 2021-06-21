@@ -1,6 +1,5 @@
 import React, { useState,useEffect } from "react";
 import HandyPeopleCard from "./HandyPeopleCard";
-import HandyPeopleTestData from "./HandyPeopleTestData.json";
 import { Link } from "react-router-dom";
 import InputFields from "./InputFields";
 
@@ -8,10 +7,21 @@ import InputFields from "./InputFields";
 
 
 export default function HandyPeopleCards() {
-	const 	[list,setList]=useState(HandyPeopleTestData);
+	const 	[list,setList]=useState([]);
 	const [search,setSearch]= useState();
+
 	const handleChange=(e)=>{
-		console.log(e.target.value)
+		if(e.target.className==="by-keyword"){
+			const	filteredByKeyWord =list.filter((data) =>  JSON.stringify(data).toLowerCase().indexOf(e.target.value.toLowerCase()) !== -1);
+			setSearch(filteredByKeyWord);
+
+		}
+		if(e.target.className==="by-skill"){
+			const	filteredBySkill =list.filter((data) =>  JSON.stringify(data.skills).toLowerCase().indexOf(e.target.value.toLowerCase()) !== -1);
+			setSearch(filteredBySkill);
+
+		}
+
 	};
 
 	useEffect(() => {
@@ -31,8 +41,20 @@ export default function HandyPeopleCards() {
 	}, []);
 
 
-	return (
-		<div className="cards-container">
+	return ( search
+		? <div className="cards-container">
+			<InputFields handleChange={handleChange} />
+			{
+				search.map((oneList,index)=>
+
+					<HandyPeopleCard key={index} onelist={oneList} />
+
+				)
+			}
+			<Link to="/about/this/site/handyPeople"></Link>
+
+		</div>
+		: <div className="cards-container">
 			<InputFields handleChange={handleChange} />
 			{
 				list.map((oneList,index)=>
@@ -44,5 +66,6 @@ export default function HandyPeopleCards() {
 			<Link to="/about/this/site/handyPeople"></Link>
 
 		</div>
+
 	);
 }

@@ -2,28 +2,25 @@ import { func } from "prop-types";
 import React, { useState } from "react";
 
 
-export default function InputFields({search,setSearch,hand}) {
+export default function InputFields({ search,setSearch,handleChange }) {
 
-	const handleChange=(e)=>{
-
-		console.log(e.target.value);
-	};
-	return (
+	return(
 		<form className="form" >
 			<div className="form-group">
 				<div>
-					<label >What</label>
-					<input type="text" className="form-control"  placeholder="sector"  onChange={handleChange} />
-				</div>
-				<div className="">
-					<label >Where</label>
-					<input type="text" className="form-control"  placeholder="location" />
+					<label >filter by skill</label>
+					<input type="text" className="by-skill"  placeholder="Type a skill"  onChange={handleChange} />
 				</div>
 				<div>
-					<button type="submit" className="btn btn-primary">Search</button>
+					<label >filter by keyword</label>
+					<input type="text" className="by-keyword"  placeholder="type a keyword"  onChange={handleChange} />
 				</div>
+
+
 
 			</div>
 		</form>
 	);
+
+
 }

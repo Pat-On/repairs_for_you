@@ -112,6 +112,21 @@ exports.protect = async (req, res, next) => {
   }
 };
 
+/**
+ * 
+ * @param  {Array of strings} roles  is the Array of the roles which are passed to the function 
+ * @returns 
+ */
+exports.restrictTo = (...roles) => {
+  return  (req, res, next) => {
+    //!TODO it should send error 403 -> We need to specify the global error handling or introduce temporary solution 
+    if(!roles.includes(req.user.user_role)) throw new Error("You do not have permission to perform this action");
+    next()
+  }
+}
+
+
+
 //   npm install jsonwebtoken
 // npm WARN acorn-jsx@5.3.1 requires a peer of acorn@^6.0.0 || ^7.0.0 || ^8.0.0 but none is installed. You must install peer dependencies yourself.
 // npm WARN mini-create-react-context@0.4.0 requires a peer of react@^0.14.0 || ^15.0.0 || ^16.0.0 but none is installed. You must install peer dependencies yourself.

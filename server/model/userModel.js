@@ -73,8 +73,6 @@ exports.findUserByTokenDecoded = async (decoded) => {
 
     const changedTimestamp = parseInt(newUser.password_changed_at.getTime() / 1000, 10);
 
-    console.log("i am here");
-    console.log(changedTimestamp, decoded.iat);
     if (decoded.iat < changedTimestamp) throw new Error("Not valid token");
 
 

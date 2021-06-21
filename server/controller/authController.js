@@ -1,7 +1,9 @@
 import { createHmac } from "crypto";
+import { send } from "process";
 const jwt = require("jsonwebtoken");
 const { promisify } = require("util");
 import userModel from "../model/userModel";
+const sendEmail = require("../utils/email");
 
 // const secret = "abcdefg";
 // const hash = createHmac("sha256", secret)
@@ -135,12 +137,25 @@ exports.forgotPassword = async (req, res, next) => {
     // generate the random reset token and saving it to DB
 
     const passwordResetToken = await userModel.createPasswordResetToken(user);
-    res.status(200).json({
-      status: "success",
-      msg: passwordResetToken,
-    });
 
     // send back as a email
+    const resetURL = `${req.protocol}://${req.get(
+      "host"
+    )}/api/v1/users/resetPassword/${passwordResetToken}`;
+
+    const message = `Forgot Your password? Submit a Patch request with your new password and password Confirm  to: 
+          ${resetURL}. \nIf You did not forger your password, please ignore this email!`;
+
+    await sendEmail({
+      email: user.email,
+      subject: "Your password reset token (valid 10 minutes)",
+      message,
+    });
+
+    res.status(200).json({
+      status: "success",
+      message: "Token sent to email",
+    });
   } catch (error) {
     res.status(404).json({
       status: "fail",
@@ -148,7 +163,14 @@ exports.forgotPassword = async (req, res, next) => {
     });
   }
 };
-exports.resetPassword = (req, res, next) => {};
+exports.resetPassword = (req, res, next) => {
+console.log(req)
+res.status(200).json({
+  status: "success",
+  message: "reset",
+});
+
+};
 
 //   npm install jsonwebtoken
 // npm WARN acorn-jsx@5.3.1 requires a peer of acorn@^6.0.0 || ^7.0.0 || ^8.0.0 but none is installed. You must install peer dependencies yourself.

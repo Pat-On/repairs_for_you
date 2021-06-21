@@ -64,7 +64,7 @@ router.delete("/deleteMe", async (req, res, next) => {
 
 router
   .route("/")
-  .get(authController.protect, authController.restrictTo('admin'), async (req, res, next) => {
+  .get(authController.protect, authController.restrictTo('admin', 'handyperson'), async (req, res, next) => {
     try {
       const bookingsAll = await pool.query("SELECT * FROM users");
 
@@ -118,7 +118,7 @@ router
       msg: `patch method usersRouter "/:offerId" You sent ${userId}`,
     });
   })
-  .delete(authController.protect, authController.restrictTo('admin'), async (req, res, next) => {
+  .delete(authController.protect, authController.restrictTo('admin', 'handyperson'), async (req, res, next) => {
     const { userId } = req.params;
 
     res.status(200).json({

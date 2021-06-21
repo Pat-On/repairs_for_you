@@ -12,73 +12,73 @@ import RegistrationForm from "./pages/RegistrationForm";
 import SignIn from "./containers/signIn/SignIn";
 
 const App = () => (
-  <div className="App container">
-    <Layout>
-      <Switch>
-        <Route path="/" exact component={(props) => <MainPage {...props} />} />
-        <Route
-          path="/buyers"
-          exact
-          component={() => (
-            <div>
-              <h1>PLACEHOLDER buyers</h1>
-            </div>
-          )}
-        />
-        <Route
-          path="/users/handyman"
-          exact
-          component={() => (
-            <div>
-              <HandyPeople />{" "}
-            </div>
-          )}
-        />
+	<div className="App container">
+		<Layout>
+			<Switch>
+				<Route path="/" exact component={(props) => <MainPage {...props} />} />
+				<Route
+					path="/buyers"
+					exact
+					component={() => (
+						<div>
+							<h1>PLACEHOLDER buyers</h1>
+						</div>
+					)}
+				/>
+				<Route
+					path="/users/handyman"
+					exact
+					component={() => (
+						<div>
+							<HandyPeople />{" "}
+						</div>
+					)}
+				/>
 
-        <Route
-          path="/contact"
-          exact
-          component={() => (
-            <div>
-              <h1>PLACEHOLDER CONTACTS</h1>
-            </div>
-          )}
-        />
+				<Route
+					path="/contact"
+					exact
+					component={() => (
+						<div>
+							<h1>PLACEHOLDER CONTACTS</h1>
+						</div>
+					)}
+				/>
 
-        <Route path="/signin"    component={(props) => <SignIn {...props} />}/>
-     
-    
+				<Route path="/signin"    component={(props) => <SignIn {...props} />} />
 
-        <Route path="/about/this/site">
-          <About />
-        </Route>
-        <Route
-          path="/admin-panel"
-          component={(props) => <AdminPanel {...props} />}
-        />
-        <Route path="/login" component={(props) => <Login {...props} />} />
 
-        <Route path="/about/this/site">
-          <About />
-        </Route>
 
-        <Route
-          path="/users/:usergroup/register"
-          exact
-          render={({ match }) => (
-            <RegistrationForm formId={match.params.usergroup} />
-          )}
-        />
+				<Route path="/about/this/site">
+					<About />
+				</Route>
+				<Route
+					path="/admin-panel"
+					component={(props) => <AdminPanel {...props} />}
+				/>
+				<Route path="/login" component={(props) => <Login {...props} />} />
 
-        <Route
-          path="/users/handyman/:id"
-          exact
-          render={({ match }) => <HandymanProfile id={match.params.id} />}
-        />
-           <Redirect to="/" />
-      </Switch>
-    </Layout>
-  </div>
+				<Route path="/about/this/site">
+					<About />
+				</Route>
+
+				<Route
+					path="/users/:usergroup/register"
+					exact
+					render={({ match }) => (
+						<RegistrationForm formId={match.params.usergroup} />
+					)}
+				/>
+
+				<Route
+					path="/users/handyman/:id"
+					exact
+					render={({ match }) => <HandymanProfile id={match.params.id} />}
+				/>
+				<Redirect to="/" />
+			</Switch>
+		</Layout>
+	</div>
 );
 
 export default withRouter(App);

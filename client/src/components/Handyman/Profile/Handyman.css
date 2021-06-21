@@ -147,6 +147,7 @@ div.user-reviews form{
 }
 .bio-handy-man{
   width: 70%;
+  text-align: justify;
 }
 .bio-handy-man :first-child{
   text-align: center;
@@ -165,18 +166,28 @@ div.user-reviews form{
 }
 .skills :nth-child(2) > li{
   display: inline-block; 
-  margin-right: 0.3rem;
   padding: 0.3rem 0.5rem;
   background-color: rgb(79, 151, 151);
   border-radius: 0.3rem;
+  width: fit-content;
 }
 .user-reviews{
   width: 80%;
   margin-left: auto;
   margin-right: auto;
   margin-top: 3rem;
+  border: 2px solid rgb(240, 239, 239) ;
+  text-align: justify;
+  padding: 5rem 5rem;
+
 }
 .user-reviews .label {
   padding-left: 50rem;
  
+}
+.btn-primary{
+  font-size: medium;
+  width: fit-content;
+  padding-top: .3rem;
+  padding-bottom: .3rem;
 }

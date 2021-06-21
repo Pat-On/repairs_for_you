@@ -19,9 +19,9 @@ function getFormErrors(formFields, formId) {
   const emailField = formFields.find((field) => field.type === "email").value;
   const phoneNumber = formFields.find((field) => field.type === "tel").value;
 
-  if (!vaidateEmail(emailField))
+  if (!emailIsValid(emailField))
     errors.push("Error: invalid email format. Please enter a valid email.");
-  if (phoneNumber !== "" && !validatePhoneNumuber(phoneNumber))
+  if (phoneNumber !== "" && !phoneNumberIsValid(phoneNumber))
     errors.push(
       "Error: invalid phone format. Please enter a valid phone number."
     );
@@ -38,11 +38,11 @@ function getFormErrors(formFields, formId) {
   return errors;
 }
 
-function vaidateEmail(email) {
+function emailIsValid(email) {
   return emailValidator.validate(email);
 }
 
-function validatePhoneNumuber(phoneNumber) {
+function phoneNumberIsValid(phoneNumber) {
   // Remove the first character from phoneNumber in case it contains the "+" sign
   phoneNumber = phoneNumber.substring(1);
   // If the phone number includes white space, remove it

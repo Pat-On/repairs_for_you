@@ -20,14 +20,15 @@ CREATE TABLE addresses (
 
 
 
-
 -- CREATE TABLE users (
 --     user_id          SERIAL PRIMARY KEY,
 --     first_name       VARCHAR(50)  NOT NULL,
 --     email            VARCHAR(50) UNIQUE NOT NULL,
 -- 	user_password VARCHAR(200),
 -- 	password_changed_at timestamp,
---     user_role        VARCHAR(20)
+--     user_role        VARCHAR(20),
+-- password_reset_token   VARCHAR(200),
+-- password_reset_expires  	timestamptz
 -- );
 
 

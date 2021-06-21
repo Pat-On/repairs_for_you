@@ -167,7 +167,8 @@ exports.updatePasswordAfterRecovery = async (
       throw new Error("Password and password confirmation must be equal");
 
     const encryptedPassword = await bcrypt.hash(password, 12); //.hash() is async
-    const dataOfCreation = new Date();
+    // minus 1000 millisecond from data Of creation -> because saving to DB is taking time
+    const dataOfCreation = new Date()
 
     //!TODO: what about cleaning the fields in DB? null? empty string?
     const _ = await pool.query(

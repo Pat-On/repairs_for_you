@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./RequestForQuoteForm.css";
 import Skills from "../Handyman/SubComponents/Skills";
-import { validateForm, sendQuoteRequest } from "../Handyman/functions";
+import { validateForm, sendQuoteRequest } from "../../common/js/functions";
 
 const RequestForQuoteForm = (props) => {
   const data = props.data.location.state;

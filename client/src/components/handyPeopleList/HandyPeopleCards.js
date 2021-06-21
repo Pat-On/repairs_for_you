@@ -2,12 +2,17 @@ import React, { useState,useEffect } from "react";
 import HandyPeopleCard from "./HandyPeopleCard";
 import HandyPeopleTestData from "./HandyPeopleTestData.json";
 import { Link } from "react-router-dom";
+import InputFields from "./InputFields";
 
 
 
 
 export default function HandyPeopleCards() {
 	const 	[list,setList]=useState(HandyPeopleTestData);
+	const [search,setSearch]= useState();
+	const handleChange=(e)=>{
+		console.log(e.target.value)
+	};
 
 	useEffect(() => {
 		fetch("/api/users/handyman")
@@ -28,7 +33,7 @@ export default function HandyPeopleCards() {
 
 	return (
 		<div className="cards-container">
-
+			<InputFields handleChange={handleChange} />
 			{
 				list.map((oneList,index)=>
 

@@ -1,12 +1,19 @@
-import React from "react";
+import { func } from "prop-types";
+import React, { useState } from "react";
 
-export default function InputFields() {
+
+export default function InputFields({search,setSearch,hand}) {
+
+	const handleChange=(e)=>{
+
+		console.log(e.target.value);
+	};
 	return (
-		<form className="form">
+		<form className="form" >
 			<div className="form-group">
 				<div>
 					<label >What</label>
-					<input type="text" className="form-control"  placeholder="sector" />
+					<input type="text" className="form-control"  placeholder="sector"  onChange={handleChange} />
 				</div>
 				<div className="">
 					<label >Where</label>

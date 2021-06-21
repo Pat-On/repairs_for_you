@@ -23,8 +23,8 @@ router.post('/signup', authController.signup);
 router.post('/login', authController.login);
 // router.get('/logout', /* FUNCTION*/);
 
-// router.post('/forgotPassword', /* FUNCTION*/);
-// router.patch('/resetPassword/:token', /* FUNCTION*/);
+router.post('/forgotPassword', authController.forgotPassword);
+router.patch('/resetPassword/:token', authController.resetPassword);
 
 // all bellow - you need to be authenticated
 

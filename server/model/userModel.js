@@ -1,4 +1,4 @@
-import { createHmac } from "crypto";
+import { createHmac, randomBytes, createHash } from "crypto";
 const bcrypt = require("bcryptjs");
 import { pool } from "../db";
 
@@ -81,3 +81,43 @@ exports.findUserByTokenDecoded = async (decoded) => {
     throw error;
   }
 };
+
+exports.findOneUser = async (userCredential) => {
+  try {
+    const { email } = userCredential;
+
+    const newUserArray = await pool.query(
+      `SELECT * FROM users WHERE email = $1`,
+      [email]
+    );
+
+    if (newUserArray.rowCount === 0)
+      throw new Error("User with that email no exist");
+
+    const newUser = newUserArray.rows[0];
+
+    //return true if both password are the same
+    const testBoolean = await bcrypt.compare(password, newUser.user_password);
+
+    if (!testBoolean) throw new Error("Incorrect email or password");
+
+    // 3) if success inform user
+    return newUser;
+  } catch (error) {
+
+  }
+};
+
+exports.createPasswordResetToken = async () => {
+
+  try {
+    const resetToken = randomBytes(32).toString('hex');
+
+    const passwordResetTokenToDB = createHash('sha256').update(resetToken).digest('hex')
+
+
+  } catch(error) {
+    throw error;
+  }
+
+}

@@ -129,9 +129,16 @@ exports.restrictTo = (...roles) => {
 exports.forgotPassword = async (req, res, next) => {
   try {
     // get user based on posted email
-    const user = await   userModel.findOneUser(reg.body);
+    console.log(req.body);
+    const user = await userModel.findOneUser(req.body);
 
-    // generate the random reset token
+    // generate the random reset token and saving it to DB
+
+    const passwordResetToken = await userModel.createPasswordResetToken(user);
+    res.status(200).json({
+      status: "success",
+      msg: passwordResetToken,
+    });
 
     // send back as a email
   } catch (error) {

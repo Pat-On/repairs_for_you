@@ -19,6 +19,18 @@ CREATE TABLE addresses (
 );
 
 
+
+
+-- CREATE TABLE users (
+--     user_id          SERIAL PRIMARY KEY,
+--     first_name       VARCHAR(50)  NOT NULL,
+--     email            VARCHAR(50) UNIQUE NOT NULL,
+-- 	user_password VARCHAR(200),
+-- 	password_changed_at timestamp,
+--     user_role        VARCHAR(20)
+-- );
+
+
 CREATE TABLE users (
     user_id          SERIAL PRIMARY KEY,
     profile_picture VARCHAR(80), --IN FIRST ATTEMPT WE WILL USE LINK BUT LWE HAVE TO ALLOW USER TO UPLOAD PICTURES TO SERVER

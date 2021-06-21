@@ -118,7 +118,7 @@ router
       msg: `patch method usersRouter "/:offerId" You sent ${userId}`,
     });
   })
-  .delete(async (req, res, next) => {
+  .delete(authController.protect, /*authController.restrictTo('admin'), */ async (req, res, next) => {
     const { userId } = req.params;
 
     res.status(200).json({

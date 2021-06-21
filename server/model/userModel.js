@@ -6,8 +6,9 @@ import { pool } from "../db";
 exports.signUpUser = async (userObj) => {
   try {
     // 1) TO CHECK IF INPUT HAS WHAT WE NEED plus SANITIZATION
-    const { name, email, password, passwordConfirm } = userObj;
-
+    const { name, email, password, passwordConfirm, role } = userObj;
+    if(role === "admin") throw new Error("Creating admins in this way is forbidden");
+    if(role !== "buyer" && role !== "handyperson" || role === "" ) throw new Error("You can only create buyer or handyperson account");
     if (!name) throw new Error("You need to provide name");
     if (!email) throw new Error("You need to provide email address"); //!TODO: backend validation
     if (!(password === passwordConfirm))
@@ -20,8 +21,8 @@ exports.signUpUser = async (userObj) => {
 
     // !TODO: returning * is not best solution in my opinion / temporary - kick out password from input later
     const newUser = await pool.query(
-      `INSERT INTO users (first_name, email, user_password, password_changed_at) VALUES ($1, $2, $3, $4) RETURNING * `,
-      [name, email, encryptedPassword, dataOfCreation]
+      `INSERT INTO users (first_name, email, user_password, password_changed_at, user_role) VALUES ($1, $2, $3, $4, $5) RETURNING * `,
+      [name, email, encryptedPassword, dataOfCreation, role]
     );
     // 3) if success inform user
     return newUser;

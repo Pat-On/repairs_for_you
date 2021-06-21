@@ -8,12 +8,10 @@ export default function InputFields({ search,setSearch,handleChange }) {
 		<form className="form" >
 			<div className="form-group">
 				<div>
-					<label >filter by skill</label>
-					<input type="text" className="by-skill"  placeholder="Type a skill"  onChange={handleChange} />
+					<input type="text" className="by-skill"  placeholder="filter by a skill"  onChange={handleChange} />
 				</div>
 				<div>
-					<label >filter by keyword</label>
-					<input type="text" className="by-keyword"  placeholder="type a keyword"  onChange={handleChange} />
+					<input type="text" className="by-keyword"  placeholder="filter by a keyword"  onChange={handleChange} />
 				</div>
 
 

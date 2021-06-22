@@ -50,7 +50,7 @@ exports.signup = async (req, res, next) => {
   try {
     // Is it logical to pass req.body or just to split data here to?
     const newUser = await userModel.signUpUser(req.body);
-    console.log(newUser.rows[0].user_id);
+
 
     createSendToken(newUser.rows[0], 201, res);
   } catch (error) {
@@ -104,7 +104,7 @@ exports.protect = async (req, res, next) => {
     ) {
       token = req.headers.authorization.split(" ")[1];
     }
-    console.log(token);
+
     if (!token) {
       //!TODO: next step it would be great to implement GLOBAL error handling!
       res.status(401).json({
@@ -114,12 +114,10 @@ exports.protect = async (req, res, next) => {
     }
     // 2 verification of token <- the most important jwt is going to do it
     const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
-    console.log(decoded);
 
     // 3 check if the user still exist
     // 4 if user changed password after jwt token was sent to him
     const fetchedUser = await userModel.findUserByTokenDecoded(decoded);
-    console.log(fetchedUser);
 
     //GRANTING ACCESS TO PROTECTED ROUTE
     req.user = fetchedUser;
@@ -149,7 +147,6 @@ exports.restrictTo = (...roles) => {
 exports.forgotPassword = async (req, res, next) => {
   try {
     // get user based on posted email
-    console.log(req.body);
     const user = await userModel.findOneUser(req.body);
 
     // generate the random reset token and saving it to DB
@@ -184,7 +181,7 @@ exports.forgotPassword = async (req, res, next) => {
 };
 exports.resetPassword = async (req, res, next) => {
   try {
-    console.log(req.params.token);
+
     // get user base on the token
     const hashedToken = createHash("sha256")
       .update(req.params.token)
@@ -192,7 +189,7 @@ exports.resetPassword = async (req, res, next) => {
     //set new password only if the token is not expired and there is the user - set new password
     // ANOTHER APPROACH IS TO BUILD ERROR BASE ON FETCHING OR NOT FETCHING USERS (?)
     const user = await userModel.findUserBaseOnResetToken(hashedToken);
-    console.log(user);
+
     // update changedPasswordAt for the current user
     // - it looks very repetitive. There must be better way
     // - I need to hash the new password as well.

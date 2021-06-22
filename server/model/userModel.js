@@ -89,7 +89,7 @@ exports.findUserByTokenDecoded = async (decoded) => {
 
 exports.findOneUser = async (userCredential) => {
   try {
-    console.log(userCredential);
+
     const { email } = userCredential;
 
     const newUserArray = await pool.query(
@@ -116,7 +116,6 @@ exports.createPasswordResetToken = async (userObject) => {
     const expirationTime = new Date();
     expirationTime.setMinutes(expirationTime.getMinutes() + 10);
 
-    // console.log({resetToken}, {passwordResetTokenToDB})
 
     const newUserArray = await pool.query(
       `UPDATE users SET password_reset_token = $1, password_reset_expires = $2 WHERE email = $3`,
@@ -131,12 +130,10 @@ exports.createPasswordResetToken = async (userObject) => {
 
 exports.findUserBaseOnResetToken = async (token) => {
   try {
-    console.log("this is token", token);
     const userToResetPassword = await pool.query(
       `SELECT * FROM users WHERE password_reset_token=$1;`,
       [token]
     );
-    console.log(userToResetPassword.rows);
     if (userToResetPassword.rowCount === 0)
       throw new Error("There is no user related to that token");
     const user = userToResetPassword.rows[0];

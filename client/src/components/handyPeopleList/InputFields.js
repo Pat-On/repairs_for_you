@@ -1,7 +1,3 @@
-
-import React, { useState } from "react";
-
-
 export default function InputFields({ search,setSearch,handleChange }) {
 
 	return(

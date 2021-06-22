@@ -1,5 +1,4 @@
 import { createHmac, randomBytes, createHash } from "crypto";
-import { reset } from "nodemon";
 const bcrypt = require("bcryptjs");
 import { pool } from "../db";
 

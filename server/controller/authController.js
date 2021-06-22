@@ -1,5 +1,4 @@
-import { createHmac, randomBytes, createHash } from "crypto";
-import { send } from "process";
+import {  createHash } from "crypto";
 const jwt = require("jsonwebtoken");
 const { promisify } = require("util");
 import userModel from "../model/userModel";

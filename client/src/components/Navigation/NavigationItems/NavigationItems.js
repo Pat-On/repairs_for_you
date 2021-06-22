@@ -26,6 +26,9 @@ const navigationItems = (props) => {
       {!authCtx.isLoggedIn && (
         <NavigationItem link="/signin">Sign-In</NavigationItem>
       )}
+            {authCtx.isLoggedIn && (
+        <NavigationItem link="/signinout">Sign-Out</NavigationItem>
+      )}
     </ul>
   );
 };

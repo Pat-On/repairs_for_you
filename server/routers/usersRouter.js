@@ -57,7 +57,7 @@ router.delete("/deleteMe", async (req, res, next) => {
 
 router
   .route("/")
-  .get(authController.protect, authController.restrictTo('admin', 'handyperson'), async (req, res, next) => {
+  .get(authController.protect, authController.restrictTo('handyperson', "buyer"), async (req, res, next) => {
     try {
       const bookingsAll = await pool.query("SELECT * FROM users");
 

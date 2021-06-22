@@ -11,11 +11,12 @@ import MainPage from "./components/mainPage/mainPage";
 import HandymanProfile from "./pages/HandymanProfile";
 import RegistrationForm from "./pages/RegistrationForm";
 import SignIn from "./containers/signIn/SignIn";
+import SignOut from "./containers/signOut/signOut";
 
 import AuthContext from "./store/authContext";
 
 const App = () => {
-const authCtx = useContext(AuthContext)
+  const authCtx = useContext(AuthContext);
 
   return (
     <div className="App container">
@@ -55,6 +56,10 @@ const authCtx = useContext(AuthContext)
             )}
           />
 
+          <Route
+            path="/signinout"
+            component={(props) => <SignOut {...props} />}
+          />
           <Route path="/signin" component={(props) => <SignIn {...props} />} />
 
           <Route path="/about/this/site">

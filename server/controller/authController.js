@@ -10,15 +10,18 @@ const sendEmail = require("../utils/email");
 //   .update("I love cupcakes")
 //   .digest("hex");
 
-
 //TODO: implement it into the all routes - important for production
 const createSendToken = (user, statusCode, res) => {
   const token = signToken(user.user_id);
 
+  const expirationTime = new Date();
+  expirationTime.setMinutes(
+    expirationTime.getMinutes() +
+      parseInt(process.env.JWT_COOKIE_EXPIRES_IN_MINUTES)
+  );
+
   const cookieOptions = {
-    expires: new Date(
-      Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 100
-    ),
+    expires: expirationTime,
     httpOnly: true,
   };
   if (process.env.DATABASE_URL) cookieOptions.secure = true;
@@ -48,9 +51,8 @@ exports.signup = async (req, res, next) => {
     // Is it logical to pass req.body or just to split data here to?
     const newUser = await userModel.signUpUser(req.body);
     console.log(newUser.rows[0].user_id);
- 
-    createSendToken(newUser.rows[0], 201, res)
 
+    createSendToken(newUser.rows[0], 201, res);
   } catch (error) {
     res.status(400).json({
       status: "fail",

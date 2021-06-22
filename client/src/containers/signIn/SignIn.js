@@ -1,14 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import SignUpForm from "../../components/signUpForm/SignUpForm";
 import { checkValidity } from "../../utility/utility";
 
+import AuthContext from "../../store/authContext"
+
+
 const SignIn = (props) => {
-//   const history = useHistory();
+
+  const authCtx = useContext(AuthContext);
+  //   const history = useHistory();
   /**
    * State: responsible for controlling the process of displaying the http req in UI
    */
 
-  console.log(props.history)
+  console.log(props.history);
   const [loadingControl, setLoadingControl] = useState(false);
 
   /**
@@ -21,26 +26,28 @@ const SignIn = (props) => {
       invalidInputInfo: "Enter valid email address",
       name: "E-mail",
       placeholder: "example@email.com",
-      value: "",
+      value: "test909222222222222222222220@p.com",
 
       validation: {
         required: true,
         isEmail: true,
       },
-      valid: false,
+      valid: true,
+      // valid: false,
       touched: false,
     },
     password: {
       invalidInputInfo: "Have to be at least 8 symbols long",
       name: "Password",
       placeholder: "Password",
-      value: "",
+      value: "password1",
 
       validation: {
         required: true,
         isName: true,
       },
-      valid: false,
+      // valid: false,
+      valid: true,
       touched: false,
     },
   });
@@ -64,9 +71,31 @@ const SignIn = (props) => {
    * @input no input
    * @return nothing
    */
-  const nextFunction = () => {
-    // !TODO: if logged success main page + auth if not error -> wrong password or email
-    props.history.replace("/");
+  const nextFunction = async () => {
+    try {
+      const data = {
+        email: signForm.email.value,
+        password: signForm.password.value
+      };
+
+      const response = await fetch("/api/v1/users/login", {
+        method: "POST", 
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data) 
+      });
+
+      const responseJsoned = await response.json()
+      authCtx.login(responseJsoned.token)
+      props.history.push("/");
+      
+    } catch (error) {
+      console.log(error)
+    }
+
+    // // !TODO: if logged success main page + auth if not error -> wrong password or email
+    // props.history.replace("/");
   };
 
   /**

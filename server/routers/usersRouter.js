@@ -1,10 +1,11 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
 
-import {
-    pool
-} from "./../db";
 
+import { pool } from "./../db";
+
+import authController from "./../controller/authController"
+import userController from "./../controller/userController"
 /* 
 /signup
 /login
@@ -18,58 +19,35 @@ Are going to be implemented later with authentication
 // this is different that others because we are going to handle a lot of things
 // like authorization, that is why we are going to have special routes
 // signup - is like special case so it is not suitable to other endpoints - divide by philosophy :>
-// router.post('/signup', /* FUNCTION*/); 
-// router.post('/login', /* FUNCTION*/);
+router.post('/signup', authController.signup);
+router.post('/login', authController.login);
 // router.get('/logout', /* FUNCTION*/);
 
-// router.post('/forgotPassword', /* FUNCTION*/);
-// router.patch('/resetPassword/:token', /* FUNCTION*/);
+router.post('/forgotPassword', authController.forgotPassword);
+router.patch('/resetPassword/:token', authController.resetPassword);
 
 // all bellow - you need to be authenticated
 
 //at this point we can use the route which is going to protect everything below
 // because middleware are called sequentially
 
-router.patch(
-    '/updateMyPassword',
-    async (req, res, next) => {
+router.patch("/updateMyPassword", authController.protect, authController.updatePassword);
 
-        res.status(200).json({
-            status: "success",
-            msg: `patch method usersRouter "/updateMyPassword"`,
-        });
-    }
-);
-router.get(
-    '/me',
-    async (req, res, next) => {
+router.get("/me", async (req, res, next) => {
+  res.status(200).json({
+    status: "success",
+    msg: `get method usersRouter "/me"`,
+  });
+});
 
-        res.status(200).json({
-            status: "success",
-            msg: `get method usersRouter "/me"`,
-        });
-    }
-);
-router.patch(
-    '/updateMe',
-    async (req, res, next) => {
-
-        res.status(200).json({
-            status: "success",
-            msg: `patch method usersRouter "/updateMe"`,
-        });
-    }
-);
-router.delete(
-    '/deleteMe',
-    async (req, res, next) => {
-
-        res.status(200).json({
-            status: "success",
-            msg: `delete method usersRouter "/deleteMe"`,
-        });
-    }
-);
+// we are getting id from the token jwt so no one can update someone else account! <3
+router.patch("/updateMe", authController.protect, userController.updateMe);
+router.delete("/deleteMe", async (req, res, next) => {
+  res.status(200).json({
+    status: "success",
+    msg: `delete method usersRouter "/deleteMe"`,
+  });
+});
 
 /*
 
@@ -78,78 +56,68 @@ router.delete(
 */
 
 router
-    .route('/')
-    .get(async (req, res, next) => {
-        try {
-            const bookingsAll = await pool.query("SELECT * FROM users")
+  .route("/")
+  .get(authController.protect, authController.restrictTo('handyperson', "buyer"), async (req, res, next) => {
+    try {
+      const bookingsAll = await pool.query("SELECT * FROM users");
 
-            res.status(200).json({
-                status: "success",
-                length: bookingsAll.rowCount,
-                data: bookingsAll.rows
-            });
-
-        } catch (error) {
-
-            res.status(400).json({
-                status: "fail",
-                msg: error.message,
-              });
-        }
-    })
-    .post(async (req, res, next) => {
-        res.status(200).json({
-            status: "success",
-            msg: 'post method usersRouter "/"',
-        });
+      res.status(200).json({
+        status: "success",
+        length: bookingsAll.rowCount,
+        data: bookingsAll.rows,
+      });
+    } catch (error) {
+      res.status(400).json({
+        status: "fail",
+        msg: error.message,
+      });
+    }
+  })
+  .post(async (req, res, next) => {
+    res.status(200).json({
+      status: "success",
+      msg: 'post method usersRouter "/"',
     });
+  });
 router
-    .route('/:userId')
-    .get(async (req, res, next) => {
-        try {
-            const {
-                userId
-            } = req.params;
+  .route("/:userId")
+  .get(async (req, res, next) => {
+    try {
+      const { userId } = req.params;
 
-            const bookingsAll = await pool.query(
-                `SELECT * FROM users WHERE user_id = $1`,
-                [userId]
-            );
+      const bookingsAll = await pool.query(
+        `SELECT * FROM users WHERE user_id = $1`,
+        [userId]
+      );
 
-            res.status(200).json({
-                status: "success",
-                status: "success",
-                length: bookingsAll.rowCount,
-                data: bookingsAll.rows[0]
-            });
-        } catch (error) {
-            res.status(400).json({
-                status: "fail",
-                msg: error.message,
-            });
-        }
-    })
-    .patch(async (req, res, next) => {
+      res.status(200).json({
+        status: "success",
+        status: "success",
+        length: bookingsAll.rowCount,
+        data: bookingsAll.rows[0],
+      });
+    } catch (error) {
+      res.status(400).json({
+        status: "fail",
+        msg: error.message,
+      });
+    }
+  })
+  .patch(async (req, res, next) => {
+    const { userId } = req.params;
 
-        const {
-            userId
-        } = req.params
-
-        res.status(200).json({
-            status: "success",
-            msg: `patch method usersRouter "/:offerId" You sent ${userId}`,
-        });
-    })
-    .delete(async (req, res, next) => {
-
-        const {
-            userId
-        } = req.params
-
-        res.status(200).json({
-            status: "success",
-            msg: `delete method usersRouter "/:offerId" You sent ${userId}`,
-        });
+    res.status(200).json({
+      status: "success",
+      msg: `patch method usersRouter "/:offerId" You sent ${userId}`,
     });
+  })
+  .delete(authController.protect, authController.restrictTo('admin', 'handyperson'), async (req, res, next) => {
+    const { userId } = req.params;
+
+    res.status(200).json({
+      status: "success",
+      msg: `delete method usersRouter "/:offerId" You sent ${userId}`,
+    });
+  });
 
 module.exports = router;

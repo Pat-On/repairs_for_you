@@ -3,12 +3,12 @@ import SignUpForm from "../../components/signUpForm/SignUpForm";
 import { checkValidity } from "../../utility/utility";
 
 const SignIn = (props) => {
-//   const history = useHistory();
+  //   const history = useHistory();
   /**
    * State: responsible for controlling the process of displaying the http req in UI
    */
 
-  console.log(props.history)
+  console.log(props.history);
   const [loadingControl, setLoadingControl] = useState(false);
 
   /**
@@ -64,9 +64,34 @@ const SignIn = (props) => {
    * @input no input
    * @return nothing
    */
-  const nextFunction = () => {
-    // !TODO: if logged success main page + auth if not error -> wrong password or email
-    props.history.replace("/");
+  const nextFunction = async () => {
+    try {
+      const data = {
+        name: "test user1",
+        email: "testemail122222222222121322@p.com",
+        password: "12341234",
+        passwordConfirm: "12341234",
+        role: "handyperson",
+      };
+
+      const response = await fetch("/api/v1/users/signup", {
+        method: "POST", // *GET, POST, PUT, DELETE, etc.
+        // mode: 'cors', // no-cors, *cors, same-origin
+        // cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+        // credentials: 'same-origin', // include, *same-origin, omit
+        headers: {
+          "Content-Type": "application/json",
+          // 'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        // redirect: 'follow', // manual, *follow, error
+        // referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+        body: JSON.stringify(data) // body data type must match "Content-Type" header
+      });
+      console.log(await response.json())
+    } catch (error) {}
+
+    // // !TODO: if logged success main page + auth if not error -> wrong password or email
+    // props.history.replace("/");
   };
 
   /**

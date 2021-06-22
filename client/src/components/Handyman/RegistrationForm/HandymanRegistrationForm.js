@@ -11,24 +11,22 @@ const HandymanRegistrationForm = (props) => {
   const [errors, setErrors] = useState([]);
 
   const allSkills = [
-    { id: 1, name: "brickLaying", value: "Brick laying" },
-    { id: 2, name: "arpentry", value: "Carpentry" },
-    { id: 3, name: "electricalWork", value: "Electrical Work" },
+    { name: "brickLaying", value: "Brick laying" },
+    { name: "arpentry", value: "Carpentry" },
+    { name: "electricalWork", value: "Electrical Work" },
     {
-      id: 4,
       name: "intallAndRepair",
       value: "Appliance installation and repair",
     },
     {
-      id: 5,
       name: "propertyMaintenance",
       value: "Interior and exterior property maintenance",
     },
-    { id: 6, name: "tiling", value: "Tiling" },
-    { id: 7, name: "plastering", value: "Plastering" },
-    { id: 8, name: "plumbing", value: "Plumbing" },
-    { id: 9, name: "painting", value: "Painting" },
-    { id: 10, name: "decorating", value: "Decorating" },
+    { name: "tiling", value: "Tiling" },
+    { name: "plastering", value: "Plastering" },
+    { name: "plumbing", value: "Plumbing" },
+    { name: "painting", value: "Painting" },
+    { name: "decorating", value: "Decorating" },
   ];
 
   // EVENT HANDLERS
@@ -39,7 +37,7 @@ const HandymanRegistrationForm = (props) => {
     if (errors.length > 0) {
       return setErrors(errors);
     }
-    
+
     setErrors([]);
     const requestData = [
       "service_l0m5rpd",

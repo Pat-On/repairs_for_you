@@ -1,8 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import SignUpForm from "../../components/signUpForm/SignUpForm";
 import { checkValidity } from "../../utility/utility";
 
+import AuthContext from "../../store/authContext"
+
+
 const SignIn = (props) => {
+
+  const authCtx = useContext(AuthContext);
   //   const history = useHistory();
   /**
    * State: responsible for controlling the process of displaying the http req in UI
@@ -80,7 +85,11 @@ const SignIn = (props) => {
         },
         body: JSON.stringify(data) 
       });
-      console.log(await response.json())
+
+      const responseJsoned = await response.json()
+      authCtx.login(responseJsoned.token)
+      props.history.push("/");
+      
     } catch (error) {
       console.log(error)
     }

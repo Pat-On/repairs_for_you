@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useCallback } from "react";
 
 const AuthContext = React.createContext({
   token: "",
@@ -8,6 +8,25 @@ const AuthContext = React.createContext({
 });
 
 export const AuthContextProvide = (props) => {
+  const [token, setToken] = useState();
+
+  const userIsLoggedIn = !!token;
+
+  const logoutHandler = useCallback(() => {
+    setToken(null);
+  }, []);
+
+  const loginHandler = (token) => {
+    setToken(token);
+  };
+
+  const contextValue = {
+    token: token,
+    isLoggedIn: userIsLoggedIn,
+    login: loginHandler,
+    logout: logoutHandler,
+  };
+
   return (
     <AuthContext.Provider value={contextValue}>
       {props.children}

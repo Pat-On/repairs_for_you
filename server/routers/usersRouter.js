@@ -5,7 +5,7 @@ const router = express.Router();
 import { pool } from "./../db";
 
 import authController from "./../controller/authController"
-
+import userController from "./../controller/userController"
 /* 
 /signup
 /login
@@ -39,12 +39,9 @@ router.get("/me", async (req, res, next) => {
     msg: `get method usersRouter "/me"`,
   });
 });
-router.patch("/updateMe", async (req, res, next) => {
-  res.status(200).json({
-    status: "success",
-    msg: `patch method usersRouter "/updateMe"`,
-  });
-});
+
+// we are getting id from the token jwt so no one can update someone else account! <3
+router.patch("/updateMe", authController.protect, userController.updateMe);
 router.delete("/deleteMe", async (req, res, next) => {
   res.status(200).json({
     status: "success",

@@ -10,6 +10,29 @@ const sendEmail = require("../utils/email");
 //   .update("I love cupcakes")
 //   .digest("hex");
 
+
+//TODO: implement it into the all routes - important for production
+const createSendToken = (user, statusCode, res) => {
+  const token = signToken(user.user_id);
+
+  const cookieOptions = {
+    expires: new Date(
+      Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 100
+    ),
+    httpOnly: true,
+  };
+  if (process.env.DATABASE_URL) cookieOptions.secure = true;
+
+  res.cookie("jwt", token, cookieOptions);
+  res.status(statusCode).json({
+    status: "success",
+    token,
+    data: {
+      user,
+    },
+  });
+};
+
 const signToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
     expiresIn: process.env.JWT_EXPIRES_IN,
@@ -25,16 +48,9 @@ exports.signup = async (req, res, next) => {
     // Is it logical to pass req.body or just to split data here to?
     const newUser = await userModel.signUpUser(req.body);
     console.log(newUser.rows[0].user_id);
-    const token = signToken(newUser.rows[0].user_id);
+ 
+    createSendToken(newUser.rows[0], 201, res)
 
-    res.status(201).json({
-      status: "success",
-      token,
-      data: {
-        //envelope
-        user: newUser.rows[0],
-      },
-    });
   } catch (error) {
     res.status(400).json({
       status: "fail",
@@ -206,7 +222,6 @@ exports.updatePassword = async (req, res, next) => {
   //TODO: logically it would be much better to check if passwordCandidate and passwordCandidateConfirm
   // are the same from start because it would save at least 1 request to DB
   try {
-
     // get user from DB
     const user = await userModel.findUserById(
       req.user.user_id,

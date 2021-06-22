@@ -1,9 +1,9 @@
 import React from "react";
-import { Link, useRouteMatch } from "react-router-dom";
+import { useRouteMatch } from "react-router-dom";
 
 export default function handyPeopleCard({ onelist }) {
 	const { url } = useRouteMatch();
-
+	
 	return (
 		<div className="one-card-container">
 			<div className="name-image">
@@ -29,7 +29,6 @@ export default function handyPeopleCard({ onelist }) {
 					</li>
 				))}
 			</ul>
-			{/* 	<Link to={`${url}/${onelist.id}`}>Details</Link> */}
 		</div>
 	);
 }

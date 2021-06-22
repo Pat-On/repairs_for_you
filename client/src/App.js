@@ -11,12 +11,17 @@ import MainPage from "./components/mainPage/mainPage";
 import HandymanProfile from "./pages/HandymanProfile";
 import RegistrationForm from "./pages/RegistrationForm";
 import SignIn from "./containers/signIn/SignIn";
+
 import SignOut from "./containers/signOut/signOut";
+
+import RequestForQuote from "./pages/RequestForQuote";
+
 
 import AuthContext from "./store/authContext";
 
 const App = () => {
   const authCtx = useContext(AuthContext);
+
 
   return (
     <div className="App container">
@@ -45,6 +50,7 @@ const App = () => {
               </div>
             )}
           />
+
 
           <Route
             path="/contact"
@@ -91,11 +97,18 @@ const App = () => {
             exact
             render={({ match }) => <HandymanProfile id={match.params.id} />}
           />
+
+        <Route
+          path="/forms/request-for-quote"
+          render={(props) => <RequestForQuote {...props} isAuthed={true} />}
+        />
+
           <Redirect to="/" />
         </Switch>
       </Layout>
     </div>
   );
 };
+
 
 export default withRouter(App);

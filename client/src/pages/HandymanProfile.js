@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import Handyman from "../components/Handyman/Handyman";
+import Handyman from "../components/Handyman/Profile/Handyman";
 
 const HandymanProfile = ({ id }) => {
 	const [user, setUser] = useState();

@@ -30,7 +30,7 @@ const Handyman = ({ userData }) => {
         <h3>Skills</h3>
         <ul className="skills-list">
           {userData.skills.map((skill, index) => (
-            <li key={index} id={skill.id}>{skill.name}</li>
+            <li key={index} >{skill}</li>
           ))}
         </ul>
       </div>

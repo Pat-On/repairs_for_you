@@ -199,6 +199,46 @@ exports.resetPassword = async (req, res, next) => {
   }
 };
 
+/**
+ * @@description only for logged in user
+ */
+exports.updatePassword = async (req, res, next) => {
+  //TODO: logically it would be much better to check if passwordCandidate and passwordCandidateConfirm
+  // are the same from start because it would save at least 1 request to DB
+  try {
+    // get user from DB
+    const user = await userModel.findUserById(
+      req.user.id,
+      req.body.passwordCurrent
+    );
+    console.log(req.user);
+    console.log(user);
+    // check if posted password is correct - second level confirmation
+    //!TODO: temporary implemented in messy way in one function inside userModel
+
+    // if correct update password
+    //!TODO: think over if i need to return something here for security reasons
+    const updatesUser = await userModel.updateUserPassword(
+      user.user_id,
+      req.body.passwordCandidate,
+      req.body.passwordCandidateConfirm
+    );
+
+    // log user in with new password - jwt token
+    //login user in
+    const token = signToken(user.user_id);
+    res.status(200).json({
+      status: "success",
+      token,
+    });
+  } catch (error) {
+    res.status(404).json({
+      status: "fail",
+      msg: error.message,
+    });
+  }
+};
+
 //   npm install jsonwebtoken
 // npm WARN acorn-jsx@5.3.1 requires a peer of acorn@^6.0.0 || ^7.0.0 || ^8.0.0 but none is installed. You must install peer dependencies yourself.
 // npm WARN mini-create-react-context@0.4.0 requires a peer of react@^0.14.0 || ^15.0.0 || ^16.0.0 but none is installed. You must install peer dependencies yourself.

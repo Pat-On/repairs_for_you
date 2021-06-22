@@ -168,12 +168,64 @@ exports.updatePasswordAfterRecovery = async (
 
     const encryptedPassword = await bcrypt.hash(password, 12); //.hash() is async
     // minus 1000 millisecond from data Of creation -> because saving to DB is taking time
-    const dataOfCreation = new Date()
+    const dataOfCreation = new Date();
 
     //!TODO: what about cleaning the fields in DB? null? empty string?
     const _ = await pool.query(
       `UPDATE users SET user_password = $1, password_changed_at = $2, password_reset_token=$3, password_reset_expires=$4 WHERE email = $5`,
-      [encryptedPassword, dataOfCreation, "", "1970-06-21 15:46:38.799+01", user.email]
+      [
+        encryptedPassword,
+        dataOfCreation,
+        "",
+        "1970-06-21 15:46:38.799+01",
+        user.email,
+      ]
+    );
+
+    //!TODO: dummy return
+    return "";
+  } catch (error) {
+    throw error;
+  }
+};
+
+exports.findUserByID = async (userId, passwordCurrent) => {
+  try {
+    const userToChangePassword = await pool.query(
+      `SELECT * FROM users WHERE user_id=$1;`,
+      [userId]
+    );
+    //!TODO: take out this part of the code and create helper function to check passwords
+    //return true if both password are the same
+    const testBoolean = await bcrypt.compare(
+      passwordCurrent,
+      userToChangePassword.user_password
+    );
+
+    if (!testBoolean) throw new Error("Incorrect password");
+
+    return userToChangePassword;
+  } catch (error) {
+    throw error;
+  }
+};
+
+exports.updateUserPassword = async (
+  userId,
+  passwordCandidate,
+  passwordCandidateConfirm
+) => {
+  try {
+    if (passwordCandidate !== passwordCandidateConfirm)
+      throw new Error("Password candidates are not equal");
+
+    const encryptedPassword = await bcrypt.hash(passwordCandidate, 12); //.hash() is async
+
+    // minus 1000 millisecond from data Of creation -> because saving to DB is taking time
+    const dataOfCreation = new Date();
+    const _ = await pool.query(
+      `UPDATE users SET user_password = $1, password_changed_at = $2,  WHERE user_id = $3`,
+      [encryptedPassword, dataOfCreation, userId]
     );
 
     //!TODO: dummy return

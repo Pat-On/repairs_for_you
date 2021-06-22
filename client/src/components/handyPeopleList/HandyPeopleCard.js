@@ -1,5 +1,6 @@
 import React from "react";
 import { useRouteMatch } from "react-router-dom";
+import userDefaultImg from "../../public/user.svg"
 
 export default function handyPeopleCard({ onelist }) {
 	const { url } = useRouteMatch();
@@ -8,7 +9,7 @@ export default function handyPeopleCard({ onelist }) {
 		<div className="one-card-container">
 			<div className="name-image">
 				<a href={`${url}/${onelist.id}`}>
-					<img className="image" src={onelist.img} alt="user profile" />
+					<img className="image" src={userDefaultImg} alt="Free icon made by Freepik from www.flaticon.com" />
 					<div className="full-name">
 					<span className="card-text">{onelist.firstName}</span>
 					{"  "}

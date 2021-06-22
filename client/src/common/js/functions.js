@@ -52,14 +52,11 @@ function phoneNumberIsValid(phoneNumber) {
 }
 
 // SEND QUOTE REQUEST EMAIL TO ADMIN
-export function sendQuoteRequest(formData) {
-  return formData
-    ? alert(
-        "Thank you for choosing us! Your request has been sent. We will get back to you soon."
-      )
-    : alert(
-        "Sorry, but we couldn't send your request. Please try again later."
-      );
+export function sendQuoteRequest(requestData) {
+  const [service, template, formData, user] = requestData;
+  // const formDataObject = getRequestForQuoteFormDataObject(form);
+  sendEmailToAdmin([service, template, formData, user]);
+  // return console.log(requestData)
 }
 
 // SEND NEW HANDYMAN REGISTRATION REQUEST EMAIL TO ADMIN
@@ -131,43 +128,43 @@ function getRegistrationFormDataObject(form) {
   return formDataDataObject;
 }
 
-// COLLECT ALL HANDYMAN REGISTRATION FORM INPUT AND CHANGE IT TO AN OBJECT TO BE SENT VIA HTTP REQUEST
-function getRequestForQuoteFormDataObject(form) {
-  const formDataDataObject = {};
-  const contact = {};
-  const address = {};
-  const skills = {};
-  // BASIC DETAILS
-  const [firstName, lastName] = [
-    ...form.querySelector(".basic-details").querySelectorAll("input"),
-  ].map((item) => item.value);
+// // COLLECT ALL HANDYMAN REGISTRATION FORM INPUT AND CHANGE IT TO AN OBJECT TO BE SENT VIA HTTP REQUEST
+// function getRequestForQuoteFormDataObject(form) {
+//   const formDataDataObject = {};
+//   const contact = {};
+//   const address = {};
+//   const skills = {};
 
-  // ADDRESS
-  const addressData = [
-    ...form.querySelector(".address-details").querySelectorAll("input"),
-  ].map((item) => [item.id, item.value]);
-  addressData.forEach((item) => (address[item[0]] = item[1]));
-  console.log(addressData);
-  const contactData = [
-    ...form.querySelector(".contact-details").querySelectorAll("input"),
-  ].map((item) => [item.id, item.value]);
-  contactData.forEach((item) => (contact[item[0]] = item[1]));
+//   // ADDRESS
+//   const addressData = [
+//     ...form.querySelector(".address-details").querySelectorAll("input"),
+//   ].map((item) => [item.id, item.value]);
+//   addressData.forEach((item) => (address[item[0]] = item[1]));
+//   console.log(addressData);
+//   const contactData = [
+//     ...form.querySelector(".contact-details").querySelectorAll("input"),
+//   ].map((item) => [item.id, item.value]);
+//   contactData.forEach((item) => (contact[item[0]] = item[1]));
 
-  // SKILLS
-  const skillsData = [
-    ...form
-      .querySelector(".skills-list")
-      .querySelectorAll("input[type='checkbox']"),
-  ]
-    .filter((skill) => skill.checked)
-    .map((item) => [item.id, item.value]);
-  skillsData.forEach((item) => (skills[item[0]] = item[1]));
+//   // SKILLS
+//   const skillsData = [
+//     ...form
+//       .querySelector(".skills-list")
+//       .querySelectorAll("input[type='checkbox']"),
+//   ]
+//     .filter((skill) => skill.checked)
+//     .map((item) => [item.id, item.value]);
+//   skillsData.forEach((item) => (skills[item[0]] = item[1]));
 
-  formDataDataObject.skills = skills;
-  formDataDataObject.contact = contact;
-  formDataDataObject.address = address;
-  formDataDataObject.lastName = lastName;
-  formDataDataObject.firstName = firstName;
+//   // JOB
+//   const jobDescription = form.querySelector("#job-description").value;
 
-  return formDataDataObject;
-}
+//   formDataDataObject.jobDescription = jobDescription;
+//   formDataDataObject.skills = skills;
+//   formDataDataObject.contact = contact;
+//   formDataDataObject.address = address;
+//   formDataDataObject.lastName = lastName;
+//   formDataDataObject.firstName = firstName;
+
+//   return formDataDataObject;
+// }

@@ -206,18 +206,16 @@ exports.updatePassword = async (req, res, next) => {
   //TODO: logically it would be much better to check if passwordCandidate and passwordCandidateConfirm
   // are the same from start because it would save at least 1 request to DB
   try {
-    console.log("I got to auth 111111111111111 CONTROLER*********************************************")
+
     // get user from DB
-    console.log(req.user)
     const user = await userModel.findUserById(
       req.user.user_id,
       req.body.passwordCurrent
     );
-    // console.log(req.user);
-    // console.log(user);
+
     // check if posted password is correct - second level confirmation
     //!TODO: temporary implemented in messy way in one function inside userModel
-    console.log("I got to auth CONTROLER*********************************************")
+
     // if correct update password
     //!TODO: think over if i need to return something here for security reasons
     const updatesUser = await userModel.updateUserPassword(

@@ -191,22 +191,18 @@ exports.updatePasswordAfterRecovery = async (
 
 exports.findUserById = async (userId, passwordCurrent) => {
   try {
-console.log("************** finduserbyid")
-console.log(userId)
     const userToChangePassword = await pool.query(
       `SELECT * FROM users WHERE user_id=$1;`,
       [userId]
     );
-const userObject = userToChangePassword.rows[0]
-    console.log(userToChangePassword)
+    const userObject = userToChangePassword.rows[0];
     //!TODO: take out this part of the code and create helper function to check passwords
     //return true if both password are the same
     const testBoolean = await bcrypt.compare(
       passwordCurrent,
       userObject.user_password
     );
-console.log("I got to testBolean*********************************************")
-console.log(testBoolean)
+
     if (!testBoolean) throw new Error("Incorrect password");
 
     return userObject;

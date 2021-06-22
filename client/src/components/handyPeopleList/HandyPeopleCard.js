@@ -3,7 +3,7 @@ import { useRouteMatch } from "react-router-dom";
 
 export default function handyPeopleCard({ onelist }) {
 	const { url } = useRouteMatch();
-
+	
 	return (
 		<div className="one-card-container">
 			<div className="name-image">
@@ -24,8 +24,8 @@ export default function handyPeopleCard({ onelist }) {
 
 			<ul className="list-group list-group-flush">
 				{onelist.skills.map((skill, index) => (
-					<li key={index} id={skill.id} className="list-group-item">
-						{skill.name}
+					<li key={index} className="list-group-item">
+						{skill}
 					</li>
 				))}
 			</ul>

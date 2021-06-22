@@ -11,7 +11,7 @@ import MainPage from "./components/mainPage/mainPage";
 import HandymanProfile from "./pages/HandymanProfile";
 import RegistrationForm from "./pages/RegistrationForm";
 import SignIn from "./containers/signIn/SignIn";
-import Contact from "../src/"
+import Contact from "../src/components/contact/Contact";
 import SignOut from "./containers/signOut/signOut";
 
 import RequestForQuote from "./pages/RequestForQuote";

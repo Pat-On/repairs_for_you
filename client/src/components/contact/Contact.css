@@ -1,0 +1,16 @@
+
+h1{
+    font-weight: 400;
+    font-size: 4rem;
+    font-style: italic;
+    text-align: center;
+    
+}
+.contact-container .form div fieldset  .input-fields-container{
+    padding-top: 3rem;
+    background-color: rgb(249, 249, 250);
+}
+
+.input-fields-container{
+    margin-top: 3rem;
+}

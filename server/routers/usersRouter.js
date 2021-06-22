@@ -31,12 +31,8 @@ router.patch('/resetPassword/:token', authController.resetPassword);
 //at this point we can use the route which is going to protect everything below
 // because middleware are called sequentially
 
-router.patch("/updateMyPassword", async (req, res, next) => {
-  res.status(200).json({
-    status: "success",
-    msg: `patch method usersRouter "/updateMyPassword"`,
-  });
-});
+router.patch("/updateMyPassword", authController.protect, authController.updatePassword);
+
 router.get("/me", async (req, res, next) => {
   res.status(200).json({
     status: "success",

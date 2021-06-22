@@ -5,14 +5,8 @@
     "lastName": "Biruk",
     "img": "https://dogtime.com/assets/uploads/2011/03/puppy-development.jpg",
     "skills": [
-      {
-        "id": 3,
-        "name": "Electrical Work"
-      },
-      {
-        "id": 7,
-        "name": "Plastering"
-      }
+      "Electrical Work",
+      "Plastering"
     ],
     "address": {
       "area": "CV1",
@@ -51,14 +45,8 @@
     "lastName": "Novak",
     "img": "https://dogtime.com/assets/uploads/2011/03/puppy-development.jpg",
     "skills": [
-      {
-        "id": 7,
-        "name": "Plastering"
-      },
-      {
-        "id": 8,
-        "name": "Plumbing"
-      }
+      "Plastering",
+      "Plumbing"
     ],
     "address": {
       "area": "CV1",
@@ -97,14 +85,8 @@
     "lastName": "Ekubai",
     "img": "https://dogtime.com/assets/uploads/2011/03/puppy-development.jpg",
     "skills": [
-      {
-        "id": 9,
-        "name": "Painting"
-      },
-      {
-        "id": 10,
-        "name": "Decorating"
-      }
+      "Painting",
+      "Decorating"
     ],
     "address": {
       "area": "CV1",

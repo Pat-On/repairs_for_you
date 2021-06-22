@@ -1,5 +1,5 @@
 
-.registration-form{
+#form-add-handyman{
   width: 75%;
   margin-left: auto;
   margin-right: auto;
@@ -8,9 +8,17 @@
   padding-right: 10rem;
   font-size: medium;
 }
-.registration-form :nth-child(n+2){
+#form-add-handyman :nth-child(n+2){
   margin-top: 0.5rem;
   margin-bottom: .5rem;
+}
+#form-add-handyman fieldset.input-field-group{
+  border:1.5px solid black;
+  margin:1.5rem 0;
+  padding:0.5rem 2rem;
+}
+.title{
+  text-align: center;
 }
 .input-field-bio :nth-child(2) {
   width:100%;

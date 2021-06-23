@@ -1,14 +1,15 @@
 import React from "react";
-import { Link, useRouteMatch } from "react-router-dom";
+import { useRouteMatch } from "react-router-dom";
+import userDefaultImg from "../../public/user.svg"
 
 export default function handyPeopleCard({ onelist }) {
 	const { url } = useRouteMatch();
-
+	
 	return (
 		<div className="one-card-container">
 			<div className="name-image">
 				<a href={`${url}/${onelist.id}`}>
-					<img className="image" src={onelist.img} alt="user profile" />
+					<img className="image" src={userDefaultImg} alt="Free icon made by Freepik from www.flaticon.com" />
 					<div className="full-name">
 					<span className="card-text">{onelist.firstName}</span>
 					{"  "}
@@ -29,7 +30,6 @@ export default function handyPeopleCard({ onelist }) {
 					</li>
 				))}
 			</ul>
-			{/* 	<Link to={`${url}/${onelist.id}`}>Details</Link> */}
 		</div>
 	);
 }

@@ -1,0 +1,53 @@
+#form-send-quote {
+  width: 75%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 3rem;
+  padding-left: 10rem;
+  padding-right: 10rem;
+  font-size: medium;
+}
+
+#form-send-quote :nth-child(n + 2) {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+#form-send-quote fieldset.input-field-group{
+  border:1.5px solid black;
+  margin:1.5rem 0;
+  padding:0.5rem 2rem;
+}
+
+.title{
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.subtitle{
+  font-size: 2.5rem;
+  font-weight: 600;
+}
+
+.required,.error{
+  color:red;
+}
+
+.input-field textarea {
+  width: 100%;
+  height: 8rem;
+}
+
+.submit-button-div input {
+  background-color: rgb(40, 129, 245);
+  width: 7rem;
+  height: 4rem;
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  font-size: medium;
+}
+
+.submit-button-div input:hover{
+  cursor: pointer;
+}

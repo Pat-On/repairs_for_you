@@ -1,4 +1,13 @@
-
+.map-form{
+    display: flex;
+    height: 50rem;
+}
+.map{
+margin-top: 3.5rem;
+}
+.form fieldset{
+    height: 30rem;
+}
 h1{
     font-weight: 400;
     font-size: 4rem;
@@ -8,9 +17,24 @@ h1{
 }
 .contact-container .form div fieldset  .input-fields-container{
     padding-top: 3rem;
-    background-color: rgb(249, 249, 250);
+    background-color: rgb(230, 248, 245);
 }
+.btn-submit{
+    text-align:justify;
+    height: 3.5rem;
+    width: 7rem;
+    background-color: blue;
+    color: white;
+    border-radius: 5px;
+    border: none;
+    font-weight: 600;
+    padding-left: 1rem;
+    padding-right: 1rem;
 
-.input-fields-container{
-    margin-top: 3rem;
+}
+.message textarea{
+    width: 90%;
+    height: 10rem;
+    overflow-x: hidden;
+    overflow-y: scroll;
 }

@@ -1,15 +1,26 @@
 import emailValidator from "email-validator";
 import { send } from "emailjs-com";
 
-export function validateForm(form) {
-  const id = form.id;
-  const fields = getFormFields(id);
-  const errors = getFormErrors(fields, id);
+const registrationRequestSuccessMessage = `
+Thank you for registering with us! Your request has been sent, and we will get back to you soon.
+`;
+
+const quoteRequestSuccessMessage = `
+Thank you for choosing us! Your request has been sent, and we will get back to you soon.
+`;
+
+const failureMessage = `
+Sorry, but we could not send your request at the moment. Please try again later.
+`;
+
+export function validateForm(form,formId) {
+  const fields = getFormFields(form);
+  const errors = getFormErrors(fields, formId);
   return errors.length > 0 ? errors : [];
 }
 
-function getFormFields(formId) {
-  return [...document.getElementById(formId).querySelectorAll("input")].map(
+function getFormFields(form) {
+  return [...form.querySelectorAll("input")].map(
     (input) => ({ name: input.name, value: input.value, type: input.type })
   );
 }
@@ -58,23 +69,43 @@ export function sendQuoteRequest(requestData) {
 }
 
 // SEND NEW HANDYMAN REGISTRATION REQUEST EMAIL TO ADMIN
-export function sendRegistrationRequest(requestData) {
-  const [service, template, formData, user] = requestData;
-  sendEmailToAdmin([service, template, formData, user]);
+export async function sendRegistrationRequest(requestData) {
+  const formData = requestData[2];
+  // 1. First, attempt to send registration request to admin via email account
+  // NOTE: THE OVERALL SUCCESS OR FAILUR OF THE REGISTRATION PROCESS DEPENDS PRIMARILY ON
+  //       THE SUCCESS OR FAILURE OF THE EMAIL SERVICE BECAUSE. IF THE EMAIL SERVICE IS WORKING FINE
+  //       ADMIN CAN ENTER USER DATA INTO THE DATABASE MANUALLY EVEN IF THE DATABASE SERVICE FAILS
+  try {
+    const emailSendResponse = await sendEmailToAdmin(requestData);
+    if (emailSendResponse.status !== 200) {
+      throw new Error(emailSendResponse.text); // if it's not successful, alert user failur of requet
+    }
+    // if it's successful, attempt to add handyman to the database for ease of convenience(at least)
+    const databaseResponse = await addHandymanToDatabase(formData);
+    // determine if a handyman with the same account exists or not
+    // console.error(databaseResponse.status)
+    if (databaseResponse.status === 400) {
+      const result = await databaseResponse.json();
+      alert(result.message)
+      throw new Error(result.message);
+    }
+    alert(registrationRequestSuccessMessage);
+    return true;
+  } catch(err) {
+    console.log(err);
+  }
 }
 
 // THIS IS WHERE EMAILS ARE SENT FROM
-function sendEmailToAdmin([...args]) {
+async function sendEmailToAdmin([...args]) {
   const [service, template, formDataEntries, user] = args;
-  
-  send(service, template, formDataEntries, user)
-    .then((response) => {
-      alert(
-        "Thank you for choosing us! Your request has been sent. We will get back to you soon."
-      );
-      console.log("SUCCESS!", response.status, response.text);
-    })
-    .catch((err) => {
-      console.log("FAILED...", err);
-    });
+  return await send(service, template, formDataEntries, user);
+}
+
+async function addHandymanToDatabase(formData) {
+  return await fetch(`/api/users/handyman`, {
+    method: "POST",
+    body: JSON.stringify(formData),
+    headers: { "Content-Type": "application/json" },
+  });
 }

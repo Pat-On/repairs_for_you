@@ -19,7 +19,9 @@ const Skills = (props) => {
     });
     setUpdatedSkillsList(newList);
     // now send only the selected skills
-    props.onChangeHandler(newList.filter(item=>item.value!=="").map(item=>item.value));
+    props.onChangeHandler(
+      newList.filter((item) => item.value !== "").map((item) => item.value)
+    );
   };
 
   return (

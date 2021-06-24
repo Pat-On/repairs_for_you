@@ -3,6 +3,7 @@
     "id": 1,
     "firstName": "Michael",
     "lastName": "Biruk",
+    "email":"michaelb@michaelbiruk.com",
     "img": "https://dogtime.com/assets/uploads/2011/03/puppy-development.jpg",
     "skills": [
       "Electrical Work",
@@ -43,6 +44,7 @@
     "id": 2,
     "firstName": "Patryk",
     "lastName": "Novak",
+    "email": "patryk_nowak@patryknowak.com",
     "img": "https://dogtime.com/assets/uploads/2011/03/puppy-development.jpg",
     "skills": [
       "Plastering",
@@ -83,6 +85,7 @@
     "id": 3,
     "firstName": "Senait",
     "lastName": "Ekubai",
+    "email": "senait.ekubai@senaitekubai.com",
     "img": "https://dogtime.com/assets/uploads/2011/03/puppy-development.jpg",
     "skills": [
       "Painting",

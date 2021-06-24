@@ -40,6 +40,7 @@ const signUpForm = (props) => {
           value={item.config.value}
           placeholder={item.config.placeholder}
           formInputHandler={(e) => props.formInputHandler(e, item.id)}
+          elementConfig={item.config.objectConfig}
         />
         {!item.config.valid &&
           // props.shouldValidate &&

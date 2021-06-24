@@ -41,7 +41,7 @@ const SignIn = (props) => {
       name: "Password",
       placeholder: "Password",
       value: "",
-
+      objectConfig: {type: "password"},
       validation: {
         required: true,
         isName: true,

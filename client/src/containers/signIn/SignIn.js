@@ -26,7 +26,7 @@ const SignIn = (props) => {
 			invalidInputInfo: "Enter valid email address",
 			name: "E-mail",
 			placeholder: "example@email.com",
-			value: "handyman5@p.com",
+			value: "",
 
 			validation: {
 				required: true,
@@ -40,7 +40,7 @@ const SignIn = (props) => {
 			invalidInputInfo: "Have to be at least 8 symbols long",
 			name: "Password",
 			placeholder: "Password",
-			value: "password",
+			value: "",
 
 			validation: {
 				required: true,

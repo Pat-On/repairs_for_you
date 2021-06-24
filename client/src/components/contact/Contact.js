@@ -1,15 +1,30 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./Contact.css";
 import MapComponent from "./MapComponent";
-
+import validateForm from "../../common/js/functions";
+import { permittedCrossDomainPolicies } from "helmet";
 
 export default function Contact() {
+	const [formDetail,setFormDetail]=useState({
+		buyer_name:"",
+		email:"",
+		message:"",
+	});
+
+	const handleChange=(e)=>{
+		e.preventDefault();
+		setFormDetail({ ...[formDetail],[e.target.name]:e.target.value });/* not completed  */
+	};
+	const handleSubmit=(e)=>{
+		e.preventDefault();
+		console.log(formDetail);
+	};
 	return (
 		<div className="contact-container">
 
 
-			<div className="map-form">
+			<div className="map-form" onSubmit={handleSubmit}>
 				<form
 					id="form-send-quote"
 					name="form-send-quote"
@@ -26,22 +41,24 @@ export default function Contact() {
 									<input
 										type="text"
 										id="buyer_name"
-										name="name"
+										name="buyer_name"
 										maxLength={60}
 										required
 										placeholder="Enter your name here"
-
+										onChange={handleChange}
 									/>
 								</div>
 								<div className="input-field">
 									<label>Email Address: {" "}</label>
 									<input
 										type="text"
-										id="buyer_name"
-										name="buyer_name"
+										id="email"
+										name="email"
 										maxLength={60}
 										required
 										placeholder="Enter your email here"
+										onChange={handleChange}
+
 
 									/>
 								</div>
@@ -54,6 +71,7 @@ export default function Contact() {
 										maxLength={60}
 										required
 										placeholder="Enter your message here"
+										onChange={handleChange}
 
 									/>
 								</div>

@@ -14,9 +14,11 @@ const navigationItems = (props) => {
       </NavigationItem>
       {/* <NavigationItem link="/about">About</NavigationItem> */}
       {/* <NavigationItem link="/ho">HOME</NavigationItem> */}
-      {authCtx.isLoggedIn && (
+
+      {/* buyers commented out because we have not implemented  buyer story */}
+      {/* {authCtx.isLoggedIn && (
         <NavigationItem link="/buyers">BUYERS</NavigationItem>
-      )}
+      )} */}
 
       <NavigationItem link="/users/handyman">Handypeople</NavigationItem>
       <NavigationItem link="/contact">Contact</NavigationItem>
@@ -26,7 +28,7 @@ const navigationItems = (props) => {
       {!authCtx.isLoggedIn && (
         <NavigationItem link="/signin">Sign-In</NavigationItem>
       )}
-            {authCtx.isLoggedIn && (
+      {authCtx.isLoggedIn && (
         <NavigationItem link="/signinout">Sign-Out</NavigationItem>
       )}
     </ul>

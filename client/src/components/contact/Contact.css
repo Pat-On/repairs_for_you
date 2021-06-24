@@ -1,21 +1,63 @@
 
-h1{
-    font-weight: 400;
-    font-size: 4rem;
-    font-style: italic;
+.contact-container{
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: rgba(95, 158, 160, 0.144);
+}
+.contact-container h1{
     text-align: center;
-    
+    font-style: italic;
+    font-weight: 400;
 }
-.contact-container .form div fieldset  .input-fields-container{
-    padding-top: 3rem;
-    background-color: rgb(249, 249, 250);
-}
+.contact-text{
+    text-align: justify;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+   font-weight: 400;
 
+
+}
+.contact-info{
+   padding-top: 2rem;
+   padding-bottom: 2rem;
+   font-weight: 400;
+}
 .input-fields-container{
+
     margin-top: 3rem;
 }
 
 .button-submit-form {
     margin-top: 1rem;;
     padding: 1rem 1.8rem;
+
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    text-align: justify;
+}
+.input-fields-container > .input-field > label,.message label{
+    padding-right: 2rem;
+}
+.input-fields-container > .input-field > textarea{
+    padding-right: 2rem;
+    height: 3rem;
+}
+.message textarea{
+    height: 7rem;
+    width: 100%;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+.btn-submit{
+    height: 3.5rem;
+    background-color: rgb(43, 43, 206);
+    color: white;
+    font-weight: 400;
+    font-size: larger;
+    border: none;
+    border-radius: 5px;
+    padding:1rem;
+
+
 }

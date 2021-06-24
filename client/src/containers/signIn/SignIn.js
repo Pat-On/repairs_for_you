@@ -42,9 +42,10 @@ const SignIn = (props) => {
       placeholder: "Password",
       value: "",
       objectConfig: {type: "password"},
+      //!IMPORTANT detailed validation of password is not required now
       validation: {
         required: true,
-        isName: true,
+        // isPassword: true,
       },
       // valid: false,
       valid: true,

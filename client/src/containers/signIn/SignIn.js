@@ -13,7 +13,6 @@ const SignIn = (props) => {
    * State: responsible for controlling the process of displaying the http req in UI
    */
 
-  console.log(props.history);
   const [loadingControl, setLoadingControl] = useState(false);
 
   /**
@@ -37,7 +36,7 @@ const SignIn = (props) => {
       touched: false,
     },
     password: {
-      invalidInputInfo: "Have to be at least 8 symbols long",
+      invalidInputInfo: "You have to input password",
       name: "Password",
       placeholder: "Password",
       value: "",

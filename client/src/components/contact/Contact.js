@@ -92,15 +92,18 @@ export default function Contact() {
 
 
 
-						<div className="input-field">
-							<input
-								className="btn-submit"
-								type="submit"
-								id="buyer_name"
-								name="submit"
-								maxLength={60}
-								required
-								placeholder="Enter your message here"
+					<div className="input-field">
+						<input
+							className="button-submit-form"
+							type="submit"
+							id="buyer_name"
+							name="buyer_name"
+							maxLength={60}
+							required
+							placeholder="Enter your name here"
+
+
+
 
 							/>
 						</div>

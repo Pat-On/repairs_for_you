@@ -31,6 +31,12 @@ export const checkValidity = (value, rules) => {
     isValid = pattern.test(value) && isValid;
   }
 
+  if (rules.isPassword) {
+    // Minimum eight characters, at least one letter, one number and one special character:
+    const pattern = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
+    isValid = pattern.test(value) && isValid;
+  }
+
   if (rules.isTelNumber) {
     const pattern = /^\d{11}$/; //simple regex
     isValid = pattern.test(value) && isValid;

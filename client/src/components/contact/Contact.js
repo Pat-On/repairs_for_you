@@ -61,7 +61,7 @@ export default function Contact() {
 
 					<div className="input-field">
 						<input
-							className="btn-primary"
+							className="button-submit-form"
 							type="submit"
 							id="buyer_name"
 							name="buyer_name"

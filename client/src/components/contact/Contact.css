@@ -14,3 +14,8 @@ h1{
 .input-fields-container{
     margin-top: 3rem;
 }
+
+.button-submit-form {
+    margin-top: 1rem;;
+    padding: 1rem 1.8rem;
+}

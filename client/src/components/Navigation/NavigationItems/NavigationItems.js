@@ -12,8 +12,6 @@ const navigationItems = (props) => {
       <NavigationItem link="/" exact>
         Home
       </NavigationItem>
-      {/* <NavigationItem link="/about">About</NavigationItem> */}
-      {/* <NavigationItem link="/ho">HOME</NavigationItem> */}
 
       {/* buyers commented out because we have not implemented  buyer story */}
       {/* {authCtx.isLoggedIn && (

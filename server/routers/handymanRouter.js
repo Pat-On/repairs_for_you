@@ -9,6 +9,25 @@ router.use(express.json());
 
 // GET "/"
 router.get("/", async (_, res) => {
+  try {
+    const allHandymans = await pool.query(`SELECT * FROM handyman `);
+
+    // const testJSON = await JSON.parse(allHandymans.rows[0].address_offer);
+    // return res.status(200).json({
+    //   data: testJSON,
+    // });
+
+    return res.status(200).json({
+      length: allHandymans.rowCount,
+      data: allHandymans.rows
+    });
+  } catch (error) {
+    //TODO ERROR HANDLER
+    console.log(error);
+  }
+});
+
+router.get("/", async (_, res) => {
   const result = await services.getAllHandymen();
   return res.status(200).json(result);
 });
@@ -51,7 +70,17 @@ router.post("/", async (req, res) => {
 
     const _ = await pool.query(
       `INSERT INTO handyman (first_name, last_name,  address_offer, postcode, email, phone_number, skills, bio)
-                  VALUES ($1, $2, $3, $4, $5, $6, $7, $8)`, [ firstName, lastName, [ JSON .stringify(address)], postcode,  email, phoneNumber, skills, bio ]
+                  VALUES ($1, $2, $3, $4, $5, $6, $7, $8)`,
+      [
+        firstName,
+        lastName,
+        [JSON.stringify(address)],
+        postcode,
+        email,
+        phoneNumber,
+        skills,
+        bio,
+      ]
     );
   } catch (error) {
     //TODO ERROR HANDLER

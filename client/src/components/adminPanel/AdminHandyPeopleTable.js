@@ -48,7 +48,7 @@ export default function AdminHandyPeopleTable() {
 			{ list.map((oneList,index)=>	<tbody key={index}>
 				<tr>
 					<td><input type="checkbox"></input></td>
-					<th scope="row">{oneList.id}</th>
+					<td >{oneList.id}</td>
 					<td>{oneList.firstName}</td>
 					<td>{oneList.lastName}</td>
 					<td>{oneList.email}</td>

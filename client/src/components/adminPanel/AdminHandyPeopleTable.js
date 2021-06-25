@@ -1,13 +1,27 @@
 import React, { useState,useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Route, Redirect, useRouteMatch, Switch, Link } from "react-router-dom";
+import UpdateForm from "./UpdateForm";
 
 
 
 
 export default function AdminHandyPeopleTable() {
 	const 	[list,setList]=useState([]);
+	const 	[changed,setChanged]=useState(false);
+
 
 console.log(list)
+
+
+	let { path, url } = useRouteMatch();
+	const handleChange=(e)=>{
+		if(e.target.value==="Update"){
+			setChanged(true);
+		}
+		alert(`are you sure you want to ${e.target.value}`);
+	};
+
+
 
 	useEffect(() => {
 		// fetch("/api/users/handyman")
@@ -51,7 +65,7 @@ console.log(list)
 	// setList(newArray)
 
 
-	return (
+	return   !changed ? (
 		<table className="table">
 			<thead>
 				<tr>
@@ -73,9 +87,11 @@ console.log(list)
 			{ list.map((oneList,index)=>	<tbody key={index}>
 				<tr>
 					<td><input type="checkbox"></input></td>
+
 					<th scope="row">{oneList.handyman_id}</th>
 					<td>{oneList.first_name}</td>
 					<td>{oneList.last_name}</td>
+
 					<td>{oneList.email}</td>
 					<td>{oneList.phone_number}</td>
 					<td>{oneList.address_offer.city}</td>
@@ -89,9 +105,12 @@ console.log(list)
 					</td>
 					<td>{oneList.visible ? "Visible" : "Hidden" }</td>
 					<td>
-						<select onChange={()=>alert("are you sure you want to delete")}>
+						<select onChange={handleChange}>
+							<option>action</option>
 							<option>Update</option>
 							<option>Delete</option>
+							<option>Deactivate</option>
+							<option>Activate</option>
 						</select>
 					</td>
 				</tr>
@@ -99,5 +118,5 @@ console.log(list)
 		</table>
 
 
-	);
+	) :<UpdateForm /> ;
 }

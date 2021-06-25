@@ -1,12 +1,21 @@
 import React, { useState,useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Route, Redirect, useRouteMatch, Switch, Link } from "react-router-dom";
+import UpdateForm from "./UpdateForm";
 
 
 
 
 export default function AdminHandyPeopleTable() {
 	const 	[list,setList]=useState([]);
+	const 	[changed,setChanged]=useState(false);
 
+	let { path, url } = useRouteMatch();
+	const handleChange=(e)=>{
+		if(e.target.value==="Update"){
+			setChanged(true);
+		}
+		alert(`are you sure you want to ${e.target.value}`);
+	};
 
 
 	useEffect(() => {
@@ -26,7 +35,7 @@ export default function AdminHandyPeopleTable() {
 	}, []);
 	console.log(list);
 
-	return (
+	return   !changed ? (
 		<table className="table">
 			<thead>
 				<tr>
@@ -64,9 +73,12 @@ export default function AdminHandyPeopleTable() {
 					</td>
 					<td>{oneList.status}</td>
 					<td>
-						<select onChange={()=>alert("are you sure you want to delete")}>
+						<select onChange={handleChange}>
+							<option>action</option>
 							<option>Update</option>
 							<option>Delete</option>
+							<option>Deactivate</option>
+							<option>Activate</option>
 						</select>
 					</td>
 				</tr>
@@ -74,5 +86,5 @@ export default function AdminHandyPeopleTable() {
 		</table>
 
 
-	);
+	) :<UpdateForm /> ;
 }

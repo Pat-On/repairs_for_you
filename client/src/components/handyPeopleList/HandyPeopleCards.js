@@ -33,7 +33,7 @@ export default function HandyPeopleCards() {
 				return res.json();
 			})
 			.then((body) => {
-				setList(body);
+				setList(body.data);
 			})
 			.catch((err) => {
 				console.error(err);

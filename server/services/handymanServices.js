@@ -1,17 +1,17 @@
 const repository = require("../data/handymanRepository");
 
-// get all handymen
+// GET ALL HANDYMEN
 async function getAllHandymen() {
   return repository.getAllHandymen();
 }
 
-// search/find a handyman from list
+// SEARCH HANDYMAN FROM LIST BY HANDYMAN ID
 async function getHandymanById(hId) {
   const result = repository.getHandymanById(hId);
   return result;
 }
 
-// add handyman to list
+// POST A NEW HANDYMAN
 async function addNewHandyman(hData) {
   const dataIsValid = validateHandymanData(hData);
   if (dataIsValid) {
@@ -40,7 +40,9 @@ async function addNewHandyman(hData) {
   };
 }
 
-// validate incoming handyman data
+// VALIDATE INCOMING HANDYMAN DATA
+// Note: this is used only during the initial stage of handyman registration process (accessible to anyone...
+// ...who would like to rgister as handyman on the site)
 function validateHandymanData(hData) {
   // required handyman data fields
   try {
@@ -57,7 +59,7 @@ function validateHandymanData(hData) {
     // destructure address (={addressLineOne, addressLineTwo,city}) and access individual field values
     // city has default value of "Coventry", so no need to validate that
     const { addressLineOne, addressLineTwo } = address;
-    
+
     const dataToValidate = {
       firstName,
       lastName,
@@ -69,14 +71,16 @@ function validateHandymanData(hData) {
       skills,
       bio,
     };
-    
+
     return Object.values(dataToValidate).every((item) => item);
   } catch (err) {
     console.log(err);
   }
 }
 
-// check existence of a handyman before posting
+// CHECK IF A HANDYMAN WITH THE SAME EMAIL (CREDENTIALS) ALREADY EXISTS
+// Note: this is used only during the initial stage of handyman registration process (accessible to anyone...
+// ...who would like to rgister as handyman on the site)
 async function handymanDoesntExist(hEmail) {
   try {
     const result = await repository.getHandymanByEmail(hEmail);

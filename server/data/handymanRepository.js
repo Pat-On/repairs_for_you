@@ -1,20 +1,29 @@
 import handymen from "../../HandyPeopleTestData.json";
 
-// get all handymen
+// FETCH DATA OF ALL HANDYMEN FROM DATABASE (accessible to anyone visiting the site)
+// WARN: NOT CONNECTED TO DATABASE YET!
 function getAllHandymen() {
   return [...handymen];
 }
 
-// search/find a handyman from list by video id
+// FETCH DATA OF A HANDYMEN FROM DATABASE BY HANDYMAN ID (accessible to anyone visiting the site)
+// WARN: NOT CONNECTED TO DATABASE YET!
 function getHandymanById(hId) {
   return handymen.find((hMan) => hMan.id === hId);
 }
 
+// FETCH DATA OF ALL HANDYMEN FROM DATABASE BY HANDYMAN EMAIL
+// WARN: NOT CONNECTED TO DATABASE YET!
+// Note: this is used only during the initial stage of handyman registration process (accessible to anyone... 
+// ...who would like to rgister as handyman on the site)
 function getHandymanByEmail(email) {
   return handymen.find((hMan) => hMan.email === email);
 }
 
-// add handyman to list
+// STORE HANDYMAN DATA IN THE DATABASE (handypeople table)
+// WARN: NOT CONNECTED TO DATABASE YET!
+// Note: this is used only during the initial stage of handyman registration process (accessible to anyone... 
+// ...who would like to rgister as handyman on the site)
 function addNewHandyman(hData) {
   const {
     firstName,

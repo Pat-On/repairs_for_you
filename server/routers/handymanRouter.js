@@ -8,7 +8,7 @@ const services = require("../services/handymanServices");
 
 router.use(express.json());
 
-// GET "/"
+// GET "/" SERVE DATA OF ALL HANDYMEN (accessible to anyone visiting the site)
 router.get("/", async (_, res) => {
   try {
     const allHandymans = await pool.query(
@@ -35,32 +35,6 @@ router.get("/", async (_, res) => {
   return res.status(200).json(result);
 });
 
-// GET "/{id}"
-// router.get("/:id", async (req, res) => {
-//   const result = await services.getHandymanById(parseInt(req.params.id));
-//   result ? res.status(200).send(result) : res.sendStatus(404);
-// });
-
-// !TODO: auth controller and the protection - base on the role
-router.get("/adminsacceshandymans", async (_, res, next) => {
-  try {
-    const allHandymans = await pool.query(`SELECT * FROM handyman`);
-
-    // const testJSON = await JSON.parse(allHandymans.rows[0].address_offer);
-    // return res.status(200).json({
-    //   data: testJSON,
-    // });
-
-    return res.status(200).json({
-      length: allHandymans.rowCount,
-      data: allHandymans.rows,
-    });
-  } catch (error) {
-    //TODO ERROR HANDLER
-    console.log(error);
-  }
-});
-
 router.get("/:id", async (req, res) => {
   try {
     const { id } = req.params;
@@ -81,7 +55,6 @@ router.get("/:id", async (req, res) => {
     });
   }
 });
-
 // POST "/"
 // router.post("/", async (req, res) => {
 //   console.log(req.body)

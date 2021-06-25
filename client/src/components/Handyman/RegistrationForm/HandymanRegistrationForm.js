@@ -37,7 +37,7 @@ const HandymanRegistrationForm = (props) => {
   // handyman registration form entry values
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-  const [profilePicture, setProfilePicture] = useState(
+  const [img, setProfilePicture] = useState(
     defaultHandymanProfilePicture // WARN: NO IMAGE UPLOAD FUNCTIONALITY ADDED!
   );
   const [addressLineOne, setAddressLineOne] = useState("");
@@ -52,7 +52,7 @@ const HandymanRegistrationForm = (props) => {
   const formData = {
     firstName,
     lastName,
-    profilePicture,
+    img,
     address: { addressLineOne, addressLineTwo, city },
     postcode,
     email,
@@ -61,10 +61,10 @@ const HandymanRegistrationForm = (props) => {
     bio,
   };
   // EVENT HANDLERS
-  const sendFormData = (event) => {
+  const sendFormData = async (event) => {
     event.preventDefault();
     const form = event.target;
-    const errors = validateForm(form);
+    const errors = validateForm(form,form.id);
     if (errors.length > 0) {
       return setErrors(errors);
     }
@@ -76,8 +76,8 @@ const HandymanRegistrationForm = (props) => {
       formData,
       "user_Z6650OqueHooRxmmi5Geo",
     ];
-    sendRegistrationRequest(requestData);
-    form.reset();
+    const okToResetForm = await sendRegistrationRequest(requestData);
+    if (okToResetForm) form.reset();
   };
 
   return (

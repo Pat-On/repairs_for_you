@@ -1,11 +1,20 @@
 import { useState } from "react";
 import "./RequestForQuoteForm.css";
-import Skills from "../Handyman/SubComponents/Skills";
-import { validateForm, sendQuoteRequest } from "../Handyman/functions";
+import Skills from "./Skills";
+import { validateForm, sendQuoteRequest } from "../../common/js/functions";
 
 const RequestForQuoteForm = (props) => {
   const data = props.data.location.state;
   const [errors, setErrors] = useState([]);
+
+  const handymanName = { name: `${data.firstName} ${data.firstName}` };
+  const [buyerName, setBuyerName] = useState("");
+  const [buyerEmail, setBuyerEmail] = useState("");
+  const [buyerPhoneNumber, setBuyerPhoneNumber] = useState("");
+  const [jobDesctiption, setJobDesctiption] = useState("");
+  const [jobStartDate, setJobStartDate] = useState("");
+  const [estimatedManHours, setEstimatedManHours] = useState("");
+  const [buyerWillingToPay, setBuyerWillingToPay] = useState("");
   
   // EVENT HANDLERS
   const sendFormData = (event) => {
@@ -15,9 +24,24 @@ const RequestForQuoteForm = (props) => {
     if (errors.length > 0) {
       return setErrors(errors);
     }
-    const formData = [...new FormData(form).entries()];
     setErrors([]);
-    sendQuoteRequest(formData);
+    const formData = {
+      handymanName,
+      buyerName,
+      buyerEmail,
+      buyerPhoneNumber,
+      jobDesctiption,
+      jobStartDate,
+      estimatedManHours,
+      buyerWillingToPay,
+    };
+    const requestData = [
+      "service_l0m5rpd",
+      "template_elv94vx",
+      formData,
+      "user_Z6650OqueHooRxmmi5Geo",
+    ];
+    sendQuoteRequest(requestData);
     form.reset();
   };
 
@@ -46,9 +70,13 @@ const RequestForQuoteForm = (props) => {
         <p>
           Area: <span>{data.address.area}</span>
         </p>
+        <div className="handyman-skills">
+          <h3>Skills</h3>
+          <Skills skills={data.skills} />
+        </div>
       </div>
       <div>
-        <fieldset className="input-field-group job-details">
+        <fieldset className="input-field-group contact-details">
           <legend className="subtitle">Contact Details</legend>
           <div className="input-field">
             <label htmlFor="first-name">Your Name</label>
@@ -59,7 +87,9 @@ const RequestForQuoteForm = (props) => {
               name="buyer-name"
               maxLength={60}
               required
+              onChange={(e) => setBuyerName(e.target.value)}
               placeholder="Enter your name here"
+              value={buyerName}
             />
           </div>
           <div className="input-field">
@@ -71,7 +101,9 @@ const RequestForQuoteForm = (props) => {
               name="email"
               maxLength={50}
               required
+              onChange={(e) => setBuyerEmail(e.target.value)}
               placeholder="someone@example.com"
+              value={buyerEmail}
             />
           </div>
           <div className="input-field">
@@ -81,6 +113,8 @@ const RequestForQuoteForm = (props) => {
               id="phone-number"
               name="phone-number"
               maxLength={13}
+              onChange={(e) => setBuyerPhoneNumber(e.target.value)}
+              value={buyerPhoneNumber}
             />
           </div>
         </fieldset>
@@ -96,14 +130,12 @@ const RequestForQuoteForm = (props) => {
             <textarea
               id="job-description"
               name="job-description"
-              maxLength={1000}
+              maxLength={500}
               required
+              onChange={(e) => setJobDesctiption(e.target.value)}
               placeholder="Short summary of the job"
+              value={jobDesctiption}
             ></textarea>
-          </div>
-          <div className="handyman-skills">
-            <h3>Required Skill(s) (optional)</h3>
-            <Skills skills={data.skills} />
           </div>
           <div className="input-field">
             <label htmlFor="date-start">Expected Start Date</label>
@@ -113,6 +145,9 @@ const RequestForQuoteForm = (props) => {
               id="date-start"
               name="date-start"
               required
+              min={new Date().toLocaleDateString()}
+              onChange={(e) => setJobStartDate(e.target.value)}
+              value={jobStartDate}
             />
           </div>
           <div>
@@ -123,11 +158,23 @@ const RequestForQuoteForm = (props) => {
             </em>
             <div className="input-field">
               <label htmlFor="job-duration-days">Estimated Man-hours:</label>{" "}
-              <input type="number" id="man-hours" name="man-hours" />
+              <input
+                type="number"
+                id="man-hours"
+                name="man-hours"
+                onChange={(e) => setEstimatedManHours(e.target.value)}
+                value={estimatedManHours}
+              />
             </div>
             <div className="input-field">
               <label htmlFor="price">Willing to Pay £</label>{" "}
-              <input type="number" id="price" name="price" />
+              <input
+                type="number"
+                id="price"
+                name="price"
+                onChange={(e) => setBuyerWillingToPay(e.target.value)}
+                value={buyerWillingToPay}
+              />
             </div>
           </div>
         </div>

@@ -1,69 +1,89 @@
 import { useState } from "react";
 import "./HandymanRegistrationForm.css";
 import Skills from "../SubComponents/Skills";
-import { send } from "emailjs-com";
+
+import {
+  sendRegistrationRequest,
+  validateForm,
+} from "../../../common/js/functions";
+
+const allSkills = [
+  { name: "brickLaying", value: "Brick laying" },
+  { name: "carpentry", value: "Carpentry" },
+  { name: "electricalWork", value: "Electrical Work" },
+  {
+    name: "intallAndRepair",
+    value: "Appliance installation and repair",
+  },
+  {
+    name: "propertyMaintenance",
+    value: "Interior and exterior property maintenance",
+  },
+  { name: "tiling", value: "Tiling" },
+  { name: "plastering", value: "Plastering" },
+  { name: "plumbing", value: "Plumbing" },
+  { name: "painting", value: "Painting" },
+  { name: "decorating", value: "Decorating" },
+];
+
+// default profile picture
+const defaultHandymanProfilePicture =
+  "https://dogtime.com/assets/uploads/2011/03/puppy-development.jpg";
 
 const HandymanRegistrationForm = (props) => {
+  // form submission errors
   const [errors, setErrors] = useState([]);
-  const [toSend, setToSend] = useState({
-    first_name: "",
-    last_name: "",
-    address_line_one: "",
-    address_line_two: "",
-    city: "",
-    postcode: "",
-    country: "",
-    email: "",
-    phone_number: "",
-    bio: "",
-  });
 
-  const allSkills = [
-    { id: 1, name: "Brick laying" },
-    { id: 2, name: "Carpentry" },
-    { id: 3, name: "Electrical Work" },
-    {
-      id: 4,
-      name: "Appliance installation and repair",
-    },
-    {
-      id: 5,
-      name: "Interior and exterior property maintenance",
-    },
-    { id: 6, name: "Tiling" },
-    { id: 7, name: "Plastering" },
-    { id: 8, name: "Plumbing" },
-    { id: 9, name: "Painting" },
-    { id: 10, name: "Decorating" },
-  ];
+  // handyman registration form entry values
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [img, setProfilePicture] = useState(
+    defaultHandymanProfilePicture // WARN: NO IMAGE UPLOAD FUNCTIONALITY ADDED!
+  );
+  const [addressLineOne, setAddressLineOne] = useState("");
+  const [addressLineTwo, setAddressLineTwo] = useState("");
+  const [city, setCity] = useState("");
+  const [postcode, setPostcode] = useState("");
+  const [email, setEmail] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [selectedSkills, setSelectedSkills] = useState([]);
+  const [bio, setBio] = useState("");
 
-  // EVENT HANDLERS
-
-  const handleChange = (e) => {
-    setToSend({ ...toSend, [e.target.name]: e.target.value });
-    console.log(toSend.email);
+  const formData = {
+    firstName,
+    lastName,
+    img,
+    address: { addressLineOne, addressLineTwo, city },
+    postcode,
+    email,
+    phoneNumber,
+    skills: selectedSkills,
+    bio,
   };
+  // EVENT HANDLERS
+  const sendFormData = async (event) => {
+    event.preventDefault();
+    const form = event.target;
+    const errors = validateForm(form,form.id);
+    if (errors.length > 0) {
+      return setErrors(errors);
+    }
 
-  const sendFormData = (e) => {
-    e.preventDefault();
-    send(
+    setErrors([]);
+    const requestData = [
       "service_l0m5rpd",
       "template_ybb8yxc",
-      toSend,
-      "user_Z6650OqueHooRxmmi5Geo"
-    )
-      .then((response) => {
-        console.log("SUCCESS!", response.status, response.text);
-      })
-      .catch((err) => {
-        console.log("FAILED...", err);
-      });
+      formData,
+      "user_Z6650OqueHooRxmmi5Geo",
+    ];
+    const okToResetForm = await sendRegistrationRequest(requestData);
+    if (okToResetForm) form.reset();
   };
 
   return (
     <form
       id="form-add-handyman"
-      className="registration-form"
+      name="form-add-handyman"
       onSubmit={sendFormData}
     >
       {errors.map((e, index) => (
@@ -71,140 +91,157 @@ const HandymanRegistrationForm = (props) => {
           {e}
         </p>
       ))}
-      <h1>Register With Us Today</h1>
-      <div>
-        <div className="input-field">
-          <label htmlFor="first-name">First Name: </label>
-          <input
-            type="text"
-            id="first-name"
-            name="form-add-handyman"
-            required
-            placeholder="Enter your first name here"
-            onChange={handleChange}
-          />
-        </div>
-        <div className="input-field">
-          <label htmlFor="last-name">Last Name: </label>
-          <input
-            type="text"
-            id="last-name"
-            name="form-add-handyman"
-            max={50}
-            required
-            placeholder="Enter your last name here"
-            onChange={handleChange}
-          />
-        </div>
-        <div className="input-field-group">
-          <h2 className="subtile">Contact Details: </h2>
+      <h1 className="title">Become a Handyman</h1>
+      <fieldset className="input-field-group details">
+        <legend className="subtitle">Your Details</legend>
+        <div className="basic-details">
+          <h3>Basic Details</h3>
           <div className="input-field">
-            <label htmlFor="address-line-one">Address Line 1: </label>
-            <input
-              type="number"
-              id="address-line-one"
-              name="form-add-handyman"
-              required
-              placeholder="Enter your building or flat number"
-              onChange={handleChange}
-            />
-          </div>
-          <div className="input-field">
-            <label htmlFor="address-line-two">Address Line 2: </label>
+            <label htmlFor="first-name">
+              First Name<span className="required">*</span>
+            </label>{" "}
             <input
               type="text"
-              id="address-line-two"
-              name="form-add-handyman"
-              max={50}
+              id="firstName"
+              name="firstName"
+              maxLength={50}
               required
-              placeholder="Enter your street name here"
-              onChange={handleChange}
+              onChange={(event) => setFirstName(event.target.value)}
+              placeholder="Enter your first name here"
             />
           </div>
           <div className="input-field">
-            <label htmlFor="city">City: </label>
+            <label htmlFor="last-name">
+              Last Name<span className="required">*</span>
+            </label>{" "}
+            <input
+              type="text"
+              id="lastName"
+              name="lastName"
+              maxLength={50}
+              required
+              onChange={(event) => setLastName(event.target.value)}
+              placeholder="Enter your last name here"
+            />
+          </div>
+        </div>
+        <div className="input-field-group address-details">
+          <h3>Address</h3>
+          <div className="input-field">
+            <label htmlFor="address-line-one">
+              Address Line 1<span className="required">*</span>
+            </label>{" "}
+            <input
+              type="text"
+              id="addressLineOne"
+              name="addressLineOne"
+              maxLength={50}
+              required
+              onChange={(event) => setAddressLineOne(event.target.value)}
+              placeholder="Enter your building or flat number"
+            />
+          </div>
+          <div className="input-field">
+            <label htmlFor="address-line-two">
+              Address Line 2<span className="required">*</span>
+            </label>{" "}
+            <input
+              type="text"
+              id="addressLineTwo"
+              name="addressLineTwo"
+              maxLength={50}
+              required
+              onChange={(event) => setAddressLineTwo(event.target.value)}
+              placeholder="Enter your street name here"
+            />
+          </div>
+          <div className="input-field">
+            <label htmlFor="city">
+              City or District<span className="required">*</span>
+            </label>{" "}
             <input
               type="text"
               id="city"
-              name="form-add-handyman"
+              name="city"
+              maxLength={50}
+              required
+              onChange={(event) => setCity(event.target.value)}
               defaultValue="Coventry"
-              placeholder="Enter your city, district or county name here"
-              onChange={handleChange}
             />
           </div>
           <div className="input-field">
-            <label htmlFor="Postcode">Postcode: </label>
+            <label htmlFor="Postcode">
+              Postcode<span className="required">*</span>
+            </label>{" "}
             <input
               type="text"
-              id="Postcode"
-              name="form-add-handyman"
-              max={50}
+              id="postcode"
+              name="postcode"
+              maxLength={12}
               required
+              onChange={(event) => setPostcode(event.target.value)}
               placeholder="Enter your postcode here"
-              onChange={handleChange}
             />
           </div>
         </div>
-        <div className="input-field">
-          <label htmlFor="country">Country: </label>
-          <input
-            type="text"
-            id="country"
-            name="form-add-handyman"
-            max={50}
-            required
-            placeholder="Enter your country name here"
-            onChange={handleChange}
-          />
+        <div className="input-field-group contact-details">
+          <h3>Contact Details</h3>
+          <div className="input-field">
+            <label htmlFor="email">
+              Email<span className="required">*</span>
+            </label>{" "}
+            <input
+              type="email"
+              id="email"
+              name="email"
+              maxLength={50}
+              required
+              onChange={(event) => setEmail(event.target.value)}
+              placeholder="someone@example.com"
+            />
+          </div>
+          <div className="input-field">
+            <label htmlFor="phone-number">
+              Phone Number<span className="required">*</span>
+            </label>{" "}
+            <input
+              type="tel"
+              id="phoneNumber"
+              name="phoneNumber"
+              minLength={11}
+              maxLength={13}
+              required
+              onChange={(event) => setPhoneNumber(event.target.value)}
+            />
+          </div>
         </div>
-        <div className="input-field">
-          <label htmlFor="email">Email: </label>
-          <input
-            type="email"
-            id="email"
-            name="form-add-handyman"
-            max={50}
-            required
-            placeholder="someone@example.com"
-            onChange={handleChange}
-          />
-        </div>
-        <div className="input-field">
-          <label htmlFor="phone-number">Phone Number: </label>
-          <input
-            type="tel"
-            id="phone-number"
-            name="form-add-handyman"
-            max={50}
-            required
-            onChange={handleChange}
-          />
-        </div>
-      </div>
-      <fieldset className="input-field-group skills-group">
-        <legend className="subtitle">Skills</legend>
-        <Skills skills={allSkills} formId="form-add-handyman" />
+      </fieldset>
+      <fieldset className="input-field-group skills">
+        <legend className="subtitle">
+          Skills<span className="required">*</span>
+        </legend>
+        <em className="required">Please select at least one skill</em>
+        <Skills
+          skills={allSkills}
+          onChangeHandler={(list) => setSelectedSkills(list)}
+        />
       </fieldset>
       <div className="input-field-bio">
-        <h2 className="subtitle">Bio: </h2>
+        <h2 className="subtitle">
+          Bio<span className="required">*</span>
+        </h2>
         <textarea
           type="text-area"
           id="bio"
           name="bio"
-          max={500}
+          maxLength={500}
           required
+          onChange={(event) => setBio(event.target.value)}
           placeholder="Short introduction about you or what you do..."
-          onChange={handleChange}
         />
       </div>
       <div className="submit-button-div">
-        <input
-          type="submit"
-          id="btn-submit"
-          name="form-add-handyman"
-          max={50}
-          value="Submit"
-        />
+        <input type="submit" id="btn-submit" name="btn-submit" value="Submit" />
       </div>
     </form>
   );

@@ -30,32 +30,6 @@ const SignUp = () => {
    *  -storing the input from user
    */
   const [signForm, setSignForm] = useState({
-    name: {
-      invalidInputInfo: "Have to contains only letters",
-      name: "Name",
-      placeholder: "Name",
-      value: "",
-
-      validation: {
-        required: true,
-        isName: true,
-      },
-      valid: false,
-      touched: false,
-    },
-    number: {
-      invalidInputInfo: "UK phone number - 11 digits",
-      name: "Phone Number",
-      placeholder: "01234567890",
-      value: "",
-
-      validation: {
-        required: true,
-        isTelNumber: true,
-      },
-      valid: false,
-      touched: false,
-    },
     email: {
       invalidInputInfo: "Enter valid email address",
       name: "E-mail",
@@ -69,18 +43,49 @@ const SignUp = () => {
       valid: false,
       touched: false,
     },
-    dateOfBirth: {
-      invalidInputInfo: "You must be 18+. DD/MM/YYYY",
-      name: "Date of birth",
-      placeholder: "dd/mm/yyyy",
+    emailConfirmation: {
+      invalidInputInfo: "Enter valid email address",
+      name: "E-mail Confirmation",
+      placeholder: "example@email.com",
       value: "",
 
       validation: {
         required: true,
-        isDOB: true,
-        isEighteen: true,
+        isEmail: true,
+        // !TODO: check if email is equal to confirmation
       },
       valid: false,
+      touched: false,
+    },
+    password: {
+      invalidInputInfo: "You have to input password",
+      name: "Password",
+      placeholder: "Password",
+      value: "",
+      objectConfig: { type: "password" },
+      //!IMPORTANT detailed validation of password is not required now
+      validation: {
+        required: true,
+        isPassword: true,
+      },
+      // valid: false,
+      valid: true,
+      touched: false,
+    },
+    passwordConfirmation: {
+      invalidInputInfo: "You have to input password",
+      name: "Password Confirmation",
+      placeholder: "Password",
+      value: "",
+      objectConfig: { type: "password" },
+      //!IMPORTANT detailed validation of password is not required now
+      validation: {
+        required: true,
+        isPassword: true,
+        // !TODO: check if password is equal to confirmation
+      },
+      // valid: false,
+      valid: true,
       touched: false,
     },
   });
@@ -196,10 +201,11 @@ const SignUp = () => {
     case FIRST_FORM_PAGE:
       form = (
         <SignUpForm
-          form={formElementKeyArray.slice(...NAME_AND_PHONE_NUMBER_SLICE_INDEX)}
+          form={formElementKeyArray}
           formInputHandler={inputChangeHandler}
           next={nextFunction}
-          buttonDisable={!(signForm.name.valid && signForm.number.valid)}
+          // buttonDisable={!(signForm.name.valid && signForm.number.valid)}
+          buttonDisable={false}
           nameOfTheForm="Sign-up"
           leftButtonName="Cancel"
           rightButtonName="Next"
@@ -207,22 +213,6 @@ const SignUp = () => {
       );
       break;
     case SECOND_FORM_PAGE:
-      form = (
-        <SignUpForm
-          form={formElementKeyArray.slice(
-            ...EMAIL_AND_DATE_OF_BIRTH_SLICE_INDEX
-          )}
-          formInputHandler={inputChangeHandler}
-          back={backFunction}
-          next={nextFunction}
-          buttonDisable={!(signForm.email.valid && signForm.dateOfBirth.valid)}
-          nameOfTheForm="Sign-Up"
-          leftButtonName="Back"
-          rightButtonName="Next"
-        />
-      );
-      break;
-    case THIRD_FORM_PAGE:
       form = (
         <ConfirmationFormPage
           loadingControl={loadingControl}

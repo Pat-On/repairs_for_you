@@ -109,10 +109,13 @@ export async function sendRegistrationRequest(requestData) {
   //       THE SUCCESS OR FAILURE OF THE EMAIL SERVICE. IF THE EMAIL SERVICE IS WORKING FINE
   //       ADMIN CAN ENTER USER DATA INTO THE DATABASE MANUALLY EVEN IF THE DATABASE SERVICE FAILS
   try {
-    const emailSendResponse = await sendEmailToAdmin(requestData);
-    if (emailSendResponse.status !== 200) {
-      throw new Error(emailSendResponse.text); // if it's not successful, alert user failure of requet
-    }
+    // ********************************************************************************
+    // COMMENTED OUT BECAUSE WE REACHED LIMIT OF EMAILS
+    
+    // const emailSendResponse = await sendEmailToAdmin(requestData);
+    // if (emailSendResponse.status !== 200) {
+    //   throw new Error(emailSendResponse.text); // if it's not successful, alert user failur of requet
+    // }
     // if it's successful, attempt to add handyman to the database for ease of convenience(at least)
     const databaseResponse = await addHandymanToDatabase(formData);
     // determine if a handyman with the same account exists or not

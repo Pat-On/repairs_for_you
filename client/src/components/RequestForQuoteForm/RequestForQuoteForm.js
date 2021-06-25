@@ -5,6 +5,10 @@ import { validateForm, sendQuoteRequest } from "../../common/js/functions";
 
 const RequestForQuoteForm = (props) => {
   const data = props.data.location.state;
+
+// temporary error fix: !TODO:
+  data.address = {area: "Coventry"}
+
   const [errors, setErrors] = useState([]);
 
   const handymanId = data.id;

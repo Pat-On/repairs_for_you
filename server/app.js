@@ -5,10 +5,10 @@ import path from "path";
 import router from "./api";
 
 import {
-	configuredHelmet,
-	httpsOnly,
-	logErrors,
-	pushStateRouting,
+  configuredHelmet,
+  httpsOnly,
+  logErrors,
+  pushStateRouting,
 } from "./middleware";
 
 import bookingRouter from "./routers/bookingRouter";
@@ -29,9 +29,15 @@ app.use(logErrors());
 app.use(morgan("dev"));
 
 if (app.get("env") === "production") {
-	app.enable("trust proxy");
-	app.use(httpsOnly());
+  app.enable("trust proxy");
+  app.use(httpsOnly());
 }
+
+app.use((req, res, next) => {
+  req.requestTime = new Date().toISOString();
+  console.log(req.headers);
+  next();
+});
 
 // our router
 app.use("/api/v1/booking", bookingRouter);

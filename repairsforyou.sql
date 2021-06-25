@@ -64,6 +64,7 @@ CREATE TABLE offers (
 );
 
 CREATE TABLE handyman (
+handyman_id  SERIAL PRIMARY KEY,
     first_name          VARCHAR(50), 
     last_name           VARCHAR(50), 
     images              VARCHAR(50),

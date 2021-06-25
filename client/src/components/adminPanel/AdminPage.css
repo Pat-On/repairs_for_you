@@ -24,6 +24,8 @@ margin:5rem auto ;
     font-weight: 600;
 }
 table {
+  display: block;
+  margin: 0 auto 5rem;;
     border-collapse: separate;
     border-spacing: 50px 0;
     font-size:1.7rem;

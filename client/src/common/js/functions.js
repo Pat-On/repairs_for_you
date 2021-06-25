@@ -36,6 +36,9 @@ function getFormErrors(formFields, formId) {
     errors.push(
       "Error: invalid phone format. Please enter a valid phone number."
     );
+  // REQUEST FOR QUOTE
+  // make sure if the user has provided either of estimated man-hour or amount of money for a job
+  //** NOTE: this feature has recieved negative feedback, so needs reviewing
   if (formId === "form-send-quote") {
     // if subject form is RequrestFormQuoteForm, check man-hour and price values
     const manHours = formFields.find((field) => field.name === "man-hours");
@@ -45,6 +48,14 @@ function getFormErrors(formFields, formId) {
     );
     if (noManHourOrPriceProvided)
       errors.push("Please enter your estimated man-hour or  is required.");
+  }
+  // HANDYMAN REGISTRATION
+  // make sure the user has confirmed their email
+  if (formId === "form-add-handyman") {
+    // if subject form is RequrestFormQuoteForm, check man-hour and price values
+    const emails = formFields.filter((field) => field.type === "email");
+    if(emails[0]!==emails[1])
+    errors.push("The emails you entered do not match.");
   }
   return errors;
 }

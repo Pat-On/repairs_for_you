@@ -16,6 +16,7 @@ import offersRouter from "./routers/offersRouter";
 import reviewRouter from "./routers/reviewRouter";
 import usersRouter from "./routers/usersRouter";
 import handymanRouter from "./routers/handymanRouter";
+import quotesRouter from "./routers/quotesRouter";
 
 const apiRoot = "/api";
 const staticDir = path.join(__dirname, "static");
@@ -38,6 +39,7 @@ app.use("/api/v1/offers", offersRouter);
 app.use("/api/v1/reviews", reviewRouter);
 app.use("/api/v1/users", usersRouter);
 app.use("/api/users/handyman", handymanRouter);
+app.use("/api/quotes", quotesRouter);
 
 app.use(express.static(staticDir));
 app.use(pushStateRouting(apiRoot, staticDir));

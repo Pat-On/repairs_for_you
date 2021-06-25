@@ -13,7 +13,7 @@ async function getQuoteById(qId) {
 
 // POST A NEW QUOTE (currently accessible to all site visitors)
 async function addNewQuote(qData) {
-  const dataIsValid = validateHandymanData(qData);
+  const dataIsValid = validateQuoteData(qData);
   if (dataIsValid) {
     try {
       await repository.addNewQuote(qData);
@@ -33,22 +33,17 @@ async function addNewQuote(qData) {
 }
 
 // validate incoming quote data
-function validateHandymanData(qData) {
+function validateQuoteData(qData) {
   // required quote data fields
   try {
-    const {
-      buyerName,
-      email,
-      jobDescription,
-      expectedJobStartingDate,
-      handymanId,
-    } = qData;
+    const { buyerName, buyerEmail, jobDescription, jobStartDate, handymanId } =
+      qData;
 
     const dataToValidate = {
       buyerName,
-      email,
+      buyerEmail,
       jobDescription,
-      expectedJobStartingDate,
+      jobStartDate,
       handymanId,
     };
 

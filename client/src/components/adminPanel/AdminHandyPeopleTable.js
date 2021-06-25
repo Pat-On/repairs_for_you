@@ -9,6 +9,7 @@ export default function AdminHandyPeopleTable() {
 	const 	[list,setList]=useState([]);
 	const 	[changed,setChanged]=useState(false);
 
+
 	let { path, url } = useRouteMatch();
 	const handleChange=(e)=>{
 		if(e.target.value==="Update"){

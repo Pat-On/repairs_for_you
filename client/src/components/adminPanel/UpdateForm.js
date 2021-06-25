@@ -1,7 +1,6 @@
 import React from "react";
 import Skills from "../Handyman/SubComponents/Skills";
-import allSkills from "../Handyman/RegistrationForm/HandymanRegistrationForm";
-export default function UpdateForm({ updateForm }) {
+export default function UpdateForm({ userData,updateForm }) {
 
 	return (
 		<div>
@@ -10,7 +9,6 @@ export default function UpdateForm({ updateForm }) {
 				name="form-add-handyman"
 				onSubmit={updateForm}
 			>
-				<h1 className="title">Become a Handyman</h1>
 				<fieldset className="input-field-group details">
 					<legend className="subtitle">Your Details</legend>
 					<div className="basic-details">

@@ -1,33 +1,8 @@
-import { Link, useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import "./Handyman.css";
 
-import Handyman from "../components/Handyman/Profile/Handyman";
-
-const Handyman = ({ userData }, props) => {
-  let { id } = useParams();
-const [handyman, setHandyman] = useState({})
-
-  useEffect(() => {
-    fetch(`/api/users/handyman/${id}`)
-      .then((res) => {
-        if (!res.ok) {
-          throw new Error(res.statusText);
-        }
-        return res.json();
-      })
-      .then((userData) => {
-        setHandyman(userData);
-      })
-      .catch((err) => {
-        console.error(err);
-        // setMessage(err);
-      });
-  }, [id]);
-
-console.log(handyman)
-
-  const { firstName, lastName, address, skills } = userData;
+const Handyman = ({ userData }) => {
+  const { id, firstName, lastName, address, skills } = userData;
   const data = { id, firstName, lastName, address, skills };
   return (
     <div className="card handy-man">
@@ -46,14 +21,16 @@ console.log(handyman)
           <p>{userData.bio}</p>
         </div>
       </div>
-      <Link to={{ pathname: "/forms/request-for-quote", state: data }}>
-        <button id="btn-quote">Get a Quote</button>
+      <Link to={{pathname:"/forms/request-for-quote",state:data}}>
+        <button id="btn-quote" >
+          Get a Quote
+        </button>
       </Link>
       <div className="skills">
         <h3>Skills</h3>
         <ul className="skills-list">
           {userData.skills.map((skill, index) => (
-            <li key={index}>{skill}</li>
+            <li key={index} >{skill}</li>
           ))}
         </ul>
       </div>

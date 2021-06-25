@@ -10,7 +10,7 @@ router.use(express.json());
 // GET "/"
 router.get("/", async (_, res) => {
   try {
-    const allHandymans = await pool.query(`SELECT * FROM handyman `);
+    const allHandymans = await pool.query(`SELECT * FROM handyman WHERE visible=True`);
 
     // const testJSON = await JSON.parse(allHandymans.rows[0].address_offer);
     // return res.status(200).json({

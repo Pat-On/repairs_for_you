@@ -26,9 +26,10 @@ const AdminPanel = (props) => {
 		<div>
 			<h1>Welcome to Your admin dashboard</h1>
 			{/* <h2>Please chose one of the option</h2> */}
+			<h1>What do you want to do next</h1>
 			<div className="admin-page-container">
 				<AdminButton />
-				<Adminpage />
+				<Adminpage {...props} />
 			</div>
 
 			{/*

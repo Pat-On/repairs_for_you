@@ -1,27 +1,31 @@
 import { Link } from "react-router-dom";
 import "./Handyman.css";
 
-const Handyman = ({ userData }) => {
-  const { id, firstName, lastName, address, skills } = userData;
-  const data = { id, firstName, lastName, address, skills };
+import userDefaultImg from "../../../public/user.svg"
+
+const Handyman = ({userData}) => {
+
+  console.log(userData.data)
+  const { handyman_id, first_name, last_name, address, skills, bio } = userData.data;
+  const data = { handyman_id, first_name, last_name, address, skills  };
   return (
     <div className="card handy-man">
       <div className="profile-image-bio">
         <figure className="profile-image">
-          <figcaption>{`${userData.firstName} ${userData.lastName}`}</figcaption>
+          <figcaption>{`${userData.data.first_name} ${userData.data.last_name}`}</figcaption>
           <img
-            src={userData.img}
-            alt={`${userData.firstName} ${userData.lastName}`}
+            src={userData.data.img ? userData.data.img : userDefaultImg}
+            alt={`${userData.data.first_name} ${userData.data.last_name}`}
           />
           <span className="label">Rating:</span>&nbsp;
-          <span className="stars">{userData.rating}&nbsp;stars</span>{" "}
+          <span className="stars">{userData.data.rating}&nbsp;stars</span>{" "}
         </figure>
         <div className="bio bio-handy-man">
           <h2>About Me</h2>
-          <p>{userData.bio}</p>
+          <p>{userData.data.bio}</p>
         </div>
       </div>
-      <Link to={{pathname:"/forms/request-for-quote",state:data}}>
+      <Link to={{pathname:"/forms/request-for-quote", state:data}}>
         <button id="btn-quote" >
           Get a Quote
         </button>
@@ -29,7 +33,7 @@ const Handyman = ({ userData }) => {
       <div className="skills">
         <h3>Skills</h3>
         <ul className="skills-list">
-          {userData.skills.map((skill, index) => (
+          {userData.data.skills.map((skill, index) => (
             <li key={index} >{skill}</li>
           ))}
         </ul>
@@ -37,16 +41,16 @@ const Handyman = ({ userData }) => {
 
       <div className="user-reviews">
         <span className="label">Reviews:</span>&nbsp;
-        <span className="stars">{userData.reviews.length}</span>
+        {/* <span className="stars">{userData.reviews.length}</span> */}
         <div>
           <a href="#customer-review">Add a review</a>
         </div>
-        {userData.reviews.map((review, index) => (
+        {userData.reviews? userData.reviews.map((review, index) => (
           <div key={index} className="review">
             <p className="reviewer">{review.name}</p>
             <p className="review-body">{review.body}</p>
           </div>
-        ))}
+        )) : <h2>No reviews was received</h2>}
         <form id="form-review" onSubmit={() => {}}>
           <label htmlFor="customer-review">Your Review</label>
           <input

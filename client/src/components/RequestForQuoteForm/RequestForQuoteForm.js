@@ -5,13 +5,18 @@ import { validateForm, sendQuoteRequest } from "../../common/js/functions";
 
 const RequestForQuoteForm = (props) => {
   const data = props.data.location.state;
+
+// temporary error fix: !TODO:
+  data.address = {area: "Coventry"}
+
   const [errors, setErrors] = useState([]);
 
-  const handymanName = { name: `${data.firstName} ${data.firstName}` };
+  const handymanId = data.id;
+  const handymanName = `${data.firstName} ${data.lastName}`;
   const [buyerName, setBuyerName] = useState("");
   const [buyerEmail, setBuyerEmail] = useState("");
   const [buyerPhoneNumber, setBuyerPhoneNumber] = useState("");
-  const [jobDesctiption, setJobDesctiption] = useState("");
+  const [jobDescription, setJobDesctiption] = useState("");
   const [jobStartDate, setJobStartDate] = useState("");
   const [estimatedManHours, setEstimatedManHours] = useState("");
   const [buyerWillingToPay, setBuyerWillingToPay] = useState("");
@@ -30,10 +35,11 @@ const RequestForQuoteForm = (props) => {
       buyerName,
       buyerEmail,
       buyerPhoneNumber,
-      jobDesctiption,
+      jobDescription,
       jobStartDate,
       estimatedManHours,
       buyerWillingToPay,
+      handymanId,
     };
     const requestData = [
       "service_l0m5rpd",
@@ -134,7 +140,7 @@ const RequestForQuoteForm = (props) => {
               required
               onChange={(e) => setJobDesctiption(e.target.value)}
               placeholder="Short summary of the job"
-              value={jobDesctiption}
+              value={jobDescription}
             ></textarea>
           </div>
           <div className="input-field">

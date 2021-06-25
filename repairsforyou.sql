@@ -63,6 +63,22 @@ CREATE TABLE offers (
     contacts            VARCHAR(100) -- temporary but need to be connected to address for example phone and email from user
 );
 
+CREATE TABLE handyman (
+handyman_id  SERIAL PRIMARY KEY,
+    first_name          VARCHAR(50), 
+    last_name           VARCHAR(50), 
+    images              VARCHAR(50),
+    address_offer        text ARRAY, 
+    postcode            VARCHAR(50), 
+    email               VARCHAR(50), 
+    phone_number        VARCHAR(50), 
+    skills              text ARRAY, 
+    bio                 VARCHAR(450),
+    visible             BOOLEAN DEFAULT FALSE
+);
+
+
+
 CREATE TABLE reviews (
     review_id          SERIAL PRIMARY KEY,
     buyer_id_ref        INTEGER REFERENCES users(user_id),

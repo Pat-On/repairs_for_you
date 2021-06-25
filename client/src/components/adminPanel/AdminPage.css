@@ -5,6 +5,10 @@ display: flex;
 justify-content: center;
 margin:5rem auto ;
 }
+.table-container{
+display: table;
+
+}
 .admin-page > button {
     background-color: rgb(247, 121, 3);
     margin-left: 2rem;
@@ -22,21 +26,20 @@ margin:5rem auto ;
     font-weight: 400;
 }
 table {
- width: 100%;
- font-size: 1.7rem;
- border-collapse: separate;
+  display: block;
+  margin: 0 auto 5rem;
+  border-collapse: separate;
+  border-spacing: 3rem 0;
+  font-size:1.7rem;
+  background-color: rgb(236, 243, 243);
+  table-layout:fixed;
 }
 
 th {
-  background-color: rgb(50, 128, 67);
-  color: white;
   height: 3rem;
 } 
 td{
   height: 3rem;
-  padding-left: 3rem;
 }
-  td select{
- height: 3rem;
-  }
+
  

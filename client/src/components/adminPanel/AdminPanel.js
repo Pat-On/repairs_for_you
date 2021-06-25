@@ -29,7 +29,7 @@ const AdminPanel = (props) => {
 			<h1>What do you want to do next</h1>
 			<div className="admin-page-container">
 				<AdminButton />
-				<Adminpage />
+				<Adminpage {...props} />
 			</div>
 
 			{/*

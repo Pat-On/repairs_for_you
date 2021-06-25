@@ -1,7 +1,6 @@
 // ROUTES RELATED TO HANDYMEN
 import { pool } from "./../db";
-import authController from "./../controller/authController"
-
+import authController from "./../controller/authController";
 
 const express = require("express");
 const router = express.Router();
@@ -12,7 +11,9 @@ router.use(express.json());
 // GET "/"
 router.get("/", async (_, res) => {
   try {
-    const allHandymans = await pool.query(`SELECT * FROM handyman WHERE visible=True`);
+    const allHandymans = await pool.query(
+      `SELECT * FROM handyman WHERE visible=True`
+    );
 
     // const testJSON = await JSON.parse(allHandymans.rows[0].address_offer);
     // return res.status(200).json({
@@ -21,7 +22,7 @@ router.get("/", async (_, res) => {
 
     return res.status(200).json({
       length: allHandymans.rowCount,
-      data: allHandymans.rows
+      data: allHandymans.rows,
     });
   } catch (error) {
     //TODO ERROR HANDLER
@@ -35,9 +36,30 @@ router.get("/", async (_, res) => {
 });
 
 // GET "/{id}"
+// router.get("/:id", async (req, res) => {
+//   const result = await services.getHandymanById(parseInt(req.params.id));
+//   result ? res.status(200).send(result) : res.sendStatus(404);
+// });
+
 router.get("/:id", async (req, res) => {
-  const result = await services.getHandymanById(parseInt(req.params.id));
-  result ? res.status(200).send(result) : res.sendStatus(404);
+  try {
+    const { id } = req.params;
+    console.log(id);
+    const oneHandyman = await pool.query(
+      "SELECT * FROM handyman WHERE handyman_id = $1 ",
+      [id]
+    );
+    res.status(200).json({
+      status: "success",
+      length: oneHandyman.rowCount,
+      data: oneHandyman.rows[0],
+    });
+  } catch (err) {
+    res.status(400).json({
+      status: "fail",
+      msg: err.message,
+    });
+  }
 });
 
 // POST "/"
@@ -90,7 +112,6 @@ router.post("/", async (req, res) => {
   }
 });
 
-
 // !TODO: auth controller and the protection - base on the role
 router.get("/adminsacceshandymans", async (_, res) => {
   try {
@@ -103,7 +124,7 @@ router.get("/adminsacceshandymans", async (_, res) => {
 
     return res.status(200).json({
       length: allHandymans.rowCount,
-      data: allHandymans.rows
+      data: allHandymans.rows,
     });
   } catch (error) {
     //TODO ERROR HANDLER

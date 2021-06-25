@@ -19,19 +19,21 @@ function getQuoteById(qId) {
 function addNewQuote(qData) {
   const {
     buyerName,
-    email,
-    phoneNumber,
+    buyerEmail,
+    buyerPhoneNumber,
     jobDescription,
-    expectedJobStartingDate,
+    jobStartDate,
+    estimatedManHours,
     handymanId,
   } = qData;
 
   return quotes.push({
     buyerName,
-    email,
-    phoneNumber,
+    buyerEmail,
+    buyerPhoneNumber,
     jobDescription,
-    expectedJobStartingDate,
+    jobStartDate,
+    estimatedManHours,
     handymanId,
   });
 }

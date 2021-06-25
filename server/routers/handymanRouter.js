@@ -1,4 +1,5 @@
 // ROUTES RELATED TO HANDYMEN
+import { pool } from "./../db";
 
 const express = require("express");
 const router = express.Router();
@@ -19,11 +20,18 @@ router.get("/:id", async (req, res) => {
 });
 
 // POST "/"
+// router.post("/", async (req, res) => {
+//   console.log(req.body)
+//   const result = await services.addNewHandyman(req.body);
+//   const resultStatus = result.status === "OK" ? 201 : 400;
+//   res.status(resultStatus).send({ message: result.message });
+// });
+
+// POST "/"
 router.post("/", async (req, res) => {
   console.log(req.body)
-  const result = await services.addNewHandyman(req.body);
-  const resultStatus = result.status === "OK" ? 201 : 400;
-  res.status(resultStatus).send({ message: result.message });
+
 });
+
 
 module.exports = router;

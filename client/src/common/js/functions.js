@@ -54,22 +54,19 @@ function phoneNumberIsValid(phoneNumber) {
 // SEND QUOTE REQUEST EMAIL TO ADMIN
 export function sendQuoteRequest(requestData) {
   const [service, template, formData, user] = requestData;
-  // const formDataObject = getRequestForQuoteFormDataObject(form);
   sendEmailToAdmin([service, template, formData, user]);
-  // return console.log(requestData)
 }
 
 // SEND NEW HANDYMAN REGISTRATION REQUEST EMAIL TO ADMIN
 export function sendRegistrationRequest(requestData) {
-  const [service, template, form, user] = requestData;
-  const formDataObject = getRegistrationFormDataObject(form);
-  sendEmailToAdmin([service, template, formDataObject, user]);
+  const [service, template, formData, user] = requestData;
+  sendEmailToAdmin([service, template, formData, user]);
 }
 
 // THIS IS WHERE EMAILS ARE SENT FROM
 function sendEmailToAdmin([...args]) {
   const [service, template, formDataEntries, user] = args;
-
+  
   send(service, template, formDataEntries, user)
     .then((response) => {
       alert(
@@ -81,90 +78,3 @@ function sendEmailToAdmin([...args]) {
       console.log("FAILED...", err);
     });
 }
-
-// COLLECT ALL HANDYMAN REGISTRATION FORM INPUT AND CHANGE IT TO AN OBJECT TO BE SENT VIA HTTP REQUEST
-function getRegistrationFormDataObject(form) {
-  const formDataDataObject = {};
-  const contact = {};
-  const address = {};
-  const skills = {};
-
-  // BASIC DETAILS
-  const [firstName, lastName] = [
-    ...form.querySelector(".basic-details").querySelectorAll("input"),
-  ].map((item) => item.value);
-
-  // ADDRESS
-  const addressData = [
-    ...form.querySelector(".address-details").querySelectorAll("input"),
-  ].map((item) => [item.id, item.value]);
-  addressData.forEach((item) => (address[item[0]] = item[1]));
-
-  const contactData = [
-    ...form.querySelector(".contact-details").querySelectorAll("input"),
-  ].map((item) => [item.id, item.value]);
-  contactData.forEach((item) => (contact[item[0]] = item[1]));
-
-  // SKILLS
-  const skillsData = [
-    ...form
-      .querySelector(".skills-list")
-      .querySelectorAll("input[type='checkbox']"),
-  ]
-    .filter((skill) => skill.checked)
-    .map((item) => [item.id, item.value]);
-  skillsData.forEach((item) => (skills[item[0]] = item[1]));
-
-  // BIO
-  const bio = form.querySelector("#bio").value;
-
-  formDataDataObject.bio = bio;
-  formDataDataObject.skills = skills;
-  formDataDataObject.contact = contact;
-  formDataDataObject.address = address;
-  formDataDataObject.lastName = lastName;
-  formDataDataObject.firstName = firstName;
-
-  return formDataDataObject;
-}
-
-// // COLLECT ALL HANDYMAN REGISTRATION FORM INPUT AND CHANGE IT TO AN OBJECT TO BE SENT VIA HTTP REQUEST
-// function getRequestForQuoteFormDataObject(form) {
-//   const formDataDataObject = {};
-//   const contact = {};
-//   const address = {};
-//   const skills = {};
-
-//   // ADDRESS
-//   const addressData = [
-//     ...form.querySelector(".address-details").querySelectorAll("input"),
-//   ].map((item) => [item.id, item.value]);
-//   addressData.forEach((item) => (address[item[0]] = item[1]));
-//   console.log(addressData);
-//   const contactData = [
-//     ...form.querySelector(".contact-details").querySelectorAll("input"),
-//   ].map((item) => [item.id, item.value]);
-//   contactData.forEach((item) => (contact[item[0]] = item[1]));
-
-//   // SKILLS
-//   const skillsData = [
-//     ...form
-//       .querySelector(".skills-list")
-//       .querySelectorAll("input[type='checkbox']"),
-//   ]
-//     .filter((skill) => skill.checked)
-//     .map((item) => [item.id, item.value]);
-//   skillsData.forEach((item) => (skills[item[0]] = item[1]));
-
-//   // JOB
-//   const jobDescription = form.querySelector("#job-description").value;
-
-//   formDataDataObject.jobDescription = jobDescription;
-//   formDataDataObject.skills = skills;
-//   formDataDataObject.contact = contact;
-//   formDataDataObject.address = address;
-//   formDataDataObject.lastName = lastName;
-//   formDataDataObject.firstName = firstName;
-
-//   return formDataDataObject;
-// }

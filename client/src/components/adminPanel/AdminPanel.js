@@ -27,8 +27,8 @@ const AdminPanel = (props) => {
 			<h1>Welcome to Your admin dashboard</h1>
 			{/* <h2>Please chose one of the option</h2> */}
 			<div className="admin-page-container">
-				<AdminButton />
-				<Adminpage />
+				<AdminButton/>
+				<Adminpage {...props} />
 			</div>
 
 			{/*

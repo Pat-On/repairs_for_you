@@ -67,13 +67,13 @@ CREATE TABLE handyman (
     first_name          VARCHAR(50), 
     last_name           VARCHAR(50), 
     images              VARCHAR(50),
-    adressoffert        VARCHAR(50), -- we will need to modify it to exist in address table
+    address_offer        text ARRAY, 
     postcode            VARCHAR(50), 
     email               VARCHAR(50), 
-    prone_number        VARCHAR(50), 
+    phone_number        VARCHAR(50), 
     skills              text ARRAY, 
     bio                 VARCHAR(450),
-    visible             BOOLEAN DEFAULT FALSE,
+    visible             BOOLEAN DEFAULT FALSE
 );
 
 

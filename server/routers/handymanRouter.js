@@ -29,9 +29,34 @@ router.get("/:id", async (req, res) => {
 
 // POST "/"
 router.post("/", async (req, res) => {
-  console.log(req.body)
+  try {
+    console.log(req.body);
+    // address - object, skills - array
+    const {
+      firstName,
+      lastName,
+      // img,
+      address,
+      postcode,
+      email,
+      phoneNumber,
+      skills,
+      bio,
+    } = req.body;
+    console.log(bio);
 
+    // '{"sector1", "sector2"}'
+    const newArrayString = skills.map((item) => `"${item}"`);
+    console.log(newArrayString.join(", "));
+
+    const _ = await pool.query(
+      `INSERT INTO handyman (first_name, last_name,  address_offer, postcode, email, phone_number, skills, bio)
+                  VALUES ($1, $2, $3, $4, $5, $6, $7, $8)`, [ firstName, lastName, [ JSON .stringify(address)], postcode,  email, phoneNumber, skills, bio ]
+    );
+  } catch (error) {
+    //TODO ERROR HANDLER
+    console.log(error);
+  }
 });
-
 
 module.exports = router;

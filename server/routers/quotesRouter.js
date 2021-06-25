@@ -2,7 +2,7 @@
 
 const express = require("express");
 const router = express.Router();
-const services = require("../services/quotesSerives");
+const services = require("../services/quotesServices");
 
 router.use(express.json());
 
@@ -11,16 +11,16 @@ router.use(express.json());
  *       They are expected to be accessible only by admin
  */
 // GET "/" SERVE DATA OF ALL QUOTES (currently accessible only to admin)
-// router.get("/", async (_, res) => {
-//   const result = await services.getAllHandymen();
-//   return res.status(200).json(result);
-// });
+router.get("/", async (_, res) => {
+  const result = await services.getAllQuotes();
+  return res.status(200).json(result.rows);
+});
 
-// // GET "/{id}" SERVE DATA OF INDIVIDUAL QUOTE (currently accessible only to admin)
-// router.get("/:id", async (req, res) => {
-//   const result = await services.getQuoteById(parseInt(req.params.id));
-//   result ? res.status(200).send(result) : res.sendStatus(404);
-// });
+// GET "/{id}" SERVE DATA OF INDIVIDUAL QUOTE (currently accessible only to admin)
+router.get("/:id", async (req, res) => {
+  const result = await services.getQuoteById(parseInt(req.params.id));
+  result ? res.status(200).send(result.rows[0]) : res.sendStatus(404);
+});
 /**
  * 
  */

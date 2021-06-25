@@ -28,7 +28,7 @@ router.use(express.json());
 // POST "/" ALLOW QUOTE REQUEST DATA STORAGE (currently accessible to all site visitors)
 // NOTE: this is used just to allow storage of quote request-related data provided by a potential buyer
 router.post("/", async (req, res) => {
-  const result = await services.addQuote(req.body);
+  const result = await services.addNewQuote(req.body);
   const resultStatus = result.status === "OK" ? 201 : 400;
   res.status(resultStatus).send({ message: result.message });
 });

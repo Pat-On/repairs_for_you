@@ -69,7 +69,7 @@ const App = () => {
           {authCtx.isLoggedIn && (
             <Route
               path="/admin-panel"
-              component={(props) => <AdminPanel {...props} />}
+              render={(props) => <AdminPanel {...props} />}
             />
           )}
 

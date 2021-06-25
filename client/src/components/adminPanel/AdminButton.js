@@ -8,16 +8,16 @@ export default function AminButton() {
 
 		<div className="admin-page">
 			<button>
-				<Link to={`${url}/users/handyman`}>View Repair Person</Link>
+				<Link to={`${url}/handyPeople`}>View Repair Person</Link>
 			</button>
 			<button>
-				<Link to={`${url}/users/buyers`}>View Buyers</Link>
+				<Link to={`${url}/buyers`}>View Buyers</Link>
 			</button>
 			<button>
-				<Link to={`${url}/users/buyers`}>View Pending buyer requests</Link>
+				<Link to={`${url}/buyersrequests`}>View Pending buyer requests</Link>
 			</button>
 			<button>
-				<Link to={`${url}/users/buyers`}>View Pending repair person requests</Link>
+				<Link to={`${url}/repairrequest`}>View Pending repair person requests</Link>
 			</button>
 			
 		</div>

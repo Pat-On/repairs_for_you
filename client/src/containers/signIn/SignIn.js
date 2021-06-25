@@ -13,46 +13,49 @@ const SignIn = (props) => {
    * State: responsible for controlling the process of displaying the http req in UI
    */
 
-	console.log(props.history);
-	const [loadingControl, setLoadingControl] = useState(false);
+
+  const [loadingControl, setLoadingControl] = useState(false);
+
 
 	/**
    * State: signForm and setSignForm are used to provide:
    *  -information about requirements of validation
    *  -storing the input from user
    */
-	const [signForm, setSignForm] = useState({
-		email: {
-			invalidInputInfo: "Enter valid email address",
-			name: "E-mail",
-			placeholder: "example@email.com",
-			value: "",
 
-			validation: {
-				required: true,
-				isEmail: true,
-			},
-			valid: true,
-			// valid: false,
-			touched: false,
-		},
-		password: {
-			invalidInputInfo: "Have to be at least 8 symbols long",
-			name: "Password",
-			placeholder: "Password",
-			value: "",
+  const [signForm, setSignForm] = useState({
+    email: {
+      invalidInputInfo: "Enter valid email address",
+      name: "E-mail",
+      placeholder: "example@email.com",
+      value: "",
 
-			validation: {
-				required: true,
-				isName: true,
-			},
-			// valid: false,
-			valid: true,
-			touched: false,
-		},
-	});
+      validation: {
+        required: true,
+        isEmail: true,
+      },
+      valid: true,
+      // valid: false,
+      touched: false,
+    },
+    password: {
+      invalidInputInfo: "You have to input password",
+      name: "Password",
+      placeholder: "Password",
+      value: "",
+      objectConfig: {type: "password"},
+      //!IMPORTANT detailed validation of password is not required now
+      validation: {
+        required: true,
+        // isPassword: true,
+      },
+      // valid: false,
+      valid: true,
+      touched: false,
+    },
+  });
 
-	/**
+  /**
    * @description Changing the page of form displayed in Browser
    * Returning to previous one page
    * Function is changing the page by changing the state of loadingControl by setLoadingControl

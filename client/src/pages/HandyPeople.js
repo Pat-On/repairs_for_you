@@ -7,7 +7,7 @@ export default function HandyPeople() {
 
 	return (
 		<div className="App">
-			<header className="card"></header>
+			<div className="card"></div>
 			<HandyPeopleCards />
 		</div>
 	);

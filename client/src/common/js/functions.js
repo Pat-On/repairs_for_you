@@ -74,22 +74,44 @@ function phoneNumberIsValid(phoneNumber) {
 }
 
 // SEND QUOTE REQUEST EMAIL TO ADMIN
-export function sendQuoteRequest(requestData) {
-  const [service, template, formData, user] = requestData;
-  sendEmailToAdmin([service, template, formData, user]);
+export async function sendQuoteRequest(requestData) {
+  const formData = requestData[2];
+  // 1. First, attempt to send quote request to admin via email account
+  // NOTE: THE OVERALL SUCCESS OR FAILURE OF THE QUOTE REQUESTING PROCESS DEPENDS PRIMARILY ON
+  //       THE SUCCESS OR FAILURE OF THE EMAIL SERVICE. IF THE EMAIL SERVICE IS WORKING FINE
+  //       ADMIN CAN ENTER USER DATA INTO THE DATABASE MANUALLY EVEN IF THE DATABASE SERVICE FAILS
+  try {
+    const emailSendResponse = await sendEmailToAdmin(requestData);
+    if (emailSendResponse.status !== 200) {
+      throw new Error(emailSendResponse.text); // if it's not successful, alert user failure of requet
+    }
+    // if it's successful, attempt to add handyman to the database for ease of convenience(at least)
+    const databaseResponse = await addQuoteRequestToDatabase(formData);
+    // determine if a handyman with the same account exists or not
+    // console.error(databaseResponse.status)
+    if (databaseResponse.status === 400) {
+      const result = await databaseResponse.json();
+      alert(result.message);
+      throw new Error(result.message);
+    }
+    alert(quoteRequestSuccessMessage);
+    return true;
+  } catch (err) {
+    console.log(err);
+  }
 }
 
 // SEND NEW HANDYMAN REGISTRATION REQUEST EMAIL TO ADMIN
 export async function sendRegistrationRequest(requestData) {
   const formData = requestData[2];
   // 1. First, attempt to send registration request to admin via email account
-  // NOTE: THE OVERALL SUCCESS OR FAILUR OF THE REGISTRATION PROCESS DEPENDS PRIMARILY ON
-  //       THE SUCCESS OR FAILURE OF THE EMAIL SERVICE BECAUSE. IF THE EMAIL SERVICE IS WORKING FINE
+  // NOTE: THE OVERALL SUCCESS OR FAILURE OF THE REGISTRATION PROCESS DEPENDS PRIMARILY ON
+  //       THE SUCCESS OR FAILURE OF THE EMAIL SERVICE. IF THE EMAIL SERVICE IS WORKING FINE
   //       ADMIN CAN ENTER USER DATA INTO THE DATABASE MANUALLY EVEN IF THE DATABASE SERVICE FAILS
   try {
     const emailSendResponse = await sendEmailToAdmin(requestData);
     if (emailSendResponse.status !== 200) {
-      throw new Error(emailSendResponse.text); // if it's not successful, alert user failur of requet
+      throw new Error(emailSendResponse.text); // if it's not successful, alert user failure of requet
     }
     // if it's successful, attempt to add handyman to the database for ease of convenience(at least)
     const databaseResponse = await addHandymanToDatabase(formData);
@@ -115,6 +137,14 @@ async function sendEmailToAdmin([...args]) {
 
 async function addHandymanToDatabase(formData) {
   return await fetch(`/api/users/handyman`, {
+    method: "POST",
+    body: JSON.stringify(formData),
+    headers: { "Content-Type": "application/json" },
+  });
+}
+
+async function addQuoteRequestToDatabase(formData) {
+  return await fetch(`/api/quotes`, {
     method: "POST",
     body: JSON.stringify(formData),
     headers: { "Content-Type": "application/json" },

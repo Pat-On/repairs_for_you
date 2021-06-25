@@ -1,5 +1,7 @@
 // ROUTES RELATED TO HANDYMEN
 import { pool } from "./../db";
+import authController from "./../controller/authController"
+
 
 const express = require("express");
 const router = express.Router();
@@ -82,6 +84,27 @@ router.post("/", async (req, res) => {
         bio,
       ]
     );
+  } catch (error) {
+    //TODO ERROR HANDLER
+    console.log(error);
+  }
+});
+
+
+// !TODO: auth controller and the protection - base on the role
+router.get("/adminsacceshandymans", async (_, res) => {
+  try {
+    const allHandymans = await pool.query(`SELECT * FROM handyman`);
+
+    // const testJSON = await JSON.parse(allHandymans.rows[0].address_offer);
+    // return res.status(200).json({
+    //   data: testJSON,
+    // });
+
+    return res.status(200).json({
+      length: allHandymans.rowCount,
+      data: allHandymans.rows
+    });
   } catch (error) {
     //TODO ERROR HANDLER
     console.log(error);

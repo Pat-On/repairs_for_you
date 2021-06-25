@@ -8,12 +8,12 @@
     background-color: white;
     border-radius: 10px;
     box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
-    height: 72vh;
+    height: auto;
     justify-content: center;
     margin: 15vh auto;
-    max-height: 550px;
+    /* max-height: 750px; */
     min-height: 480px;
-    padding-top: 2vh;
+    padding: 2vh 0 3vh;
     text-align: center;
     width: 90%;
 }

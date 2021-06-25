@@ -12,9 +12,9 @@ import classes from "./CompletionFormScreen.module.css";
 const confirmationFormPage = (props) => {
   const form = (
     <div className={classes.container}>
-      <h1 className={classes.title}>Thank You For Your Submission</h1>
+      <h1 className={classes.title}>Thank You For Your Registration</h1>
       <p className={classes.subTitle}>
-        You will get an email with further instructions.
+        You can log-in into your account now.
       </p>
       <div
         className={[

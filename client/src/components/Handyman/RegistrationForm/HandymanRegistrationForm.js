@@ -7,33 +7,64 @@ import {
   validateForm,
 } from "../../../common/js/functions";
 
+const allSkills = [
+  { name: "brickLaying", value: "Brick laying" },
+  { name: "carpentry", value: "Carpentry" },
+  { name: "electricalWork", value: "Electrical Work" },
+  {
+    name: "intallAndRepair",
+    value: "Appliance installation and repair",
+  },
+  {
+    name: "propertyMaintenance",
+    value: "Interior and exterior property maintenance",
+  },
+  { name: "tiling", value: "Tiling" },
+  { name: "plastering", value: "Plastering" },
+  { name: "plumbing", value: "Plumbing" },
+  { name: "painting", value: "Painting" },
+  { name: "decorating", value: "Decorating" },
+];
+
+// default profile picture
+const defaultHandymanProfilePicture =
+  "https://dogtime.com/assets/uploads/2011/03/puppy-development.jpg";
+
 const HandymanRegistrationForm = (props) => {
+  // form submission errors
   const [errors, setErrors] = useState([]);
 
-  const allSkills = [
-    { name: "brickLaying", value: "Brick laying" },
-    { name: "arpentry", value: "Carpentry" },
-    { name: "electricalWork", value: "Electrical Work" },
-    {
-      name: "intallAndRepair",
-      value: "Appliance installation and repair",
-    },
-    {
-      name: "propertyMaintenance",
-      value: "Interior and exterior property maintenance",
-    },
-    { name: "tiling", value: "Tiling" },
-    { name: "plastering", value: "Plastering" },
-    { name: "plumbing", value: "Plumbing" },
-    { name: "painting", value: "Painting" },
-    { name: "decorating", value: "Decorating" },
-  ];
+  // handyman registration form entry values
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [img, setProfilePicture] = useState(
+    defaultHandymanProfilePicture // WARN: NO IMAGE UPLOAD FUNCTIONALITY ADDED!
+  );
+  const [addressLineOne, setAddressLineOne] = useState("");
+  const [addressLineTwo, setAddressLineTwo] = useState("");
+  const [city, setCity] = useState("");
+  const [postcode, setPostcode] = useState("");
+  const [email, setEmail] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [selectedSkills, setSelectedSkills] = useState([]);
+  const [bio, setBio] = useState("");
 
+  const formData = {
+    firstName,
+    lastName,
+    img,
+    address: { addressLineOne, addressLineTwo, city },
+    postcode,
+    email,
+    phoneNumber,
+    skills: selectedSkills,
+    bio,
+  };
   // EVENT HANDLERS
-  const sendFormData = (event) => {
+  const sendFormData = async (event) => {
     event.preventDefault();
     const form = event.target;
-    const errors = validateForm(form);
+    const errors = validateForm(form,form.id);
     if (errors.length > 0) {
       return setErrors(errors);
     }
@@ -42,11 +73,11 @@ const HandymanRegistrationForm = (props) => {
     const requestData = [
       "service_l0m5rpd",
       "template_ybb8yxc",
-      form,
+      formData,
       "user_Z6650OqueHooRxmmi5Geo",
     ];
-    sendRegistrationRequest(requestData);
-    form.reset();
+    const okToResetForm = await sendRegistrationRequest(requestData);
+    if (okToResetForm) form.reset();
   };
 
   return (
@@ -75,6 +106,7 @@ const HandymanRegistrationForm = (props) => {
               name="firstName"
               maxLength={50}
               required
+              onChange={(event) => setFirstName(event.target.value)}
               placeholder="Enter your first name here"
             />
           </div>
@@ -88,6 +120,7 @@ const HandymanRegistrationForm = (props) => {
               name="lastName"
               maxLength={50}
               required
+              onChange={(event) => setLastName(event.target.value)}
               placeholder="Enter your last name here"
             />
           </div>
@@ -104,6 +137,7 @@ const HandymanRegistrationForm = (props) => {
               name="addressLineOne"
               maxLength={50}
               required
+              onChange={(event) => setAddressLineOne(event.target.value)}
               placeholder="Enter your building or flat number"
             />
           </div>
@@ -117,6 +151,7 @@ const HandymanRegistrationForm = (props) => {
               name="addressLineTwo"
               maxLength={50}
               required
+              onChange={(event) => setAddressLineTwo(event.target.value)}
               placeholder="Enter your street name here"
             />
           </div>
@@ -129,8 +164,9 @@ const HandymanRegistrationForm = (props) => {
               id="city"
               name="city"
               maxLength={50}
+              required
+              onChange={(event) => setCity(event.target.value)}
               defaultValue="Coventry"
-              placeholder="City, county or district name"
             />
           </div>
           <div className="input-field">
@@ -143,6 +179,7 @@ const HandymanRegistrationForm = (props) => {
               name="postcode"
               maxLength={12}
               required
+              onChange={(event) => setPostcode(event.target.value)}
               placeholder="Enter your postcode here"
             />
           </div>
@@ -159,6 +196,7 @@ const HandymanRegistrationForm = (props) => {
               name="email"
               maxLength={50}
               required
+              onChange={(event) => setEmail(event.target.value)}
               placeholder="someone@example.com"
             />
           </div>
@@ -173,6 +211,7 @@ const HandymanRegistrationForm = (props) => {
               minLength={11}
               maxLength={13}
               required
+              onChange={(event) => setPhoneNumber(event.target.value)}
             />
           </div>
         </div>
@@ -182,7 +221,10 @@ const HandymanRegistrationForm = (props) => {
           Skills<span className="required">*</span>
         </legend>
         <em className="required">Please select at least one skill</em>
-        <Skills skills={allSkills} />
+        <Skills
+          skills={allSkills}
+          onChangeHandler={(list) => setSelectedSkills(list)}
+        />
       </fieldset>
       <div className="input-field-bio">
         <h2 className="subtitle">
@@ -194,6 +236,7 @@ const HandymanRegistrationForm = (props) => {
           name="bio"
           maxLength={500}
           required
+          onChange={(event) => setBio(event.target.value)}
           placeholder="Short introduction about you or what you do..."
         />
       </div>

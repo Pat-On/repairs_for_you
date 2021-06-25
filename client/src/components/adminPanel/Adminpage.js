@@ -2,11 +2,13 @@ import React from "react";
 import "./AdminPage.css";
 import { Route, Redirect, useRouteMatch, Switch, Link } from "react-router-dom";
 import AdminHandyPeopleTable from "./AdminHandyPeopleTable";
+import TemporaryEditForm from "./usersManagements/temporaryEditForm/TemporaryEditForm"
 
 export default function Adminpage(props) {
   let { path, url } = useRouteMatch();
-  console.log(`${url}/handyPeople/:id/`);
-  console.log(`${path}/handyPeople/:id/`);
+//   console.log(url);
+//   console.log(path);
+console.log(props.match)
   return (
     <div>
       <Switch>
@@ -17,8 +19,8 @@ export default function Adminpage(props) {
         />
 
         <Route
-          path={`${path}/handyPeople/:id/`}
-          render={(props) => <p>Admin People Handy People by /:id</p>}
+          path={`${path}/handyPeople/:id`}
+          component={(props) => <TemporaryEditForm {...props}/>}
         />
 
         <Route

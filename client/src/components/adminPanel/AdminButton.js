@@ -1,7 +1,9 @@
 import React from "react";
 import { Route, Redirect, useRouteMatch, Switch, Link } from "react-router-dom";
 
-export default function AminButton() {
+
+
+export default function AdminButton() {
 	let { path, url } = useRouteMatch();
 
 	return (

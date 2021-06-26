@@ -28,7 +28,7 @@ const SignIn = (props) => {
       invalidInputInfo: "Enter valid email address",
       name: "E-mail",
       placeholder: "example@email.com",
-      value: "handyman12@p.com",
+      value: "handyman1@p.com",
 
       validation: {
         required: true,

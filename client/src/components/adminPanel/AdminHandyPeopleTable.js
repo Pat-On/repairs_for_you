@@ -5,6 +5,7 @@ import UpdateForm from "./UpdateForm";
 export default function AdminHandyPeopleTable(props) {
 	let { path, url } = useRouteMatch();
 
+
   const [list, setList] = useState([]);
   const [changed, setChanged] = useState(false);
 

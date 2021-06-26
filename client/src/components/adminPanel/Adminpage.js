@@ -3,7 +3,7 @@ import "./AdminPage.css";
 import { Route, Redirect, useRouteMatch, Switch, Link } from "react-router-dom";
 import AdminHandyPeopleTable from "./AdminHandyPeopleTable";
 import TemporaryEditForm from "./usersManagements/temporaryEditForm/TemporaryEditForm"
-
+import UpdateForm from "./UpdateForm"
 export default function Adminpage(props) {
   let { path, url } = useRouteMatch();
 //   console.log(url);
@@ -20,7 +20,7 @@ console.log(props.match)
 
         <Route
           path={`${path}/handyPeople/:id`}
-          component={(props) => <TemporaryEditForm {...props}/>}
+          component={(props) => <UpdateForm {...props}/>}
         />
 
         <Route

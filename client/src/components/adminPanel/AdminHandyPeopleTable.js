@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Route, Redirect, useRouteMatch, Switch, Link } from "react-router-dom";
 import UpdateForm from "./UpdateForm";
 
-export default function AdminHandyPeopleTable() {
+export default function AdminHandyPeopleTable(props) {
 	let { path, url } = useRouteMatch();
 
   const [list, setList] = useState([]);
@@ -12,7 +12,8 @@ export default function AdminHandyPeopleTable() {
 
   const handleChange = (e) => {
     if (e.target.value === "Update") {
-      setChanged(true);
+      // setChanged(true);
+      props.history.push(`${path}/${e.target.id}`)
     }
     alert(`are you sure you want to ${e.target.value}`);
   };
@@ -109,7 +110,7 @@ export default function AdminHandyPeopleTable() {
             </td>
             <td>{oneList.visible ? "Visible" : "Hidden"}</td>
             <td>
-              <select onChange={handleChange}>
+              <select id={oneList.handyman_id} onChange={handleChange}>
                 <option>action</option>
                 <option>Update</option>
                 <option>Delete</option>

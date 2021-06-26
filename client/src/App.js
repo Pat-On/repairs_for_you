@@ -37,6 +37,15 @@ const App = () => {
               </div>
             )}
           />
+
+
+<Route
+            path="/users/handyman/:id"
+            exact
+            component={(props) => <HandymanProfile {...props} />}
+          />
+
+
           <Route
             path="/users/handyman"
 
@@ -83,11 +92,7 @@ const App = () => {
             )}
           />
 
-          <Route
-            path="/users/handyman/:id"
-  
-            render={({ match }) => <HandymanProfile id={match.params.id} />}
-          />
+
 
           <Route
             path="/forms/request-for-quote"

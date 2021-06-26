@@ -2,7 +2,6 @@ import React from "react";
 import "./AdminPage.css";
 import { Route, Redirect, useRouteMatch, Switch, Link } from "react-router-dom";
 import AdminHandyPeopleTable from "./AdminHandyPeopleTable";
-import TemporaryEditForm from "./usersManagements/temporaryEditForm/TemporaryEditForm"
 import UpdateForm from "./UpdateForm"
 export default function Adminpage(props) {
   let { path, url } = useRouteMatch();

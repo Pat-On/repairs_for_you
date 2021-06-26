@@ -61,10 +61,34 @@ router.get("/adminsacceshandymans", async (_, res, next) => {
   }
 });
 
+router.get("/adminsacceshandymans/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    console.log(id);
+    //TODO: add filter that You can select only the one with visible true flag
+    const oneHandyman = await pool.query(
+      "SELECT * FROM handyman WHERE handyman_id = $1 ",
+      [id]
+    );
+    res.status(200).json({
+      status: "success",
+      length: oneHandyman.rowCount,
+      data: oneHandyman.rows[0],
+    });
+  } catch (err) {
+    res.status(400).json({
+      status: "fail",
+      msg: err.message,
+    });
+  }
+});
+
+
 router.get("/:id", async (req, res) => {
   try {
     const { id } = req.params;
     console.log(id);
+    //TODO: add filter that You can select only the one with visible true flag
     const oneHandyman = await pool.query(
       "SELECT * FROM handyman WHERE handyman_id = $1 ",
       [id]

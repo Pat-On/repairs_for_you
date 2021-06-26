@@ -50,6 +50,7 @@ export default function HandyPeopleCards() {
 
 			)
 		}
+		{/* WHY THIS IS LEFT HERE? */}
 		<Link to="/about/this/site/handyPeople"></Link>
 
 	</div>
@@ -62,6 +63,7 @@ export default function HandyPeopleCards() {
 
 				)
 			}
+			{/* WHY THIS IS LEFT HERE? */}
 			<Link to="/about/this/site/handyPeople"></Link>
 
 		</div>

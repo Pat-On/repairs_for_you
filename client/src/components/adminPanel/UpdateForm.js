@@ -2,6 +2,9 @@ import React from "react";
 import Skills from "../Handyman/SubComponents/Skills";
 export default function UpdateForm({ userData,updateForm }) {
 
+console.log(userData)
+console.log(updateForm)
+
 	return (
 		<div>
 			<form

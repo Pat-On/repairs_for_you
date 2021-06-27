@@ -5,24 +5,24 @@ import { useRouteMatch, useParams } from "react-router";
 export default function UpdateForm(props) {
 	let [userData,setUserData]=useState([]);
 	const { id } = useParams();
-	console.log(id);
+
+
 
 	useEffect(() => {
 		fetch(`/api/users/handyman/adminsacceshandymans/${id}`) .then((res) => {
 			if (!res.ok) {
-			  throw new Error(res.statusText);
+				throw new Error(res.statusText);
 			}
 			return res.json();
-		  }) .then((body) => {
+		}) .then((body) => {
 			setUserData(body.data);
 
-		  }).catch((err) => {
+		}).catch((err) => {
 			console.error(err);
-		  });
-	  }, []);
+		});
+	}, [id]);
 
-	/* console.log(userData)
-console.log(updateForm) */
+
 
 
 	return (
@@ -44,10 +44,11 @@ console.log(updateForm) */
 								type="text"
 								id="firstName"
 								name="firstName"
-								value={firstName}
 								maxLength={50}
 								required
+								defaultValue={userData.first_name}
 								placeholder="Enter your first name here"
+								onChange={handleChange}
 							/>
 						</div>
 						<div className="input-field">
@@ -60,7 +61,7 @@ console.log(updateForm) */
 								name="lastName"
 								maxLength={50}
 								required
-
+								defaultValue={userData.last_name}
 								placeholder="Enter your last name here"
 							/>
 						</div>
@@ -77,6 +78,8 @@ console.log(updateForm) */
 								name="addressLineOne"
 								maxLength={50}
 								required
+								defaultValue={userData.address_offer}
+
 								placeholder="Enter your building or flat number"
 							/>
 						</div>
@@ -90,7 +93,7 @@ console.log(updateForm) */
 								name="addressLineTwo"
 								maxLength={50}
 								required
-
+								defaultValue={userData.address_offer}
 								placeholder="Enter your street name here"
 							/>
 						</div>
@@ -104,7 +107,6 @@ console.log(updateForm) */
 								name="city"
 								maxLength={50}
 								required
-
 								defaultValue="Coventry"
 							/>
 						</div>
@@ -118,7 +120,7 @@ console.log(updateForm) */
 								name="postcode"
 								maxLength={12}
 								required
-
+								defaultValue={userData.postCode}
 								placeholder="Enter your postcode here"
 							/>
 						</div>
@@ -135,7 +137,7 @@ console.log(updateForm) */
 								name="email"
 								maxLength={50}
 								required
-
+								defaultValue={userData.email}
 								placeholder="someone@example.com"
 							/>
 						</div>
@@ -150,6 +152,8 @@ console.log(updateForm) */
 								minLength={11}
 								maxLength={13}
 								required
+								defaultValue={userData.phone_number}
+
 
 							/>
 						</div>

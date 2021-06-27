@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Skills from "../Handyman/SubComponents/Skills";
 import { useRouteMatch, useParams } from "react-router";
 
-export default function UpdateForm(props) {
+export default function UpdateForm() {
 	let [userData,setUserData]=useState([]);
 	const { id } = useParams();
 
@@ -51,7 +51,6 @@ export default function UpdateForm(props) {
 								maxLength={50}
 								required
 								defaultValue={userData.first_name}
-								placeholder="Enter your first name here"
 								onChange={handleChange}
 							/>
 						</div>
@@ -67,8 +66,6 @@ export default function UpdateForm(props) {
 								required
 								defaultValue={userData.last_name}
 								onChange={handleChange}
-
-								placeholder="Enter your last name here"
 							/>
 						</div>
 					</div>
@@ -86,8 +83,6 @@ export default function UpdateForm(props) {
 								required
 								defaultValue={userData.address_offer}
 								onChange={handleChange}
-
-								placeholder="Enter your building or flat number"
 							/>
 						</div>
 						<div className="input-field">
@@ -102,8 +97,6 @@ export default function UpdateForm(props) {
 								required
 								defaultValue={userData.address_offer}
 								onChange={handleChange}
-
-								placeholder="Enter your street name here"
 							/>
 						</div>
 						<div className="input-field">
@@ -117,7 +110,6 @@ export default function UpdateForm(props) {
 								maxLength={50}
 								required
 								onChange={handleChange}
-
 								defaultValue="Coventry"
 							/>
 						</div>
@@ -132,9 +124,7 @@ export default function UpdateForm(props) {
 								maxLength={12}
 								required
 								onChange={handleChange}
-
-								defaultValue={userData.postCode}
-								placeholder="Enter your postcode here"
+								defaultValue={userData.postcode}
 							/>
 						</div>
 					</div>

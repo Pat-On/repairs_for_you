@@ -7,6 +7,10 @@ export default function UpdateForm(props) {
 	const { id } = useParams();
 
 
+	const handleChange=(e)=>{
+		console.log(e.target.value);
+
+	};
 
 	useEffect(() => {
 		fetch(`/api/users/handyman/adminsacceshandymans/${id}`) .then((res) => {
@@ -62,6 +66,8 @@ export default function UpdateForm(props) {
 								maxLength={50}
 								required
 								defaultValue={userData.last_name}
+								onChange={handleChange}
+
 								placeholder="Enter your last name here"
 							/>
 						</div>
@@ -79,6 +85,7 @@ export default function UpdateForm(props) {
 								maxLength={50}
 								required
 								defaultValue={userData.address_offer}
+								onChange={handleChange}
 
 								placeholder="Enter your building or flat number"
 							/>
@@ -94,6 +101,8 @@ export default function UpdateForm(props) {
 								maxLength={50}
 								required
 								defaultValue={userData.address_offer}
+								onChange={handleChange}
+
 								placeholder="Enter your street name here"
 							/>
 						</div>
@@ -107,6 +116,8 @@ export default function UpdateForm(props) {
 								name="city"
 								maxLength={50}
 								required
+								onChange={handleChange}
+
 								defaultValue="Coventry"
 							/>
 						</div>
@@ -120,6 +131,8 @@ export default function UpdateForm(props) {
 								name="postcode"
 								maxLength={12}
 								required
+								onChange={handleChange}
+
 								defaultValue={userData.postCode}
 								placeholder="Enter your postcode here"
 							/>
@@ -138,7 +151,7 @@ export default function UpdateForm(props) {
 								maxLength={50}
 								required
 								defaultValue={userData.email}
-								placeholder="someone@example.com"
+								onChange={handleChange}
 							/>
 						</div>
 						<div className="input-field">
@@ -153,6 +166,7 @@ export default function UpdateForm(props) {
 								maxLength={13}
 								required
 								defaultValue={userData.phone_number}
+								onChange={handleChange}
 
 
 							/>

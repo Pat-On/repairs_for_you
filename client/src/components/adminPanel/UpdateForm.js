@@ -7,6 +7,23 @@ export default function UpdateForm(props) {
 	const { id } = useParams();
 	console.log(id);
 
+	useEffect(() => {
+		fetch(`/api/users/handyman/adminsacceshandymans/${id}`) .then((res) => {
+			if (!res.ok) {
+			  throw new Error(res.statusText);
+			}
+			return res.json();
+		  }) .then((body) => {
+			setUserData(body.data);
+
+		  }).catch((err) => {
+			console.error(err);
+		  });
+	  }, []);
+
+	/* console.log(userData)
+console.log(updateForm) */
+
 
 	return (
 		<div>

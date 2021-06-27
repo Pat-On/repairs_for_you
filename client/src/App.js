@@ -37,20 +37,19 @@ const App = () => {
               </div>
             )}
           />
-
           <Route
             path="/users/handyman"
-            exact
-            component={(props) => <HandyPeople {...props} />}
-          />
 
-          <Route
-            path="/users/handyman/:id"
-            component={(props) => <HandymanProfile {...props} />}
+            component={() => (
+              <div>
+                <HandyPeople />
+              </div>
+            )}
           />
 
           <Route
             path="/contact"
+
             component={() => (
               <div>
                 <h1>
@@ -78,9 +77,16 @@ const App = () => {
           {/* Sub-routes which should be outsources to the nester router */}
           <Route
             path="/users/:usergroup/register"
+
             render={({ match }) => (
               <RegistrationForm formId={match.params.usergroup} />
             )}
+          />
+
+          <Route
+            path="/users/handyman/:id"
+  
+            render={({ match }) => <HandymanProfile id={match.params.id} />}
           />
 
           <Route

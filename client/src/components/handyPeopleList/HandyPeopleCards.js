@@ -6,7 +6,7 @@ import InputFields from "./InputFields";
 
 
 
-export default function HandyPeopleCards(props) {
+export default function HandyPeopleCards() {
 	const 	[list,setList]=useState([]);
 	const [search,setSearch]= useState();
 
@@ -46,7 +46,7 @@ export default function HandyPeopleCards(props) {
 		{
 			search.map((oneList,index)=>
 
-				<HandyPeopleCard  {...props} key={index} onelist={oneList} />
+				<HandyPeopleCard key={index} onelist={oneList} />
 
 			)
 		}
@@ -59,12 +59,12 @@ export default function HandyPeopleCards(props) {
 			{
 				list.map((oneList,index)=>
 
-					<HandyPeopleCard {...props} key={index} onelist={oneList} />
+					<HandyPeopleCard key={index} onelist={oneList} />
 
 				)
 			}
 			{/* WHY THIS IS LEFT HERE? */}
-			<Link to="/about/this/site/handyPeople">3333333333333333</Link>
+			<Link to="/about/this/site/handyPeople"></Link>
 
 		</div>
 

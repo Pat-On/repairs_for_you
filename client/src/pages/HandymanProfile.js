@@ -1,11 +1,7 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router";
 import Handyman from "../components/Handyman/Profile/Handyman";
 
-const HandymanProfile = (props) => {
-
-const {id} = useParams()
-console.log(id)
+const HandymanProfile = ({ id }) => {
 	const [user, setUser] = useState();
 	const [message, setMessage] = useState("Loading...");
 	useEffect(() => {

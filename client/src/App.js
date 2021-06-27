@@ -31,26 +31,26 @@ const App = () => {
           />
           <Route
             path="/buyers"
-            exact
             component={() => (
               <div>
                 <h1>PLACEHOLDER buyers</h1>
               </div>
             )}
           />
+
           <Route
             path="/users/handyman"
             exact
-            component={() => (
-              <div>
-                <HandyPeople />{" "}
-              </div>
-            )}
+            component={(props) => <HandyPeople {...props} />}
+          />
+
+          <Route
+            path="/users/handyman/:id"
+            component={(props) => <HandymanProfile {...props} />}
           />
 
           <Route
             path="/contact"
-            exact
             component={() => (
               <div>
                 <h1>
@@ -69,7 +69,7 @@ const App = () => {
           {authCtx.isLoggedIn && (
             <Route
               path="/admin-panel"
-              component={(props) => <AdminPanel {...props} />}
+              render={(props) => <AdminPanel {...props} />}
             />
           )}
 
@@ -78,16 +78,9 @@ const App = () => {
           {/* Sub-routes which should be outsources to the nester router */}
           <Route
             path="/users/:usergroup/register"
-            exact
             render={({ match }) => (
               <RegistrationForm formId={match.params.usergroup} />
             )}
-          />
-
-          <Route
-            path="/users/handyman/:id"
-            exact
-            render={({ match }) => <HandymanProfile id={match.params.id} />}
           />
 
           <Route

@@ -35,10 +35,60 @@ router.get("/", async (_, res) => {
   return res.status(200).json(result);
 });
 
+
+// GET "/{id}"
+// router.get("/:id", async (req, res) => {
+//   const result = await services.getHandymanById(parseInt(req.params.id));
+//   result ? res.status(200).send(result) : res.sendStatus(404);
+// });
+
+// !TODO: auth controller and the protection - base on the role
+router.get("/adminsacceshandymans", async (_, res, next) => {
+  try {
+    const allHandymans = await pool.query(`SELECT * FROM handyman`);
+
+    // const testJSON = await JSON.parse(allHandymans.rows[0].address_offer);
+    // return res.status(200).json({
+    //   data: testJSON,
+    // });
+
+    return res.status(200).json({
+      length: allHandymans.rowCount,
+      data: allHandymans.rows,
+    });
+  } catch (error) {
+    //TODO ERROR HANDLER
+    console.log(error);
+  }
+});
+
+router.get("/adminsacceshandymans/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    console.log(id);
+    //TODO: add filter that You can select only the one with visible true flag
+    const oneHandyman = await pool.query(
+      "SELECT * FROM handyman WHERE handyman_id = $1 ",
+      [id]
+    );
+    res.status(200).json({
+      status: "success",
+      length: oneHandyman.rowCount,
+      data: oneHandyman.rows[0],
+    });
+  } catch (err) {
+    res.status(400).json({
+      status: "fail",
+      msg: err.message,
+    });
+  }
+});
+
 router.get("/:id", async (req, res) => {
   try {
     const { id } = req.params;
     console.log(id);
+    //TODO: add filter that You can select only the one with visible true flag
     const oneHandyman = await pool.query(
       "SELECT * FROM handyman WHERE handyman_id = $1 ",
       [id]

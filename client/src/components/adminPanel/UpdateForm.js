@@ -1,16 +1,19 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Skills from "../Handyman/SubComponents/Skills";
-export default function UpdateForm({ userData,updateForm }) {
+import { useRouteMatch, useParams } from "react-router";
 
-console.log(userData)
-console.log(updateForm)
+export default function UpdateForm(props) {
+	let [userData,setUserData]=useState([]);
+	const { id } = useParams();
+	console.log(id);
+
 
 	return (
 		<div>
 			<form
 				id="form-add-handyman"
 				name="form-add-handyman"
-				onSubmit={updateForm}
+			/* 	onSubmit={updateForm} */
 			>
 				<fieldset className="input-field-group details">
 					<legend className="subtitle">Your Details</legend>
@@ -24,6 +27,7 @@ console.log(updateForm)
 								type="text"
 								id="firstName"
 								name="firstName"
+								value={firstName}
 								maxLength={50}
 								required
 								placeholder="Enter your first name here"
@@ -39,6 +43,7 @@ console.log(updateForm)
 								name="lastName"
 								maxLength={50}
 								required
+
 								placeholder="Enter your last name here"
 							/>
 						</div>

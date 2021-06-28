@@ -10,29 +10,29 @@ router.use(express.json());
 
 // GET "/"
 router.get("/", async (_, res) => {
-  try {
-    const allHandymans = await pool.query(
-      `SELECT * FROM handyman WHERE visible=True`
-    );
+	try {
+		const allHandymans = await pool.query(
+			"SELECT * FROM handyman WHERE visible=True"
+		);
 
-    // const testJSON = await JSON.parse(allHandymans.rows[0].address_offer);
-    // return res.status(200).json({
-    //   data: testJSON,
-    // });
+		// const testJSON = await JSON.parse(allHandymans.rows[0].address_offer);
+		// return res.status(200).json({
+		//   data: testJSON,
+		// });
 
-    return res.status(200).json({
-      length: allHandymans.rowCount,
-      data: allHandymans.rows,
-    });
-  } catch (error) {
-    //TODO ERROR HANDLER
-    console.log(error);
-  }
+		return res.status(200).json({
+			length: allHandymans.rowCount,
+			data: allHandymans.rows,
+		});
+	} catch (error) {
+		//TODO ERROR HANDLER
+		console.log(error);
+	}
 });
 
 router.get("/", async (_, res) => {
-  const result = await services.getAllHandymen();
-  return res.status(200).json(result);
+	const result = await services.getAllHandymen();
+	return res.status(200).json(result);
 });
 
 // GET "/{id}"
@@ -43,67 +43,67 @@ router.get("/", async (_, res) => {
 
 // !TODO: auth controller and the protection - base on the role
 router.get("/adminsacceshandymans", async (_, res, next) => {
-  try {
-    const allHandymans = await pool.query(`SELECT * FROM handyman`);
+	try {
+		const allHandymans = await pool.query("SELECT * FROM handyman");
 
-    // const testJSON = await JSON.parse(allHandymans.rows[0].address_offer);
-    // return res.status(200).json({
-    //   data: testJSON,
-    // });
+		// const testJSON = await JSON.parse(allHandymans.rows[0].address_offer);
+		// return res.status(200).json({
+		//   data: testJSON,
+		// });
 
-    return res.status(200).json({
-      length: allHandymans.rowCount,
-      data: allHandymans.rows,
-    });
-  } catch (error) {
-    //TODO ERROR HANDLER
-    console.log(error);
-  }
+		return res.status(200).json({
+			length: allHandymans.rowCount,
+			data: allHandymans.rows,
+		});
+	} catch (error) {
+		//TODO ERROR HANDLER
+		console.log(error);
+	}
 });
 
 router.get("/adminsacceshandymans/:id", async (req, res) => {
-  try {
-    const { id } = req.params;
-    console.log(id);
-    //TODO: add filter that You can select only the one with visible true flag
-    const oneHandyman = await pool.query(
-      "SELECT * FROM handyman WHERE handyman_id = $1 ",
-      [id]
-    );
-    res.status(200).json({
-      status: "success",
-      length: oneHandyman.rowCount,
-      data: oneHandyman.rows[0],
-    });
-  } catch (err) {
-    res.status(400).json({
-      status: "fail",
-      msg: err.message,
-    });
-  }
+	try {
+		const { id } = req.params;
+		console.log(id);
+		//TODO: add filter that You can select only the one with visible true flag
+		const oneHandyman = await pool.query(
+			"SELECT * FROM handyman WHERE handyman_id = $1 ",
+			[id]
+		);
+		res.status(200).json({
+			status: "success",
+			length: oneHandyman.rowCount,
+			data: oneHandyman.rows[0],
+		});
+	} catch (err) {
+		res.status(400).json({
+			status: "fail",
+			msg: err.message,
+		});
+	}
 });
 
 
 router.get("/:id", async (req, res) => {
-  try {
-    const { id } = req.params;
-    console.log(id);
-    //TODO: add filter that You can select only the one with visible true flag
-    const oneHandyman = await pool.query(
-      "SELECT * FROM handyman WHERE handyman_id = $1 ",
-      [id]
-    );
-    res.status(200).json({
-      status: "success",
-      length: oneHandyman.rowCount,
-      data: oneHandyman.rows[0],
-    });
-  } catch (err) {
-    res.status(400).json({
-      status: "fail",
-      msg: err.message,
-    });
-  }
+	try {
+		const { id } = req.params;
+		console.log(id);
+		//TODO: add filter that You can select only the one with visible true flag
+		const oneHandyman = await pool.query(
+			"SELECT * FROM handyman WHERE handyman_id = $1 ",
+			[id]
+		);
+		res.status(200).json({
+			status: "success",
+			length: oneHandyman.rowCount,
+			data: oneHandyman.rows[0],
+		});
+	} catch (err) {
+		res.status(400).json({
+			status: "fail",
+			msg: err.message,
+		});
+	}
 });
 
 // POST "/"
@@ -116,46 +116,52 @@ router.get("/:id", async (req, res) => {
 
 // POST "/"
 router.post("/", async (req, res) => {
-  try {
-    console.log(req.body);
-    // address - object, skills - array
-    const {
-      firstName,
-      lastName,
-      // img,
-      address,
-      postcode,
-      email,
-      phoneNumber,
-      skills,
-      bio,
-    } = req.body;
-    console.log(bio);
+	try {
+		console.log(req.body);
+		// address - object, skills - array
+		const {
+			firstName,
+			lastName,
+			// img,
+			address,
+			postcode,
+			email,
+			phoneNumber,
+			skills,
+			bio,
+		} = req.body;
+		console.log(bio);
 
-    // '{"sector1", "sector2"}'
-    const newArrayString = skills.map((item) => `"${item}"`);
-    console.log(newArrayString.join(", "));
+		// '{"sector1", "sector2"}'
+		const newArrayString = skills.map((item) => `"${item}"`);
+		console.log(newArrayString.join(", "));
 
-    const _ = await pool.query(
-      `INSERT INTO handyman (first_name, last_name,  address_offer, postcode, email, phone_number, skills, bio)
+		const _ = await pool.query(
+			`INSERT INTO handyman (first_name, last_name,  address_offer, postcode, email, phone_number, skills, bio)
                   VALUES ($1, $2, $3, $4, $5, $6, $7, $8)`,
-      [
-        firstName,
-        lastName,
-        [JSON.stringify(address)],
-        postcode,
-        email,
-        phoneNumber,
-        skills,
-        bio,
-      ]
-    );
-  } catch (error) {
-    //TODO ERROR HANDLER
-    console.log(error);
-  }
+			[
+				firstName,
+				lastName,
+				[JSON.stringify(address)],
+				postcode,
+				email,
+				phoneNumber,
+				skills,
+				bio,
+			]
+		);
+	} catch (error) {
+		//TODO ERROR HANDLER
+		console.log(error);
+	}
 });
 
+// put method
+router.put("/adminsacceshandymans", async (req, res) => {
+	console.log(req.body);
 
+
+
+});
 
 module.exports = router;

@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 import {
-    pool
+    pool,
 } from "./../db";
 /*
     the main root of this router is: "/api/v1/booking"
@@ -27,7 +27,7 @@ router
     .post(async (req, res, next) => {
         res.status(200).json({
             status: "success",
-            msg: 'post method bookingRouter "/"',
+            msg: "post method bookingRouter \"/\"",
         });
     });
 
@@ -36,11 +36,11 @@ router
     .get(async (req, res, next) => {
         try {
             const {
-                bookingId
+                bookingId,
             } = req.params;
 
             const bookingsAll = await pool.query(
-                `SELECT * FROM offers WHERE offer_id = $1`,
+                "SELECT * FROM offers WHERE offer_id = $1",
                 [bookingId]
             );
 
@@ -57,7 +57,7 @@ router
     })
     .patch(async (req, res, next) => {
         const {
-            bookingId
+            bookingId,
         } = req.params;
 
         res.status(200).json({
@@ -67,7 +67,7 @@ router
     })
     .delete(async (req, res, next) => {
         const {
-            bookingId
+            bookingId,
         } = req.params;
 
         res.status(200).json({

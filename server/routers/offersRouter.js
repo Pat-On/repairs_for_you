@@ -1,25 +1,25 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
 
-import reviewRouter from "./reviewRouter"
+import reviewRouter from "./reviewRouter";
 import {
-    pool
+    pool,
 } from "./../db";
 /*
     the main root of this router is: "/api/v1/offers"
 */
-router.use('/:offerId/reviews', reviewRouter);
+router.use("/:offerId/reviews", reviewRouter);
 
 router
-    .route('/')
+    .route("/")
     .get(async (req, res, next) => {
         try {
-            const bookingsAll = await pool.query("SELECT * FROM offers")
+            const bookingsAll = await pool.query("SELECT * FROM offers");
 
             res.status(200).json({
                 status: "success",
                 length: bookingsAll.rowCount,
-                data: bookingsAll.rows
+                data: bookingsAll.rows,
             });
 
         } catch (error) {
@@ -33,22 +33,22 @@ router
     .post(async (req, res, next) => {
             res.status(200).json({
                 status: "success",
-                msg: 'post method offersRouter "/"',
+                msg: "post method offersRouter \"/\"",
             });
         }
 
     );
 
 router
-    .route('/:offerId')
+    .route("/:offerId")
     .get(async (req, res, next) => {
         try {
             const {
-                offerId
+                offerId,
             } = req.params;
 
             const bookingsAll = await pool.query(
-                `SELECT * FROM offers WHERE offer_id = $1`,
+                "SELECT * FROM offers WHERE offer_id = $1",
                 [offerId]
             );
 
@@ -56,7 +56,7 @@ router
                 status: "success",
                 status: "success",
                 length: bookingsAll.rowCount,
-                data: bookingsAll.rows[0]
+                data: bookingsAll.rows[0],
             });
         } catch (error) {
             res.status(400).json({
@@ -68,8 +68,8 @@ router
     .patch(async (req, res, next) => {
 
             const {
-                offerId
-            } = req.params
+                offerId,
+            } = req.params;
 
             res.status(200).json({
                 status: "success",
@@ -81,8 +81,8 @@ router
     .delete(async (req, res, next) => {
 
             const {
-                offerId
-            } = req.params
+                offerId,
+            } = req.params;
 
             res.status(200).json({
                 status: "success",

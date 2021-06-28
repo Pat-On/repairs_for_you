@@ -11,16 +11,14 @@ const AuthContext = React.createContext({
 
 //helper functions
 /**
- * 
+ * @description function is calculating difference between current time and the expiration time
  * @param {milliseconds} expiration is provided from the server with the respond
  * @returns remaining time in the form of milliseconds
  */
 const calcRemainingTime = (expiration) => {
-  console.log(expiration)
   const currentTime = new Date().getTime();
   const expirationOfToken = new Date(expiration).getTime();
   const remainingTime = expirationOfToken - currentTime;
-  console.log(remainingTime);
 
   return remainingTime;
 };

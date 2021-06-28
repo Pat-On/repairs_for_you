@@ -159,7 +159,17 @@ router.post("/", async (req, res) => {
 // put method
 router.put("/adminsacceshandymans", async (req, res) => {
 	console.log(req.body);
-
+	const {
+		firstName,
+		lastName,
+		// img,
+		address,
+		postcode,
+		email,
+		phoneNumber,
+		skills,
+		bio,
+	} = req.body;
 
 
 });

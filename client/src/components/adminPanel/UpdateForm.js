@@ -37,7 +37,7 @@ export default function UpdateForm() {
 			/* 	onSubmit={updateForm} */
 			>
 				<fieldset className="input-field-group details">
-					<legend className="subtitle">Your Details</legend>
+					<legend className="subtitle">Update User details</legend>
 					<div className="basic-details">
 						<h3>Basic Details</h3>
 						<div className="input-field">
@@ -168,8 +168,9 @@ export default function UpdateForm() {
           Skills<span className="required">*</span>
 					</legend>
 					<em className="required">Please select at least one skill</em>
+					{console.log(userData.skills)}
 					{/* <Skills
-						skills={allSkills}
+						skills={userData.skills}
 					/> */}
 				</fieldset>
 				<div className="submit-button-div">

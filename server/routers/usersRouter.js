@@ -60,6 +60,7 @@ router
   .get(authController.protect, authController.restrictTo("handyperson", "buyer"), async (req, res, next) => {
     try {
       const bookingsAll = await pool.query("SELECT * FROM users");
+      console.log("something");
 
       res.status(200).json({
         status: "success",

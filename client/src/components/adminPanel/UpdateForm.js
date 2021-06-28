@@ -1,19 +1,43 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Skills from "../Handyman/SubComponents/Skills";
-export default function UpdateForm({ userData,updateForm }) {
+import { useRouteMatch, useParams } from "react-router";
 
-console.log(userData)
-console.log(updateForm)
+export default function UpdateForm() {
+	let [userData,setUserData]=useState([]);
+	const { id } = useParams();
+
+
+	const handleChange=(e)=>{
+		console.log(e.target.value);
+
+	};
+
+	useEffect(() => {
+		fetch(`/api/users/handyman/adminsacceshandymans/${id}`) .then((res) => {
+			if (!res.ok) {
+				throw new Error(res.statusText);
+			}
+			return res.json();
+		}) .then((body) => {
+			setUserData(body.data);
+
+		}).catch((err) => {
+			console.error(err);
+		});
+	}, [id]);
+
+
+
 
 	return (
 		<div>
 			<form
 				id="form-add-handyman"
 				name="form-add-handyman"
-				onSubmit={updateForm}
+			/* 	onSubmit={updateForm} */
 			>
 				<fieldset className="input-field-group details">
-					<legend className="subtitle">Your Details</legend>
+					<legend className="subtitle">Update User details</legend>
 					<div className="basic-details">
 						<h3>Basic Details</h3>
 						<div className="input-field">
@@ -26,7 +50,8 @@ console.log(updateForm)
 								name="firstName"
 								maxLength={50}
 								required
-								placeholder="Enter your first name here"
+								defaultValue={userData.first_name}
+								onChange={handleChange}
 							/>
 						</div>
 						<div className="input-field">
@@ -39,7 +64,8 @@ console.log(updateForm)
 								name="lastName"
 								maxLength={50}
 								required
-								placeholder="Enter your last name here"
+								defaultValue={userData.last_name}
+								onChange={handleChange}
 							/>
 						</div>
 					</div>
@@ -55,7 +81,8 @@ console.log(updateForm)
 								name="addressLineOne"
 								maxLength={50}
 								required
-								placeholder="Enter your building or flat number"
+								defaultValue={userData.address_offer}
+								onChange={handleChange}
 							/>
 						</div>
 						<div className="input-field">
@@ -68,8 +95,8 @@ console.log(updateForm)
 								name="addressLineTwo"
 								maxLength={50}
 								required
-
-								placeholder="Enter your street name here"
+								defaultValue={userData.address_offer}
+								onChange={handleChange}
 							/>
 						</div>
 						<div className="input-field">
@@ -82,7 +109,7 @@ console.log(updateForm)
 								name="city"
 								maxLength={50}
 								required
-
+								onChange={handleChange}
 								defaultValue="Coventry"
 							/>
 						</div>
@@ -96,8 +123,8 @@ console.log(updateForm)
 								name="postcode"
 								maxLength={12}
 								required
-
-								placeholder="Enter your postcode here"
+								onChange={handleChange}
+								defaultValue={userData.postcode}
 							/>
 						</div>
 					</div>
@@ -113,8 +140,8 @@ console.log(updateForm)
 								name="email"
 								maxLength={50}
 								required
-
-								placeholder="someone@example.com"
+								defaultValue={userData.email}
+								onChange={handleChange}
 							/>
 						</div>
 						<div className="input-field">
@@ -128,6 +155,9 @@ console.log(updateForm)
 								minLength={11}
 								maxLength={13}
 								required
+								defaultValue={userData.phone_number}
+								onChange={handleChange}
+
 
 							/>
 						</div>
@@ -138,8 +168,9 @@ console.log(updateForm)
           Skills<span className="required">*</span>
 					</legend>
 					<em className="required">Please select at least one skill</em>
+					{console.log(userData.skills)}
 					{/* <Skills
-						skills={allSkills}
+						skills={userData.skills}
 					/> */}
 				</fieldset>
 				<div className="submit-button-div">

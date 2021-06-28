@@ -158,19 +158,25 @@ router.post("/", async (req, res) => {
 
 // put method
 router.put("/adminsacceshandymans", async (req, res) => {
-	console.log(req.body);
-	const {
-		firstName,
-		lastName,
-		// img,
-		address,
-		postcode,
-		email,
-		phoneNumber,
-		skills,
-		bio,
-	} = req.body;
+	try{
+		console.log(req.body);
+		const {
+			firstName,
+			lastName,
+			// img,
+			address,
+			postcode,
+			email,
+			phoneNumber,
+			skills,
+			bio,
+		} = req.body;
+		console.log(firstName);
 
+	}catch (error) {
+		//TODO ERROR HANDLER
+		console.log(error);
+	}
 
 });
 

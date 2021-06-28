@@ -172,6 +172,15 @@ router.put("/adminsacceshandymans/:id", async (req, res) => {
 			skills,
 		} = req.body;
 		console.log(firstName);
+		const _ = await pool.query(`UPDATE handyman
+    SET first_name = $1,
+        last_name= $2,
+        address_offer=$3,
+        email=$4,
+        phone_number=$5,
+        skills=$6,
+		   	postcode=$7
+        WHERE handyman_id=$3`,[firstName,lastName,email,postcode,phoneNumber,skills,handyman_id]	);
 
 	}catch (error) {
 		//TODO ERROR HANDLER

@@ -23,7 +23,8 @@ export const AuthContextProvide = (props) => {
     localStorage.removeItem("token");
   }, []);
 
-  const loginHandler = (token) => {
+  const loginHandler = (token, expiration) => {
+    console.log(expiration)
     setToken(token);
     localStorage.setItem("token", token);
   };

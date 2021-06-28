@@ -29,6 +29,7 @@ const createSendToken = (user, statusCode, res) => {
   res.status(statusCode).json({
     status: "success",
     token,
+    expirationTime,
     data: {
       user,
     },
@@ -76,11 +77,13 @@ exports.login = async (req, res, next) => {
     const newUser = await userModel.logInUser(req.body);
 
     // all ok - > send token
-    const token = signToken(newUser.user_id);
-    res.status(200).json({
-      status: "success",
-      token,
-    });
+    // const token = signToken(newUser.user_id);
+    createSendToken(newUser, 201, res);
+
+    // res.status(200).json({
+    //   status: "success",
+    //   token,
+    // });
   } catch (error) {
     res.status(401).json({
       status: "fail",

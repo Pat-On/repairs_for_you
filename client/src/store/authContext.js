@@ -48,6 +48,7 @@ const getStoredItem = () => {
 
 // exported context
 export const AuthContextProvide = (props) => {
+  //retrieving item from local storage
   const tokenData = getStoredItem();
 
   let initialToken;
@@ -59,6 +60,7 @@ export const AuthContextProvide = (props) => {
 
   const userIsLoggedIn = !!token;
 
+  // useCallback to stop unnecessary re rendering components
   const logoutHandler = useCallback(() => {
     setToken(null);
     localStorage.removeItem("token");
@@ -71,7 +73,6 @@ export const AuthContextProvide = (props) => {
 
   const loginHandler = (token, expiration) => {
     setToken(token);
-    console.log(expiration)
     localStorage.setItem("token", token);
     localStorage.setItem("expTime", expiration);
 
@@ -81,7 +82,7 @@ export const AuthContextProvide = (props) => {
   };
 
 
-  // Setting the timer
+  // Setting the timer to auto logout
   useEffect(() => {
     if (tokenData) {
       console.log(tokenData.duration);

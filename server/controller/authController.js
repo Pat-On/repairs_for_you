@@ -1,15 +1,22 @@
-import {  createHash } from "crypto";
+import { createHash } from "crypto";
 const jwt = require("jsonwebtoken");
 const { promisify } = require("util");
 import userModel from "../model/userModel";
 const sendEmail = require("../utils/email");
 
-// const secret = "abcdefg";
-// const hash = createHmac("sha256", secret)
-//   .update("I love cupcakes")
-//   .digest("hex");
+// Small helper function to create jwt token
+const signToken = (id) => {
+  return jwt.sign({ id }, process.env.JWT_SECRET, {
+    expiresIn: process.env.JWT_EXPIRES_IN,
+  });
+};
 
-//TODO: implement it into the all routes - important for production
+/**
+ * @description function is creating and sending token and expiration time. Function is using signToken() helper function
+ * @param {object} user
+ * @param {integer} statusCode
+ * @param {response object} res
+ */
 const createSendToken = (user, statusCode, res) => {
   const token = signToken(user.user_id);
 
@@ -29,15 +36,10 @@ const createSendToken = (user, statusCode, res) => {
   res.status(statusCode).json({
     status: "success",
     token,
+    expirationTime,
     data: {
       user,
     },
-  });
-};
-
-const signToken = (id) => {
-  return jwt.sign({ id }, process.env.JWT_SECRET, {
-    expiresIn: process.env.JWT_EXPIRES_IN,
   });
 };
 
@@ -49,7 +51,6 @@ exports.signup = async (req, res, next) => {
   try {
     // Is it logical to pass req.body or just to split data here to?
     const newUser = await userModel.signUpUser(req.body);
-
 
     createSendToken(newUser.rows[0], 201, res);
   } catch (error) {
@@ -76,11 +77,7 @@ exports.login = async (req, res, next) => {
     const newUser = await userModel.logInUser(req.body);
 
     // all ok - > send token
-    const token = signToken(newUser.user_id);
-    res.status(200).json({
-      status: "success",
-      token,
-    });
+    createSendToken(newUser, 201, res);
   } catch (error) {
     res.status(401).json({
       status: "fail",
@@ -91,7 +88,6 @@ exports.login = async (req, res, next) => {
 
 /**
  * @description Middleware used to protection of routes
-
  */
 exports.protect = async (req, res, next) => {
   try {
@@ -149,7 +145,6 @@ exports.forgotPassword = async (req, res, next) => {
     const user = await userModel.findOneUser(req.body);
 
     // generate the random reset token and saving it to DB
-
     const passwordResetToken = await userModel.createPasswordResetToken(user);
 
     // send back as a email
@@ -168,7 +163,7 @@ exports.forgotPassword = async (req, res, next) => {
 
     res.status(200).json({
       status: "success",
-      message: "Token sent to email",
+      message: "Token sent to your email address",
     });
   } catch (error) {
     // !TODO in this place in case of error we have to undone the changes in DB in users -> password token and expire token - delete it
@@ -180,7 +175,6 @@ exports.forgotPassword = async (req, res, next) => {
 };
 exports.resetPassword = async (req, res, next) => {
   try {
-
     // get user base on the token
     const hashedToken = createHash("sha256")
       .update(req.params.token)
@@ -200,11 +194,8 @@ exports.resetPassword = async (req, res, next) => {
     );
 
     //login user in
-    const token = signToken(user.user_id);
-    res.status(200).json({
-      status: "success",
-      token,
-    });
+    createSendToken(user, 201, res);
+
   } catch (error) {
     res.status(404).json({
       status: "fail",
@@ -239,11 +230,8 @@ exports.updatePassword = async (req, res, next) => {
 
     // log user in with new password - jwt token
     //login user in
-    const token = signToken(user.user_id);
-    res.status(200).json({
-      status: "success",
-      token,
-    });
+    createSendToken(user, 201, res);
+ 
   } catch (error) {
     res.status(404).json({
       status: "fail",
@@ -251,13 +239,3 @@ exports.updatePassword = async (req, res, next) => {
     });
   }
 };
-
-//   npm install jsonwebtoken
-// npm WARN acorn-jsx@5.3.1 requires a peer of acorn@^6.0.0 || ^7.0.0 || ^8.0.0 but none is installed. You must install peer dependencies yourself.
-// npm WARN mini-create-react-context@0.4.0 requires a peer of react@^0.14.0 || ^15.0.0 || ^16.0.0 but none is installed. You must install peer dependencies yourself.
-// npm WARN optional SKIPPING OPTIONAL DEPENDENCY: fsevents@2.3.2 (node_modules\@babel\cli\node_modules\fsevents):
-// npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@2.3.2: wanted {"os":"darwin","arch":"any"} (current: {"os":"win32","arch":"ia32"})
-// npm WARN optional SKIPPING OPTIONAL DEPENDENCY: fsevents@1.2.13 (node_modules\fsevents):
-// npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@1.2.13: wanted {"os":"darwin","arch":"any"} (current: {"os":"win32","arch":"ia32"})
-// npm WARN optional SKIPPING OPTIONAL DEPENDENCY: fsevents@2.3.1 (node_modules\nodemon\node_modules\fsevents):
-// npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@2.3.1: wanted {"os":"darwin","arch":"any"} (current: {"os":"win32","arch":"ia32"})

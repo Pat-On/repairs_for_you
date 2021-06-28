@@ -1,23 +1,20 @@
 import React, { useState, useEffect } from "react";
-import { Route, Redirect, useRouteMatch, Switch, Link } from "react-router-dom";
+import { Route, Redirect, useRouteMatch, Switch, Link,useParams } from "react-router-dom";
 import UpdateForm from "./UpdateForm";
 
 export default function AdminHandyPeopleTable(props) {
 	let { path, url } = useRouteMatch();
-
-
 	const [list, setList] = useState([]);
 	const [changed, setChanged] = useState(false);
 
-	console.log(list);
-
-	const handleChange = (e) => {
+	const handleChange = (e,oneList) => {
 		alert(`are you sure you want to ${e.target.value}`);
-
 		if (e.target.value === "Update") {
 			// setChanged(true);
 			props.history.push(`${path}/${e.target.id}`);
 		}
+
+		console.log(oneList);
 	};
 
 	useEffect(() => {
@@ -112,7 +109,9 @@ export default function AdminHandyPeopleTable(props) {
 						</td>
 						<td>{oneList.visible ? "Visible" : "Hidden"}</td>
 						<td>
-							<select id={oneList.handyman_id} onChange={handleChange}>
+							<select id={oneList.handyman_id} onChange={(e)=>{
+								handleChange(e,oneList);
+							}}>
 								<option>action</option>
 								<option>Update</option>
 								<option>Delete</option>
@@ -125,6 +124,6 @@ export default function AdminHandyPeopleTable(props) {
 			))}
 		</table>
 	) : (
-		<UpdateForm />
+		<UpdateForm  />
 	);
 }

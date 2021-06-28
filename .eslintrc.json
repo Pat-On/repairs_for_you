@@ -6,5 +6,9 @@
   "extends": [
     "@codeyourfuture/standard"
   ],
+  "rules": {
+    "indent": "off",
+    "operator-linebreak": "off"
+  },
   "parser": "babel-eslint"
 }

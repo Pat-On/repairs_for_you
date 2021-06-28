@@ -157,8 +157,9 @@ router.post("/", async (req, res) => {
 });
 
 // put method
-router.put("/adminsacceshandymans", async (req, res) => {
+router.put("/adminsacceshandymans/:id", async (req, res) => {
 	try{
+		const handyman_id=req.params.id;
 		console.log(req.body);
 		const {
 			firstName,
@@ -169,7 +170,6 @@ router.put("/adminsacceshandymans", async (req, res) => {
 			email,
 			phoneNumber,
 			skills,
-			bio,
 		} = req.body;
 		console.log(firstName);
 

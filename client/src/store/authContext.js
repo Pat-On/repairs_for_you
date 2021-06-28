@@ -24,7 +24,7 @@ const calcRemainingTime = (expiration) => {
 };
 
 /**
- * @description function is retriving the expiration time of token and the token from local storage
+ * @description function is retrieving the expiration time of token and the token from local storage
  * @returns {object} object contain token and duration in milliseconds
  */
 const getStoredItem = () => {

@@ -10,8 +10,13 @@ const AuthContext = React.createContext({
 });
 
 //helper functions
-
+/**
+ * 
+ * @param {milliseconds} expiration is provided from the server with the respond
+ * @returns remaining time in the form of milliseconds
+ */
 const calcRemainingTime = (expiration) => {
+  console.log(expiration)
   const currentTime = new Date().getTime();
   const expirationOfToken = new Date(expiration).getTime();
   const remainingTime = expirationOfToken - currentTime;
@@ -20,12 +25,15 @@ const calcRemainingTime = (expiration) => {
   return remainingTime;
 };
 
+/**
+ * @description function is retriving the expiration time of token and the token from local storage
+ * @returns {object} object contain token and duration in milliseconds
+ */
 const getStoredItem = () => {
   const storedToken = localStorage.getItem("token");
   const storedExpirationTime = localStorage.getItem("expTime");
 
-  // const remainingTime = calcRemainingTime(storedExpirationTime);
-  const remainingTime = 10000
+  const remainingTime = calcRemainingTime(storedExpirationTime);
 
   if (remainingTime <= 3600) {
     localStorage.removeItem("token");
@@ -63,10 +71,11 @@ export const AuthContextProvide = (props) => {
 
   const loginHandler = (token, expiration) => {
     setToken(token);
+    console.log(expiration)
     localStorage.setItem("token", token);
-    localStorage.setItem("expTime", toexpirationken);
+    localStorage.setItem("expTime", expiration);
 
-    const remainingTime = calculateRemainingTime(expirationTime);
+    const remainingTime = calcRemainingTime(expiration);
 
     logoutTimer = setTimeout(logoutHandler, remainingTime);
   };

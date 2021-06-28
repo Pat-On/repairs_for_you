@@ -1,9 +1,8 @@
-import {  createHash } from "crypto";
+import { createHash } from "crypto";
 const jwt = require("jsonwebtoken");
 const { promisify } = require("util");
 import userModel from "../model/userModel";
 const sendEmail = require("../utils/email");
-
 
 //TODO: implement it into the all routes - important for production
 const createSendToken = (user, statusCode, res) => {
@@ -20,7 +19,7 @@ const createSendToken = (user, statusCode, res) => {
     httpOnly: true,
   };
   if (process.env.DATABASE_URL) cookieOptions.secure = true;
-
+  console.log(expirationTime);
   res.cookie("jwt", token, cookieOptions);
   res.status(statusCode).json({
     status: "success",
@@ -46,7 +45,6 @@ exports.signup = async (req, res, next) => {
   try {
     // Is it logical to pass req.body or just to split data here to?
     const newUser = await userModel.signUpUser(req.body);
-
 
     createSendToken(newUser.rows[0], 201, res);
   } catch (error) {
@@ -179,7 +177,6 @@ exports.forgotPassword = async (req, res, next) => {
 };
 exports.resetPassword = async (req, res, next) => {
   try {
-
     // get user base on the token
     const hashedToken = createHash("sha256")
       .update(req.params.token)

@@ -4,10 +4,6 @@ const { promisify } = require("util");
 import userModel from "../model/userModel";
 const sendEmail = require("../utils/email");
 
-// const secret = "abcdefg";
-// const hash = createHmac("sha256", secret)
-//   .update("I love cupcakes")
-//   .digest("hex");
 
 //TODO: implement it into the all routes - important for production
 const createSendToken = (user, statusCode, res) => {
@@ -203,11 +199,12 @@ exports.resetPassword = async (req, res, next) => {
     );
 
     //login user in
-    const token = signToken(user.user_id);
-    res.status(200).json({
-      status: "success",
-      token,
-    });
+    createSendToken(user, 201, res);
+    // const token = signToken(user.user_id);
+    // res.status(200).json({
+    //   status: "success",
+    //   token,
+    // });
   } catch (error) {
     res.status(404).json({
       status: "fail",
@@ -242,11 +239,13 @@ exports.updatePassword = async (req, res, next) => {
 
     // log user in with new password - jwt token
     //login user in
-    const token = signToken(user.user_id);
-    res.status(200).json({
-      status: "success",
-      token,
-    });
+    //TODO: better is to send the newUSer here but there is no difference the same user the same id
+    createSendToken(user, 201, res);
+    // const token = signToken(user.user_id);
+    // res.status(200).json({
+    //   status: "success",
+    //   token,
+    // });
   } catch (error) {
     res.status(404).json({
       status: "fail",

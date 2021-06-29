@@ -2,6 +2,7 @@ import React from "react";
 
 import Input from "../../UI/input/Input";
 import Button from "../../UI/button/Button";
+import Spinner from "../../UI/Spinner/Spinner"
 
 import classes from "./SignUpForm.module.scss";
 
@@ -69,7 +70,7 @@ const signUpForm = (props) => {
             clicked={props.next}
             buttonDisable={props.buttonDisable}
           >
-            {props.loading ? "Loading..." : props.rightButtonName}
+            {props.rightButtonName}
           </Button>
         </div>
       )}
@@ -79,8 +80,10 @@ const signUpForm = (props) => {
   return (
     <div className={classes.container}>
       {/* <LogoRFY /> */}
+      
       <h1 className={classes.title}>{props.nameOfTheForm}</h1>
       {inputForms}
+      {props.loading && <div className={classes.spinnerContainer}><Spinner /></div>}
       {props.wrongPasswordEmail && (
         <p className={classes.wrongPassOrEmail}>Incorrect Password or Email</p>
       )}

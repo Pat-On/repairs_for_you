@@ -1,7 +1,9 @@
 .Loader,
 .Loader:before,
 .Loader:after {
+
   border-radius: 50%;
+  z-index: 100;
 }
 .Loader {
   color: #521751;
@@ -15,6 +17,7 @@
   -webkit-transform: translateZ(0);
   -ms-transform: translateZ(0);
   transform: translateZ(0);
+  
 }
 .Loader:before,
 .Loader:after {

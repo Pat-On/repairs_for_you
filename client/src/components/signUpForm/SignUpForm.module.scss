@@ -70,6 +70,13 @@
     margin: 0;
     padding: 0;
 }
+.spinnerContainer{
+    position: absolute;
+    top: 53%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 100;
+}
 
 .wrongPassOrEmail {
     position: absolute;

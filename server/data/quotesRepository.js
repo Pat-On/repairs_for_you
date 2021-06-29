@@ -1,12 +1,15 @@
 import pool from "../db";
 
 // QUERIES
-
 const getAllQuotesQuery = `SELECT * FROM quotes`; //**WARN: NOT IMPLEMENTED YET**
-const getQuoteByIdQuery = `SELECT * FROM handymen WHERE id = $1`; // **WARN: NOT IMPLEMENTED YET**
+const getQuoteByIdQuery = `SELECT * FROM handyman WHERE id = $1`; // **WARN: NOT IMPLEMENTED YET**
 const addNewQuoteQuery = `
-INSERT INTO quotes (client_name, client_email, job_description, job_start_date, price, handyman_id)
+INSERT INTO quotes (client_name, client_email, job_description, job_start_date, handyman_id)
   VALUES($1, $2, $3, $4, $5, $6)`;
+
+/***************** THE FOLLOWING METHODS ARE DEDICATED TO ADMIN-ACCESSIBLE ROUTES *******************/
+
+// WARN: ANY REQUIRED AUTHORISATION LOGIC IS YET TO BE ADDED
 
 // FETCH DATA OF ALL QUOTES FROM DATABASE BY QUOTE ID (currently accessible only to admin)
 function getAllQuotes() {
@@ -27,7 +30,6 @@ function addNewQuote(qData) {
     buyerEmail,
     jobDescription,
     jobStartDate,
-    estimatedManHours,
     handymanId,
   } = qData;
 
@@ -36,7 +38,6 @@ function addNewQuote(qData) {
     buyerEmail,
     jobDescription,
     jobStartDate,
-    estimatedManHours,
     handymanId,
   ]);
 }

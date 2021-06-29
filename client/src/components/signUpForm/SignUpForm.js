@@ -81,7 +81,7 @@ const signUpForm = (props) => {
       {/* <LogoRFY /> */}
       <h1 className={classes.title}>{props.nameOfTheForm}</h1>
       {inputForms}
-      {props.wrongPasswordEmail && <p className={classes.wrongPassOrEmail}>Wrong Password or Email</p>}
+      {props.wrongPasswordEmail && <p className={classes.wrongPassOrEmail}>Incorrect Password or Email</p>}
       {buttonsPart}
     </div>
   );

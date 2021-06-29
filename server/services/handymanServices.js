@@ -1,19 +1,23 @@
+const { bool } = require("prop-types");
 const repository = require("../data/handymanRepository");
 
-// get all handymen
+/***************** THE FOLLOWING METHODS ARE ACCESSIBLE TO ALL PUBLIC ROUTES *******************/
+
+// GET ALL HANDYMEN
 async function getAllHandymen() {
-  return repository.getAllHandymen();
+  const result = await repository.getAllHandymen();
+  return result.rows;
 }
 
-// search/find a handyman from list
+// SEARCH HANDYMAN FROM LIST BY HANDYMAN ID
 async function getHandymanById(hId) {
   const result = repository.getHandymanById(hId);
-  return result;
+  return result.rows[0];
 }
 
-// add handyman to list
+// POST A NEW HANDYMAN
 async function addNewHandyman(hData) {
-  const dataIsValid = validateHandymanData(hData);
+  const dataIsValid = validateNewHandymanData(hData);
   if (dataIsValid) {
     try {
       const handymanIsNew = await handymanDoesntExist(hData.email);
@@ -21,7 +25,7 @@ async function addNewHandyman(hData) {
         await repository.addNewHandyman(hData);
         return {
           status: "OK",
-          message: "User has been added successfully.",
+          message: "Handyman has been added successfully.",
         };
       }
       return {
@@ -40,8 +44,10 @@ async function addNewHandyman(hData) {
   };
 }
 
-// validate incoming handyman data
-function validateHandymanData(hData) {
+// VALIDATE INCOMING HANDYMAN DATA
+// Note: this is used only during the initial stage of handyman registration process (accessible to anyone...
+// ...who would like to rgister as handyman on the site)
+function validateNewHandymanData(hData) {
   // required handyman data fields
   try {
     const {
@@ -58,7 +64,7 @@ function validateHandymanData(hData) {
     // city has default value of "Coventry", so no need to validate that
     const { addressLineOne, addressLineTwo } = address;
     
-    const dataToValidate = {
+    const dataToValidate = [
       firstName,
       lastName,
       addressLineOne,
@@ -68,26 +74,91 @@ function validateHandymanData(hData) {
       phoneNumber,
       skills,
       bio,
-    };
-    
-    return Object.values(dataToValidate).every((item) => item);
+    ];
+   return dataToValidate.every((item) => item);
   } catch (err) {
     console.log(err);
   }
 }
 
-// check existence of a handyman before posting
+// CHECK IF A HANDYMAN WITH THE SAME EMAIL (CREDENTIALS) ALREADY EXISTS
+// Note: this is used only during the initial stage of handyman registration process (accessible to anyone...
+// ...who would like to rgister as handyman on the site)
 async function handymanDoesntExist(hEmail) {
   try {
     const result = await repository.getHandymanByEmail(hEmail);
-    return result === undefined;
+    return result.rowCount === 0;
   } catch (error) {
     console.log(error);
   }
 }
 
+/******************************************************************************************************/
+
+/***************** THE FOLLOWING METHODS ARE DEDICATED TO ADMIN-ACCESSIBLE ROUTES *******************/
+
+// WARN: ANY REQUIRED AUTHORISATION LOGIC IS YET TO BE ADDED
+
+// GET ALL HANDYMEN
+async function getAllHandymenForAdmin() {
+  const result = await repository.getAllHandymenForAdmin();
+  console.log(result.rows)
+  return result.rows;
+}
+
+// SEARCH HANDYMAN FROM LIST BY HANDYMAN ID
+async function getHandymanByIdForAdmin(hId) {
+  const result = await repository.getHandymanByIdForAdmin(hId);
+  return result.rows[0];
+}
+
+// UPDATE THE VISIBILITY STATUS (TRUE OR FALSE) OF A HANDYMAN
+async function changeHandymanVisibilityByAdmin(hData) {
+  const dataIsValid = validateUpdateData(hData);
+  if (!dataIsValid) {
+    return {
+      status: "FAIL",
+      message:
+        "Handyman visibility could not updated. Missing or invalid information.",
+    };
+  }
+  // if the provided information is valid, continue...
+  try {
+    // check if the requested handyman is found in the database
+    const result = await repository.getHandymanByIdForAdmin(hData.id);
+    if (result.rowCount===0) {
+      return {
+        status: "FAIL",
+        message: `Sorry, but the handyman with id "${hData.id}" could not be found.`,
+      };
+    }
+    await repository.changeHandymanVisibilityByAdmin(hData);
+    return {
+      status: "OK",
+      message: "Handyman visibility has been updated successfully.",
+    };
+  } catch (error) {
+    // if there is database connection issue
+    return console.log(error);
+  }
+}
+
+function validateUpdateData(hData) {
+  const { visible, id } = hData;
+  // make sure both new visible value ('true' or 'false') and handyman id has been supplied
+  if (visible === undefined || id === undefined) return false;
+  // if all informaiton has been provided, validate each data
+  if (typeof visible !== "boolean") return false;
+  if (isNaN(parseInt(id))) return false;
+  // 
+  return true;
+}
+
 module.exports = {
   getAllHandymen,
   getHandymanById,
+  getAllHandymenForAdmin,
+  getHandymanByIdForAdmin,
+  changeHandymanVisibilityByAdmin,
   addNewHandyman,
 };

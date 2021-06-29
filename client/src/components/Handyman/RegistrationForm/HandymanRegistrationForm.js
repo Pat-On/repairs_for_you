@@ -45,6 +45,7 @@ const HandymanRegistrationForm = (props) => {
   const [city, setCity] = useState("");
   const [postcode, setPostcode] = useState("");
   const [email, setEmail] = useState("");
+  const [emailConfirm, setEmailConfirm] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [selectedSkills, setSelectedSkills] = useState([]);
   const [bio, setBio] = useState("");
@@ -197,6 +198,20 @@ const HandymanRegistrationForm = (props) => {
               maxLength={50}
               required
               onChange={(event) => setEmail(event.target.value)}
+              placeholder="someone@example.com"
+            />
+          </div>
+          <div className="input-field">
+            <label htmlFor="email">
+              Confirm Your Email<span className="required">*</span>
+            </label>{" "}
+            <input
+              type="email"
+              id="email"
+              name="email"
+              maxLength={50}
+              required
+              onChange={(event) => setEmailConfirm(event.target.value)}
               placeholder="someone@example.com"
             />
           </div>

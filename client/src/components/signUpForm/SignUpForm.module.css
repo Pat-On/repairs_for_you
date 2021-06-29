@@ -16,6 +16,7 @@
     padding: 2vh 0 3vh;
     text-align: center;
     width: 90%;
+    position: relative;
 }
 
 .inputContainer {
@@ -68,6 +69,14 @@
     padding: 0;
 }
 
+.wrongPassOrEmail {
+    position: absolute;
+    font-size: 2rem;
+    color: red;
+    top: 53%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
 
 @media (max-width: 700px) and (min-width: 481px){
     .container {

@@ -158,7 +158,7 @@ const SignIn = (props) => {
       nameOfTheForm="Sign-In"
       leftButtonName="Cancel"
       rightButtonName="Log In"
-	  wrongPasswordEmail={!(signForm.password.incorrect && signForm.email.incorrect)}
+	  wrongPasswordEmail={signForm.password.incorrect && signForm.email.incorrect}
     />
   );
 

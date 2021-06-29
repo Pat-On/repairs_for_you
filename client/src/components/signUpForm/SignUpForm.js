@@ -18,7 +18,7 @@ import classes from "./SignUpForm.module.css";
  */
 const signUpForm = (props) => {
   const flexClassStyleArr = [classes.flexContainerGeneral];
-
+  console.log(props.wrongPasswordEmail)
   /**
    * If condition which are going to change the CSS classes
    * in relation to how many buttons need to be rendered, base on number of the passed event handlers
@@ -81,6 +81,7 @@ const signUpForm = (props) => {
       {/* <LogoRFY /> */}
       <h1 className={classes.title}>{props.nameOfTheForm}</h1>
       {inputForms}
+      {props.wrongPasswordEmail && <p className={classes.wrongPassOrEmail}>Wrong Password or Email</p>}
       {buttonsPart}
     </div>
   );

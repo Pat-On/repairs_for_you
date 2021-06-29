@@ -1,14 +1,13 @@
 import express from "express";
 import morgan from "morgan";
 import path from "path";
-
+import cors from "cors";
 import router from "./api";
-
 import {
-  configuredHelmet,
-  httpsOnly,
-  logErrors,
-  pushStateRouting,
+	configuredHelmet,
+	httpsOnly,
+	logErrors,
+	pushStateRouting,
 } from "./middleware";
 
 import bookingRouter from "./routers/bookingRouter";
@@ -26,16 +25,18 @@ app.use(express.json());
 app.use(configuredHelmet());
 app.use(logErrors());
 app.use(morgan("dev"));
+app.use(cors());
+
 
 if (app.get("env") === "production") {
-  app.enable("trust proxy");
-  app.use(httpsOnly());
+	app.enable("trust proxy");
+	app.use(httpsOnly());
 }
 
 app.use((req, res, next) => {
-  req.requestTime = new Date().toISOString();
-  console.log(req.headers);
-  next();
+	req.requestTime = new Date().toISOString();
+	console.log(req.headers);
+	next();
 });
 
 // our router

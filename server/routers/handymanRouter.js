@@ -156,7 +156,7 @@ router.post("/", async (req, res) => {
 	}
 });
 
-// put method
+// put method for editing handyman details
 router.put("/adminsacceshandymans/:id", async (req, res) => {
 	try{
 		const handyman_id=req.params.id;
@@ -180,8 +180,7 @@ router.put("/adminsacceshandymans/:id", async (req, res) => {
         phone_number=$5,
         skills=$6,
 		   	postcode=$7
-        WHERE handyman_id=$3`,[firstName,lastName,email,postcode,phoneNumber,skills,handyman_id]	);
-
+        WHERE handyman_id=$3`,[firstName,lastName,email,address,postcode,phoneNumber,skills,handyman_id]	);
 	}catch (error) {
 		//TODO ERROR HANDLER
 		console.log(error);

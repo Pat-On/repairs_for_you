@@ -34,6 +34,7 @@ const signUpForm = (props) => {
         <p className={classes.inputFieldName}>{item.config.name}</p>
         <Input
           id={"input" + index}
+          incorrectEmOrPass={props.wrongPasswordEmail}
           invalid={!item.config.valid}
           shouldValidate={item.config.validation}
           touched={item.config.touched}

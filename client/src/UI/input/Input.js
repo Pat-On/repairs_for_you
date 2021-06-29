@@ -7,7 +7,7 @@ import classes from "./Input.module.css";
  */
 const input = (props) => {
   const inputCSSClasses = [classes.inputClass];
-
+console.log(props.incorrectEmOrPass)
   /**
    * If condition which are going to change the CSS classes
    * CSS class Invalid is going to emphasise incorrect input
@@ -15,6 +15,10 @@ const input = (props) => {
   if (props.invalid && props.shouldValidate && props.touched) {
     inputCSSClasses.push(classes.Invalid);
   }
+  if (props.incorrectEmOrPass) {
+    inputCSSClasses.push(classes.Invalid);
+  }
+
   const inputItem = (
     <input
       className={inputCSSClasses.join(" ")}

@@ -6,11 +6,10 @@ import AuthContext from "../../store/authContext";
 
 const SignIn = (props) => {
   const authCtx = useContext(AuthContext);
-  //   const history = useHistory();
+
   /**
    * State: responsible for controlling the process of displaying the http req in UI
    */
-
   const [loadingControl, setLoadingControl] = useState(false);
 
   /**
@@ -18,7 +17,6 @@ const SignIn = (props) => {
    *  -information about requirements of validation
    *  -storing the input from user
    */
-
   const [signForm, setSignForm] = useState({
     email: {
       invalidInputInfo: "Enter valid email address",
@@ -61,8 +59,7 @@ const SignIn = (props) => {
    * @return nothing
    */
   const backFunction = () => {
-    //TODO: to home page
-    props.history.goBack();
+    props.history.push("/");
   };
 
   /**
@@ -74,6 +71,8 @@ const SignIn = (props) => {
    */
   const nextFunction = async () => {
     try {
+      setLoadingControl(true);
+
       const data = {
         email: signForm.email.value,
         password: signForm.password.value,
@@ -90,33 +89,32 @@ const SignIn = (props) => {
       const responseJsoned = await response.json();
       console.log(responseJsoned);
       if (responseJsoned.token) {
+        setLoadingControl(false);
         authCtx.login(responseJsoned.token, responseJsoned.expirationTime);
         props.history.push("/");
       }
       if (responseJsoned.status === "fail") {
+        setLoadingControl(false);
         //TODO: automate process
         setSignForm((prevState) => {
           return {
             ...prevState,
             email: {
               ...prevState.email,
-			  incorrect: true,
+              incorrect: true,
             },
-			password: {
-				...prevState.password,
-				incorrect: true,
-			}
+            password: {
+              ...prevState.password,
+              incorrect: true,
+            },
           };
         });
       }
     } catch (error) {
       console.log(error);
     }
-
-    // // !TODO: if logged success main page + auth if not error -> wrong password or email
-    // props.history.replace("/");
   };
-  console.log(signForm.email.incorrect);
+
   /**
    * @DescriptionFunction is changing the value, touched and valid stored inside the signForm
    * function is using the helper function checkValidity(), which is evaluating upcoming input
@@ -158,7 +156,10 @@ const SignIn = (props) => {
       nameOfTheForm="Sign-In"
       leftButtonName="Cancel"
       rightButtonName="Log In"
-	  wrongPasswordEmail={signForm.password.incorrect && signForm.email.incorrect}
+      wrongPasswordEmail={
+        signForm.password.incorrect && signForm.email.incorrect
+      }
+      loading={loadingControl}
     />
   );
 

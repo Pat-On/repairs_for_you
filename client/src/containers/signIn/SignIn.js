@@ -28,6 +28,7 @@ const SignIn = (props) => {
         required: true,
         isEmail: true,
       },
+      //TODO: change valid in production for false
       valid: true,
       // valid: false,
       touched: false,
@@ -42,8 +43,10 @@ const SignIn = (props) => {
       //!IMPORTANT detailed validation of password is not required now
       validation: {
         required: true,
+        //TODO: important in production to turn on validation password in utility.js
         // isPassword: true,
       },
+      //TODO: change valid in production for false
       // valid: false,
       valid: true,
       touched: false,
@@ -95,7 +98,7 @@ const SignIn = (props) => {
       }
       if (responseJsoned.status === "fail") {
         setLoadingControl(false);
-        //TODO: automate process
+        //TODO: automate process of updating the object of the state
         setSignForm((prevState) => {
           return {
             ...prevState,

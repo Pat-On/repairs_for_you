@@ -186,16 +186,6 @@ router.patch("/adminsacceshandymans/:id", async (req, res) => {
 	}
 
 });
-router.delete("/adminsacceshandymans/:id", async (req, res) => {
-	const handyman_id= req.params.id;
-	try{
-		
-		const _ = await pool.query(`delete from handyman where handyman_id=$1`,[handyman_id]);
-	}catch (error) {
-		//TODO ERROR HANDLER
-		console.log(error);
-	}
 
-});
 
 module.exports = router;

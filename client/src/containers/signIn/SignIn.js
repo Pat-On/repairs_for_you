@@ -125,6 +125,8 @@ const SignIn = (props) => {
    * @param {String} formName [Is a name of the input's field in form, used to identify what should be updated]
    */
   const inputChangeHandler = (e, formName) => {
+
+
     const updatedForm = {
       ...signForm,
       [formName]: {
@@ -135,6 +137,19 @@ const SignIn = (props) => {
       },
     };
     setSignForm(updatedForm);
+	setSignForm((prevState) => {
+		return {
+		  ...prevState,
+		  email: {
+			...prevState.email,
+			incorrect: false,
+		  },
+		  password: {
+			...prevState.password,
+			incorrect: false,
+		  },
+		};
+	  });
   };
 
   /**

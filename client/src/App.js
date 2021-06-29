@@ -2,19 +2,14 @@ import { Route, Switch, Redirect, withRouter } from "react-router-dom";
 import React, { useContext } from "react";
 
 import "./App.scss";
-import HandyPeople from "./pages/HandyPeople";
 import Layout from "./hoc/Layout/Layout";
 import AdminPanel from "./components/adminPanel/AdminPanel";
 import Login from "./containers/signUp/SignUp";
 import MainPage from "./components/mainPage/mainPage";
-import HandymanProfile from "./pages/HandymanProfile";
-import RegistrationForm from "./pages/RegistrationForm";
 import SignIn from "./containers/signIn/SignIn";
 import Contact from "../src/components/contact/Contact";
 import SignOut from "./containers/signOut/signOut";
-
-import RequestForQuote from "./pages/RequestForQuote";
-
+import HandymanRoutes from "./components/Handyman/HandymanRoutes";
 import AuthContext from "./store/authContext";
 
 const App = () => {
@@ -38,7 +33,10 @@ const App = () => {
             )}
           />
 
-
+          <Route
+            path="/users/handyman"
+            render={(props) => <HandymanRoutes {...props} />}
+          />
 
           <Route
             path="/contact"
@@ -65,32 +63,6 @@ const App = () => {
           )}
 
           <Route path="/login" component={(props) => <Login {...props} />} />
-
-          {/* Sub-routes which should be outsources to the nester router */}
-          <Route
-          exact
-            path="/users/:usergroup/register"
-            render={({ match }) => (
-              <RegistrationForm formId={match.params.usergroup} />
-            )}
-          />
-
-          <Route
-            path="/users/handyman"
-            exact
-            component={(props) => <HandyPeople {...props} />}
-          />
-
-          <Route
-            path="/users/handyman/:id"
-            exact
-            component={(props) => <HandymanProfile {...props} />}
-          />
-
-          <Route
-            path="/forms/request-for-quote"
-            render={(props) => <RequestForQuote {...props} isAuthed={true} />}
-          />
 
           <Redirect to="/" />
         </Switch>

@@ -4,7 +4,6 @@ const { promisify } = require("util");
 import userModel from "../model/userModel";
 const sendEmail = require("../utils/email");
 
-// Small helper function to create jwt token
 const signToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
     expiresIn: process.env.JWT_EXPIRES_IN,
@@ -31,7 +30,7 @@ const createSendToken = (user, statusCode, res) => {
     httpOnly: true,
   };
   if (process.env.DATABASE_URL) cookieOptions.secure = true;
-
+  console.log(expirationTime);
   res.cookie("jwt", token, cookieOptions);
   res.status(statusCode).json({
     status: "success",
@@ -78,6 +77,7 @@ exports.login = async (req, res, next) => {
 
     // all ok - > send token
     createSendToken(newUser, 201, res);
+
   } catch (error) {
     res.status(401).json({
       status: "fail",
@@ -195,7 +195,6 @@ exports.resetPassword = async (req, res, next) => {
 
     //login user in
     createSendToken(user, 201, res);
-
   } catch (error) {
     res.status(404).json({
       status: "fail",
@@ -231,7 +230,7 @@ exports.updatePassword = async (req, res, next) => {
     // log user in with new password - jwt token
     //login user in
     createSendToken(user, 201, res);
- 
+
   } catch (error) {
     res.status(404).json({
       status: "fail",

@@ -3,7 +3,7 @@ import React from "react";
 import Input from "../../UI/input/Input";
 import Button from "../../UI/button/Button";
 
-import classes from "./SignUpForm.module.css";
+import classes from "./SignUpForm.module.scss";
 
 // I left it because we may decide to use logo, but it was not looking good in that version
 // import LogoRFY from "../logo/Logo"

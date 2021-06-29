@@ -14,10 +14,13 @@ const HandymanRoutes = () => {
           path={path}
           render={(props) => <HandyPeople {...props} />}
         />
-        <Route path={`${path}/register`} render={() => <RegistrationForm formId="handyman"/>} />
+        <Route
+          path={`${path}/register`}
+          render={() => <RegistrationForm formId="handyman" />}
+        />
         <Route
           path={`${path}/:id/forms/request-for-quote`}
-          render={(props) => <RequestForQuote {...props} />}
+          render={(props) => <RequestForQuote {...props} isAuthed={true} />}
         />
         <Route
           path={`${path}/:id`}

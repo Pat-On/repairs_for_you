@@ -157,7 +157,7 @@ router.post("/", async (req, res) => {
 });
 
 // put method for editing handyman details
-router.put("/adminsacceshandymans/:id", async (req, res) => {
+router.patch("/adminsacceshandymans/:id", async (req, res) => {
 	try{
 		const handyman_id=req.params.id;
 		console.log(req.body);
@@ -175,12 +175,22 @@ router.put("/adminsacceshandymans/:id", async (req, res) => {
 		const _ = await pool.query(`UPDATE handyman
     SET first_name = $1,
         last_name= $2,
-        address_offer=$3,
         email=$4,
         phone_number=$5,
         skills=$6,
 		   	postcode=$7
-        WHERE handyman_id=$3`,[firstName,lastName,email,address,postcode,phoneNumber,skills,handyman_id]	);
+        WHERE handyman_id=$3`,[firstName,lastName,email,/* [JSON.stringify(address)], */postcode,phoneNumber,skills,handyman_id]	);
+	}catch (error) {
+		//TODO ERROR HANDLER
+		console.log(error);
+	}
+
+});
+router.delete("/adminsacceshandymans/:id", async (req, res) => {
+	const handyman_id= req.params.id;
+	try{
+		
+		const _ = await pool.query(`delete from handyman where handyman_id=$1`,[handyman_id]);
 	}catch (error) {
 		//TODO ERROR HANDLER
 		console.log(error);

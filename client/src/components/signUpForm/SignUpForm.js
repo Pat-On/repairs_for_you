@@ -80,7 +80,6 @@ const signUpForm = (props) => {
   return (
     <div className={classes.container}>
       {/* <LogoRFY /> */}
-      
       <h1 className={classes.title}>{props.nameOfTheForm}</h1>
       {inputForms}
       {props.loading && <div className={classes.spinnerContainer}><Spinner /></div>}

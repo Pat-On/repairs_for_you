@@ -10,7 +10,7 @@ const SignIn = (props) => {
   /**
    * State: responsible for controlling the process of displaying the http req in UI
    */
-  const [loadingControl, setLoadingControl] = useState(true);
+  const [loadingControl, setLoadingControl] = useState(false);
 
   /**
    * State: signForm and setSignForm are used to provide:

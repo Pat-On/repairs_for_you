@@ -54,7 +54,7 @@ function getFormErrors(formFields, formId) {
   if (formId === "form-add-handyman") {
     // if subject form is RequrestFormQuoteForm, check man-hour and price values
     const emails = formFields.filter((field) => field.type === "email");
-    if(emails[0]!==emails[1])
+    if(emails[0].value !==emails[1].value)
     errors.push("The emails you entered do not match.");
   }
   return errors;
@@ -81,10 +81,10 @@ export async function sendQuoteRequest(requestData) {
   //       THE SUCCESS OR FAILURE OF THE EMAIL SERVICE. IF THE EMAIL SERVICE IS WORKING FINE
   //       ADMIN CAN ENTER USER DATA INTO THE DATABASE MANUALLY EVEN IF THE DATABASE SERVICE FAILS
   try {
-    const emailSendResponse = await sendEmailToAdmin(requestData);
-    if (emailSendResponse.status !== 200) {
-      throw new Error(emailSendResponse.text); // if it's not successful, alert user failure of requet
-    }
+    // const emailSendResponse = await sendEmailToAdmin(requestData);
+    // if (emailSendResponse.status !== 200) {
+    //   throw new Error(emailSendResponse.text); // if it's not successful, alert user failure of requet
+    // }
     // if it's successful, attempt to add handyman to the database for ease of convenience(at least)
     const databaseResponse = await addQuoteRequestToDatabase(formData);
     // determine if a handyman with the same account exists or not

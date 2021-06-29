@@ -6,6 +6,10 @@ const services = require("../services/quotesServices");
 
 router.use(express.json());
 
+/***************** THE FOLLOWING METHODS ARE DEDICATED TO ADMIN-ACCESSIBLE ROUTES *******************/
+
+// WARN: ANY REQUIRED AUTHORISATION LOGIC IS YET TO BE ADDED
+
 /**
  * NOTE: code commented out as the functionallity has not been implemented yet.
  *       They are expected to be accessible only by admin

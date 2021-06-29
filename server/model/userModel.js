@@ -2,7 +2,6 @@ import { createHmac, randomBytes, createHash } from "crypto";
 const bcrypt = require("bcryptjs");
 import { pool } from "../db";
 
-// !IMPORTANT: WHAT ABOUT SECURITY HOOKS IN postgres
 exports.signUpUser = async (userObj) => {
   try {
     // 1) TO CHECK IF INPUT HAS WHAT WE NEED plus SANITIZATION
@@ -88,7 +87,6 @@ exports.findUserByTokenDecoded = async (decoded) => {
 
 exports.findOneUser = async (userCredential) => {
   try {
-
     const { email } = userCredential;
 
     const newUserArray = await pool.query(
@@ -114,7 +112,6 @@ exports.createPasswordResetToken = async (userObject) => {
 
     const expirationTime = new Date();
     expirationTime.setMinutes(expirationTime.getMinutes() + 10);
-
 
     const newUserArray = await pool.query(
       `UPDATE users SET password_reset_token = $1, password_reset_expires = $2 WHERE email = $3`,
@@ -231,4 +228,3 @@ exports.updateUserPassword = async (
     throw error;
   }
 };
-

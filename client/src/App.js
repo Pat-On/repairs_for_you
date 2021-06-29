@@ -32,6 +32,7 @@ const App = () => {
               </div>
             )}
           />
+
           <Route
             path="/users/handyman"
             render={(props) => <HandymanRoutes {...props} />}

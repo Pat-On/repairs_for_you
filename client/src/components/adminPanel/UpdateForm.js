@@ -1,15 +1,32 @@
 import React, { useEffect, useState } from "react";
 import Skills from "../Handyman/SubComponents/Skills";
 import { useRouteMatch, useParams } from "react-router";
+import axios from "axios";
 
-export default function UpdateForm() {
+
+export default function UpdateForm(props) {
 	let [userData,setUserData]=useState([]);
+	const [updatedDetail,setUpdatedDetail]=useState({
+		first_name:"",
+		last_name:"",
+		/* addressLineOne:"",
+		addressLineTwo:"", */
+		city:"",
+		postcode:"",
+		email:"",
+		phone_number:"",
+
+
+	});
 	const { id } = useParams();
 
 
 	const handleChange=(e)=>{
-		console.log(e.target.value);
-
+		setUpdatedDetail({
+			...updatedDetail,
+			[e.target.name]: e.target.value,
+		  });
+		  console.log(updatedDetail);
 	};
 
 	useEffect(() => {
@@ -27,16 +44,23 @@ export default function UpdateForm() {
 	}, [id]);
 
 
+	const updateForm=(e)=>{
+		e.preventDefault();
+		axios.request({
+			method:"PATCH",
+			url:`http://localhost:3100/api/users/handyman/adminsacceshandymans/${id}`,
+			data:updatedDetail,
+		}).then((response)=>props.history.push("/admin-panel/")).catch((error)=>console.log(error));
 
+
+	};
 
 	return (
 		<div>
 			<form
 				id="form-add-handyman"
 				name="form-add-handyman"
-				/* method="PUT"
-				action={`http://localhost:3100/api/users/handyman/adminsacceshandymans/${id}`} */
-			/* 	onSubmit={updateForm} */
+				onSubmit={updateForm}
 			>
 				<fieldset className="input-field-group details">
 					<legend className="subtitle">Update User details</legend>
@@ -49,7 +73,7 @@ export default function UpdateForm() {
 							<input
 								type="text"
 								id="firstName"
-								name="firstName"
+								name="first_name"
 								maxLength={50}
 								required
 								defaultValue={userData.first_name}
@@ -63,7 +87,7 @@ export default function UpdateForm() {
 							<input
 								type="text"
 								id="lastName"
-								name="lastName"
+								name="last_name"
 								maxLength={50}
 								required
 								defaultValue={userData.last_name}
@@ -77,7 +101,7 @@ export default function UpdateForm() {
 							<label htmlFor="address-line-one">
               Address Line 1<span className="required">*</span>
 							</label>{" "}
-							<input
+							{/* <input
 								type="text"
 								id="addressLineOne"
 								name="addressLineOne"
@@ -85,21 +109,21 @@ export default function UpdateForm() {
 								required
 								defaultValue={userData.address_offer}
 								onChange={handleChange}
-							/>
+							/> */}
 						</div>
 						<div className="input-field">
 							<label htmlFor="address-line-two">
               Address Line 2<span className="required">*</span>
 							</label>{" "}
-							<input
+							{/* <input
 								type="text"
 								id="addressLineTwo"
-								name="addressLineTwo"
+								 name="addressLineTwo"
 								maxLength={50}
 								required
 								defaultValue={userData.address_offer}
 								onChange={handleChange}
-							/>
+							/> */}
 						</div>
 						<div className="input-field">
 							<label htmlFor="city">
@@ -153,7 +177,7 @@ export default function UpdateForm() {
 							<input
 								type="tel"
 								id="phoneNumber"
-								name="phoneNumber"
+								name="phone_number"
 								minLength={11}
 								maxLength={13}
 								required

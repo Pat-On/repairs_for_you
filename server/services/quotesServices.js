@@ -1,5 +1,9 @@
 const repository = require("../data/quotesRepository");
 
+/***************** THE FOLLOWING METHODS ARE DEDICATED TO ADMIN-ACCESSIBLE ROUTES *******************/
+
+// WARN: ANY REQUIRED AUTHORISATION LOGIC IS YET TO BE ADDED
+
 // GET ALL QUOTES (currently accessible only to admin)
 async function getAllQuotes() {
   return repository.getAllQuotes();

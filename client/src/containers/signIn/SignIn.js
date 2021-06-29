@@ -90,7 +90,8 @@ const SignIn = (props) => {
 			});
 
 			const responseJsoned = await response.json();
-			authCtx.login(responseJsoned.token);
+			console.log(responseJsoned)
+			authCtx.login(responseJsoned.token, responseJsoned.expirationTime);
 			props.history.push("/");
 
 		} catch (error) {

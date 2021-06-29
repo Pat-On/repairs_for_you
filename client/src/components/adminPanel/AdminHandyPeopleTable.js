@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { Route, Redirect, useRouteMatch, Switch, Link,useParams } from "react-router-dom";
 import UpdateForm from "./UpdateForm";
@@ -12,6 +13,10 @@ export default function AdminHandyPeopleTable(props) {
 		if (e.target.value === "Update") {
 			// setChanged(true);
 			props.history.push(`${path}/${e.target.id}`);
+		}
+		if(e.target.value==="delete"){
+			console.log(e.target.value)
+			axios.delete(`http://localhost:3100/api/users/handyman/adminsacceshandymans/${e.target.id}`).catch(error=>console.log(error))
 		}
 
 		console.log(oneList);

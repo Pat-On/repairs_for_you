@@ -34,6 +34,8 @@ export default function UpdateForm() {
 			<form
 				id="form-add-handyman"
 				name="form-add-handyman"
+				/* method="PUT"
+				action={`http://localhost:3100/api/users/handyman/adminsacceshandymans/${id}`} */
 			/* 	onSubmit={updateForm} */
 			>
 				<fieldset className="input-field-group details">
@@ -167,11 +169,9 @@ export default function UpdateForm() {
 					<legend className="subtitle">
           Skills<span className="required">*</span>
 					</legend>
-					<em className="required">Please select at least one skill</em>
-					{console.log(userData.skills)}
-					{/* <Skills
-						skills={userData.skills}
-					/> */}
+					<em className="required"></em>
+					{(userData.skills)}
+
 				</fieldset>
 				<div className="submit-button-div">
 					<input type="submit" id="btn-submit" name="btn-submit" value="update" />

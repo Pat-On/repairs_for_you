@@ -1,4 +1,6 @@
 .inputClass {
+    z-index: 10;
+    position: relative;
     color: rgb(87, 85, 85);
     display: block;
     font-family: lato;

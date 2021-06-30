@@ -37,7 +37,7 @@
     width: 3.5rem;
     height: 3.5rem;
   }
- 
+
   &__flexContainer {
     width: 100%;
     display: flex;
@@ -48,7 +48,6 @@
 
     p {
       width: 15rem;
-      // background-color: blue;
     }
   }
 
@@ -61,6 +60,4 @@
     grid-row: 5 / 6;
     grid-column: 1 / -1;
   }
-
 }
-

@@ -1,15 +1,11 @@
 import { Route, Switch, Redirect, withRouter } from "react-router-dom";
 import React, { useContext, Suspense } from "react";
 
-import "./App.scss";
+import classes from  "./App.module.scss";
 import Layout from "./hoc/Layout/Layout";
-// import AdminPanel from "./components/adminPanel/AdminPanel";
 import Login from "./containers/signUp/SignUp";
 import MainPage from "./components/mainPage/mainPage";
-// import SignIn from "./containers/signIn/SignIn";
-// import Contact from "../src/components/contact/Contact";
 import SignOut from "./containers/signOut/signOut";
-// import HandymanRoutes from "./components/Handyman/HandymanRoutes";
 import AuthContext from "./store/authContext";
 
 //Lazy loading
@@ -32,7 +28,7 @@ const App = () => {
   const authCtx = useContext(AuthContext);
 
   return (
-    <div className="App container">
+    <div className={classes.container}>
       <Layout>
         <Suspense fallback={<p>Loading...</p>}>
         <Switch>

@@ -10,7 +10,7 @@ router.use(express.json());
 
 // WARN: ANY REQUIRED AUTHORISATION LOGIC IS YET TO BE ADDED
 
-// GET "/" SERVE DATA OF ALL HANDYMEN (accessible to anyone visiting the site)
+// GET "/" SERVE DATA OF ALL HANDYMEN
 router.get("/admin", async (_, res) => {
   const result = await services.getAllHandymenForAdmin();
   return res.status(200).json(result);

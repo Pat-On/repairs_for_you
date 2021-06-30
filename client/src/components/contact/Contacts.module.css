@@ -1,11 +1,11 @@
 
-.contact-container{
+.contact_container{
     width: 80%;
     margin-left: auto;
     margin-right: auto;
-    background-color: rgba(95, 158, 160, 0.144);
+    background-color: rgba(240, 11, 22, 0.144);
 }
-.contact-container h1{
+.contact_container h1{
     text-align: center;
     font-style: italic;
     font-weight: 400;

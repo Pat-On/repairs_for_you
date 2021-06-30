@@ -6,33 +6,7 @@ const services = require("../services/handymanServices");
 
 router.use(express.json());
 
-/***************** THE FOLLOWING METHODS ARE DEDICATED TO ADMIN-ACCESSIBLE ROUTES *******************/
 
-// WARN: ANY REQUIRED AUTHORISATION LOGIC IS YET TO BE ADDED
-
-// GET "/" SERVE DATA OF ALL HANDYMEN (accessible to anyone visiting the site)
-router.get("/admin", async (_, res) => {
-  const result = await services.getAllHandymenForAdmin();
-  return res.status(200).json(result);
-});
-
-// GET "/{id}" SERVE DATA OF INDIVIDUAL HANDYMAN
-router.get("/admin/:id", async (req, res) => {
-  const result = await services.getHandymanByIdForAdmin(
-    parseInt(req.params.id)
-  );
-  return result ? res.status(200).send(result) : res.sendStatus(404);
-});
-
-// PATCH "/" LET ADMIN CONTROL THE VISIBILITY OF A HANDYMAN'S PROFILE ON THE SITE(?)
-router.patch("/admin/:id", async (req, res) => {
-  const result = await services.changeHandymanVisibilityByAdmin(req.body);
-  const resultStatus = result.status === "OK" ? 200 : 400;
-  return res.status(resultStatus).json({ message: result.message });
-});
-
-
-/******************************************************************************************************/
 
 
 /***************** THE FOLLOWING METHODS ARE ACCESSIBLE TO ALL PUBLIC ROUTES *******************/
@@ -89,5 +63,35 @@ router.put("/adminsacceshandymans/:id", async (req, res) => {
 		console.log(error);
 	}
 });
+
+
+
+/***************** THE FOLLOWING METHODS ARE DEDICATED TO ADMIN-ACCESSIBLE ROUTES *******************/
+
+// WARN: ANY REQUIRED AUTHORISATION LOGIC IS YET TO BE ADDED
+
+// GET "/" SERVE DATA OF ALL HANDYMEN (accessible to anyone visiting the site)
+router.get("/admin", async (_, res) => {
+  const result = await services.getAllHandymenForAdmin();
+  return res.status(200).json(result);
+});
+
+// GET "/{id}" SERVE DATA OF INDIVIDUAL HANDYMAN
+router.get("/admin/:id", async (req, res) => {
+  const result = await services.getHandymanByIdForAdmin(
+    parseInt(req.params.id)
+  );
+  return result ? res.status(200).send(result) : res.sendStatus(404);
+});
+
+// PATCH "/" LET ADMIN CONTROL THE VISIBILITY OF A HANDYMAN'S PROFILE ON THE SITE(?)
+router.patch("/admin/:id", async (req, res) => {
+  const result = await services.changeHandymanVisibilityByAdmin(req.body);
+  const resultStatus = result.status === "OK" ? 200 : 400;
+  return res.status(resultStatus).json({ message: result.message });
+});
+
+
+/******************************************************************************************************/
 
 module.exports = router;

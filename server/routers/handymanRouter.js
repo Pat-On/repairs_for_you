@@ -4,6 +4,8 @@ const express = require("express");
 const router = express.Router();
 const services = require("../services/handymanServices");
 
+import authController from "./../controller/authController";
+
 router.use(express.json());
 
 
@@ -68,7 +70,11 @@ router.put("/adminsacceshandymans/:id", async (req, res) => {
 
 /***************** THE FOLLOWING METHODS ARE DEDICATED TO ADMIN-ACCESSIBLE ROUTES *******************/
 
-// WARN: ANY REQUIRED AUTHORISATION LOGIC IS YET TO BE ADDED
+/**
+ * Routes are only accessible for logged in admin
+ */
+ router.use(authController.protect);
+ router.use(authController.restrictTo("admin"));
 
 // GET "/" SERVE DATA OF ALL HANDYMEN (accessible to anyone visiting the site)
 router.get("/admin", async (_, res) => {

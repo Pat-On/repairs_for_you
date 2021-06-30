@@ -42,7 +42,7 @@ const HandymanRegistrationForm = (props) => {
   );
   const [addressLineOne, setAddressLineOne] = useState("");
   const [addressLineTwo, setAddressLineTwo] = useState("");
-  const [city, setCity] = useState("");
+  const [city, setCity] = useState("Coventry");
   const [postcode, setPostcode] = useState("");
   const [email, setEmail] = useState("");
   const [emailConfirm, setEmailConfirm] = useState("");

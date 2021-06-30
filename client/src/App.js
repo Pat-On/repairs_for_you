@@ -7,6 +7,7 @@ import Login from "./containers/signUp/SignUp";
 import MainPage from "./components/mainPage/mainPage";
 import SignOut from "./containers/signOut/signOut";
 import AuthContext from "./store/authContext";
+import Spinner from "./UI/Spinner/Spinner"
 
 //Lazy loading
 const AdminPanel = React.lazy(() => {
@@ -30,7 +31,7 @@ const App = () => {
   return (
     <div className={classes.container}>
       <Layout>
-        <Suspense fallback={<p>Loading...</p>}>
+        <Suspense fallback={<div className={classes.spinner__container}><Spinner/></div>}>
         <Switch>
           <Route
             path="/"

@@ -1,4 +1,4 @@
-import pool from "../db";
+import { pool } from "../db";
 
 // QUERIES
 // 1. DEDITCATED TO ADMIN
@@ -26,8 +26,8 @@ const getAllHandymenQuery = `
 	          WHERE h.visible = true
 	            GROUP BY h.id,first_name,last_name,img,p.postcode,p.area_code,email,phone_number,skills,bio
                 ORDER BY h.id`;
-const getHandymanByIdQuery = `SELECT * FROM handyman WHERE id = $1`;  // used mainly to check if handyman exists
-const getHandymanByEmailQuery = `SELECT * FROM handyman WHERE email = $1`;  // used mainly to check if handyman exists
+const getHandymanByIdQuery = `SELECT * FROM handyman WHERE id = $1`; // used mainly to check if handyman exists
+const getHandymanByEmailQuery = `SELECT * FROM handyman WHERE email = $1`; // used mainly to check if handyman exists
 const addNewHandymanQuery = `
       INSERT INTO handyman (first_name, last_name, img, address, postcode, email, phone_number, skills, bio)
       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)`;

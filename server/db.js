@@ -47,4 +47,4 @@ export const connectDb = async () => {
 
 export const disconnectDb = () => pool.close();
 
-// export default { query: pool.query };
+export default { query: pool.query.bind(pool) };

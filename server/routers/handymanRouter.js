@@ -6,7 +6,8 @@ const services = require("../services/handymanServices");
 
 import authController from "./../controller/authController";
 
-router.use(express.json());
+
+// router.use(express.json()); // You Do not need to put it here because You already have it in app.js
 
 
 
@@ -30,6 +31,7 @@ router.get("/:id", async (req, res) => {
 // Note: this is used only during the initial stage of handyman registration process (accessible to anyone... 
 // ...who would like to rgister as handyman on the site)
 router.post("/", async (req, res) => {
+  console.log(req.body.msg)
   const result = await services.addNewHandyman(req.body);
   const resultStatus = result.status === "OK" ? 201 : 400;
   return res.status(resultStatus).send({ message: result.message });

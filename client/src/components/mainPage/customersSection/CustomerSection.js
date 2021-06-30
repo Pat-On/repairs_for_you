@@ -1,6 +1,4 @@
-import React, { useEffect, useState } from "react";
-import { Route, Redirect, useRouteMatch, Switch, Link } from "react-router-dom";
-
+import React from "react";
 import classes from "./CustomerSection.module.scss";
 
 import backgroundVideo from "../../../public/ConstructionWorkersDESKTOP.mp4";
@@ -9,8 +7,6 @@ import CustomerCommentMain from "./customerCommentMain/CustomerCommentMain";
 import customer1 from "../../../public/5.jpg";
 import customer2 from "../../../public/17.jpg";
 import customer3 from "../../../public/81.jpg";
-
-
 
 /**
  * @DescriptionFunction Sub component used in MainPage component
@@ -26,7 +22,7 @@ const CustomerSection = (props) => {
        in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.`,
       review: 5,
       user_name: "Name1",
-      user_surname: "Surname1"
+      user_surname: "Surname1",
     },
     {
       photo: customer2,
@@ -36,7 +32,7 @@ const CustomerSection = (props) => {
      in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.`,
       review: 3,
       user_name: "Name2",
-      user_surname: "Surname2"
+      user_surname: "Surname2",
     },
     {
       photo: customer3,
@@ -46,7 +42,7 @@ const CustomerSection = (props) => {
    in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.`,
       review: 4,
       user_name: "Name3",
-      user_surname: "Surname3"
+      user_surname: "Surname3",
     },
   ];
 
@@ -73,9 +69,7 @@ const CustomerSection = (props) => {
         </video>
       </div>
       <h2 className={classes.customers__heading}> Happy Customers </h2>
-      <div className={classes.customers__commentContainer}>
-        {usersComments}
-      </div>
+      <div className={classes.customers__commentContainer}>{usersComments}</div>
     </div>
   );
 };

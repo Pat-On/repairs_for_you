@@ -3,14 +3,27 @@ import React, { useContext } from "react";
 
 import "./App.scss";
 import Layout from "./hoc/Layout/Layout";
-import AdminPanel from "./components/adminPanel/AdminPanel";
+// import AdminPanel from "./components/adminPanel/AdminPanel";
 import Login from "./containers/signUp/SignUp";
 import MainPage from "./components/mainPage/mainPage";
 import SignIn from "./containers/signIn/SignIn";
 import Contact from "../src/components/contact/Contact";
 import SignOut from "./containers/signOut/signOut";
-import HandymanRoutes from "./components/Handyman/HandymanRoutes";
+// import HandymanRoutes from "./components/Handyman/HandymanRoutes";
 import AuthContext from "./store/authContext";
+
+//Lazy loading
+const AdminPanel = React.lazy(() => {
+  return import("./components/adminPanel/AdminPanel");
+});
+const HandymanRoutes = React.lazy(() => {
+  return import("./components/Handyman/HandymanRoutes");
+});
+const Contact = React.lazy(() => {
+  return import("../src/components/contact/Contact");
+});
+
+
 
 const App = () => {
   const authCtx = useContext(AuthContext);

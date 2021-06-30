@@ -1,13 +1,11 @@
 import React from "react";
 import "./AdminPage.css";
-import { Route, Redirect, useRouteMatch, Switch, Link } from "react-router-dom";
+import { Route, useRouteMatch, Switch } from "react-router-dom";
 import AdminHandyPeopleTable from "./AdminHandyPeopleTable";
-import UpdateForm from "./UpdateForm"
+import UpdateForm from "./UpdateForm";
 export default function Adminpage(props) {
   let { path, url } = useRouteMatch();
-//   console.log(url);
-//   console.log(path);
-console.log(props.match)
+
   return (
     <div>
       <Switch>
@@ -19,7 +17,7 @@ console.log(props.match)
 
         <Route
           path={`${path}/handyPeople/:id`}
-          component={(props) => <UpdateForm {...props}/>}
+          component={(props) => <UpdateForm {...props} />}
         />
 
         <Route

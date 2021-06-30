@@ -1,6 +1,6 @@
 import React from "react";
 
-import classes from "./Button.module.css";
+import classes from "./Button.module.scss";
 
 /**
  * @DescriptionFunction Simple component - part of UI

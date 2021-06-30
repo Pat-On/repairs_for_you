@@ -8,10 +8,7 @@ import { checkValidity } from "../../utility/utility";
 
 const FIRST_FORM_PAGE = 0;
 const SECOND_FORM_PAGE = 1;
-const THIRD_FORM_PAGE = 2;
 const LAST_FORM_PAGE = 3;
-const NAME_AND_PHONE_NUMBER_SLICE_INDEX = [0, 2];
-const EMAIL_AND_DATE_OF_BIRTH_SLICE_INDEX = [2, 4];
 
 const SignUp = () => {
   /**

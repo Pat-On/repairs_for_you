@@ -17,16 +17,16 @@ export default function AdminHandyPeopleTable(props) {
     } else if (e.target.value === "Activate") {
       fetch(`/api/users/handyman/admin/${oneList.id}`, {
         method: "PATCH",
-        body: JSON.stringify({ visible: true, id: 1 }),
+        body: JSON.stringify({ visible: true, id: oneList.id }),
         headers: { "Content-Type": "application/json" },
       })
         .then((response) => response.json()) //response.json()
-				.then((data) => console.log(data));
+        .then((data) => console.log(data));
 			window.location.reload();
     } else if (e.target.value === "Deactivate") {
       fetch(`/api/users/handyman/admin/${oneList.id}`, {
         method: "PATCH",
-        body: JSON.stringify({ visible: false }),
+        body: JSON.stringify({ visible: false, id:oneList.id}),
         headers: { "Content-Type": "application/json" },
       })
         .then((response) => response.json()) //response.json()

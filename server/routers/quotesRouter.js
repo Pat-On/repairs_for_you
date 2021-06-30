@@ -6,7 +6,8 @@ const services = require("../services/quotesServices");
 
 import authController from "./../controller/authController";
 
-router.use(express.json());
+// router.use(express.json()); // You Do not need to put it here because You already have it in app.js
+
 
 /***************** THE FOLLOWING METHODS ARE DEDICATED TO ADMIN-ACCESSIBLE ROUTES *******************/
 

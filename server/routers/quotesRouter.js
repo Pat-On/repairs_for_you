@@ -4,11 +4,17 @@ const express = require("express");
 const router = express.Router();
 const services = require("../services/quotesServices");
 
+import authController from "./../controller/authController";
+
 router.use(express.json());
 
 /***************** THE FOLLOWING METHODS ARE DEDICATED TO ADMIN-ACCESSIBLE ROUTES *******************/
 
-// WARN: ANY REQUIRED AUTHORISATION LOGIC IS YET TO BE ADDED
+/**
+ * Routes are only accessible for logged in admin
+ */
+router.use(authController.protect);
+router.use(authController.restrictTo("admin"));
 
 /**
  * NOTE: code commented out as the functionallity has not been implemented yet.

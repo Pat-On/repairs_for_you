@@ -1,47 +1,46 @@
 
 .contact_container{
-    width: 80%;
+    width: 50%;
     margin-left: auto;
     margin-right: auto;
-    background-color: rgba(163, 50, 173, 0.144);
+    background-color: rgba(236, 142, 248, 0.075);
 }
-.contact-container h1{
+.contact_container h1{
     text-align: center;
     font-style: italic;
     font-weight: 400;
 }
-.contact-text{
+.contact_text{
     text-align: justify;
     padding-top: 2rem;
     padding-bottom: 2rem;
-   font-weight: 400;
+   font-weight: 300;
+   font-size: large;
 
 
 }
-.contact-info{
+.contact_info{
    padding-top: 2rem;
    padding-bottom: 2rem;
    font-weight: 400;
+   font-size: large;
 }
-.input-fields-container{
+.input_fields_container{
 
     margin-top: 3rem;
 }
 
-.button-submit-form {
+.button_submit_form {
     margin-top: 1rem;;
     padding: 1rem 1.8rem;
-
     padding-top: 2rem;
     padding-bottom: 2rem;
     text-align: justify;
 }
-.input-fields-container > .input-field > label,.message label{
+.input_fields_container > .input_field > label,.message label{
     padding-right: 2rem;
-}
-.input-fields-container > .input-field > textarea{
-    padding-right: 2rem;
-    height: 3rem;
+    font-size: large;
+    font-weight: 400;
 }
 .message textarea{
     height: 7rem;
@@ -49,12 +48,12 @@
     overflow-x: hidden;
     overflow-y: scroll;
 }
-.btn-submit{
+.btn_submit{
     height: 3.5rem;
     background-color: rgb(43, 43, 206);
     color: white;
     font-weight: 400;
-    font-size: larger;
+    font-size: medium;
     border: none;
     border-radius: 5px;
     padding:1rem;

@@ -17,11 +17,12 @@ router.patch("/resetPassword/:token", authController.resetPassword);
 //at this point we can use the route which is going to protect everything below
 // because middleware are called sequentially
 
-router.patch(
-  "/updateMyPassword",
-  authController.protect,
-  authController.updatePassword
-);
+/**
+ * To reach routes bellow You need to be logged in
+ */
+router.use(authController.protect);
+
+router.patch("/updateMyPassword", authController.updatePassword);
 
 router.get("/me", async (req, res, next) => {
   res.status(200).json({
@@ -45,28 +46,29 @@ router.delete("/deleteMe", async (req, res, next) => {
 
 */
 
+/**
+ * To reach routes bellow You need to be logged in as a administrator
+ */
+router.use(authController.restrictTo("admin"));
+
 router
   .route("/")
-  .get(
-    authController.protect,
-    authController.restrictTo("handyperson", "buyer"),
-    async (req, res, next) => {
-      try {
-        const bookingsAll = await pool.query("SELECT * FROM users");
+  .get(async (req, res, next) => {
+    try {
+      const bookingsAll = await pool.query("SELECT * FROM users");
 
-        res.status(200).json({
-          status: "success",
-          length: bookingsAll.rowCount,
-          data: bookingsAll.rows,
-        });
-      } catch (error) {
-        res.status(400).json({
-          status: "fail",
-          msg: error.message,
-        });
-      }
+      res.status(200).json({
+        status: "success",
+        length: bookingsAll.rowCount,
+        data: bookingsAll.rows,
+      });
+    } catch (error) {
+      res.status(400).json({
+        status: "fail",
+        msg: error.message,
+      });
     }
-  )
+  })
   .post(async (req, res, next) => {
     res.status(200).json({
       status: "success",
@@ -106,17 +108,13 @@ router
       msg: `patch method usersRouter "/:offerId" You sent ${userId}`,
     });
   })
-  .delete(
-    authController.protect,
-    authController.restrictTo("admin", "handyperson"),
-    async (req, res, next) => {
-      const { userId } = req.params;
+  .delete(async (req, res, next) => {
+    const { userId } = req.params;
 
-      res.status(200).json({
-        status: "success",
-        msg: `delete method usersRouter "/:offerId" You sent ${userId}`,
-      });
-    }
-  );
+    res.status(200).json({
+      status: "success",
+      msg: `delete method usersRouter "/:offerId" You sent ${userId}`,
+    });
+  });
 
 module.exports = router;

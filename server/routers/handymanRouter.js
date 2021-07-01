@@ -21,6 +21,7 @@ router.get("/handymannotprotected", async (_, res) => {
 // ...who would like to rgister as handyman on the site)
 router.post("/handymannotprotected", async (req, res) => {
   const result = await services.addNewHandyman(req.body);
+  console.log("********************************************* I hit post")
   const resultStatus = result.status === "OK" ? 201 : 400;
   return res.status(resultStatus).send({ message: result.message });
 });

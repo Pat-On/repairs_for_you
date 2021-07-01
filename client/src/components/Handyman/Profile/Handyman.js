@@ -12,7 +12,7 @@ const Handyman = ({ userData }) => {
   const { url } = useRouteMatch();
 
   useEffect(() => {
-    fetch(`/api/users/handyman/${id}/reviews`)
+    fetch(`/api/v1/handyman/handymannotprotected/${id}/reviews`)
       .then((res) => {
         if (!res.ok) {
           throw new Error(res.statusText);

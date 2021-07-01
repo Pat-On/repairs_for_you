@@ -24,7 +24,6 @@ app.use(express.json());
 app.use(configuredHelmet());
 app.use(logErrors());
 app.use(morgan("dev"));
-app.use(cors());
 
 
 if (app.get("env") === "production") {

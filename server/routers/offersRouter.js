@@ -5,6 +5,10 @@ import reviewRouter from "./reviewRouter"
 import {
     pool
 } from "./../db";
+
+
+//TODO: doubled route - Michael created route handyman what is basically the same in concept
+
 /*
     the main root of this router is: "/api/v1/offers"
 */

@@ -2,30 +2,32 @@ import { pool } from "../db";
 
 // QUERIES
 // 1. DEDITCATED TO ADMIN
-const getAllHandymenAdminQuery = `
-  SELECT h.id,first_name,last_name,img,address,p.postcode,p.area_code AS area,email,phone_number,skills,bio,
-        ARRAY_AGG(reviews.review_body) reviews, ARRAY_AGG(reviews.rating) ratings, visible
-    FROM handyman AS h
-      INNER JOIN postcodes AS p ON p.postcode=h.postcode
-        INNER JOIN areas ON areas.code=p.area_code
-          INNER JOIN reviews ON h.id=reviews.handyman_id
-            GROUP BY h.id,first_name,last_name,img,p.postcode,p.area_code,email,phone_number,skills,bio
-              ORDER BY h.id`;
+// const getAllHandymenAdminQuery = `
+//   SELECT h.id,first_name,last_name,img,address,p.postcode,p.area_code AS area,email,phone_number,skills,bio,
+//         ARRAY_AGG(reviews.review_body) reviews, ARRAY_AGG(reviews.rating) ratings, visible
+//     FROM handyman AS h
+//       INNER JOIN postcodes AS p ON p.postcode=h.postcode
+//         INNER JOIN areas ON areas.code=p.area_code
+//           INNER JOIN reviews ON h.id=reviews.handyman_id
+//             GROUP BY h.id,first_name,last_name,img,p.postcode,p.area_code,email,phone_number,skills,bio
+//               ORDER BY h.id`;
+const getAllHandymenAdminQuery = `SELECT * FROM handyman`;
 
 const getHandymanByIdAdminQuery = `SELECT * FROM handyman WHERE id = $1`; // used mainly to check if handyman exists
 const changeHandymanVisibilityByIdAdminQuery = `UPDATE handyman SET visible = $1 WHERE id = $2`;
 
 // 2. ALL SITE VISITORS
-const getAllHandymenQuery = `
-  SELECT h.id,first_name,last_name,img,address,p.postcode,p.area_code AS area,email,phone_number,skills,bio,
-        ARRAY_AGG(reviews.review_body) reviews, ARRAY_AGG(reviews.rating) ratings
-	  FROM handyman AS h
-	    INNER JOIN postcodes AS p ON p.postcode=h.postcode
-	      INNER JOIN areas ON areas.code=p.area_code
-	        INNER JOIN reviews ON h.id=reviews.handyman_id
-	          WHERE h.visible = true
-	            GROUP BY h.id,first_name,last_name,img,p.postcode,p.area_code,email,phone_number,skills,bio
-                ORDER BY h.id`;
+// const getAllHandymenQuery = `
+//   SELECT h.id,first_name,last_name,img,address,p.postcode,p.area_code AS area,email,phone_number,skills,bio,
+//         ARRAY_AGG(reviews.review_body) reviews, ARRAY_AGG(reviews.rating) ratings
+// 	  FROM handyman AS h
+// 	    INNER JOIN postcodes AS p ON p.postcode=h.postcode
+// 	      INNER JOIN areas ON areas.code=p.area_code
+// 	        INNER JOIN reviews ON h.id=reviews.handyman_id
+// 	          WHERE h.visible = true
+// 	            GROUP BY h.id,first_name,last_name,img,p.postcode,p.area_code,email,phone_number,skills,bio
+//                 ORDER BY h.id`;
+const getAllHandymenQuery = `SELECT * FROM HANDYMAN WHERE visible = true `;
 const getHandymanByIdQuery = `SELECT * FROM handyman WHERE id = $1`; // used mainly to check if handyman exists
 const getHandymanByEmailQuery = `SELECT * FROM handyman WHERE email = $1`; // used mainly to check if handyman exists
 const addNewHandymanQuery = `

@@ -3,6 +3,8 @@ const router = express.Router();
 import {
     pool
 } from "./../db";
+
+//TODO: doubled route - Michael created route quotes what is basically the same in concept
 /*
     the main root of this router is: "/api/v1/booking"
 */

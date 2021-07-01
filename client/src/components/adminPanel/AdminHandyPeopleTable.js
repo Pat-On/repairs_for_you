@@ -1,33 +1,40 @@
-import axios from "axios";
-import React, { useState, useEffect } from "react";
-import { Route, Redirect, useRouteMatch, Switch, Link,useParams } from "react-router-dom";
+import React, { useState, useEffect, useContext } from "react";
+import {  useRouteMatch,  Link } from "react-router-dom";
 import UpdateForm from "./UpdateForm";
+
+
+import AuthContext from "../../store/authContext";
 
 export default function AdminHandyPeopleTable(props) {
 	let { path, url } = useRouteMatch();
 	const [list, setList] = useState([]);
 	const [changed, setChanged] = useState(false);
 	
-	const handleChange = (e, oneList) => {
+  const authCtx = useContext(AuthContext);
+  console.log(authCtx.token)
 		
+	const handleChange = (e, oneList) => {
+
 		alert(`are you sure you want to ${e.target.value}`);
 		if (e.target.value === "Update") {
       // setChanged(true);
       props.history.push(`${path}/${e.target.id}`);
     } else if (e.target.value === "Activate") {
-      fetch(`/api/users/handyman/admin/${oneList.id}`, {
+      fetch(`/api/v1/handyman/handymanprotected/${oneList.id}`, {
         method: "PATCH",
         body: JSON.stringify({ visible: true, id: oneList.id }),
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json",
+                    "Authorization": `Bearer ${authCtx.token}` },
       })
         .then((response) => response.json()) //response.json()
         .then((data) => console.log(data));
 			window.location.reload();
     } else if (e.target.value === "Deactivate") {
-      fetch(`/api/users/handyman/admin/${oneList.id}`, {
+      fetch(`/api/v1/handyman/handymanprotected/${oneList.id}`, {
         method: "PATCH",
         body: JSON.stringify({ visible: false, id:oneList.id}),
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json" ,
+        "Authorization": `Bearer ${authCtx.token}`},
       })
         .then((response) => response.json()) //response.json()
         .then((data) => console.log(data)).catch(err=>console.log(err));
@@ -37,8 +44,11 @@ export default function AdminHandyPeopleTable(props) {
 	};
 
 	useEffect(() => {
-		// fetch("/api/users/handyman")
-		fetch("/api/users/handyman/admin")
+		fetch("/api/v1/handyman/handymanprotected", {
+      headers: { 
+      "Authorization": `Bearer ${authCtx.token}` },
+    }
+    )
 			.then((res) => {
 				if (!res.ok) {
 					throw new Error(res.statusText);

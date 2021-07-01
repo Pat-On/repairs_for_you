@@ -1,4 +1,5 @@
 const repository = require("../data/quotesRepository");
+import { getBuyerByEmail, addNewBuyer } from "../data/buyerRepository";
 
 /***************** THE FOLLOWING METHODS ARE DEDICATED TO ADMIN-ACCESSIBLE ROUTES *******************/
 
@@ -6,12 +7,12 @@ const repository = require("../data/quotesRepository");
 
 // GET ALL QUOTES (currently accessible only to admin)
 async function getAllQuotes() {
-  return repository.getAllQuotes();
+  return await repository.getAllQuotes();
 }
 
 // SEARCH QUOTE FROM LIST BY QUOTE ID (currently accessible only to admin)
 async function getQuoteById(qId) {
-  const result = repository.getQuoteById(qId);
+  const result = await repository.getQuoteById(qId);
   return result;
 }
 
@@ -20,6 +21,10 @@ async function addNewQuote(qData) {
   const dataIsValid = validateQuoteData(qData);
   if (dataIsValid) {
     try {
+      // check if buyer is new to the site, and if they are, attempt to add their basic data to database
+      const result = await getBuyerByEmail(qData.buyerEmail);
+      if (result.rowCount === 0) await addNewBuyer(qData);
+      // continue attempt to add new quote request data to database
       await repository.addNewQuote(qData);
       return {
         status: "OK",

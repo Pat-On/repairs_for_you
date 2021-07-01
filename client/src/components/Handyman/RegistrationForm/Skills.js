@@ -1,7 +1,27 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+
+const allSkills = [
+  { name: "brickLaying", value: "Brick laying" },
+  { name: "carpentry", value: "Carpentry" },
+  { name: "electricalWork", value: "Electrical Work" },
+  {
+    name: "installAndRepair",
+    value: "Appliance installation and repair",
+  },
+  {
+    name: "propertyMaintenance",
+    value: "Interior and exterior property maintenance",
+  },
+  { name: "tiling", value: "Tiling" },
+  { name: "plastering", value: "Plastering" },
+  { name: "plumbing", value: "Plumbing" },
+  { name: "painting", value: "Painting" },
+  { name: "decorating", value: "Decorating" },
+];
 
 const Skills = (props) => {
-  const unselectedSkillsList = props.skills.map((skill) => ({
+
+  const unselectedSkillsList = allSkills.map((skill) => ({
     name: skill.name,
     value: "",
   }));
@@ -26,7 +46,7 @@ const Skills = (props) => {
 
   return (
     <div className="skills-list">
-      {props.skills.map((skill, index) => (
+      {allSkills.map((skill, index) => (
         <div key={index} className="input-field">
           <input
             type="checkbox"

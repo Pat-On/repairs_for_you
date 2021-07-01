@@ -26,6 +26,11 @@
   overflow-y: scroll;
   height: 10rem;
 }
+
+input[id=other-skills]{
+  width:60%;
+}
+
 .submit-button-div input{
   background-color: rgb(40, 129, 245);
   width: 7rem;

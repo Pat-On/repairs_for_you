@@ -1,4 +1,4 @@
-import { pool } from "../db";
+import pool from "../db";
 
 // QUERIES
 // 1. DEDITCATED TO ADMIN

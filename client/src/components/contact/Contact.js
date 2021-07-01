@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import "./Contact.css";
+import classes from "./Contact.module.css";
 import validateForm from "../../common/js/functions";
 import { permittedCrossDomainPolicies } from "helmet";
 import { send } from "emailjs-com";
@@ -29,7 +29,7 @@ export default function Contact() {
 	};
 
 	return (
-		<div className="contact-container">
+		<div className={classes.contact_container}>
 			<div className="map-form" onSubmit={handleSubmit}>
 				<form
 					id="form-send-quote"

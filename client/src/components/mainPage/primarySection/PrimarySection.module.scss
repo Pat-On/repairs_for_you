@@ -39,23 +39,20 @@
     text-decoration: none;
     padding: 1.5rem 4rem;
     font-weight: 600;
-    
 
     &__publish {
-        margin-right: 1rem;
-        background-color: #F49A34;
-        color: rgb(3, 3, 3);
-        font-size: 1.6rem;
+      margin-right: 1rem;
+      background-color: #f49a34;
+      color: rgb(3, 3, 3);
+      font-size: 1.6rem;
     }
 
     &__hire {
-        margin-left: 1rem;
-        background-color: #F49A34;
-        padding: 1.5rem 8rem;
-        color: rgb(7, 7, 7);
-        font-size: 1.7rem;
-
-
+      margin-left: 1rem;
+      background-color: #f49a34;
+      padding: 1.5rem 8rem;
+      color: rgb(7, 7, 7);
+      font-size: 1.7rem;
     }
   }
 }

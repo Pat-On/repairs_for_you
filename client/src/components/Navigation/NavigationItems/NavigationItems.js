@@ -12,12 +12,6 @@ const navigationItems = (props) => {
       <NavigationItem link="/" exact>
         Home
       </NavigationItem>
-
-      {/* buyers commented out because we have not implemented  buyer story */}
-      {/* {authCtx.isLoggedIn && (
-        <NavigationItem link="/buyers">BUYERS</NavigationItem>
-      )} */}
-
       <NavigationItem link="/users/handyman">Handypeople</NavigationItem>
       <NavigationItem link="/contact">Contact</NavigationItem>
       {authCtx.isLoggedIn && (

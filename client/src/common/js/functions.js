@@ -139,7 +139,7 @@ async function sendEmailToAdmin([...args]) {
 }
 
 async function addHandymanToDatabase(formData) {
-  return await fetch(`/api/users/handyman`, {
+  return await fetch(`/api/v1/handyman/handymannotprotected`, {
     method: "POST",
     body: JSON.stringify(formData),
     headers: { "Content-Type": "application/json" },
@@ -147,7 +147,7 @@ async function addHandymanToDatabase(formData) {
 }
 
 async function addQuoteRequestToDatabase(formData) {
-  return await fetch(`/api/quotes`, {
+  return await fetch(`/api/v1/quotes`, {
     method: "POST",
     body: JSON.stringify(formData),
     headers: { "Content-Type": "application/json" },

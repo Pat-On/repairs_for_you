@@ -1,5 +1,3 @@
-
-
 /*****************************************************************input fields  styling ***********************************************/
 
 .form-group{
@@ -12,8 +10,8 @@
     justify-content: center;
     margin-top: 7rem;
     margin-bottom: 7rem;
-
 } 
+
 .form-group :first-child, .form-group :nth-child(2){
     display: flex;
     flex-direction: column;

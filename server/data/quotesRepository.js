@@ -5,7 +5,7 @@ const getAllQuotesQuery = `SELECT * FROM quotes`; //**WARN: NOT IMPLEMENTED YET*
 const getQuoteByIdQuery = `SELECT * FROM handyman WHERE id = $1`; // **WARN: NOT IMPLEMENTED YET**
 const addNewQuoteQuery = `
 INSERT INTO quotes (client_name, client_email, job_description, job_start_date, handyman_id)
-  VALUES($1, $2, $3, $4, $5, $6)`;
+  VALUES($1, $2, $3, $4, $5)`;
 
 /***************** THE FOLLOWING METHODS ARE DEDICATED TO ADMIN-ACCESSIBLE ROUTES *******************/
 

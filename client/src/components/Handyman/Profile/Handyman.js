@@ -5,8 +5,8 @@ import "./Handyman.css";
 
 const Handyman = ({ userData }) => {
   
-  const { id, first_name, last_name, address, skills } = userData;
-  const data = { id, first_name, last_name, address, skills };
+  const { id, first_name, last_name, address, area, skills } = userData;
+  const data = { id, first_name, last_name, address, area, skills };
   const { url } = useRouteMatch();
   return (
     <div className="card handy-man">

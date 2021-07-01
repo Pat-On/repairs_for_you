@@ -1,12 +1,12 @@
 const Skills = ({ skills }) => {
   return (
-    <div>
+    <ul className="skills">
       {skills.map((skill, index) => (
-        <div key={index} className="input-field">
+        <li key={index} className="input-field">
           <span>{skill}</span>
-        </div>
+        </li>
       ))}
-    </div>
+    </ul>
   );
 };
 

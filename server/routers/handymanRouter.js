@@ -3,8 +3,8 @@
 const express = require("express");
 const router = express.Router();
 const services = require("../services/handymanServices");
-
 import authController from "./../controller/authController";
+
 
 // router.use(express.json()); // You Do not need to put it here because You already have it in app.js
 

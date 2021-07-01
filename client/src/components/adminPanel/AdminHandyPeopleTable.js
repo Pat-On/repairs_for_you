@@ -33,7 +33,8 @@ export default function AdminHandyPeopleTable(props) {
       fetch(`/api/users/handyman/admin/${oneList.id}`, {
         method: "PATCH",
         body: JSON.stringify({ visible: false, id:oneList.id}),
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json" ,
+        "Authorization": `Bearer ${authCtx.token}`},
       })
         .then((response) => response.json()) //response.json()
         .then((data) => console.log(data)).catch(err=>console.log(err));

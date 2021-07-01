@@ -1,4 +1,5 @@
 import { useLocation } from "react-router-dom";
+import Skills from "../Handyman/SubComponents/Skills";
 
 
 // TODO: IT does not work
@@ -62,7 +63,7 @@ export default function UpdateForm() {
                 name="addressLineOne"
                 maxLength={50}
                 required
-                defaultValue={userData.address_offer}
+                defaultValue={userData.address.addressLineOne}
                 onChange={handleChange}
               />
             </div>
@@ -76,10 +77,12 @@ export default function UpdateForm() {
                 name="addressLineTwo"
                 maxLength={50}
                 required
-                defaultValue={userData.address_offer}
+                defaultValue={userData.address.addressLineTwo}
                 onChange={handleChange}
               />
             </div>
+            {console.log(userData.address)}
+
             <div className="input-field">
               <label htmlFor="city">
                 City or District<span className="required">*</span>
@@ -148,9 +151,17 @@ export default function UpdateForm() {
           </legend>
           <em className="required">Please select at least one skill</em>
           {console.log(userData.skills)}
-          {/* <Skills
+          {/*  <Skills
 						skills={userData.skills}
-					/> */}
+					/> 
+           */}
+            <div>
+  {userData.skills.map((skill, index) => (
+        <div key={index} className="input-field">
+          <span>{skill}</span>
+         </div>       ))}
+    </div>
+
         </fieldset>
         <div className="submit-button-div">
           <input

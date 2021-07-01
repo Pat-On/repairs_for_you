@@ -2,8 +2,6 @@ import express from "express";
 import morgan from "morgan";
 import path from "path";
 
-import router from "./api";
-
 import {
   configuredHelmet,
   httpsOnly,
@@ -44,7 +42,7 @@ app.use("/api/v1/booking", bookingRouter);
 app.use("/api/v1/offers", offersRouter);
 app.use("/api/v1/reviews", reviewRouter);
 app.use("/api/v1/users", usersRouter);
-app.use("/api/v1/users/handyman", handymanRouter);
+app.use("/api/users/handyman", handymanRouter);
 app.use("/api/quotes", quotesRouter);
 
 app.use(express.static(staticDir));

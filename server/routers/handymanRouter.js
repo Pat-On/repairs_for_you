@@ -90,4 +90,10 @@ router.put("/adminsacceshandymans/:id", async (req, res) => {
 	}
 });
 
+// GET ALL REVIEWS BY HANDYMAN ID
+router.get("/:id/reviews", async (req, res) => {
+  const result = await services.getReviewsByHandymanId(parseInt(req.params.id));
+  return result ? res.status(200).send(result) : res.sendStatus(404);
+}) 
+
 module.exports = router;

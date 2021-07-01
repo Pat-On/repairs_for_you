@@ -20,7 +20,7 @@ export default function AdminHandyPeopleTable(props) {
       // setChanged(true);
       props.history.push(`${path}/${e.target.id}`);
     } else if (e.target.value === "Activate") {
-      fetch(`/api/users/handyman/admin/${oneList.id}`, {
+      fetch(`/api/v1/handyman/handymanprotected/${oneList.id}`, {
         method: "PATCH",
         body: JSON.stringify({ visible: true, id: oneList.id }),
         headers: { "Content-Type": "application/json",
@@ -30,7 +30,7 @@ export default function AdminHandyPeopleTable(props) {
         .then((data) => console.log(data));
 			window.location.reload();
     } else if (e.target.value === "Deactivate") {
-      fetch(`/api/users/handyman/admin/${oneList.id}`, {
+      fetch(`/api/v1/handyman/handymanprotected/${oneList.id}`, {
         method: "PATCH",
         body: JSON.stringify({ visible: false, id:oneList.id}),
         headers: { "Content-Type": "application/json" ,
@@ -44,7 +44,7 @@ export default function AdminHandyPeopleTable(props) {
 	};
 
 	useEffect(() => {
-		fetch("/api/users/handyman/admin", {
+		fetch("/api/v1/handyman/handymanprotected", {
       headers: { 
       "Authorization": `Bearer ${authCtx.token}` },
     }

@@ -28,7 +28,7 @@ export default function HandyPeopleCards() {
   };
 
   useEffect(() => {
-    fetch("/api/users/handyman")
+    fetch("/api/v1/handyman/handymannotprotected")
       .then((res) => {
         if (!res.ok) {
           throw new Error(res.statusText);

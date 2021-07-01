@@ -1,9 +1,12 @@
 import { useLocation } from "react-router-dom";
 
+
+// TODO: IT does not work
 export default function UpdateForm() {
   const { state } = useLocation();
-	const userData = state;
+  const userData = state;
   const handleChange = (e) => {
+
     console.log(e.target.value);
   };
 
@@ -12,7 +15,7 @@ export default function UpdateForm() {
       <form
         id="form-add-handyman"
         name="form-add-handyman"
-        /* 	onSubmit={updateForm} */
+        // onSubmit={handleChange(e)} 
       >
         <fieldset className="input-field-group details">
           <legend className="subtitle">Update User details</legend>

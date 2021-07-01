@@ -1,6 +1,6 @@
 import React from "react";
 
-import classes from "./Input.module.css";
+import classes from "./Input.module.scss";
 
 /**
  * @DescriptionFunction Simple Input component which has dynamic style to emphasise wrong input

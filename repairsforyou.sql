@@ -1,4 +1,94 @@
 
+DROP TABLE IF EXISTS quotes;
+DROP TABLE IF EXISTS reviews;
+DROP TABLE IF EXISTS buyers;
+DROP TABLE IF EXISTS handyman;
+​
+CREATE TABLE handyman(id SERIAL PRIMARY KEY,
+					 first_name VARCHAR(30) NOT NULL,
+					 last_name VARCHAR(30) NOT NULL,
+					 img VARCHAR,
+					 address JSON NOT NULL,
+					 postcode CHAR(12) NOT NULL,
+					 email VARCHAR(50) UNIQUE NOT NULL,						 
+					 phone_number CHAR(13) NOT NULL,
+					 skills VARCHAR[] NOT NULL,
+					 bio VARCHAR(1000) NOT NULL,
+					 visible bool DEFAULT false
+				  );
+				  
+CREATE TABLE buyers(id SERIAL PRIMARY KEY,
+					 customer_name VARCHAR(60) NOT NULL,
+					 email VARCHAR(50) UNIQUE NOT NULL,
+					 telephone_number VARCHAR(13)
+				  );
+				  
+				  
+			
+CREATE TABLE reviews(id SERIAL PRIMARY KEY,
+				   	 buyer_id INT REFERENCES buyers(id),
+				     handyman_id INT REFERENCES handyman(id),
+					 review_body VARCHAR(500),
+					 rating INT DEFAULT 5
+				    );
+					
+CREATE TABLE quotes(
+					id serial PRIMARY KEY,
+					client_name varchar(60) NOT NULL,
+					client_email varchar NOT NULL,
+					job_description varchar(500) NOT NULL,
+					job_start_date date NOT NULL,
+					handyman_id	integer REFERENCES handyman(id)
+				);					
+					  
+INSERT INTO handyman(first_name,last_name,address,postcode,email,phone_number,skills,bio)
+			VALUES('Senait','Ekubai','{"addressLineOne":"1","addressLineTwo":"Street Name 1","city":"Coventry"}','CV1 1AA','senait.ekubai@senaitekubai.com',07123456789,'{"Painting","Decorating"}','Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.');
+INSERT INTO handyman(first_name,last_name,address,postcode,email,phone_number,skills,bio)
+			VALUES('Patryk','Nowak','{"addressLineOne":"1","addressLineTwo":"Street Name 1","city":"Coventry"}','CV1 1AA','patryk_nowak@patryknowak.com',07123456789,'{"Plastering","Plumbing"}','Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.');
+INSERT INTO handyman(first_name,last_name,address,postcode,email,phone_number,skills,bio)
+			VALUES('Michael','Biruk','{"addressLineOne":"1","addressLineTwo":"Street Name 1","city":"Coventry"}','CV1 1AA','michaelb@michaelbiruk.com',07123456789,'{"Electrical Work","Plastering","Plumbing"}','Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.');
+				  
+INSERT INTO buyers(customer_name,email)
+			VALUES('customer1','costomer1@somewhere.com');				  
+INSERT INTO buyers(customer_name,email)
+			VALUES('customer2','costomer2@somewhere.com');					  
+INSERT INTO buyers(customer_name,email)
+			VALUES('customer3','costomer3@somewhere.com');  
+					
+INSERT INTO	reviews(buyer_id,handyman_id,review_body) VALUES(1,1,'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.');				
+INSERT INTO	reviews(buyer_id,handyman_id,review_body) VALUES(2,1,'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.');				
+INSERT INTO	reviews(buyer_id,handyman_id,review_body) VALUES(3,1,'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.');				
+INSERT INTO	reviews(buyer_id,handyman_id,review_body) VALUES(1,2,'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.');				
+INSERT INTO	reviews(buyer_id,handyman_id,review_body) VALUES(2,2,'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.');				
+INSERT INTO	reviews(buyer_id,handyman_id,review_body) VALUES(3,2,'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.');				
+INSERT INTO	reviews(buyer_id,handyman_id,review_body) VALUES(1,3,'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.');				
+INSERT INTO	reviews(buyer_id,handyman_id,review_body) VALUES(2,3,'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.');				
+INSERT INTO	reviews(buyer_id,handyman_id,review_body) VALUES(3,3,'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.');				
+					  
+​
+
+DROP TABLE IF EXISTS postcodes;
+DROP TABLE IF EXISTS areas;
+CREATE TABLE areas(
+code varchar(5) NOT NULL PRIMARY KEY
+	);
+CREATE TABLE postcodes(
+postcode varchar(12) NOT NULL PRIMARY KEY,
+area_code varchar REFERENCES areas(code)
+	);
+INSERT INTO areas (code) VALUES('CV1');
+INSERT INTO postcodes(postcode,area_code) VALUES('CV1 1AA','CV1');
+
+
+
+
+
+
+
+---------------------------------------------------------
+
+-- old---------------------------------------------------
+
 -- TABLE CREATORS
 CREATE TABLE addresses (
     address_id       SERIAL PRIMARY KEY,

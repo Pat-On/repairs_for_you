@@ -5,8 +5,14 @@ import classes from "./CustomerCommentMain.module.scss";
 import fullStart from "../../../../public/starFullColor.svg";
 import star from "../../../../public/star.svg";
 
-const imgItem = (link, i) => <img className={classes.customer__star} key={i}src={link} alt="Star icon made by Freepik" />
-
+const imgItem = (link, i) => (
+  <img
+    className={classes.customer__star}
+    key={i}
+    src={link}
+    alt="Star icon made by Freepik"
+  />
+);
 
 /**
  * @DescriptionFunction sub component used by CustomerSection to create the review of users widget which is going to be displayed on main page.
@@ -15,7 +21,7 @@ const imgItem = (link, i) => <img className={classes.customer__star} key={i}src=
  *  - photo: string which point to directory where is stored picture
  *  - user_name: string with name of the user
  *  - user_surname: string with surname of the user
- *  - comment: comment provided by user regarding service   
+ *  - comment: comment provided by user regarding service
  */
 const CustomerCommentMain = (props) => {
   let stars = [];

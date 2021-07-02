@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import {  useRouteMatch,  Link } from "react-router-dom";
-import UpdateForm from "./UpdateForm";
+import classes from './AdminPage.module.css'
+
 
 
 import AuthContext from "../../store/authContext";
@@ -8,7 +9,6 @@ import AuthContext from "../../store/authContext";
 export default function AdminHandyPeopleTable(props) {
 	let { path, url } = useRouteMatch();
 	const [list, setList] = useState([]);
-	const [changed, setChanged] = useState(false);
 	
   const authCtx = useContext(AuthContext);
   console.log(authCtx.token)
@@ -17,8 +17,7 @@ export default function AdminHandyPeopleTable(props) {
 
 		alert(`are you sure you want to ${e.target.value}`);
 		if (e.target.value === "Update") {
-      props.history.push(`${path}/${e.target.id}`);
-     
+      props.history.push(`${path}/${e.target.id}`);    
     } else if (e.target.value === "Activate") {
       fetch(`/api/v1/handyman/handymanprotected/${oneList.id}`, {
         method: "PATCH",
@@ -87,13 +86,13 @@ export default function AdminHandyPeopleTable(props) {
 	// setList(newArray)
 
 	return (
-    <table className="table">
+    <table className={classes.table}>
       <thead>
         <tr>
-          <th>
-            {/* <input type="checkbox"></input> */}
+        {/*   <th>
+             <input type="checkbox"></input> 
             <p>More</p>
-          </th>
+          </th> */}
           <th scope="col">Id</th>
           <th scope="col">First-name</th>
           <th scope="col">Last-name</th>
@@ -111,15 +110,15 @@ export default function AdminHandyPeopleTable(props) {
       {list.map((oneList, index) => (
         <tbody key={index}>
           <tr>
-            <td>
-              {/* add here link base on id uf user to the update profile */}
-              {/* <input type="checkbox"></input> */}
+           {/*  <td>
+               add here link base on id uf user to the update profile 
+               <input type="checkbox"></input> 
               <button>
                 <Link to={{ pathname: `${url}/${oneList.id}`, state: oneList }}>
                   View Repair Person
                 </Link>
               </button>
-            </td>
+            </td> */}
 
             <th scope="row">{oneList.id}</th>
             <td>{oneList.first_name}</td>

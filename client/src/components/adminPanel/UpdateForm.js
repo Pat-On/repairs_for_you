@@ -2,20 +2,25 @@ import { useLocation, useParams } from "react-router-dom";
 import {useContext,useEffect,useState} from "react"
 import Skills from "../Handyman/SubComponents/Skills";
 import AuthContext from "../../store/authContext";
+import classes from './AdminPage.module.css'
+
 
 
 
 // TODO: IT does not work
 export default function UpdateForm() {
-  const [userData,setUserData]=useState([]);
-  const { state } = useLocation();
-  //const userData = state; 
-  const {id}=useParams()
   const authCtx = useContext(AuthContext);
-  console.log(id);
+  const { state } = useLocation();
+  const {id}=useParams()
+  const [userData,setUserData]=useState([]);
+  //const userData = state; 
+
+  // handle change function work in progress
+
   const handleChange = (e) => {
     console.log(e.target.value);
   };
+
   useEffect(() => {
     fetch(`/api/v1/handyman/handymanprotected/${id}`,
     { headers: { "Authorization": `Bearer ${authCtx.token}` }})
@@ -23,13 +28,6 @@ export default function UpdateForm() {
     .then(data=>setUserData(data))
    }, [id])
   
- 
- console.log(userData)
- /* eturn <div>
-   ffhggghh
- </div>   */
- 
-
   return (
     <div>
       <form
@@ -37,11 +35,11 @@ export default function UpdateForm() {
         name="form-add-handyman"
         // onSubmit={handleChange(e)} 
       >
-        <fieldset className="input-field-group details">
-          <legend className="subtitle">Update User details</legend>
-          <div className="basic-details">
+        <fieldset className={classes.input_field_group_details}>
+          <legend className={classes.subtitle}>Edit User details</legend>
+          <div className={classes.basic_details}>
             <h3>Basic Details</h3>
-            <div className="input-field">
+            <div className={classes.input_field}>
               <label htmlFor="first-name">
                 First Name<span className="required">*</span>
               </label>{" "}
@@ -55,7 +53,7 @@ export default function UpdateForm() {
                 onChange={handleChange}
               />
             </div>
-            <div className="input-field">
+            <div className={classes.input_field}>
               <label htmlFor="last-name">
                 Last Name<span className="required">*</span>
               </label>{" "}
@@ -72,11 +70,10 @@ export default function UpdateForm() {
           </div>
           <div className="input-field-group address-details">
             <h3>Address</h3>
-            <div className="input-field">
+            <div className={classes.input_field}>
               <label htmlFor="address-line-one">
                 Address Line 1<span className="required">*</span>
               </label>{" "}
-              {console.log(userData)}
               <input
                 type="text"
                 id="addressLineOne"
@@ -87,7 +84,7 @@ export default function UpdateForm() {
                 onChange={handleChange}
               />
             </div>
-            <div className="input-field">
+            <div className={classes.input_field}>
               <label htmlFor="address-line-two">
                 Address Line 2<span className="required">*</span>
               </label>{" "}
@@ -102,7 +99,7 @@ export default function UpdateForm() {
               />
             </div>
 
-            <div className="input-field">
+            <div className={classes.input_field}>
               <label htmlFor="city">
                 City or District<span className="required">*</span>
               </label>{" "}
@@ -116,7 +113,7 @@ export default function UpdateForm() {
                 defaultValue="Coventry"
               />
             </div>
-            <div className="input-field">
+            <div className={classes.input_field}>
               <label htmlFor="Postcode">
                 Postcode<span className="required">*</span>
               </label>{" "}
@@ -131,9 +128,9 @@ export default function UpdateForm() {
               />
             </div>
           </div>
-          <div className="input-field-group contact-details">
+          <div className={classes.contact_details}>
             <h3>Contact Details</h3>
-            <div className="input-field">
+            <div className={classes.input_field}>
               <label htmlFor="email">
                 Email<span className="required">*</span>
               </label>{" "}
@@ -147,7 +144,7 @@ export default function UpdateForm() {
                 onChange={handleChange}
               />
             </div>
-            <div className="input-field">
+            <div className={classes.input_field}>
               <label htmlFor="phone-number">
                 Phone Number<span className="required">*</span>
               </label>{" "}
@@ -164,40 +161,21 @@ export default function UpdateForm() {
             </div>
           </div>
         </fieldset>
-        <fieldset className="input-field-group skills">
+        <fieldset className={classes.input_field}>
           <legend className="subtitle">
             Skills<span className="required">*</span>
           </legend>
-          <em className="required">Please select at least one skill</em>
-          {console.log(userData.skills)}
-          {/*  <Skills
-						skills={userData.skills}
-					/> 
-           */}
-          
-
+          <em className="required">Please select at least one skill</em>      
         </fieldset>
-        <div className="submit-button-div">
+        <div className={classes.submit_button}>
           <input
             type="submit"
             id="btn-submit"
             name="btn-submit"
-            value="update"
+            value="Edit"
           />
         </div>
       </form>
     </div>
   );
 }
-
-// const Skills = ({ skills }) => {
-//   return (
-//     <div>
-//       {skills.map((skill, index) => (
-//         <div key={index} className="input-field">
-//           <span>{skill}</span>
-//         </div>
-//       ))}
-//     </div>
-//   );
-// };

@@ -27,7 +27,7 @@ export default function UpdateForm() {
     .then(data=>setUserData(data))
    }, [id])
   
-  return (
+  return userData.length===0 ? <p>Please wait .......</p> : (
     <div>
       <form
         id="form-add-handyman"
@@ -79,7 +79,7 @@ export default function UpdateForm() {
                 name="addressLineOne"
                 maxLength={50}
                 required
-                /* defaultValue={userData.address.addressLineOne} */
+                defaultValue={userData.address.addressLineOne} 
                 onChange={handleChange}
               />
             </div>
@@ -93,7 +93,7 @@ export default function UpdateForm() {
                 name="addressLineTwo"
                 maxLength={50}
                 required
-               /*  defaultValue={userData.address.addressLineTwo} */
+                defaultValue={userData.address.addressLineTwo} 
                 onChange={handleChange}
               />
             </div>

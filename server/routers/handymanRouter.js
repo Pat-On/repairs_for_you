@@ -59,7 +59,6 @@ router
   .put(async (req, res) => {
     try {
       const handyman_id = req.params.id;
-      console.log(req.body);
       const {
         firstName,
         lastName,

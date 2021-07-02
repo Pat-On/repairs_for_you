@@ -16,7 +16,18 @@ export default function UpdateForm() {
   const handleChange = (e) => {
     console.log(e.target.value);
   };
-
+  useEffect(() => {
+    fetch(`/api/v1/handyman/handymanprotected/${id}`,
+    { headers: { "Authorization": `Bearer ${authCtx.token}` }})
+    .then(res=>res.json())
+    .then(data=>setUserData(data))
+   }, [id])
+  
+ 
+ console.log(userData)
+ /* eturn <div>
+   ffhggghh
+ </div>   */
  
 
   return (

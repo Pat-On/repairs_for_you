@@ -1,6 +1,6 @@
 import React from "react";
 
-import classes from "./HandymanProfileMain.module.scss";
+import classes from "./handymanProfileMain.module.scss";
 
 
 //TODO: add the alt from where I took this svg!

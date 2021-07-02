@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Route, Redirect, useRouteMatch, Switch, Link } from "react-router-dom";
 
 import UserManagements from "./usersManagements/UsersManagements";
-import "./AdminPage.css";
+import classes from "./AdminPage.module.css";
 import UserDetailedProfile from "./usersManagements/UserDetailedProfile/UserDetailedProfile";
 import Adminpage from "./Adminpage";
 import AdminButton from "./AdminButton";

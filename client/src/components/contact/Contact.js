@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import classes from "./Contacts.module.css";
-
+import classes from "./Contact.module.css";
 import validateForm from "../../common/js/functions";
 import { permittedCrossDomainPolicies } from "helmet";
 import { send } from "emailjs-com";
@@ -32,26 +31,26 @@ export default function Contact() {
 
 	return (
 		<div className={classes.contact_container}>
-			<div className={classes.map_form} onSubmit={handleSubmit}>
+			<div className="map-form" onSubmit={handleSubmit}>
 				<form
 					id="form-send-quote"
 					name="form-send-quote"
 					className="form"
 				>
 					<div>
-						<div className="contact-text">
+						<div className={classes.contact_text}>
 							<h1>Contact Us</h1>
 							<p>Got a question, we would love to hear from you.</p>
 							<p>Drop us a message and one of our team members will get in touch with you</p>
 
 						</div>
-						<div className="contact-info">
+						<div className={classes.contact_info}>
 							<p>Tele-+4470000000</p>
 							<p>repairsyou@gmail.com</p>
 							<a href="https://goo.gl/maps/KaWYzgRdgEwHb9xHA">Coventry refugee and migrant center</a>
 						</div>
 
-						<div className="input-fields-container">
+						<div className={classes.input_fields_container }>
 							<div className="input-field">
 								<label>Name: {" "}</label>
 								<input
@@ -64,7 +63,7 @@ export default function Contact() {
 									onChange={handleChange}
 								/>
 							</div>
-							<div className="input-field">
+							<div className={classes.input_field}>
 								<label>Email Address: {" "}</label>
 								<input
 									type="text"
@@ -78,7 +77,7 @@ export default function Contact() {
 
 								/>
 							</div>
-							<div className="message">
+							<div className={classes.message}>
 								<label> Message: {" "}</label><span><textarea
 									type="text"
 									id="message"
@@ -94,9 +93,9 @@ export default function Contact() {
 
 
 
-					<div className="input-field">
+					<div>
 						<input
-							className="btn-submit"
+							className={classes.btn_submit}
 							type="submit"
 							id="buyer_name"
 							name="buyer_name"

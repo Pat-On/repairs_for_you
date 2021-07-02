@@ -43,6 +43,11 @@ async function addNewHandyman(hData) {
   };
 }
 
+async function getReviewsByHandymanId(hId) {
+  const result = await repository.getReviewsByHandymanId(hId);
+  return result.rows;
+}
+
 // VALIDATE INCOMING HANDYMAN DATA
 // Note: this is used only during the initial stage of handyman registration process (accessible to anyone...
 // ...who would like to rgister as handyman on the site)
@@ -92,6 +97,11 @@ async function handymanDoesntExist(hEmail) {
   }
 }
 
+async function getThreeRandomHandyman() {
+  const result = await repository.getThreeRandomHandyman();
+  return result.rows;
+}
+
 /******************************************************************************************************/
 
 /***************** THE FOLLOWING METHODS ARE DEDICATED TO ADMIN-ACCESSIBLE ROUTES *******************/
@@ -101,7 +111,6 @@ async function handymanDoesntExist(hEmail) {
 // GET ALL HANDYMEN
 async function getAllHandymenForAdmin() {
   const result = await repository.getAllHandymenForAdmin();
-  console.log(result.rows)
   return result.rows;
 }
 
@@ -160,4 +169,6 @@ module.exports = {
   getHandymanByIdForAdmin,
   changeHandymanVisibilityByAdmin,
   addNewHandyman,
+  getReviewsByHandymanId,
+  getThreeRandomHandyman
 };

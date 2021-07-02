@@ -50,7 +50,7 @@ const CustomerSection = (props) => {
           Your browser is not supported!
         </video>
       </div>
-      <h2 className={classes.customers__heading}> Happy Customers </h2>
+      <h2 className={classes.customers__heading}> Our Handyman </h2>
       <div className={classes.customers__commentContainer}>{usersComments}</div>
     </div>
   );

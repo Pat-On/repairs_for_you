@@ -14,11 +14,12 @@ const CustomerSection = (props) => {
   useEffect(() => {}, []);
 
 
-  //!TODO: proper spinner
+  //!TODO: style in nice way spinner or to put it into the container (?) 
+  // but first functionality! 
   let usersComments = <Spinner />
 
-  if (commentArray.length === 3) {
-    usersComments = commentArray.map((item) => (
+  if (handymenProfiles.length === 3) {
+    usersComments = handymenProfiles.map((item) => (
       <CustomerCommentMain key={item.user_name} item={item} />
     ));
   }

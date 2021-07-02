@@ -3,6 +3,7 @@ import classes from "./CustomerSection.module.scss";
 
 import backgroundVideo from "../../../public/ConstructionWorkersDESKTOP.mp4";
 import CustomerCommentMain from "./customerCommentMain/CustomerCommentMain";
+import HandymanProfileMain from "./handymanProfileMain/handymanProfileMain";
 
 import Spinner from "../../../UI/Spinner/Spinner";
 
@@ -16,8 +17,9 @@ const CustomerSection = (props) => {
       const dataRAW = await fetch(
         "/api/v1/handyman/handymannotprotected/randomthree"
       );
-      const threeHandyman = await dataRAW.json()
-      console.log(threeHandyman.data)
+      const data = await dataRAW.json()
+      const threeHandyman = data.data
+      console.log(threeHandyman)
       setHandymanProfiles(threeHandyman)
     } catch (error) {
       // after functionality TODO: error handling
@@ -29,9 +31,9 @@ const CustomerSection = (props) => {
   // but first functionality!
   let usersComments = <Spinner />;
 
-  if (handymenProfiles.length === 3) {
+  if (handymenProfiles.length !== 0) {
     usersComments = handymenProfiles.map((item) => (
-      <CustomerCommentMain key={item.user_name} item={item} />
+      <HandymanProfileMain key={item.id} item={item} />
     ));
   }
 

@@ -26,6 +26,8 @@ router.post("/handymannotprotected", async (req, res) => {
   return res.status(resultStatus).send({ message: result.message });
 });
 
+// router.get("/handymannotprotected/randomthree", )
+
   
 // GET ALL REVIEWS BY HANDYMAN ID
 router.get("/handymannotprotected/:id/reviews", async (req, res) => {

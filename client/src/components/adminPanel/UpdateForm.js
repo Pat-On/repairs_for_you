@@ -1,6 +1,5 @@
 import { useLocation, useParams } from "react-router-dom";
 import {useContext,useEffect,useState} from "react"
-import Skills from "../Handyman/SubComponents/Skills";
 import AuthContext from "../../store/authContext";
 import classes from './AdminPage.module.css'
 

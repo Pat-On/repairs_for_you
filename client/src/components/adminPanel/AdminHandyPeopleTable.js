@@ -1,12 +1,15 @@
 import React, { useState, useEffect, useContext } from "react";
-import { useRouteMatch, Link } from "react-router-dom";
-import UpdateForm from "./UpdateForm";
+import {  useRouteMatch,  Link } from "react-router-dom";
+import classes from './AdminPage.module.css'
+
+
+
 import AuthContext from "../../store/authContext";
 
 export default function AdminHandyPeopleTable(props) {
-  let { path, url } = useRouteMatch();
-  const [list, setList] = useState([]);
-  const [changed, setChanged] = useState(false);
+	let { path, url } = useRouteMatch();
+	const [list, setList] = useState([]);
+	
 
   const authCtx = useContext(AuthContext);
   console.log(authCtx.token);
@@ -57,14 +60,16 @@ export default function AdminHandyPeopleTable(props) {
       });
   }, []);
 
-  return !changed ? (
-    <table className="table">
+
+	return (
+    <table className={classes.table}>
+
       <thead>
         <tr>
-          <th>
-            {/* <input type="checkbox"></input> */}
+        {/*   <th>
+             <input type="checkbox"></input> 
             <p>More</p>
-          </th>
+          </th> */}
           <th scope="col">Id</th>
           <th scope="col">First-name</th>
           <th scope="col">Last-name</th>
@@ -82,15 +87,15 @@ export default function AdminHandyPeopleTable(props) {
       {list.map((oneList, index) => (
         <tbody key={index}>
           <tr>
-            <td>
-              {/* add here link base on id uf user to the update profile */}
-              {/* <input type="checkbox"></input> */}
+           {/*  <td>
+               add here link base on id uf user to the update profile 
+               <input type="checkbox"></input> 
               <button>
                 <Link to={{ pathname: `${url}/${oneList.id}`, state: oneList }}>
                   View Repair Person
                 </Link>
               </button>
-            </td>
+            </td> */}
 
             <th scope="row">{oneList.id}</th>
             <td>{oneList.first_name}</td>
@@ -113,7 +118,7 @@ export default function AdminHandyPeopleTable(props) {
             <td>{oneList.visible ? "Visible" : "Hidden"}</td>
             <td>
               <select
-                id={oneList.handyman_id}
+                id={oneList.id}
                 onChange={(e) => {
                   handleChange(e, oneList);
                 }}
@@ -129,7 +134,5 @@ export default function AdminHandyPeopleTable(props) {
         </tbody>
       ))}
     </table>
-  ) : (
-    <UpdateForm />
-  );
+  ) 
 }

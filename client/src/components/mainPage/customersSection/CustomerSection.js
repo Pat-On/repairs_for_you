@@ -19,7 +19,6 @@ const CustomerSection = (props) => {
       );
       const data = await dataRAW.json()
       const threeHandyman = data.data
-      console.log(threeHandyman)
       setHandymanProfiles(threeHandyman)
     } catch (error) {
       // after functionality TODO: error handling

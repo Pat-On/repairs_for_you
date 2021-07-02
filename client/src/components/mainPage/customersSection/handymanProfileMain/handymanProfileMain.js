@@ -2,6 +2,8 @@ import React from "react";
 
 import classes from "./HandymanProfileMain.module.scss";
 
+
+//TODO: add the alt from where I took this svg!
 import user from "../../../../public/user.svg";
 
 /**

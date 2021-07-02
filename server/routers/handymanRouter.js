@@ -26,6 +26,7 @@ router.post("/handymannotprotected", async (req, res) => {
   return res.status(resultStatus).send({ message: result.message });
 });
 
+// Serving three random handyman which has set visibility to true
 router.get(
   "/handymannotprotected/randomthree",
   handymanController.threeRandomHandyman

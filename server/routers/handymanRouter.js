@@ -4,7 +4,7 @@ const express = require("express");
 const router = express.Router();
 const services = require("../services/handymanServices");
 import authController from "./../controller/authController";
-
+import handymanController from "./../controller/handymanController";
 
 // router.use(express.json()); // You Do not need to put it here because You already have it in app.js
 
@@ -21,18 +21,23 @@ router.get("/handymannotprotected", async (_, res) => {
 // ...who would like to rgister as handyman on the site)
 router.post("/handymannotprotected", async (req, res) => {
   const result = await services.addNewHandyman(req.body);
-  console.log("********************************************* I hit post")
+  console.log("********************************************* I hit post");
   const resultStatus = result.status === "OK" ? 201 : 400;
   return res.status(resultStatus).send({ message: result.message });
 });
 
-  
+// Serving three random handyman which has set visibility to true
+router.get(
+  "/handymannotprotected/randomthree",
+  handymanController.threeRandomHandyman
+);
+
 // GET ALL REVIEWS BY HANDYMAN ID
 router.get("/handymannotprotected/:id/reviews", async (req, res) => {
-  console.log(req)
+  console.log(req);
   const result = await services.getReviewsByHandymanId(parseInt(req.params.id));
   return result ? res.status(200).send(result) : res.sendStatus(404);
-}); 
+});
 
 // GET "/{id}" SERVE DATA OF INDIVIDUAL HANDYMAN
 router.get("/handymannotprotected/:id", async (req, res) => {
@@ -110,8 +115,6 @@ router
     return res.status(resultStatus).json({ message: result.message });
   });
 
-
 /******************************************************************************************************/
-
 
 module.exports = router;

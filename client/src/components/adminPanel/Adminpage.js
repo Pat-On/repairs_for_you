@@ -16,7 +16,7 @@ export default function Adminpage(props) {
         />
 
         <Route
-          path={`${path}/handyPeople/:id`}
+          path={`${url}/handyPeople/:id`}
           component={(props) => <UpdateForm {...props} />}
         />
 

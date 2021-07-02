@@ -3,7 +3,7 @@ import pool from "../db";
 // QUERIES
 // 1. DEDITCATED TO ADMIN
 const getAllHandymenAdminQuery = `
-  SELECT h.id,first_name,last_name,img,address,p.postcode,p.area_code AS area,email,phone_number,skills,bio
+  SELECT h.id,first_name,last_name,img,address,p.postcode,p.area_code AS area,email,phone_number,skills,bio,visible
     FROM handyman AS h
       INNER JOIN postcodes AS p ON p.postcode=h.postcode
         INNER JOIN areas ON areas.code=p.area_code

@@ -92,7 +92,6 @@ async function buyerDoesntExist(bEmail) {
 // GET ALL BUYERS
 async function getAllBuyersForAdmin() {
   const result = await repository.getAllBuyersForAdmin();
-  console.log(result.rows);
   return result.rows;
 }
 

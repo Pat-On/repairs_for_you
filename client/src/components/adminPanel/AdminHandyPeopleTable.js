@@ -10,83 +10,60 @@ export default function AdminHandyPeopleTable(props) {
 	let { path, url } = useRouteMatch();
 	const [list, setList] = useState([]);
 	
+
   const authCtx = useContext(AuthContext);
-  console.log(authCtx.token)
-		
-	const handleChange = (e, oneList) => {
+  console.log(authCtx.token);
 
-		alert(`are you sure you want to ${e.target.value}`);
-		if (e.target.value === "Update") {
-      props.history.push(`${path}/${e.target.id}`);    
-    } else if (e.target.value === "Activate") {
+  const handleChange = (e, oneList) => {
+
+    alert(`are you sure you want to ${e.target.value}`);
+    const actionVerb = e.target.value;
+    if (actionVerb === "Update") {
+      // setChanged(true);
+      props.history.push(`${path}/${e.target.id}`);
+    } else if (actionVerb === "Activate" || actionVerb === "Deactivate") {
+      const newStatus = actionVerb === "Activate" ? true : false;
       fetch(`/api/v1/handyman/handymanprotected/${oneList.id}`, {
         method: "PATCH",
-        body: JSON.stringify({ visible: true, id: oneList.id }),
-        headers: { "Content-Type": "application/json",
-                    "Authorization": `Bearer ${authCtx.token}` },
+        body: JSON.stringify({ visible: newStatus, id: oneList.id }),
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${authCtx.token}`,
+        },
       })
-        .then((response) => response.json()) //response.json()
-        .then((data) => console.log(data));
-			window.location.reload();
-    } else if (e.target.value === "Deactivate") {
-      fetch(`/api/v1/handyman/handymanprotected/${oneList.id}`, {
-        method: "PATCH",
-        body: JSON.stringify({ visible: false, id:oneList.id}),
-        headers: { "Content-Type": "application/json" ,
-        "Authorization": `Bearer ${authCtx.token}`},
+        .then((response) => response.json())
+        .then((data) => setChanged(data))
+        .catch((err) => console.log(err));
+
+      window.location.reload();
+    }
+    console.log(oneList);
+  };
+
+  useEffect(() => {
+    fetch("/api/v1/handyman/handymanprotected", {
+      headers: {
+        Authorization: `Bearer ${authCtx.token}`,
+      },
+    })
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error(res.statusText);
+        }
+        return res.json();
       })
-        .then((response) => response.json()) //response.json()
-        .then((data) => console.log(data)).catch(err=>console.log(err));
-			window.location.reload();
-    }
-		console.log(oneList);
-	};
+      .then((body) => {
+        setList(body);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }, []);
 
-	useEffect(() => {
-		fetch("/api/v1/handyman/handymanprotected", {
-      headers: { 
-      "Authorization": `Bearer ${authCtx.token}` },
-    }
-    )
-			.then((res) => {
-				if (!res.ok) {
-					throw new Error(res.statusText);
-				}
-				return res.json();
-			})
-			.then((body) => {
-				//!TODO: brutal solution of storing data inside the db as a string - fix it
-				const newArray = body.map((item) => {
-					return (item = {
-						...item,
-						// address_offer: JSON.parse(item.address[0]),
-					});
-				});
-				// console.log(newArray);
-				// console.log(body.data[0].address_offer[0]);
-				setList(newArray);
-			})
-			.catch((err) => {
-				console.error(err);
-			});
-	}, []);
-
-	// const addressObj = {}
-	// if (list[0]) {
-	// console.log(JSON.parse(list[0].address_offer[0]));
-	// }
-
-	// // Parsing address from DB
-	// const newArray = list.map(item => {
-	// 	return item = {
-	// 		...item,
-	// 		address_offer: JSON.parse(item.address_offer[0])
-	// 	}
-	// })
-	// setList(newArray)
 
 	return (
     <table className={classes.table}>
+
       <thead>
         <tr>
         {/*   <th>

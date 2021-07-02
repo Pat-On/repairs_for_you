@@ -26,6 +26,14 @@ router.post("/handymannotprotected", async (req, res) => {
   return res.status(resultStatus).send({ message: result.message });
 });
 
+  
+// GET ALL REVIEWS BY HANDYMAN ID
+router.get("/handymannotprotected/:id/reviews", async (req, res) => {
+  console.log(req)
+  const result = await services.getReviewsByHandymanId(parseInt(req.params.id));
+  return result ? res.status(200).send(result) : res.sendStatus(404);
+}); 
+
 // GET "/{id}" SERVE DATA OF INDIVIDUAL HANDYMAN
 router.get("/handymannotprotected/:id", async (req, res) => {
   const result = await services.getHandymanById(parseInt(req.params.id));
@@ -105,5 +113,6 @@ router
 
 
 /******************************************************************************************************/
+
 
 module.exports = router;

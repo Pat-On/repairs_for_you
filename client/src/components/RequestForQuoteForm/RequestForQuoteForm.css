@@ -38,6 +38,27 @@
   height: 8rem;
 }
 
+span.bold{
+  font-size: large;
+  font-weight: bold;
+}
+
+#form-send-quote div.handyman-skills{
+  display: flex;
+  align-items: center;
+}
+
+#form-send-quote ul.skills{
+  display: flex;
+  align-items: center;
+  margin-left: 1.5rem;
+}
+
+#form-send-quote ul.skills> li{
+  margin:0 1.5rem 0 1rem;
+  font-weight: bold;
+}
+
 .submit-button-div input {
   background-color: rgb(40, 129, 245);
   width: 7rem;

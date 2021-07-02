@@ -3,8 +3,8 @@
 const express = require("express");
 const router = express.Router();
 const services = require("../services/handymanServices");
-
 import authController from "./../controller/authController";
+
 
 // router.use(express.json()); // You Do not need to put it here because You already have it in app.js
 
@@ -25,6 +25,14 @@ router.post("/handymannotprotected", async (req, res) => {
   const resultStatus = result.status === "OK" ? 201 : 400;
   return res.status(resultStatus).send({ message: result.message });
 });
+
+  
+// GET ALL REVIEWS BY HANDYMAN ID
+router.get("/handymannotprotected/:id/reviews", async (req, res) => {
+  console.log(req)
+  const result = await services.getReviewsByHandymanId(parseInt(req.params.id));
+  return result ? res.status(200).send(result) : res.sendStatus(404);
+}); 
 
 // GET "/{id}" SERVE DATA OF INDIVIDUAL HANDYMAN
 router.get("/handymannotprotected/:id", async (req, res) => {
@@ -105,5 +113,6 @@ router
 
 
 /******************************************************************************************************/
+
 
 module.exports = router;

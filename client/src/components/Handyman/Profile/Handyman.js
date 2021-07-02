@@ -1,13 +1,32 @@
 import { Link, useRouteMatch } from "react-router-dom";
 import "./Handyman.css";
 
-  import userDefaultImg from "../../../public/user.svg"; // WARN: TEMPORARY SOLUTION
+import userDefaultImg from "../../../public/user.svg"; // WARN: TEMPORARY SOLUTION
+import { useEffect, useState } from "react";
 
 const Handyman = ({ userData }) => {
-  
-  const { id, first_name, last_name, address, skills } = userData;
-  const data = { id, first_name, last_name, address, skills };
+  const [reviews, setReviews] = useState([]);
+
+  const { id, first_name, last_name, address, area, skills } = userData;
+  const data = { id, first_name, last_name, address, area, skills };
   const { url } = useRouteMatch();
+
+  useEffect(() => {
+    fetch(`/api/v1/handyman/handymannotprotected/${id}/reviews`)
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error(res.statusText);
+        }
+        return res.json();
+      })
+      .then((data) => {
+        setReviews(data);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }, [id]);
+
   return (
     <div className="card handy-man">
       <div className="profile-image-bio">
@@ -39,21 +58,19 @@ const Handyman = ({ userData }) => {
 
       <div className="user-reviews">
         <span className="label">Reviews:</span>&nbsp;
-        <span className="stars">{userData.reviews.length}</span>
+        {reviews && <span className="stars">{reviews.length}</span>}
         <div>
           <a href="#customer-review">Add a review</a>
         </div>
-        {userData.reviews ? (
-          userData.reviews.map((review, index) => (
+        {reviews &&
+          reviews.map((review, index) => (
             <div key={index} className="review">
               {/* WARN: TEMPORARY SOLUTION */}
               {/* <p className="reviewer">{review.name}</p> */}
-              <p className="review-body">{review}</p><br/>
+              <p className="review-body">{review.review_body}</p>
+              <br />
             </div>
-          ))
-        ) : (
-          <h2>No reviews was received</h2>
-        )}
+          ))}
         <form id="form-review" onSubmit={() => {}}>
           <label htmlFor="customer-review">Your Review</label>
           <input

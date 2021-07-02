@@ -164,7 +164,8 @@ export default function UpdateForm() {
           <legend className="subtitle">
             Skills<span className="required">*</span>
           </legend>
-          <em className="required">Please select at least one skill</em>      
+          {userData.skills.map((skill,index)=><p key={index}>{skill}</p>)}
+          <input placeholder="added new skill"></input>      
         </fieldset>
         <div className={classes.submit_button}>
           <input

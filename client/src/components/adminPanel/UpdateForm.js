@@ -1,15 +1,23 @@
-import { useLocation } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
+import {useContext,useEffect,useState} from "react"
 import Skills from "../Handyman/SubComponents/Skills";
+import AuthContext from "../../store/authContext";
+
 
 
 // TODO: IT does not work
 export default function UpdateForm() {
+  const [userData,setUserData]=useState([]);
   const { state } = useLocation();
-  const userData = state;
+  //const userData = state; 
+  const {id}=useParams()
+  const authCtx = useContext(AuthContext);
+  console.log(id);
   const handleChange = (e) => {
-
     console.log(e.target.value);
   };
+
+ 
 
   return (
     <div>
@@ -57,13 +65,14 @@ export default function UpdateForm() {
               <label htmlFor="address-line-one">
                 Address Line 1<span className="required">*</span>
               </label>{" "}
+              {console.log(userData)}
               <input
                 type="text"
                 id="addressLineOne"
                 name="addressLineOne"
                 maxLength={50}
                 required
-                defaultValue={userData.address.addressLineOne}
+                /* defaultValue={userData.address.addressLineOne} */
                 onChange={handleChange}
               />
             </div>
@@ -77,11 +86,10 @@ export default function UpdateForm() {
                 name="addressLineTwo"
                 maxLength={50}
                 required
-                defaultValue={userData.address.addressLineTwo}
+               /*  defaultValue={userData.address.addressLineTwo} */
                 onChange={handleChange}
               />
             </div>
-            {console.log(userData.address)}
 
             <div className="input-field">
               <label htmlFor="city">
@@ -155,12 +163,7 @@ export default function UpdateForm() {
 						skills={userData.skills}
 					/> 
            */}
-            <div>
-  {userData.skills.map((skill, index) => (
-        <div key={index} className="input-field">
-          <span>{skill}</span>
-         </div>       ))}
-    </div>
+          
 
         </fieldset>
         <div className="submit-button-div">

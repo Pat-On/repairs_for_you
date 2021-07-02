@@ -1,5 +1,5 @@
 import React from "react";
-import "./AdminPage.css";
+import classes from "./AdminPage.module.css";
 import { Route, useRouteMatch, Switch } from "react-router-dom";
 import AdminHandyPeopleTable from "./AdminHandyPeopleTable";
 import UpdateForm from "./UpdateForm";

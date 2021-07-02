@@ -32,7 +32,7 @@ const getReviewsByHandymanIdQuery = `
 const threeRandomHandymanQuery = `SELECT *FROM handyman 
                                 where visible = 'true'
                                 ORDER BY random()
-                                LIMIT 1;`;
+                                LIMIT 3;`;
 // METHODS
 
 /***************** THE FOLLOWING METHODS ARE ACCESSIBLE TO ALL PUBLIC ROUTES *******************/

@@ -17,8 +17,8 @@ export default function AdminHandyPeopleTable(props) {
 
 		alert(`are you sure you want to ${e.target.value}`);
 		if (e.target.value === "Update") {
-      // setChanged(true);
       props.history.push(`${path}/${e.target.id}`);
+     
     } else if (e.target.value === "Activate") {
       fetch(`/api/v1/handyman/handymanprotected/${oneList.id}`, {
         method: "PATCH",
@@ -86,7 +86,7 @@ export default function AdminHandyPeopleTable(props) {
 	// })
 	// setList(newArray)
 
-	return !changed ? (
+	return (
     <table className="table">
       <thead>
         <tr>
@@ -142,7 +142,7 @@ export default function AdminHandyPeopleTable(props) {
             <td>{oneList.visible ? "Visible" : "Hidden"}</td>
             <td>
               <select
-                id={oneList.handyman_id}
+                id={oneList.id}
                 onChange={(e) => {
                   handleChange(e, oneList);
                 }}
@@ -158,7 +158,5 @@ export default function AdminHandyPeopleTable(props) {
         </tbody>
       ))}
     </table>
-  ) : (
-    <UpdateForm />
-  );
+  ) 
 }

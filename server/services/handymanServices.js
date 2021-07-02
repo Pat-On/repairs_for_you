@@ -97,6 +97,11 @@ async function handymanDoesntExist(hEmail) {
   }
 }
 
+async function getThreeRandomHandyman() {
+  const result = await repository.getThreeRandomHandyman();
+  return result.rows;
+}
+
 /******************************************************************************************************/
 
 /***************** THE FOLLOWING METHODS ARE DEDICATED TO ADMIN-ACCESSIBLE ROUTES *******************/
@@ -165,4 +170,5 @@ module.exports = {
   changeHandymanVisibilityByAdmin,
   addNewHandyman,
   getReviewsByHandymanId,
+  getThreeRandomHandyman
 };

@@ -22,12 +22,17 @@ const getHandymanByEmailQuery = `SELECT * FROM handyman WHERE email = $1`; // us
 const addNewHandymanQuery = `
       INSERT INTO handyman (first_name, last_name, img, address, postcode, email, phone_number, skills, bio)
       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)`;
-      
+
 const getReviewsByHandymanIdQuery = `
   SELECT r.review_body, r.rating
     FROM reviews AS r
       INNER JOIN handyman as h ON h.id=r.handyman_id	  
         WHERE r.handyman_id=$1`;
+
+const threeRandomHandymanQuery = `SELECT *FROM handyman 
+                                where visible = 'true'
+                                ORDER BY random()
+                                LIMIT 3;`;
 // METHODS
 
 /***************** THE FOLLOWING METHODS ARE ACCESSIBLE TO ALL PUBLIC ROUTES *******************/
@@ -79,7 +84,11 @@ function addNewHandyman(hData) {
 }
 
 function getReviewsByHandymanId(hId) {
-  return pool.query(getReviewsByHandymanIdQuery,[hId]);
+  return pool.query(getReviewsByHandymanIdQuery, [hId]);
+}
+
+function getThreeRandomHandyman() {
+  return pool.query(threeRandomHandymanQuery)
 }
 /******************************************************************************************************/
 
@@ -109,4 +118,5 @@ module.exports = {
   getHandymanByEmail,
   addNewHandyman,
   getReviewsByHandymanId,
+  getThreeRandomHandyman
 };

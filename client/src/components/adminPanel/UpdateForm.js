@@ -37,7 +37,17 @@ export default function UpdateForm() {
     console.log(formData); */
     
   };
-
+  const submitData= async(e)=>{
+    e.preventDefault();
+    fetch(`/api/v1/handyman/handymanprotected/${id}`, {
+      method: "PUT",
+      body: JSON.stringify({ firstName,lastName,email,addressLineOne,addressLineTwo,phoneNumber,postcode,city, id: id }),
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${authCtx.token}`,
+      },
+    })
+  }
   useEffect(() => {
     fetch(`/api/v1/handyman/handymanprotected/${id}`,
     { headers: { "Authorization": `Bearer ${authCtx.token}` }})

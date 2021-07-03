@@ -12,6 +12,8 @@ export default function UpdateForm() {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
+  const [skills,setSkills]=useState([]);
+  const [newSkill,setNewSkill]=useState("");
   const [city, setCity] = useState("");
   const [postcode, setPostcode] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
@@ -33,6 +35,7 @@ export default function UpdateForm() {
         setEmail(data.email);
         setCity(data.address.city);
         setPostcode(data.postcode);
+        setSkills(data.skills);
         setAddressLineOne(data.address.addressLineOne);
         setAddressLineTwo(data.address.addressLineTwo);
       });
@@ -202,8 +205,8 @@ export default function UpdateForm() {
           <legend className="subtitle">
             Skills<span className="required">*</span>
           </legend>
-          {/*  {data.skills.map((skill,index)=><p key={index}>{skill}</p>)} */}
-          <input placeholder="added new skill"></input>
+          {skills.map((skill,index)=><p key={index}>{skill}</p>)}
+          <input value={newSkill}  placeholder="add new skill"></input>
         </fieldset>
         <div className={classes.submit_button}>
           <input type="submit" id="btn-submit" name="btn-submit" value="Edit" />

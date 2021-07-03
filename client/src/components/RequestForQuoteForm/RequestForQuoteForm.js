@@ -5,52 +5,72 @@ import { validateForm, sendQuoteRequest } from "../../common/js/functions";
 import { useLocation } from "react-router-dom";
 
 const RequestForQuoteForm = (props) => {
-	const { state } = useLocation();	
-	const data = state;
+  const { state } = useLocation();
+  console.log(state);
+  const data = state;
 
-	const [errors, setErrors] = useState([]);
+  const [errors, setErrors] = useState([]);
 
   const handymanId = data.id;
-	const handymanName = { name: `${data.first_name} ${data.last_name}` };
-	const [buyerName, setBuyerName] = useState("");
-	const [buyerEmail, setBuyerEmail] = useState("");
-	const [buyerPhoneNumber, setBuyerPhoneNumber] = useState("");
-	const [jobDescription, setJobDescription] = useState("");
-	const [jobStartDate, setJobStartDate] = useState("");
-	const [estimatedManHours, setEstimatedManHours] = useState("");
-	const [buyerWillingToPay, setBuyerWillingToPay] = useState("");
+  const handymanName = { name: `${data.first_name} ${data.last_name}` };
+  const [buyerName, setBuyerName] = useState("");
+  const [buyerEmail, setBuyerEmail] = useState("");
+  const [buyerPhoneNumber, setBuyerPhoneNumber] = useState("");
+  const [jobDescription, setJobDescription] = useState("");
+  const [jobStartDate, setJobStartDate] = useState("");
+  const [estimatedManHours, setEstimatedManHours] = useState("");
+  const [buyerWillingToPay, setBuyerWillingToPay] = useState("");
 
-	// EVENT HANDLERS
-	const sendFormData = (event) => {
-		event.preventDefault();
-		const form = event.target;
-		const errors = validateForm(form);
-		if (errors.length > 0) {
-			return setErrors(errors);
-		}
-		setErrors([]);
+  // EVENT HANDLERS
+  const sendFormData = (event) => {
+    event.preventDefault();
+    const form = event.target;
+    const errors = validateForm(form);
+    if (errors.length > 0) {
+      return setErrors(errors);
+    }
+    console.log(formData);
+    setErrors([]);
     const formData = {
       handymanId,
-			handymanName,
-			buyerName,
-			buyerEmail,
-			buyerPhoneNumber,
-			jobDescription,
-			jobStartDate,
-			estimatedManHours,
-			buyerWillingToPay,
-		};
-		const requestData = [
-			"service_l0m5rpd",
-			"template_elv94vx",
-			formData,
-			"user_Z6650OqueHooRxmmi5Geo",
-		];
-		sendQuoteRequest(requestData);
-		form.reset();
-	};
+      handymanName,
+      buyerName,
+      buyerEmail,
+      buyerPhoneNumber,
+      jobDescription,
+      jobStartDate,
+      estimatedManHours,
+      buyerWillingToPay,
+    };
+    const requestData = [
+      "service_l0m5rpd",
+      "template_elv94vx",
+      formData,
+      "user_Z6650OqueHooRxmmi5Geo",
+    ];
+    sendQuoteRequest(requestData);
+    form.reset();
+  };
 
-	return (
+  const handymanSummary = (
+    <div className="handyman-summary">
+      <h2>Handyman Info</h2>
+      <p>
+        <span>Name:</span> <span className="bold">{data.first_name}</span>{" "}
+        <span className="bold">{data.last_name}</span>
+      </p>
+      <div className="handyman-skills">
+        <p>Skills:</p>
+        <Skills skills={data.skills} />
+      </div>
+      <p>
+        <span>Area:</span>{" "}
+        <span className="bold">{`${data.area}, ${data.address.city}`}</span>
+      </p>
+    </div>
+  );
+
+  return (
     <form
       id="form-send-quote"
       name="form-send-quote"
@@ -62,25 +82,13 @@ const RequestForQuoteForm = (props) => {
           {e}
         </p>
       ))}
-      <h1 className="title">Request For Quote</h1>
+      <h1 className="title">
+        {data.id !== 0 ? "Request For Quote" : "General Quote Request"}
+      </h1>
       <em className="required">
         <span className="required">*</span>&nbsp;Required field
       </em>
-      <div className="handyman-summary">
-        <h2>Handyman Info</h2>
-        <p>
-          <span>Name:</span> <span className="bold">{data.first_name}</span>{" "}
-          <span className="bold">{data.last_name}</span>
-        </p>
-        <div className="handyman-skills">
-          <p>Skills:</p>
-          <Skills skills={data.skills} />
-        </div>
-        <p>
-          <span>Area:</span>{" "}
-          <span className="bold">{`${data.area}, ${data.address.city}`}</span>
-        </p>
-      </div>
+      { data.id !== 0 ? handymanSummary : null}
       <div>
         <fieldset className="input-field-group contact-details">
           <legend className="subtitle">Contact Details</legend>

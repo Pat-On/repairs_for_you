@@ -44,7 +44,14 @@ export default function UpdateForm() {
     .then(res=>res.json())
     .then(data=>
 {console.log(data)
-   
+  setFirstName(data.first_name);
+  setLastName(data.last_name);
+  setPhoneNumber(data.phone_number);
+  setEmail(data.email);
+  setCity(data.address.city)
+  setPostcode(data.postcode);
+   setAddressLineOne(data.address.addressLineOne)
+  setAddressLineTwo(data.address.addressLineTwo) 
     })
    }, [id])
   

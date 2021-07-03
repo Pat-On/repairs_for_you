@@ -4,7 +4,6 @@ import userDefaultImg from "../../public/user.svg";
 
 export default function handyPeopleCard({ onelist }) {
   const { url } = useRouteMatch();
-  console.log(onelist.id);
   return (
     <div className="one-card-container">
       <div className="name-image">

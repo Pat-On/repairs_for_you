@@ -16,7 +16,14 @@ export default function UpdateForm() {
 /* const [formData,setFormData]=useState({}) */
   // handle change function work in progress
 
-
+  const [firstName,setFirstName]=useState("");
+  const [lastName,setLastName]=useState("");
+  const [email,setEmail]=useState("");
+  const [city,setCity]=useState("");
+  const [postcode,setPostcode]=useState("");
+  const [phoneNumber,setPhoneNumber]=useState("");
+  const [addressLineOne,setAddressLineOne]=useState("");
+  const [addressLineTwo,setAddressLineTwo]=useState("")
 
 
 

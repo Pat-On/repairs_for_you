@@ -3,9 +3,8 @@ import { Link, useRouteMatch } from "react-router-dom";
 import userDefaultImg from "../../public/user.svg";
 
 export default function handyPeopleCard({ onelist }) {
-	const { url } = useRouteMatch();
-	
-	return (
+  const { url } = useRouteMatch();
+  return (
     <div className="one-card-container">
       <div className="name-image">
         <Link to={{ pathname: `${url}/${onelist.id}`, state: onelist }}>
@@ -20,6 +19,14 @@ export default function handyPeopleCard({ onelist }) {
       <div className="bio">
         <p className="card-text">{onelist.bio}</p>
       </div>
+      <Link
+        to={{
+          pathname: `${url}/${onelist.id}/forms/request-for-quote`,
+          state: onelist,
+        }}
+      >
+        quote
+      </Link>
 
       <ul className="list-group list-group-flush">
         {onelist.skills.map((skill, index) => (

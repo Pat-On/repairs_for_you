@@ -49,9 +49,6 @@ const Footer = (props) => {
           <li>Street</li>
           <li>Birmingham</li>
           <li>B1 111</li>
-          <li>
-            <Link to="/signin">admin</Link>{" "}
-          </li>
         </ul>
       </div>
 
@@ -60,6 +57,7 @@ const Footer = (props) => {
         <p>
           A Social enterprise founded by Coventry Refugee and Migrant Centre
         </p>
+        <Link to="/signin">admin</Link>{" "}
       </div>
     </footer>
   );

@@ -1,38 +1,73 @@
 import { useLocation, useParams } from "react-router-dom";
-import {useContext,useEffect,useState} from "react"
+import { useContext, useEffect, useState } from "react";
 import AuthContext from "../../store/authContext";
-import classes from './AdminPage.module.css'
+import classes from "./AdminPage.module.css";
 
-
-
-
-// TODO: IT does not work
 export default function UpdateForm() {
   const authCtx = useContext(AuthContext);
-  const { state } = useLocation();
-  const {id}=useParams()
-  const [userData,setUserData]=useState([]);
-  //const userData = state; 
+  const { id } = useParams();
 
-  // handle change function work in progress
+  // input field states
 
-  const handleChange = (e) => {
-    console.log(e.target.value);
-  };
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [city, setCity] = useState("");
+  const [postcode, setPostcode] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [addressLineOne, setAddressLineOne] = useState("");
+  const [addressLineTwo, setAddressLineTwo] = useState("");
+
+  // fetch data by id
 
   useEffect(() => {
-    fetch(`/api/v1/handyman/handymanprotected/${id}`,
-    { headers: { "Authorization": `Bearer ${authCtx.token}` }})
-    .then(res=>res.json())
-    .then(data=>setUserData(data))
-   }, [id])
-  
+    fetch(`/api/v1/handyman/handymanprotected/${id}`, {
+      headers: { Authorization: `Bearer ${authCtx.token}` },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        setFirstName(data.first_name);
+        setLastName(data.last_name);
+        setPhoneNumber(data.phone_number);
+        setEmail(data.email);
+        setCity(data.address.city);
+        setPostcode(data.postcode);
+        setAddressLineOne(data.address.addressLineOne);
+        setAddressLineTwo(data.address.addressLineTwo);
+      });
+  }, [id]);
+
+  // submit data function
+
+  const submitData = async (e) => {
+    e.preventDefault();
+    fetch(`/api/v1/handyman/handymanprotected/${id}`, {
+      method: "PUT",
+      body: JSON.stringify({
+        firstName,
+        lastName,
+        email,
+        addressLineOne,
+        addressLineTwo,
+        phoneNumber,
+        postcode,
+        city,
+        id: id,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${authCtx.token}`,
+      },
+    });
+  };
+
   return (
     <div>
       <form
         id="form-add-handyman"
         name="form-add-handyman"
-        // onSubmit={handleChange(e)} 
+        onSubmit={submitData}
       >
         <fieldset className={classes.input_field_group_details}>
           <legend className={classes.subtitle}>Edit User details</legend>
@@ -48,8 +83,8 @@ export default function UpdateForm() {
                 name="firstName"
                 maxLength={50}
                 required
-                defaultValue={userData.first_name}
-                onChange={handleChange}
+                value={firstName}
+                onChange={(e) => setFirstName(e.target.value)}
               />
             </div>
             <div className={classes.input_field}>
@@ -62,8 +97,11 @@ export default function UpdateForm() {
                 name="lastName"
                 maxLength={50}
                 required
-                defaultValue={userData.last_name}
-                onChange={handleChange}
+                value={lastName}
+                onChange={(e) => {
+                  console.log(e.target.value);
+                  setLastName(e.target.value);
+                }}
               />
             </div>
           </div>
@@ -79,8 +117,8 @@ export default function UpdateForm() {
                 name="addressLineOne"
                 maxLength={50}
                 required
-                /* defaultValue={userData.address.addressLineOne} */
-                onChange={handleChange}
+                value={addressLineOne}
+                onChange={(e) => setAddressLineOne(e.target.value)}
               />
             </div>
             <div className={classes.input_field}>
@@ -93,8 +131,8 @@ export default function UpdateForm() {
                 name="addressLineTwo"
                 maxLength={50}
                 required
-               /*  defaultValue={userData.address.addressLineTwo} */
-                onChange={handleChange}
+                value={addressLineTwo}
+                onChange={(e) => setAddressLineTwo(e.target.value)}
               />
             </div>
 
@@ -108,8 +146,8 @@ export default function UpdateForm() {
                 name="city"
                 maxLength={50}
                 required
-                onChange={handleChange}
-                defaultValue="Coventry"
+                value={city}
+                onChange={(e) => setCity(e.target.value)}
               />
             </div>
             <div className={classes.input_field}>
@@ -122,8 +160,8 @@ export default function UpdateForm() {
                 name="postcode"
                 maxLength={12}
                 required
-                onChange={handleChange}
-                defaultValue={userData.postcode}
+                value={postcode}
+                onChange={(e) => setPostcode(e.target.value)}
               />
             </div>
           </div>
@@ -139,8 +177,8 @@ export default function UpdateForm() {
                 name="email"
                 maxLength={50}
                 required
-                defaultValue={userData.email}
-                onChange={handleChange}
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
               />
             </div>
             <div className={classes.input_field}>
@@ -154,8 +192,8 @@ export default function UpdateForm() {
                 minLength={11}
                 maxLength={13}
                 required
-                defaultValue={userData.phone_number}
-                onChange={handleChange}
+                value={phoneNumber}
+                onChange={(e) => setPhoneNumber(e.target.value)}
               />
             </div>
           </div>
@@ -164,15 +202,11 @@ export default function UpdateForm() {
           <legend className="subtitle">
             Skills<span className="required">*</span>
           </legend>
-          <em className="required">Please select at least one skill</em>      
+          {/*  {data.skills.map((skill,index)=><p key={index}>{skill}</p>)} */}
+          <input placeholder="added new skill"></input>
         </fieldset>
         <div className={classes.submit_button}>
-          <input
-            type="submit"
-            id="btn-submit"
-            name="btn-submit"
-            value="Edit"
-          />
+          <input type="submit" id="btn-submit" name="btn-submit" value="Edit" />
         </div>
       </form>
     </div>

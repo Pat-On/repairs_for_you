@@ -11,40 +11,40 @@ export default function UpdateForm() {
   const authCtx = useContext(AuthContext);
   //const { state } = useLocation();
   const {id}=useParams()
-  const [userData,setUserData]=useState([]);
-  //const userData = state; 
-const [formData,setFormData]=useState({
-  firstName:"",
-  lastName:"",
-  email:"",
-  addressLineOne:"",
-  addressLineTwo:"",
-})
+  //const [data,setdata]=useState([]);
+  //const data = state; 
+/* const [formData,setFormData]=useState({}) */
   // handle change function work in progress
 
+
+
+
+
+
   const handleChange = (e) => {
-    e.preventDefault();
+   /*  e.preventDefault();
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
     });
-    console.log(formData);
+    console.log(formData); */
     
   };
-const submitData= (e)=>{
-  e.preventDefault();
-}
+
   useEffect(() => {
     fetch(`/api/v1/handyman/handymanprotected/${id}`,
     { headers: { "Authorization": `Bearer ${authCtx.token}` }})
     .then(res=>res.json())
-    .then(data=>setUserData(data))
+    .then(data=>
+{console.log(data)
+   
+    })
    }, [id])
   
-  return userData.length===0 ? <p>Please wait .......</p> : (
+  return /* data.length===0 ? <p>Please wait .......</p> : */ (
     <div>
       <form
-       /*  id="form-add-handyman" */
+        id="form-add-handyman" 
         name="form-add-handyman"
          onSubmit={submitData}
       >
@@ -62,8 +62,8 @@ const submitData= (e)=>{
                 name="firstName"
                 maxLength={50}
                 required
-                defaultValue={userData.first_name}
-                onChange={handleChange}
+                value={firstName}
+                onChange={(e)=>setFirstName(e.target.value)}
               />
             </div>
             <div className={classes.input_field}>
@@ -76,8 +76,11 @@ const submitData= (e)=>{
                 name="lastName"
                 maxLength={50}
                 required
-                defaultValue={userData.last_name}
-                onChange={handleChange}
+                value={lastName}
+                onChange={(e)=>{
+                  console.log(e.target.value)
+                  setLastName(e.target.value)}}
+
               />
             </div>
           </div>
@@ -93,8 +96,8 @@ const submitData= (e)=>{
                 name="addressLineOne"
                 maxLength={50}
                 required
-                defaultValue={userData.address.addressLineOne} 
-                onChange={handleChange}
+                value={addressLineOne} 
+                onChange={(e)=>setAddressLineOne(e.target.value)}
               />
             </div>
             <div className={classes.input_field}>
@@ -107,8 +110,9 @@ const submitData= (e)=>{
                 name="addressLineTwo"
                 maxLength={50}
                 required
-                defaultValue={userData.address.addressLineTwo} 
-                onChange={handleChange}
+                value={addressLineTwo} 
+                onChange={(e)=>setAddressLineTwo(e.target.value)}
+
               />
             </div>
 
@@ -122,8 +126,9 @@ const submitData= (e)=>{
                 name="city"
                 maxLength={50}
                 required
-                onChange={handleChange}
-                defaultValue="Coventry"
+                value={city}
+                onChange={(e)=>setCity(e.target.value)}
+
               />
             </div>
             <div className={classes.input_field}>
@@ -136,8 +141,8 @@ const submitData= (e)=>{
                 name="postcode"
                 maxLength={12}
                 required
-                onChange={handleChange}
-                defaultValue={userData.postcode}
+                value={postcode}
+                onChange={(e)=>setPostcode(e.target.value)}
               />
             </div>
           </div>
@@ -153,8 +158,9 @@ const submitData= (e)=>{
                 name="email"
                 maxLength={50}
                 required
-                defaultValue={userData.email}
-                onChange={handleChange}
+                value={email}
+                onChange={(e)=>setEmail(e.target.value)}
+
               />
             </div>
             <div className={classes.input_field}>
@@ -168,8 +174,9 @@ const submitData= (e)=>{
                 minLength={11}
                 maxLength={13}
                 required
-                defaultValue={userData.phone_number}
-                onChange={handleChange}
+                value={phoneNumber}
+                onChange={(e)=>setPhoneNumber(e.target.value)}
+
               />
             </div>
           </div>
@@ -178,7 +185,7 @@ const submitData= (e)=>{
           <legend className="subtitle">
             Skills<span className="required">*</span>
           </legend>
-          {userData.skills.map((skill,index)=><p key={index}>{skill}</p>)}
+         {/*  {data.skills.map((skill,index)=><p key={index}>{skill}</p>)} */}
           <input placeholder="added new skill"></input>      
         </fieldset>
         <div className={classes.submit_button}>

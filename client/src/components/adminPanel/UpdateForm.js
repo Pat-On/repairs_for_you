@@ -9,17 +9,31 @@ import classes from './AdminPage.module.css'
 // TODO: IT does not work
 export default function UpdateForm() {
   const authCtx = useContext(AuthContext);
-  const { state } = useLocation();
+  //const { state } = useLocation();
   const {id}=useParams()
   const [userData,setUserData]=useState([]);
   //const userData = state; 
-
+const [formData,setFormData]=useState({
+  firstName:"",
+  lastName:"",
+  email:"",
+  addressLineOne:"",
+  addressLineTwo:"",
+})
   // handle change function work in progress
 
   const handleChange = (e) => {
-    console.log(e.target.value);
+    e.preventDefault();
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+    console.log(formData);
+    
   };
-
+const submitData= (e)=>{
+  e.preventDefault();
+}
   useEffect(() => {
     fetch(`/api/v1/handyman/handymanprotected/${id}`,
     { headers: { "Authorization": `Bearer ${authCtx.token}` }})
@@ -30,9 +44,9 @@ export default function UpdateForm() {
   return userData.length===0 ? <p>Please wait .......</p> : (
     <div>
       <form
-        id="form-add-handyman"
+       /*  id="form-add-handyman" */
         name="form-add-handyman"
-        // onSubmit={handleChange(e)} 
+         onSubmit={submitData}
       >
         <fieldset className={classes.input_field_group_details}>
           <legend className={classes.subtitle}>Edit User details</legend>

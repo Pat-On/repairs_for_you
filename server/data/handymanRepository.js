@@ -33,6 +33,17 @@ const threeRandomHandymanQuery = `SELECT *FROM handyman
                                 where visible = 'true'
                                 ORDER BY random()
                                 LIMIT 3;`;
+                            
+const adminEditHandymanDetailQuery=  `UPDATE handyman
+                              SET first_name = $1,
+                                last_name= $2,
+                                addressLineOne=$3,
+                                email=$4,
+                                phone_number=$5,
+                                skills=$6,
+                                 postcode=$7,
+                                 addressLineTwo=$8
+                                WHERE handyman_id=$3`;
 // METHODS
 
 /***************** THE FOLLOWING METHODS ARE ACCESSIBLE TO ALL PUBLIC ROUTES *******************/
@@ -118,5 +129,5 @@ module.exports = {
   getHandymanByEmail,
   addNewHandyman,
   getReviewsByHandymanId,
-  getThreeRandomHandyman
+  getThreeRandomHandyman,
 };

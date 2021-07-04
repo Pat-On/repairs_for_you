@@ -1,29 +1,26 @@
 import React, { useState, useEffect, useContext } from "react";
-import {  useRouteMatch,  Link } from "react-router-dom";
-import classes from './AdminPage.module.css'
-
-
+import { useRouteMatch, Link } from "react-router-dom";
+import classes from "./AdminPage.module.css";
 
 import AuthContext from "../../store/authContext";
 
 export default function AdminHandyPeopleTable(props) {
-	let { path, url } = useRouteMatch();
-	const [list, setList] = useState([]);
+  let { path, url } = useRouteMatch();
+  const [list, setList] = useState([]);
   const [changed, setChanged] = useState(false);
 
   const authCtx = useContext(AuthContext);
   console.log(authCtx.token);
 
   const handleChange = (e, oneList) => {
-
     alert(`are you sure you want to ${e.target.value}`);
     const actionVerb = e.target.value;
     if (actionVerb === "Update") {
       // setChanged(true);
       props.history.push(`${path}/${e.target.id}`);
-    } 
-    // when action verb is delete 
-    else if(actionVerb==="Delete"){
+    }
+    // when action verb is delete
+    else if (actionVerb === "Delete") {
       fetch(`/api/v1/handyman/handymanprotected/${e.target.id}`, {
         method: "DELETE",
         body: JSON.stringify({ id: e.target.id }),
@@ -31,9 +28,8 @@ export default function AdminHandyPeopleTable(props) {
           "Content-Type": "application/json",
           Authorization: `Bearer ${authCtx.token}`,
         },
-      })
-    }
-    else if (actionVerb === "Activate" || actionVerb === "Deactivate") {
+      });
+    } else if (actionVerb === "Activate" || actionVerb === "Deactivate") {
       const newStatus = actionVerb === "Activate" ? true : false;
       fetch(`/api/v1/handyman/handymanprotected/${oneList.id}`, {
         method: "PATCH",
@@ -72,10 +68,8 @@ export default function AdminHandyPeopleTable(props) {
       });
   }, []);
 
-
-	return (
+  return (
     <table className={classes.table}>
-
       <thead>
         <tr>
           <th scope="col">Id</th>
@@ -83,7 +77,6 @@ export default function AdminHandyPeopleTable(props) {
           <th scope="col">Last-name</th>
           <th scope="col">email</th>
           <th scope="col">Telephone</th>
-          <th scope="col">Area</th>
           <th scope="col">postcode</th>
           <th scope="col">street-name</th>
           <th scope="col">Joined</th>
@@ -100,7 +93,6 @@ export default function AdminHandyPeopleTable(props) {
 
             <td>{oneList.email}</td>
             <td>{oneList.phone_number}</td>
-            <td>{oneList.area}</td>
             <td>{oneList.postcode}</td>
             <td>{oneList.address.addressLineTwo}</td>
             <td>day/month/year</td>
@@ -123,5 +115,5 @@ export default function AdminHandyPeopleTable(props) {
         </tbody>
       ))}
     </table>
-  ) 
+  );
 }

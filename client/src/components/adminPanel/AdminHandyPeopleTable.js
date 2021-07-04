@@ -78,10 +78,6 @@ export default function AdminHandyPeopleTable(props) {
 
       <thead>
         <tr>
-        {/*   <th>
-             <input type="checkbox"></input> 
-            <p>More</p>
-          </th> */}
           <th scope="col">Id</th>
           <th scope="col">First-name</th>
           <th scope="col">Last-name</th>
@@ -99,28 +95,16 @@ export default function AdminHandyPeopleTable(props) {
       {list.map((oneList, index) => (
         <tbody key={index}>
           <tr>
-           {/*  <td>
-               add here link base on id uf user to the update profile 
-               <input type="checkbox"></input> 
-              <button>
-                <Link to={{ pathname: `${url}/${oneList.id}`, state: oneList }}>
-                  View Repair Person
-                </Link>
-              </button>
-            </td> */}
-
             <th scope="row">{oneList.id}</th>
             <td>{oneList.first_name}</td>
             <td>{oneList.last_name}</td>
 
             <td>{oneList.email}</td>
             <td>{oneList.phone_number}</td>
-            {/* <td>{oneList.address_offer.city}</td> */}
             <td>{oneList.area}</td>
             <td>{oneList.postcode}</td>
             <td>{oneList.address.addressLineTwo}</td>
             <td>day/month/year</td>
-            {/* this will be the date the user was created  */}
             <td>
               completed jobs
               <br></br>

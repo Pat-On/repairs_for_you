@@ -10,7 +10,7 @@ async function getAllHandymen() {
 
 // SEARCH HANDYMAN FROM LIST BY HANDYMAN ID
 async function getHandymanById(hId) {
-  const result = repository.getHandymanById(hId);
+  const result = await repository.getHandymanById(hId);
   return result.rows[0];
 }
 
@@ -43,6 +43,7 @@ async function addNewHandyman(hData) {
   };
 }
 
+// WARN: THIS FUNCTION IS CURRENTLY NOT BEING USED. IT IS INCLUDED IN LIGHT OF PROBABLE FUTURE NEEDS
 async function getReviewsByHandymanId(hId) {
   const result = await repository.getReviewsByHandymanId(hId);
   return result.rows;

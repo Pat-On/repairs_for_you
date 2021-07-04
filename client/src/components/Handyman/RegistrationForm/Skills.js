@@ -35,7 +35,10 @@ const Skills = (props) => {
       if (item.name === skill.name && skill.checked) {
         return { ...item, value: skill.value };
       }
-      return { ...item, value: item.value };
+      if (item.name === skill.name && !skill.checked) {
+        return { ...item, value: "" };
+      }
+      return item;
     });
     setUpdatedSkillsList(newList);
     // now send only the selected skills

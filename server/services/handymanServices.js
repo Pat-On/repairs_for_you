@@ -10,13 +10,13 @@ async function getAllHandymen() {
 
 // SEARCH HANDYMAN FROM LIST BY HANDYMAN ID
 async function getHandymanById(hId) {
-  const result = repository.getHandymanById(hId);
+  const result = await repository.getHandymanById(hId);
   return result.rows[0];
 }
 
 // POST A NEW HANDYMAN
 async function addNewHandyman(hData) {
-  const dataIsValid = validateNewHandymanData(hData);
+  const dataIsValid = validateHandymanData(hData);
   if (dataIsValid) {
     try {
       const handymanIsNew = await handymanDoesntExist(hData.email);
@@ -43,6 +43,7 @@ async function addNewHandyman(hData) {
   };
 }
 
+// WARN: THIS FUNCTION IS CURRENTLY NOT BEING USED. IT IS INCLUDED IN LIGHT OF PROBABLE FUTURE NEEDS
 async function getReviewsByHandymanId(hId) {
   const result = await repository.getReviewsByHandymanId(hId);
   return result.rows;
@@ -51,8 +52,9 @@ async function getReviewsByHandymanId(hId) {
 // VALIDATE INCOMING HANDYMAN DATA
 // Note: this is used only during the initial stage of handyman registration process (accessible to anyone...
 // ...who would like to rgister as handyman on the site)
-function validateNewHandymanData(hData) {
+function validateHandymanData(hData) {
   // required handyman data fields
+  console.log(hData);
   try {
     const {
       firstName,
@@ -67,7 +69,7 @@ function validateNewHandymanData(hData) {
     // destructure address (={addressLineOne, addressLineTwo,city}) and access individual field values
     // city has default value of "Coventry", so no need to validate that
     const { addressLineOne, addressLineTwo } = address;
-    
+
     const dataToValidate = [
       firstName,
       lastName,
@@ -79,7 +81,7 @@ function validateNewHandymanData(hData) {
       skills,
       bio,
     ];
-   return dataToValidate.every((item) => item);
+    return dataToValidate.every((item) => item);
   } catch (err) {
     console.log(err);
   }
@@ -151,6 +153,45 @@ async function changeHandymanVisibilityByAdmin(hData) {
   }
 }
 
+// UPDATE HANDYMAN RECORDS BY ID FOR ADMIN
+
+async function editHandymanDetailsByIdAdmin(hData) {
+  const dataIsValid = validateHandymanData(hData); //
+  if (dataIsValid) {
+    try {
+      const handymanExists = await getHandymanByIdForAdmin(hData.id);
+      if (handymanExists) {
+        const result = await repository.editHandymanDetailsByIdAdmin(hData);
+        if (result.rowCount > 0) {
+          return {
+            status: "OK",
+            message: "Handyman has been updated successfully.",
+          };
+        }
+      }
+      return {
+        status: "FAIL",
+        message:
+          "A user with this id does not exist.",
+      };
+    } catch (error) {
+      // if there is database connection issue
+      return console.log(error);
+    }
+  }
+  return {
+    status: "FAIL",
+    message: "Handyman could not be saved. Missing handyman information.",
+  };
+}
+// DELETE HANDYMAN RECORD BY ID FOR ADMIN
+
+async function deleteHandymanByIdAdmin(hId) {
+  const result = await repository.deleteHandymanByIdAdmin(hId);
+  console.log(result)
+  return result.rows[0];   
+}
+
 function validateUpdateData(hData) {
   const { visible, id } = hData;
   // make sure both new visible value ('true' or 'false') and handyman id has been supplied
@@ -158,7 +199,7 @@ function validateUpdateData(hData) {
   // if all informaiton has been provided, validate each data
   if (typeof visible !== "boolean") return false;
   if (isNaN(parseInt(id))) return false;
-  // 
+  //
   return true;
 }
 
@@ -170,5 +211,7 @@ module.exports = {
   changeHandymanVisibilityByAdmin,
   addNewHandyman,
   getReviewsByHandymanId,
-  getThreeRandomHandyman
+  getThreeRandomHandyman,
+  editHandymanDetailsByIdAdmin,
+  deleteHandymanByIdAdmin
 };

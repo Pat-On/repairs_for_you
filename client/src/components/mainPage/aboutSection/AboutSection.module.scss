@@ -1,11 +1,12 @@
 .about {
+  position: relative;
   grid-row: 2 / 3;
   grid-column: 1 / -1;
   background-color: rgb(233, 230, 230);
 
   display: grid;
   grid-template-columns: 0.3fr repeat(2, 1fr) 0.3fr;
-  grid-template-rows: repeat(3, 1fr);
+  grid-template-rows: 0.8fr 1fr 0.8fr;
 
   justify-items: center;
   align-items: center;
@@ -22,8 +23,9 @@
   &__description {
     grid-row: 2 / 3;
     grid-column: 2 / 4;
-
+    width: 80%;
     font-size: 2rem;
+    line-height: 2;
   }
 
   &__list {
@@ -35,13 +37,15 @@
     justify-content: space-evenly;
 
     &__element {
+      display: relative;
       background-color: white;
-      width: 20rem; // simple trick to make all logos the same size.
-
+      width: 22rem; // simple trick to make all logos the same size.
+      height: 7rem;
+      
       img {
         margin: 0 auto;
         display: block;
-        height: 5rem;
+        height: 100%;
       }
     }
   }

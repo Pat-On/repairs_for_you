@@ -22,8 +22,8 @@ async function addNewQuote(qData) {
   if (dataIsValid) {
     try {
       // check if buyer is new to the site, and if they are, attempt to add their basic data to database
-      const result = await getBuyerByEmail(qData.buyerEmail);
-      if (result.rowCount === 0) await addNewBuyer(qData);
+      // const result = await getBuyerByEmail(qData.buyerEmail); WARN: LINE COMMENTED OUT AS FEATURE IS CURRENTLY NOT IMPLEMENTED
+      // if (result.rowCount === 0) await addNewBuyer(qData); WARN: LINE COMMENTED OUT AS FEATURE IS CURRENTLY NOT IMPLEMENTED
       // continue attempt to add new quote request data to database
       await repository.addNewQuote(qData);
       return {

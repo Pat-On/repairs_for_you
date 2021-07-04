@@ -9,7 +9,7 @@ import AuthContext from "../../store/authContext";
 export default function AdminHandyPeopleTable(props) {
 	let { path, url } = useRouteMatch();
 	const [list, setList] = useState([]);
-	
+  const [changed, setChanged] = useState(false);
 
   const authCtx = useContext(AuthContext);
   console.log(authCtx.token);
@@ -21,7 +21,19 @@ export default function AdminHandyPeopleTable(props) {
     if (actionVerb === "Update") {
       // setChanged(true);
       props.history.push(`${path}/${e.target.id}`);
-    } else if (actionVerb === "Activate" || actionVerb === "Deactivate") {
+    } 
+    // when action verb is delete 
+    else if(actionVerb==="Delete"){
+      fetch(`/api/v1/handyman/handymanprotected/${e.target.id}`, {
+        method: "DELETE",
+        body: JSON.stringify({ id: e.target.id }),
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${authCtx.token}`,
+        },
+      })
+    }
+    else if (actionVerb === "Activate" || actionVerb === "Deactivate") {
       const newStatus = actionVerb === "Activate" ? true : false;
       fetch(`/api/v1/handyman/handymanprotected/${oneList.id}`, {
         method: "PATCH",

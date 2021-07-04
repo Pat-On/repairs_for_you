@@ -8,7 +8,7 @@ export default function SearchField({list,setSearch,search}) {
                 .toLowerCase()
                 .indexOf(e.target.value.toLowerCase()) !== -1
           );
-         
+          setSearch(filteredByKeyWord)
         }
     return (
         <div>

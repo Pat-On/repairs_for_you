@@ -16,9 +16,10 @@ const Footer = (props) => {
     <footer className={classes.footer}>
       <ul className={classes.footer__listOfIcons}>
         <li>
-          <a className={classes.links} href="mailto: patryk.nowak@gmail.com">
+         {/*  <a className={classes.links} href="mailto: patryk.nowak@gmail.com">
             <img src={email} alt="Email icon made by Pixel Perfect" />
-          </a>
+          </a> */}
+           <Link to={"/contact"}> <img src={email} alt="Email icon made by Pixel Perfect" /></Link>
         </li>
         <li>
           <a rel="noreferrer" className={classes.links} href="" target="_blank">

@@ -9,17 +9,17 @@ const navigationItems = (props) => {
 
   return (
     <ul className={classes.navigationItems}>
-      <NavigationItem link="/" exact>
+      {/* <NavigationItem link="/" exact>
         Home
-      </NavigationItem>
-      <NavigationItem link="/users/handyman">Handypeople</NavigationItem>
-      <NavigationItem link="/contact">Contact</NavigationItem>
+      </NavigationItem> */}
+      <NavigationItem link="/users/handyman">Find A Repairer</NavigationItem>
+      <NavigationItem link="/contact">Contact US</NavigationItem>
       {authCtx.isLoggedIn && (
         <NavigationItem link="/admin-panel">Admin Panel</NavigationItem>
       )}
-      {!authCtx.isLoggedIn && (
+      {/* {!authCtx.isLoggedIn && (
         <NavigationItem link="/signin">Sign-In</NavigationItem>
-      )}
+      )} */}
       {authCtx.isLoggedIn && (
         <NavigationItem link="/signinout">Sign-Out</NavigationItem>
       )}

@@ -28,6 +28,7 @@ const RequestForQuoteForm = () => {
     if (errors.length > 0) {
       return setErrors(errors);
     }
+    
     setErrors([]);
     const formData = {
       handymanId,
@@ -60,6 +61,7 @@ const RequestForQuoteForm = () => {
           {e}
         </p>
       ))}
+
       <h1 className="title">Request For Quote</h1>
       {data && (
         <div className="handyman-summary">
@@ -81,6 +83,7 @@ const RequestForQuoteForm = () => {
           </p> */}
         </div>
       )}
+      
       <div>
         <em className="required">
           <span className="required">*</span>&nbsp;Required field

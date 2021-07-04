@@ -11,6 +11,15 @@ import authController from "./../controller/authController";
 
 /***************** THE FOLLOWING METHODS ARE DEDICATED TO ADMIN-ACCESSIBLE ROUTES *******************/
 
+// POST "/" ALLOW QUOTE REQUEST DATA STORAGE (currently accessible to all site visitors)
+// NOTE: this is used just to allow storage of quote request-related data provided by a potential buyer
+router.post("/", async (req, res) => {
+  const result = await services.addNewQuote(req.body);
+  const resultStatus = result.status === "OK" ? 201 : 400;
+  res.status(resultStatus).send({ message: result.message });
+});
+
+
 /**
  * Routes are only accessible for logged in admin
  */
@@ -36,12 +45,6 @@ router.get("/:id", async (req, res) => {
  * 
  */
 
-// POST "/" ALLOW QUOTE REQUEST DATA STORAGE (currently accessible to all site visitors)
-// NOTE: this is used just to allow storage of quote request-related data provided by a potential buyer
-router.post("/", async (req, res) => {
-  const result = await services.addNewQuote(req.body);
-  const resultStatus = result.status === "OK" ? 201 : 400;
-  res.status(resultStatus).send({ message: result.message });
-});
+
 
 module.exports = router;

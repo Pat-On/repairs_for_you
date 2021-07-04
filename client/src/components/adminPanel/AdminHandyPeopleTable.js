@@ -87,7 +87,6 @@ export default function AdminHandyPeopleTable(props) {
           <th scope="col">postcode</th>
           <th scope="col">street-name</th>
           <th scope="col">Joined</th>
-          <th scope="col">Jobs Done</th>
           <th scope="col">status</th>
           <th scope="col">Action</th>
         </tr>
@@ -105,12 +104,6 @@ export default function AdminHandyPeopleTable(props) {
             <td>{oneList.postcode}</td>
             <td>{oneList.address.addressLineTwo}</td>
             <td>day/month/year</td>
-            <td>
-              completed jobs
-              <br></br>
-              {/* also possible to make it into two columns */}
-              inprogress jobs
-            </td>
             <td>{oneList.visible ? "Visible" : "Hidden"}</td>
             <td>
               <select

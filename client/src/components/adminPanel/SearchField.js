@@ -1,9 +1,18 @@
-import React from 'react'
+import React, { useState } from 'react'
 
-export default function SearchField() {
+export default function SearchField({list,setSearch,search}) {
+    const handleChange=(e)=>{
+        const filteredByKeyWord = list.filter(
+            (data) =>
+              JSON.stringify(data)
+                .toLowerCase()
+                .indexOf(e.target.value.toLowerCase()) !== -1
+          );
+         
+        }
     return (
         <div>
-            <input placeholder="search by keyword"></input>
+            <input placeholder="search by keyword" onChange={handleChange}></input>
         </div>
     )
 }

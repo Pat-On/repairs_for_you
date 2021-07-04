@@ -80,7 +80,7 @@ router
     return res.status(resultStatus).json({ message: result.message });
   })
 
-  // delete handyman 
+  // ADMIN CAN DELETE HANDYMAN RECORD  
   .delete(async (req, res) => {
     const result = await services.deleteHandymanByIdAdmin(
       parseInt(req.params.id)

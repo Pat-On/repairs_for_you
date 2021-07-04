@@ -67,7 +67,9 @@ export default function UpdateForm() {
         "Content-Type": "application/json",
         Authorization: `Bearer ${authCtx.token}`,
       },
-    })
+    }).then((res) => res.json())
+    .then((data) => console.log(data))
+    .catch((error) => console.log(error)); 
       
   };
 

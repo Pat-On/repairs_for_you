@@ -12,7 +12,7 @@ export default function UpdateForm() {
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [skills, setSkills] = useState([]);
-  //const [newSkill, setNewSkill] = useState("");
+  const [newSkill, setNewSkill] = useState("");
   const [city, setCity] = useState("");
   const [postcode, setPostcode] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
@@ -59,7 +59,7 @@ export default function UpdateForm() {
         },
         phoneNumber,
         postcode,
-        skills,
+      skills:[...skills, newSkill],
         bio,
         id,
       }),
@@ -218,7 +218,7 @@ export default function UpdateForm() {
           ))}
           <input
             value={newSkill}
-            onChange={(e) => console.log(e.target.value)}
+            onChange={(e) => setNewSkill(e.target.value)}
             placeholder="add new skill"
           ></input>
         </fieldset>

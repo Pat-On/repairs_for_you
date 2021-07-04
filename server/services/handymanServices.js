@@ -153,6 +153,37 @@ async function changeHandymanVisibilityByAdmin(hData) {
   }
 }
 
+// update handyman details
+
+async function editHandymanDetailsByIdAdmin(hData) {
+  const dataIsValid = validateHandymanData(hData); //
+  if (dataIsValid) {
+    try {
+      const handymanExists = await getHandymanByIdForAdmin(hData.id);
+      if (handymanExists) {
+        const result = await repository.editHandymanDetailsByIdAdmin(hData);
+        if (result.rowCount > 0) {
+          return {
+            status: "OK",
+            message: "Handyman has been updated successfully.",
+          };
+        }
+      }
+      return {
+        status: "FAIL",
+        message:
+          "A user with this id does not exist.",
+      };
+    } catch (error) {
+      // if there is database connection issue
+      return console.log(error);
+    }
+  }
+  return {
+    status: "FAIL",
+    message: "Handyman could not be saved. Missing handyman information.",
+  };
+}
 function validateUpdateData(hData) {
   const { visible, id } = hData;
   // make sure both new visible value ('true' or 'false') and handyman id has been supplied

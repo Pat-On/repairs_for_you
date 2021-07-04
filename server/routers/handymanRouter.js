@@ -78,8 +78,15 @@ router
     const result = await services.changeHandymanVisibilityByAdmin(req.body);
     const resultStatus = result.status === "OK" ? 200 : 400;
     return res.status(resultStatus).json({ message: result.message });
-  });
+  })
 
+  // delete handyman 
+  .delete(async (req, res) => {
+    const result = await services.deleteHandymanByIdAdmin(
+      parseInt(req.params.id)
+    );
+    return !result ? res.status(204).send(result) : res.sendStatus(404);
+  })
 /******************************************************************************************************/
 
 module.exports = router;

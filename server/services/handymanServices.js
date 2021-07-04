@@ -203,5 +203,6 @@ module.exports = {
   changeHandymanVisibilityByAdmin,
   addNewHandyman,
   getReviewsByHandymanId,
-  getThreeRandomHandyman
+  getThreeRandomHandyman,
+  editHandymanDetailsByIdAdmin
 };

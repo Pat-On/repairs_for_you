@@ -34,16 +34,16 @@ const threeRandomHandymanQuery = `SELECT *FROM handyman
                                 ORDER BY random()
                                 LIMIT 3;`;
                             
-const adminEditHandymanDetailQuery=  `UPDATE handyman
+const editHandymanDetailsByIdAdminQuery=  `UPDATE handyman
                               SET first_name = $1,
-                                last_name= $2,
-                                addressLineOne=$3,
-                                email=$4,
-                                phone_number=$5,
-                                skills=$6,
-                                 postcode=$7,
-                                 addressLineTwo=$8
-                                WHERE handyman_id=$3`;
+                                  last_name= $2,
+                                  address=$3,
+                                  postcode=$4,
+                                  email=$5,
+                                  phone_number=$6,
+                                  skills=$7,
+                                  bio=$8
+                              WHERE id=$9`;
 // METHODS
 
 /***************** THE FOLLOWING METHODS ARE ACCESSIBLE TO ALL PUBLIC ROUTES *******************/
@@ -80,7 +80,6 @@ function addNewHandyman(hData) {
     skills,
     bio,
   } = hData;
-
   return pool.query(addNewHandymanQuery, [
     firstName,
     lastName,
@@ -100,6 +99,34 @@ function getReviewsByHandymanId(hId) {
 
 function getThreeRandomHandyman() {
   return pool.query(threeRandomHandymanQuery)
+}
+// edit handyman details
+function editHandymanDetailsByIdAdmin(hData){
+  const {
+    firstName,
+    lastName,
+    //img,
+    address,
+    postcode,
+    email,
+    phoneNumber,
+    skills,
+    bio,
+    id,
+  } = hData;
+
+  return pool.query(editHandymanDetailsByIdAdminQuery,[ 
+    firstName,
+    lastName,
+    //img,
+    address,
+    postcode,
+    email,
+    phoneNumber,
+    skills,
+    bio,
+    id
+  ])
 }
 /******************************************************************************************************/
 
@@ -130,4 +157,5 @@ module.exports = {
   addNewHandyman,
   getReviewsByHandymanId,
   getThreeRandomHandyman,
+  editHandymanDetailsByIdAdmin,
 };

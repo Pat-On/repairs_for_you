@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useRouteMatch, Link } from "react-router-dom";
 import classes from "./AdminPage.module.css";
-
+import SearchField from "./SearchField";
 import AuthContext from "../../store/authContext";
 
 export default function AdminHandyPeopleTable(props) {
@@ -17,7 +17,7 @@ export default function AdminHandyPeopleTable(props) {
       props.history.push(`${path}/${e.target.id}`);
     }
     // when action verb is delete
-    
+
     else if (actionVerb === "Delete") {
       fetch(`/api/v1/handyman/handymanprotected/${e.target.id}`, {
         method: "DELETE",
@@ -66,7 +66,9 @@ export default function AdminHandyPeopleTable(props) {
   }, []);
 
   return (
-    <table className={classes.table}>
+    <div>
+      <SearchField/>
+ <table className={classes.table}>
       <thead>
         <tr>
           <th scope="col">Id</th>
@@ -112,5 +114,6 @@ export default function AdminHandyPeopleTable(props) {
         </tbody>
       ))}
     </table>
+    </div>
   );
 }

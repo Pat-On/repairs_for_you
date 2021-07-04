@@ -1,16 +1,9 @@
 
 .contact_container{
-<<<<<<< HEAD:client/src/components/contact/Contacts.module.css
-    width: 80%;
-    margin-left: auto;
-    margin-right: auto;
-    background-color: rgba(240, 11, 22, 0.144);
-=======
     width: 50%;
     margin-left: auto;
     margin-right: auto;
     background-color: rgba(236, 142, 248, 0.075);
->>>>>>> 7f8fa5611566fca6e487fd304b5de14b773e6b80:client/src/components/contact/Contact.module.css
 }
 .contact_container h1{
     text-align: center;

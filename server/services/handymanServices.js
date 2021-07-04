@@ -153,7 +153,7 @@ async function changeHandymanVisibilityByAdmin(hData) {
   }
 }
 
-// update handyman details
+// UPDATE HANDYMAN RECORDS BY ID FOR ADMIN
 
 async function editHandymanDetailsByIdAdmin(hData) {
   const dataIsValid = validateHandymanData(hData); //
@@ -184,6 +184,14 @@ async function editHandymanDetailsByIdAdmin(hData) {
     message: "Handyman could not be saved. Missing handyman information.",
   };
 }
+// DELETE HANDYMAN RECORD BY ID FOR ADMIN
+
+async function deleteHandymanByIdAdmin(hId) {
+  const result = await repository.deleteHandymanByIdAdmin(hId);
+  console.log(result)
+  return result.rows[0];   
+}
+
 function validateUpdateData(hData) {
   const { visible, id } = hData;
   // make sure both new visible value ('true' or 'false') and handyman id has been supplied
@@ -204,5 +212,6 @@ module.exports = {
   addNewHandyman,
   getReviewsByHandymanId,
   getThreeRandomHandyman,
-  editHandymanDetailsByIdAdmin
+  editHandymanDetailsByIdAdmin,
+  deleteHandymanByIdAdmin
 };

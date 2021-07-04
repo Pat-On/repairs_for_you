@@ -6,7 +6,7 @@ export default function UpdateForm() {
   const authCtx = useContext(AuthContext);
   const { id } = useParams();
 
-  // input field states
+  // INPUT FIELDS STATES DECLARATION AND INITIALIZING TO EMPTY STRING 
 
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -20,7 +20,7 @@ export default function UpdateForm() {
   const [addressLineTwo, setAddressLineTwo] = useState("");
   const [bio, setBio] = useState("");
 
-  // fetch data by id
+  // FETCH HANDYMAN DATA BY ID 
 
   useEffect(() => {
     fetch(`/api/v1/handyman/handymanprotected/${id}`, {
@@ -28,7 +28,9 @@ export default function UpdateForm() {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+
+// INPUT FIELDS UPDATE WITH INCOMING DATA 
+
         setFirstName(data.first_name);
         setLastName(data.last_name);
         setPhoneNumber(data.phone_number);
@@ -42,7 +44,7 @@ export default function UpdateForm() {
       });
   }, [id]);
 
-  // submit data function
+  // SUBMIT FORM DATA FUNCTION 
 
   const submitData = async (e) => {
     e.preventDefault();
@@ -95,7 +97,7 @@ export default function UpdateForm() {
                 maxLength={50}
                 required
                 value={firstName}
-                onChange={(e) => setFirstName(e.target.value)}
+                onChange={(e) => setFirstName(e.target.value)} // INPUT FIELD VALUES WILL BE RESET TO TYPED VALUE 
               />
             </div>
             <div className={classes.input_field}>
@@ -216,6 +218,7 @@ export default function UpdateForm() {
           {skills.map((skill, index) => (
             <p key={index}>{skill}</p>
           ))}
+  {/* INPUT FIELD FOR THE ADMIN TO ADD NEW SKILL TO THE HANDYMAN SKILLS */}
           <input
             value={newSkill}
             onChange={(e) => setNewSkill(e.target.value)}

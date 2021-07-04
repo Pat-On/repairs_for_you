@@ -11,7 +11,7 @@ export default function TableRows({ oneList, handleChange }) {
         <td>{oneList.phone_number}</td>
         <td>{oneList.postcode}</td>
         <td>{oneList.address.addressLineTwo}</td>
-        <td>day/month/year</td> {/* DATE HANDYMAN SUBMITTED THE FORM  */}
+        <td>day/month/year</td>
         <td>{oneList.visible ? "Visible" : "Hidden"}</td>
         <td>
           <select

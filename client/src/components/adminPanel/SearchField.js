@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-
+import classes from './AdminPage.module.css'
 export default function SearchField({list,setSearch,search}) {
 
  const handleChange=(e)=>{
@@ -12,7 +12,7 @@ export default function SearchField({list,setSearch,search}) {
           setSearch(filteredByKeyWord)
         }
     return (
-        <div>
+        <div className={classes.searchField}>
             <input placeholder="search by keyword" onChange={handleChange}></input>
         </div>
     )

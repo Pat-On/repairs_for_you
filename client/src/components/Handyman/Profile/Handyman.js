@@ -2,30 +2,31 @@ import { Link, useRouteMatch } from "react-router-dom";
 import "./Handyman.css";
 
 import userDefaultImg from "../../../public/user.svg"; // WARN: TEMPORARY SOLUTION
-import { useEffect, useState } from "react";
+// import { useEffect, useState } from "react"; WARN: INTENDED FOR FUTURE USE
 
 const Handyman = ({ userData }) => {
-  const [reviews, setReviews] = useState([]);
+  // const [reviews, setReviews] = useState([]); WARN: CURRENTLY NOT BEING USED. INCLUDED HERE IN LIGHT OF PROBABLE FUTURE NEEDS
 
   const { id, first_name, last_name, address, area, skills } = userData;
   const data = { id, first_name, last_name, address, area, skills };
   const { url } = useRouteMatch();
 
-  useEffect(() => {
-    fetch(`/api/v1/handyman/handymannotprotected/${id}/reviews`)
-      .then((res) => {
-        if (!res.ok) {
-          throw new Error(res.statusText);
-        }
-        return res.json();
-      })
-      .then((data) => {
-        setReviews(data);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  }, [id]);
+  // WARN: COMMENTED OUT CODE BELOW IS HOPED TO BE USED AS PART OF FUTURE SITE IMPROVEMENTS
+  // useEffect(() => {
+  //   fetch(`/api/v1/handyman/handymannotprotected/${id}/reviews`)
+  //     .then((res) => {
+  //       if (!res.ok) {
+  //         throw new Error(res.statusText);
+  //       }
+  //       return res.json();
+  //     })
+  //     .then((data) => {
+  //       setReviews(data);
+  //     })
+  //     .catch((err) => {
+  //       console.error(err);
+  //     });
+  // }, [id]);
 
   return (
     <div className="card handy-man">
@@ -36,8 +37,11 @@ const Handyman = ({ userData }) => {
             src={userDefaultImg} // WARN: TEMPORARY SOLUTION
             alt={`${userData.first_name} ${userData.last_name}`}
           />
-          <span className="label">Rating:</span>&nbsp;
-          <span className="stars">{userData.rating}&nbsp;stars</span>{" "}
+
+          {/* NOTE: COMMENTED OUT SECTION BELOW IS HOPED TO BE PART OF FUTURE SITE IMPROVEMENTS */}
+
+          {/* <span className="label">Rating:</span>&nbsp;
+          <span className="stars">{userData.rating}&nbsp;stars</span>{" "} */}
         </figure>
         <div className="bio bio-handy-man">
           <h2>About Me</h2>
@@ -56,7 +60,9 @@ const Handyman = ({ userData }) => {
         </ul>
       </div>
 
-      <div className="user-reviews">
+      {/* NOTE: COMMENTED OUT SECTION BELOW IS HOPED TO BE PART OF FUTURE SITE IMPROVEMENTS */}
+
+      {/* <div className="user-reviews">
         <span className="label">Reviews:</span>&nbsp;
         {reviews && <span className="stars">{reviews.length}</span>}
         <div>
@@ -65,8 +71,6 @@ const Handyman = ({ userData }) => {
         {reviews &&
           reviews.map((review, index) => (
             <div key={index} className="review">
-              {/* WARN: TEMPORARY SOLUTION */}
-              {/* <p className="reviewer">{review.name}</p> */}
               <p className="review-body">{review.review_body}</p>
               <br />
             </div>
@@ -86,7 +90,8 @@ const Handyman = ({ userData }) => {
             value="Send Review"
           />
         </form>
-      </div>
+
+      </div> */}
     </div>
   );
 };

@@ -4,22 +4,21 @@ import Skills from "./Skills";
 import { validateForm, sendQuoteRequest } from "../../common/js/functions";
 import { useLocation } from "react-router-dom";
 
-const RequestForQuoteForm = (props) => {
+const RequestForQuoteForm = () => {
   const { state } = useLocation();
-  console.log(state);
   const data = state;
 
   const [errors, setErrors] = useState([]);
 
-  const handymanId = data.id;
-  const handymanName = { name: `${data.first_name} ${data.last_name}` };
+  const handymanId = data ? data.id : 0;
+  const handymanName = data
+    ? { name: `${data.first_name} ${data.last_name}` }
+    : "(not provided)";
   const [buyerName, setBuyerName] = useState("");
   const [buyerEmail, setBuyerEmail] = useState("");
   const [buyerPhoneNumber, setBuyerPhoneNumber] = useState("");
   const [jobDescription, setJobDescription] = useState("");
   const [jobStartDate, setJobStartDate] = useState("");
-  const [estimatedManHours, setEstimatedManHours] = useState("");
-  const [buyerWillingToPay, setBuyerWillingToPay] = useState("");
 
   // EVENT HANDLERS
   const sendFormData = (event) => {
@@ -29,7 +28,7 @@ const RequestForQuoteForm = (props) => {
     if (errors.length > 0) {
       return setErrors(errors);
     }
-    console.log(formData);
+    
     setErrors([]);
     const formData = {
       handymanId,
@@ -39,8 +38,6 @@ const RequestForQuoteForm = (props) => {
       buyerPhoneNumber,
       jobDescription,
       jobStartDate,
-      estimatedManHours,
-      buyerWillingToPay,
     };
     const requestData = [
       "service_l0m5rpd",
@@ -51,24 +48,6 @@ const RequestForQuoteForm = (props) => {
     sendQuoteRequest(requestData);
     form.reset();
   };
-
-  const handymanSummary = (
-    <div className="handyman-summary">
-      <h2>Handyman Info</h2>
-      <p>
-        <span>Name:</span> <span className="bold">{data.first_name}</span>{" "}
-        <span className="bold">{data.last_name}</span>
-      </p>
-      <div className="handyman-skills">
-        <p>Skills:</p>
-        <Skills skills={data.skills} />
-      </div>
-      <p>
-        <span>Area:</span>{" "}
-        <span className="bold">{`${data.area}, ${data.address.city}`}</span>
-      </p>
-    </div>
-  );
 
   return (
     <form
@@ -82,14 +61,33 @@ const RequestForQuoteForm = (props) => {
           {e}
         </p>
       ))}
-      <h1 className="title">
-        {data.id !== 0 ? "Request For Quote" : "General Quote Request"}
-      </h1>
-      <em className="required">
-        <span className="required">*</span>&nbsp;Required field
-      </em>
-      { data.id !== 0 ? handymanSummary : null}
+
+      <h1 className="title">Request For Quote</h1>
+      {data && (
+        <div className="handyman-summary">
+          <h2>Handyman Info</h2>
+          <p>
+            <span>Name:</span> <span className="bold">{data.first_name}</span>{" "}
+            <span className="bold">{data.last_name}</span>
+          </p>
+          <div className="handyman-skills">
+            <p>Skills:</p>
+            <Skills skills={data.skills} />
+          </div>
+
+          {/* WARN: COMMENTED OUT SECTION BELOW IS INCLUDED ONLY IN LIGHT OF PROBABLE FUTURE NEEDS */}
+
+          {/* <p>
+            <span>Area:</span>{" "}
+            <span className="bold">{`${data.area}, ${data.address.city}`}</span>
+          </p> */}
+        </div>
+      )}
+      
       <div>
+        <em className="required">
+          <span className="required">*</span>&nbsp;Required field
+        </em>
         <fieldset className="input-field-group contact-details">
           <legend className="subtitle">Contact Details</legend>
           <div className="input-field">
@@ -163,33 +161,6 @@ const RequestForQuoteForm = (props) => {
               onChange={(e) => setJobStartDate(e.target.value)}
               value={jobStartDate}
             />
-          </div>
-          <div>
-            <h3>Additional Information</h3>
-            <em className="required">
-              Please provide at least one of the following additional
-              information:
-            </em>
-            <div className="input-field">
-              <label htmlFor="job-duration-days">Estimated Man-hours:</label>{" "}
-              <input
-                type="number"
-                id="man-hours"
-                name="man-hours"
-                onChange={(e) => setEstimatedManHours(e.target.value)}
-                value={estimatedManHours}
-              />
-            </div>
-            <div className="input-field">
-              <label htmlFor="price">Willing to Pay £</label>{" "}
-              <input
-                type="number"
-                id="price"
-                name="price"
-                onChange={(e) => setBuyerWillingToPay(e.target.value)}
-                value={buyerWillingToPay}
-              />
-            </div>
           </div>
         </div>
       </fieldset>

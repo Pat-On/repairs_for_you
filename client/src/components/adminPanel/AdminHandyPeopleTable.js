@@ -9,7 +9,7 @@ import AuthContext from "../../store/authContext";
 export default function AdminHandyPeopleTable(props) {
 	let { path, url } = useRouteMatch();
 	const [list, setList] = useState([]);
-	
+  const [changed, setChanged] = useState(false);
 
   const authCtx = useContext(AuthContext);
   console.log(authCtx.token);

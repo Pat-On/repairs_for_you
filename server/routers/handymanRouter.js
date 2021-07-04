@@ -33,8 +33,8 @@ router.get(
 );
 
 // GET ALL REVIEWS BY HANDYMAN ID
+// WARN: THIS ENDPOINT IS CURRENTLY NOT BEING USED. IT IS INCLUDED IN LIGHT OF PROBABLE FUTURE NEEDS
 router.get("/handymannotprotected/:id/reviews", async (req, res) => {
-  console.log(req);
   const result = await services.getReviewsByHandymanId(parseInt(req.params.id));
   return result ? res.status(200).send(result) : res.sendStatus(404);
 });
@@ -66,6 +66,7 @@ router
     console.log(result);
     const resultStatus = result.status === "OK" ? 200 : 400;
     return res.status(resultStatus).json({ message: result.message }); })
+
   //// GET "/{id}" SERVE DATA OF INDIVIDUAL HANDYMAN
   .get(async (req, res) => {
     const result = await services.getHandymanByIdForAdmin(

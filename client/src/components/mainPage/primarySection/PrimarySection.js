@@ -2,14 +2,6 @@ import React from "react";
 import { Link, useRouteMatch } from "react-router-dom";
 
 import classes from "./PrimarySection.module.scss";
-const data = {
-  id: 0,
-  first_name: "test",
-  last_name: "test",
-  address: "address",
-  area: "something",
-  skills: ["1", "2"],
-};
 
 /**
  * @DescriptionFunction Sub component used in MainPage component
@@ -33,10 +25,7 @@ const PrimarySection = (props) => {
           BECOME A REPAIRER
         </Link>
         <Link
-          to={{
-            pathname: "/users/handyman/0/forms/request-for-quote",
-            state: data,
-          }}
+          to="/users/handyman/0/forms/request-for-quote"
           className={`${classes.primary__button} ${classes.primary__button__hire}`}
         >
           ASK FOR A PRICE

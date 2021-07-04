@@ -53,9 +53,9 @@ export default function UpdateForm() {
         lastName,
         email,
         address: {
-         /*  addressLineOne,
+          addressLineOne,
           addressLineTwo,
-          city, */
+          city, 
         },
         phoneNumber,
         postcode,

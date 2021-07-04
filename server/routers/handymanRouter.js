@@ -60,6 +60,12 @@ router.get("/handymanprotected", async (_, res) => {
 });
 
 router
+  .route("/handymanprotected/:id")
+  .put(async (req, res) => {
+    const result = await services.editHandymanDetailsByIdAdmin(req.body);
+    console.log(result);
+    const resultStatus = result.status === "OK" ? 200 : 400;
+    return res.status(resultStatus).json({ message: result.message }); })
   //// GET "/{id}" SERVE DATA OF INDIVIDUAL HANDYMAN
   .get(async (req, res) => {
     const result = await services.getHandymanByIdForAdmin(

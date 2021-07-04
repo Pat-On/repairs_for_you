@@ -62,46 +62,10 @@ router.get("/handymanprotected", async (_, res) => {
 router
   .route("/handymanprotected/:id")
   .put(async (req, res) => {
-    try {
-      const handyman_id = req.params.id;
-      console.log(req.body);
-      const {
-        firstName,
-        lastName,
-        // img,
-        address,
-        postcode,
-        email,
-        phoneNumber,
-        skills,
-      } = req.body;
-      console.log(firstName);
-      const _ = await pool.query(
-        `UPDATE handyman
-    SET first_name = $1,
-        last_name= $2,
-        address_offer=$3,
-        email=$4,
-        phone_number=$5,
-        skills=$6,
-		   	postcode=$7
-        WHERE handyman_id=$3`,
-        [
-          firstName,
-          lastName,
-          email,
-          address,
-          postcode,
-          phoneNumber,
-          skills,
-          handyman_id,
-        ]
-      );
-    } catch (error) {
-      //TODO ERROR HANDLER
-      console.log(error);
-    }
-  })
+    const result = await services.editHandymanDetailsByIdAdmin(req.body);
+    console.log(result);
+    const resultStatus = result.status === "OK" ? 200 : 400;
+    return res.status(resultStatus).json({ message: result.message }); })
   //// GET "/{id}" SERVE DATA OF INDIVIDUAL HANDYMAN
   .get(async (req, res) => {
     const result = await services.getHandymanByIdForAdmin(
@@ -114,8 +78,15 @@ router
     const result = await services.changeHandymanVisibilityByAdmin(req.body);
     const resultStatus = result.status === "OK" ? 200 : 400;
     return res.status(resultStatus).json({ message: result.message });
-  });
+  })
 
+  // ADMIN CAN DELETE HANDYMAN RECORD  
+  .delete(async (req, res) => {
+    const result = await services.deleteHandymanByIdAdmin(
+      parseInt(req.params.id)
+    );
+    return !result ? res.status(204).send(result) : res.sendStatus(404);
+  })
 /******************************************************************************************************/
 
 module.exports = router;

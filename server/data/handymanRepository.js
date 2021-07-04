@@ -1,3 +1,4 @@
+import { func } from "prop-types";
 import pool from "../db";
 
 // QUERIES
@@ -5,6 +6,17 @@ import pool from "../db";
 const getAllHandymenAdminQuery = `SELECT * FROM handyman`;
 const getHandymanByIdAdminQuery = `SELECT * FROM handyman WHERE id = $1`; // used mainly to check if handyman exists
 const changeHandymanVisibilityByIdAdminQuery = `UPDATE handyman SET visible = $1 WHERE id = $2`;
+const editHandymanDetailsByIdAdminQuery = `UPDATE handyman
+                              SET first_name = $1,
+                                  last_name= $2,
+                                  address=$3,
+                                  postcode=$4,
+                                  email=$5,
+                                  phone_number=$6,
+                                  skills=$7,
+                                  bio=$8
+                              WHERE id=$9`;
+const deleteHandymanByIdAdminQuery=`DELETE FROM handyman WHERE id=$1`;
 
 // 2. ALL SITE VISITORS
 const getAllHandymenQuery = `
@@ -33,17 +45,7 @@ const threeRandomHandymanQuery = `SELECT *FROM handyman
                                 where visible = 'true'
                                 ORDER BY random()
                                 LIMIT 3;`;
-                            
-const adminEditHandymanDetailQuery=  `UPDATE handyman
-                              SET first_name = $1,
-                                last_name= $2,
-                                addressLineOne=$3,
-                                email=$4,
-                                phone_number=$5,
-                                skills=$6,
-                                 postcode=$7,
-                                 addressLineTwo=$8
-                                WHERE handyman_id=$3`;
+
 // METHODS
 
 /***************** THE FOLLOWING METHODS ARE ACCESSIBLE TO ALL PUBLIC ROUTES *******************/
@@ -80,7 +82,6 @@ function addNewHandyman(hData) {
     skills,
     bio,
   } = hData;
-
   return pool.query(addNewHandymanQuery, [
     firstName,
     lastName,
@@ -99,7 +100,39 @@ function getReviewsByHandymanId(hId) {
 }
 
 function getThreeRandomHandyman() {
-  return pool.query(threeRandomHandymanQuery)
+  return pool.query(threeRandomHandymanQuery);
+}
+// edit handyman details
+function editHandymanDetailsByIdAdmin(hData) {
+  const {
+    firstName,
+    lastName,
+    //img,
+    address,
+    postcode,
+    email,
+    phoneNumber,
+    skills,
+    bio,
+    id,
+  } = hData;
+
+  return pool.query(editHandymanDetailsByIdAdminQuery, [
+    firstName,
+    lastName,
+    //img,
+    address,
+    postcode,
+    email,
+    phoneNumber,
+    skills,
+    bio,
+    id,
+  ]);
+}
+
+function deleteHandymanByIdAdmin(hId){
+  return pool.query(deleteHandymanByIdAdminQuery,[hId]);
 }
 /******************************************************************************************************/
 
@@ -130,4 +163,6 @@ module.exports = {
   addNewHandyman,
   getReviewsByHandymanId,
   getThreeRandomHandyman,
+  editHandymanDetailsByIdAdmin,
+  deleteHandymanByIdAdmin,
 };

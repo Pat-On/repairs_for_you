@@ -2,7 +2,6 @@ import { useLocation, useParams } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import AuthContext from "../../store/authContext";
 import classes from "./AdminPage.module.css";
-
 export default function UpdateForm() {
   const authCtx = useContext(AuthContext);
   const { id } = useParams();
@@ -12,11 +11,14 @@ export default function UpdateForm() {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
+  const [skills, setSkills] = useState([]);
+  const [newSkill, setNewSkill] = useState("");
   const [city, setCity] = useState("");
   const [postcode, setPostcode] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [addressLineOne, setAddressLineOne] = useState("");
   const [addressLineTwo, setAddressLineTwo] = useState("");
+  const [bio, setBio] = useState("");
 
   // fetch data by id
 
@@ -33,8 +35,10 @@ export default function UpdateForm() {
         setEmail(data.email);
         setCity(data.address.city);
         setPostcode(data.postcode);
+        setSkills(data.skills);
         setAddressLineOne(data.address.addressLineOne);
         setAddressLineTwo(data.address.addressLineTwo);
+        setBio(data.bio);
       });
   }, [id]);
 
@@ -48,18 +52,25 @@ export default function UpdateForm() {
         firstName,
         lastName,
         email,
-        addressLineOne,
-        addressLineTwo,
+        address: {
+          addressLineOne,
+          addressLineTwo,
+          city, 
+        },
         phoneNumber,
         postcode,
-        city,
-        id: id,
+      skills:[...skills, newSkill],
+        bio,
+        id,
       }),
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${authCtx.token}`,
       },
-    });
+    }).then((res) => res.json())
+    .then((data) => console.log(data))
+    .catch((error) => console.log(error)); 
+      
   };
 
   return (
@@ -202,8 +213,14 @@ export default function UpdateForm() {
           <legend className="subtitle">
             Skills<span className="required">*</span>
           </legend>
-          {/*  {data.skills.map((skill,index)=><p key={index}>{skill}</p>)} */}
-          <input placeholder="added new skill"></input>
+          {skills.map((skill, index) => (
+            <p key={index}>{skill}</p>
+          ))}
+          <input
+            value={newSkill}
+            onChange={(e) => setNewSkill(e.target.value)}
+            placeholder="add new skill"
+          ></input>
         </fieldset>
         <div className={classes.submit_button}>
           <input type="submit" id="btn-submit" name="btn-submit" value="Edit" />

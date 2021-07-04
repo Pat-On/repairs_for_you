@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function TableRows({oneList}) {
+export default function TableRows({oneList,handleChange}) {
     return (
             
             <tbody >

@@ -7,7 +7,7 @@ import AdminHandyPeopleTableRows from "./AdminHandyPeopleTableRows";
 export default function AdminHandyPeopleTable(props) {
   let { path, url } = useRouteMatch();
   const [list, setList] = useState([]);
-  const [search,setSearch]=useState([])
+  const [search, setSearch] = useState([]);
   const authCtx = useContext(AuthContext);
 
   const handleChange = (e, oneList) => {
@@ -64,10 +64,9 @@ export default function AdminHandyPeopleTable(props) {
       });
   }, []);
 
-
   return (
     <div>
-      <SearchField list={list} setSearch={setSearch} search={search}/>
+      <SearchField list={list} setSearch={setSearch} search={search} />
       <table className={classes.table}>
         <thead>
           <tr>
@@ -83,14 +82,21 @@ export default function AdminHandyPeopleTable(props) {
             <th scope="col">Action</th>
           </tr>
         </thead>
-        {
-          search.length > 0 ? search.map((oneList, index) => (
-            <AdminHandyPeopleTableRows key={index} oneList={oneList}/>
-           ))
-        :
-         list.map((oneList, index) => (
-         <AdminHandyPeopleTableRows key={index} oneList={oneList}/>
-        ))}
+        {search.length > 0
+          ? search.map((oneList, index) => (
+              <AdminHandyPeopleTableRows
+                key={index}
+                oneList={oneList}
+                handleChange={handleChange}
+              />
+            ))
+          : list.map((oneList, index) => (
+              <AdminHandyPeopleTableRows
+                key={index}
+                oneList={oneList}
+                handleChange={handleChange}
+              />
+            ))}
       </table>
     </div>
   );

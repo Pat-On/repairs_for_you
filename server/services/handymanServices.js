@@ -1,4 +1,3 @@
-const { func } = require("prop-types");
 const repository = require("../data/handymanRepository");
 
 /***************** THE FOLLOWING METHODS ARE ACCESSIBLE TO ALL PUBLIC ROUTES *******************/

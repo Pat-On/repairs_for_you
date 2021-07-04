@@ -4,6 +4,7 @@ import classes from "./AdminPage.module.css";
 import SearchField from "./SearchField";
 import AuthContext from "../../store/authContext";
 import AdminHandyPeopleTableRows from "./AdminHandyPeopleTableRows";
+
 export default function AdminHandyPeopleTable(props) {
   let { path, url } = useRouteMatch();
   const [list, setList] = useState([]);
@@ -16,7 +17,6 @@ export default function AdminHandyPeopleTable(props) {
     if (actionVerb === "Update") {
       props.history.push(`${path}/${e.target.id}`);
     }
-    // when action verb is delete
     else if (actionVerb === "Delete") {
       fetch(`/api/v1/handyman/handymanprotected/${e.target.id}`, {
         method: "DELETE",

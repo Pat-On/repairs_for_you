@@ -1,3 +1,5 @@
+@import "/client//src//assets//styling/base";
+
 .temporary
  {
    text-decoration: underline;
@@ -25,6 +27,7 @@
   background-position: top;
 
   &__heading {
+    font-family: $font-primary;
     color: white;
     text-transform: uppercase;
     margin-bottom: 6rem;

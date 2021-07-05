@@ -27,7 +27,7 @@ const Footer = (props) => {
           </a>
         </li>
         <li>
-          <a rel="noreferrer" className={classes.links} target="_blank" href="">
+          <a rel="noreferrer" className={classes.links} target="_blank" href="https://www.facebook.com/CRMCCov/?ref=page_internal">
             <img src={facebook} alt="Facebook icon made by Pixel Perfect" />
           </a>
         </li>

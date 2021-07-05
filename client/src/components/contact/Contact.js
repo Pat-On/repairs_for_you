@@ -26,6 +26,7 @@ export default function Contact() {
 			"template_ybb8yxc",
 			formDetail,
 			"user_Z6650OqueHooRxmmi5Geo",);
+	alert("Thank you for contacting us! Your message has been sent and we will get back to you soon.")
 	};
 
 	return (

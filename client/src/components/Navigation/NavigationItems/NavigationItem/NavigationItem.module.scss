@@ -1,9 +1,11 @@
+@import "/client/src/assets/styling/base";
+
 .navigationItem {
   background-color: transparent;
   display: inline-block;
   width: 22rem;
   height: auto;
-  // font-family: $font-display;
+  font-family: $font-secondary;
   font-weight: 600;
   text-align: center;
   position: relative;

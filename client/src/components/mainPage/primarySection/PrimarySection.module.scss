@@ -1,9 +1,5 @@
-@import "/client//src//assets//styling/base";
-
-.temporary
- {
-   text-decoration: underline;
- }
+@import "/client/src/assets//styling/base";
+@import "/client/src/assets/styling/animation";
 
 .primary {
   grid-row: 1 / 2;
@@ -29,31 +25,39 @@
   &__heading {
     font-family: $font-primary;
     color: white;
-    text-transform: uppercase;
+    letter-spacing: 3px;
+    text-transform: capitalize;
     margin-bottom: 6rem;
-    font-size: 6rem;
-    span {
-      // text-decoration: underline;
-    }
+    margin-top: 6rem;
+    
+
 
     &__main {
       display: block;
+      font-size: 5rem;
+      animation-name: moveFromLeft;
+      animation-duration: 1s;
+      animation-timing-function: easy-out;
     }
 
     &__sub {
       display: block;
+      font-size: 6rem;
+      span {
+        font-size: 7rem;
+      }
     }
   }
 
   //TODO: styling of this button is not the same
   &__button {
     display: inline-block;
+    font-family: $font-secondary;
     text-transform: uppercase;
     text-decoration: none;
     padding: 1.5rem 4rem;
     font-weight: 600;
     width: 28rem;
-    // height: 8rem;
 
     &__publish {
       margin-right: 1rem;

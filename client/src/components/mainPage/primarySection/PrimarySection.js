@@ -20,10 +20,10 @@ const PrimarySection = (props) => {
       <div>
         <h1 className={classes.primary__heading}>
           <span className={classes.primary__heading__main}>
-            FIND A REPAIRER
+            find a repairer
           </span>
           <span className={classes.primary__heading__sub}>
-            FROM YOUR <span className={classes.temporary}>COMMUNITY</span>{" "}
+            from your <span>community</span>
           </span>
         </h1>
         <Link

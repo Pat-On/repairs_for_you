@@ -1,60 +1,72 @@
 /* ADMIN PAGE STYLES  */
 .admin_page {
-display: flex;
-justify-content: center;
-margin:5rem auto ;
-position: relative;
+  display: flex;
+  justify-content: center;
+  margin: 5rem auto;
+  position: relative;
 }
 .admin_page > button {
-    background-color: rgb(247, 121, 3);
-    margin-left: 2rem;
-    margin-right: 2rem;
-    height: 10rem;
-    width: 11rem;
-    outline: none;
-    border: none;
-    border-radius: 5px;
+  background-color: rgb(247, 121, 3);
+  margin-left: 2rem;
+  margin-right: 2rem;
+  height: 10rem;
+  width: 11rem;
+  outline: none;
+  border: none;
+  border-radius: 5px;
 }
 .admin_page > button > a {
-    text-decoration: none;
-    color: white;
-    font-size: 1.7rem;
-    font-weight: 400;
+  text-decoration: none;
+  color: white;
+  font-size: 1.7rem;
+  font-weight: 400;
 }
 
 /* TABLE STYLES  */
 
-.table-container{
+.table-container {
   display: block;
   margin: 0 auto;
   width: 100%;
-
 }
 table {
   display: block;
   margin: 0 auto 5rem;
   border-collapse: separate;
   border-spacing: 3rem 0;
-  font-size:1.7rem;
+  font-size: 1.7rem;
   background-color: rgb(236, 243, 243);
-  table-layout:fixed;
+  table-layout: fixed;
   width: 100%;
 }
 
 th {
   height: 5%;
-} 
-td{
+}
+td {
   height: 5%;
 }
-.submit_button input{
-  background-color: blue;
+.edit_button input {
+  background-color: #0275d8;
+  height: 3rem;
+  width: 7rem;
+  color: white;
+  font-size: 1.5rem;
+  border: none;
+  border-radius: 2px;
+  margin-top: 1.2rem;
 }
 /* INPUT FIELD STYLES */
- .searchField input{
-   height: 3.5rem;
-   width: 30%;
-   margin:2rem 35%;
-  
-
- }
+.searchField {
+  width: 75%;
+  margin: 2rem 25%;
+}
+.searchField input {
+  height: 3.5rem;
+  width: 30%;
+}
+.searchField span {
+  font-size: 1.7rem;
+  padding-left: 3rem;
+  color: blue;
+}

@@ -13,6 +13,16 @@
   padding: 1rem;
   height: 100%;
 
+  @media only screen and (max-width: $bp-medium) {
+    flex-direction: row;
+    width: 80%;
+  }
+  @media only screen and (max-width: $bp-medium) {
+    flex-direction: row;
+    padding: 0;
+    width: 95%;
+  }
+
   &__figure {
     width: 16rem;
     height: 16rem;

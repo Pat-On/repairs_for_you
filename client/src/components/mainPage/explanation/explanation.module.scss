@@ -52,6 +52,13 @@
     font-size: 2.2rem;
     font-family: $font-secondary;
     font-weight: 400;
+    @media only screen and (max-width: $bp-medium) {
+      flex-direction: column;
+    }
+
+    @media only screen and (max-width: $bp-small) {
+      flex-direction: column;
+    }
 
     p {
       width: 15rem;

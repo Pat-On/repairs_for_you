@@ -22,7 +22,7 @@ const Footer = (props) => {
            <Link to={"/contact"}> <img src={email} alt="Email icon made by Pixel Perfect" /></Link>
         </li>
         <li>
-          <a rel="noreferrer" className={classes.links} href="" target="_blank">
+          <a rel="noreferrer" className={classes.links} href="https://twitter.com/CRMCCov" target="_blank">
             <img src={twitter} alt="Twitter icon made by Pixel Perfect" />
           </a>
         </li>

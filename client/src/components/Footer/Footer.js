@@ -37,7 +37,7 @@ const Footer = (props) => {
           </a>
         </li>
         <li>
-          <a rel="noreferrer" className={classes.links} target="_blank" href="">
+          <a rel="noreferrer" className={classes.links} target="_blank" href="https://goo.gl/maps/xnymgq1W7U4g3xka6">
             <img src={locato} alt="Locato icon made by Freepik" />
           </a>
         </li>

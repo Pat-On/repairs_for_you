@@ -13,13 +13,12 @@ const AboutSection = (props) => {
     <div className={classes.about}>
       <h2 className={classes.about__heading}>Our Mission</h2>
       <p className={classes.about__description}>
-        After the success of last year's project to help refugees and migrants
-        find work as cleaners, CYF is partnering with the Coventry Refugee and
-        Migrant Centre again to build another site aimed at helping migrants
-        find work. The website supports our Repairers service, allowing our
-        beneficiaries (refugees and migrants communities) to realise their
-        entrepreneurial potential by providing home repairs services for
-        customers across the city of Coventry.
+        Code Your Future is partnering with the Coventry Refugee and Migrant
+        Centre to build a website aimed at helping migrants find work. The
+        website supports our Repairer service, allowing our beneficiaries
+        (refugees and migrants communities) to realise their entrepreneurial
+        potential by providing home repair services to customers across the city
+        of Coventry.
       </p>
       <ul className={classes.about__list}>
         <li className={classes.about__list__element}>

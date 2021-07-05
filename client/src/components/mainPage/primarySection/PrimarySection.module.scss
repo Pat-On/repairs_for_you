@@ -43,6 +43,10 @@
     &__sub {
       display: block;
       font-size: 6rem;
+      animation-name: moveFromRight;
+      animation-duration: 1s;
+      animation-timing-function: easy-out;
+
       span {
         font-size: 7rem;
       }

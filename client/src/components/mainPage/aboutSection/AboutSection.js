@@ -11,7 +11,7 @@ import coventryRefLogo from "./../../../public/coventryRefugeeCenter.jpg";
 const AboutSection = (props) => {
   return (
     <div className={classes.about}>
-      <h2 className={classes.about__heading}>About US</h2>
+      <h2 className={classes.about__heading}>Our Mission</h2>
       <p className={classes.about__description}>
         After the success of last year's project to help refugees and migrants
         find work as cleaners, CYF is partnering with the Coventry Refugee and

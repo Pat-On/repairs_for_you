@@ -1,4 +1,4 @@
-@import "/client/src/assets//styling/base";
+@import "/client/src/assets/styling/base";
 @import "/client/src/assets/styling/animation";
 
 .about {
@@ -48,7 +48,7 @@
       width: 22rem; // simple trick to make all logos the same size.
       height: 7rem;
       &:hover {
-        transform: scale(1.1);
+        transform: scale(1.05);
         box-shadow: 5px 5px 8px #888888;
       }
       

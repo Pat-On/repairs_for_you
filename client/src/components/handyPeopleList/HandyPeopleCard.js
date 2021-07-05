@@ -28,7 +28,7 @@ export default function handyPeopleCard({ onelist }) {
         quote
       </Link>
 
-      <ul className="list-group list-group-flush">
+      <ul className="list-group list-group-flush skills">
         {onelist.skills.map((skill, index) => (
           <li key={index} className="list-group-item">
             {skill}

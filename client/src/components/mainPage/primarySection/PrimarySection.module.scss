@@ -63,20 +63,28 @@
     animation-name: fadeIn;
     animation-duration: 1s;
     animation-timing-function: easy-out;
-
+    letter-spacing: 1px;
 
     &__publish {
       margin-right: 1rem;
       border: 1px solid #f49a34;
       color: #f49a34;
       font-size: 1.6rem;
+      &:hover {
+        color: white;
+        background-color: #f49a34;
+      }
     }
 
     &__hire {
       margin-left: 1rem;
+      border: 1px solid #f49a34; //added border to make them the same size
       background-color: #f49a34;
-      color: rgb(7, 7, 7);
+      color: white;
       font-size: 1.6rem;
+      &:hover {
+        background-color: #d6862b;
+      }
     }
   }
 }

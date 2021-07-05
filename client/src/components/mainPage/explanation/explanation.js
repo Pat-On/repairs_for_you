@@ -11,7 +11,7 @@ import svgArrow from "../../../public/right-arrow.svg"
 const Explanation = (props) => {
   return (
     <div className={classes.explanation}>
-      <h2 className={classes.explanation__header}>So Simple: Just 3 Steps</h2>
+      <h2 className={classes.explanation__header}>Just 3 Steps</h2>
 
       <h3 className={classes.explanation__header__sub__1}> For Buyers: </h3>
 	  <div className={`${classes.explanation__flexContainer} ${classes.explanation__listGridPos1}`}>

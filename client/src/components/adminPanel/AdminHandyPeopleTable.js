@@ -26,6 +26,7 @@ export default function AdminHandyPeopleTable(props) {
           Authorization: `Bearer ${authCtx.token}`,
         },
       });
+      window.location.reload();
     } else if (actionVerb === "Activate" || actionVerb === "Deactivate") {
       const newStatus = actionVerb === "Activate" ? true : false;
       fetch(`/api/v1/handyman/handymanprotected/${oneList.id}`, {

@@ -22,12 +22,12 @@ const Footer = (props) => {
            <Link to={"/contact"}> <img src={email} alt="Email icon made by Pixel Perfect" /></Link>
         </li>
         <li>
-          <a rel="noreferrer" className={classes.links} href="" target="_blank">
+          <a rel="noreferrer" className={classes.links} href="https://twitter.com/CRMCCov" target="_blank">
             <img src={twitter} alt="Twitter icon made by Pixel Perfect" />
           </a>
         </li>
         <li>
-          <a rel="noreferrer" className={classes.links} target="_blank" href="">
+          <a rel="noreferrer" className={classes.links} target="_blank" href="https://www.facebook.com/CRMCCov/?ref=page_internal">
             <img src={facebook} alt="Facebook icon made by Pixel Perfect" />
           </a>
         </li>
@@ -37,7 +37,7 @@ const Footer = (props) => {
           </a>
         </li>
         <li>
-          <a rel="noreferrer" className={classes.links} target="_blank" href="">
+          <a rel="noreferrer" className={classes.links} target="_blank" href="https://goo.gl/maps/xnymgq1W7U4g3xka6">
             <img src={locato} alt="Locato icon made by Freepik" />
           </a>
         </li>

@@ -29,8 +29,6 @@
     text-transform: capitalize;
     margin-bottom: 6rem;
     margin-top: 6rem;
-    
-
 
     &__main {
       display: block;
@@ -62,6 +60,10 @@
     padding: 1.5rem 4rem;
     font-weight: 600;
     width: 28rem;
+    animation-name: fadeIn;
+    animation-duration: 1s;
+    animation-timing-function: easy-out;
+
 
     &__publish {
       margin-right: 1rem;

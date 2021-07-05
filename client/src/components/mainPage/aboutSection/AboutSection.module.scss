@@ -47,6 +47,10 @@
       background-color: white;
       width: 22rem; // simple trick to make all logos the same size.
       height: 7rem;
+      &:hover {
+        transform: scale(1.1);
+        box-shadow: 5px 5px 8px #888888;
+      }
       
       img {
         margin: 0 auto;

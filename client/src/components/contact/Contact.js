@@ -4,6 +4,7 @@ import classes from "./Contact.module.css";
 import { send } from "emailjs-com";
 
 export default function Contact() {
+	const [isRedirect,setIsRedirect]=useState(false);
 	const [formDetail,setFormDetail]=useState({
 		buyer_name:"",
 		email:"",
@@ -29,7 +30,7 @@ export default function Contact() {
 	};
 
 	return  (
-		<div className={classes.contact_container}>
+		!isRedirect ?	<div className={classes.contact_container}>
 			<div className="map-form" onSubmit={handleSubmit}>
 				<form
 					id="form-send-quote"
@@ -112,6 +113,7 @@ export default function Contact() {
 			<Link to="/contact"></Link>
 
 		</div> 
-		
+		:
+		 <Redirect to="/home" />
 	);
 }

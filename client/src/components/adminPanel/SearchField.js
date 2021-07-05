@@ -14,6 +14,8 @@ export default function SearchField({list,setSearch,search}) {
     return (
         <div className={classes.searchField}>
             <input placeholder="search by keyword" onChange={handleChange}></input>
+      <span>{search.length}  result(s) found.</span>
+
         </div>
     )
 }

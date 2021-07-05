@@ -111,3 +111,6 @@ p.no-results-found-message{
     margin-right: 5rem;
     text-align: justify;
 }
+.skills > li{
+    list-style: none;
+}

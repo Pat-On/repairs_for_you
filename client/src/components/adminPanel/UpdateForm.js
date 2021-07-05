@@ -225,7 +225,7 @@ export default function UpdateForm() {
             placeholder="add new skill"
           ></input>
         </fieldset>
-        <div className={classes.submit_button}>
+        <div className={classes.edit_button}>
           <input type="submit" id="btn-submit" name="btn-submit" value="Edit" />
         </div>
       </form>

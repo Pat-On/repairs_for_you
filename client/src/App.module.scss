@@ -15,6 +15,6 @@
   @media only screen and (max-width: $bp-large) {
     padding: 0;
     margin: 0;
-    grid-template-columns:[main-start] 50vw 50vw [main-end];
+    grid-template-columns:[main-start] 1fr 1fr [main-end];
   }
 }

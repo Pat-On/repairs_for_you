@@ -43,7 +43,7 @@ const Footer = (props) => {
         </li>
       </ul>
 
-      <div>
+
         <ul className={classes.footer__contactList}>
           <li>email@example.uk</li>
           <li>Building</li>
@@ -51,7 +51,6 @@ const Footer = (props) => {
           <li>Birmingham</li>
           <li>B1 111</li>
         </ul>
-      </div>
 
       <div className={classes.footer__end}>
         <p>&copy; 2021 by Repairs For You Company</p>

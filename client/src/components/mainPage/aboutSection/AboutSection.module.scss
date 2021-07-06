@@ -20,6 +20,9 @@
   @media only screen and (max-width: $bp-medium) {
     grid-template-columns: repeat(2, 1fr) ;
   }
+  @media only screen and (max-width: $bp-small) {
+    grid-template-rows: 0.3fr 1fr 0.5fr;
+  }
 
   
   &__heading {

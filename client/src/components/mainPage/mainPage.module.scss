@@ -1,3 +1,5 @@
+@import "/client/src/assets/styling/base";
+
 .mainPage {
   position: relative;
   display: grid;
@@ -10,6 +12,12 @@
   justify-items: center;
   align-items: center;
 //   grid-row-gap: 3.5rem;
+@media only screen and (max-width: $bp-medium) {
+  grid-template-rows: minmax(min-content, 80vh) minmax(min-content, 50vh) repeat(
+    2, minmax(min-content, 80vh)
+    
+  ); // repeat(3, minmax(min-content, max-content))
+}
 
   &__explanation {
     grid-row: 4 / 5;

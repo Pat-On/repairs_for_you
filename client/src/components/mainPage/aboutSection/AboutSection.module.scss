@@ -19,6 +19,7 @@
   text-align: center;
   @media only screen and (max-width: $bp-medium) {
     grid-template-columns: repeat(2, 1fr) ;
+    grid-template-rows: 0.5fr 1fr 0.5fr;
   }
 
   

@@ -17,9 +17,9 @@ const CustomerSection = (props) => {
       const dataRAW = await fetch(
         "/api/v1/handyman/handymannotprotected/randomthree"
       );
-      const data = await dataRAW.json()
-      const threeHandyman = data.data
-      setHandymanProfiles(threeHandyman)
+      const data = await dataRAW.json();
+      const threeHandyman = data.data;
+      setHandymanProfiles(threeHandyman);
     } catch (error) {
       // after functionality TODO: error handling
       console.log(error);
@@ -30,10 +30,14 @@ const CustomerSection = (props) => {
   // but first functionality!
   let usersComments = <Spinner />;
 
-  if (handymenProfiles.length !== 0) {
+  if (handymenProfiles && handymenProfiles.length > 0) {
+    // if handymen profiles could be fetched from database, load profiles (max 3) at random
     usersComments = handymenProfiles.map((item) => (
       <HandymanProfileMain key={item.id} item={item} />
     ));
+  } else {
+    // otherwise, replace the handymenProfiles area with other content
+    usersComments = ""; // hopefully this will be replaced by some text related to handymen
   }
 
   return (

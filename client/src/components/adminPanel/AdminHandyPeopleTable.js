@@ -4,6 +4,7 @@ import classes from "./AdminPage.module.css";
 import SearchField from "./SearchField";
 import AuthContext from "../../store/authContext";
 import AdminHandyPeopleTableRows from "./AdminHandyPeopleTableRows";
+import { activateDeactivateHandyman } from "../../common/js/functions";
 
 export default function AdminHandyPeopleTable(props) {
   let { path, url } = useRouteMatch();
@@ -11,13 +12,12 @@ export default function AdminHandyPeopleTable(props) {
   const [search, setSearch] = useState([]);
   const authCtx = useContext(AuthContext);
 
-  const handleChange = (e, oneList) => {
+  const handleChange = async (e, oneList) => {
     alert(`are you sure you want to ${e.target.value}`);
     const actionVerb = e.target.value;
     if (actionVerb === "Update") {
       props.history.push(`${path}/${e.target.id}`);
-    }
-    else if (actionVerb === "Delete") {
+    } else if (actionVerb === "Delete") {
       fetch(`/api/v1/handyman/handymanprotected/${e.target.id}`, {
         method: "DELETE",
         body: JSON.stringify({ id: e.target.id }),
@@ -29,18 +29,9 @@ export default function AdminHandyPeopleTable(props) {
       window.location.reload();
     } else if (actionVerb === "Activate" || actionVerb === "Deactivate") {
       const newStatus = actionVerb === "Activate" ? true : false;
-      fetch(`/api/v1/handyman/handymanprotected/${oneList.id}`, {
-        method: "PATCH",
-        body: JSON.stringify({ visible: newStatus, id: oneList.id }),
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${authCtx.token}`,
-        },
-      })
-        .then((response) => response.json())
-        .then((data) => setChanged(data))
-        .catch((err) => console.log(err));
-
+      const requiredData = { handyman: oneList, newStatus, authCtx };
+      const result = await activateDeactivateHandyman(requiredData);
+      alert(result.message);
       window.location.reload();
     }
   };

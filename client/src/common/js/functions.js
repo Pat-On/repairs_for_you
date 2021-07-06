@@ -13,19 +13,12 @@ const failureMessage = `
 Sorry, but we could not send your request at the moment. Please try again later.
 `;
 
-export function validateForm(form,formId) {
-  const fields = getFormFields(form);
-  const errors = getFormErrors(fields, formId);
+export function validateForm(formFields) {
+  const errors = getFormErrors(formFields);
   return errors.length > 0 ? errors : [];
 }
 
-function getFormFields(form) {
-  return [...form.querySelectorAll("input")].map(
-    (input) => ({ name: input.name, value: input.value, type: input.type })
-  );
-}
-
-function getFormErrors(formFields, formId) {
+function getFormErrors(formFields) {
   const errors = [];
   const emailField = formFields.find((field) => field.type === "email").value;
   const phoneNumber = formFields.find((field) => field.type === "tel").value;
@@ -36,27 +29,6 @@ function getFormErrors(formFields, formId) {
     errors.push(
       "Error: invalid phone format. Please enter a valid phone number."
     );
-  // REQUEST FOR QUOTE
-  // make sure if the user has provided either of estimated man-hour or amount of money for a job
-  //** NOTE: this feature has recieved negative feedback, so needs reviewing
-  if (formId === "form-send-quote") {
-    // if subject form is RequrestFormQuoteForm, check man-hour and price values
-    const manHours = formFields.find((field) => field.name === "man-hours");
-    const price = formFields.find((field) => field.name === "price");
-    const noManHourOrPriceProvided = [manHours, price].every(
-      (item) => item.value === ""
-    );
-    if (noManHourOrPriceProvided)
-      errors.push("Please enter your estimated man-hour or  is required.");
-  }
-  // HANDYMAN REGISTRATION
-  // make sure the user has confirmed their email
-  if (formId === "form-add-handyman") {
-    // if subject form is RequrestFormQuoteForm, check man-hour and price values
-    const emails = formFields.filter((field) => field.type === "email");
-    if(emails[0].value !==emails[1].value)
-    errors.push("The emails you entered do not match.");
-  }
   return errors;
 }
 
@@ -83,7 +55,7 @@ export async function sendQuoteRequest(requestData) {
   try {
     // const emailSendResponse = await sendEmailToAdmin(requestData);
     // if (emailSendResponse.status !== 200) {
-    //   throw new Error(emailSendResponse.text); // if it's not successful, alert user failure of requet
+    //   throw new Error(emailSendResponse.text); // if it's not successful, alert user failure of request
     // }
     // if it's successful, attempt to add handyman to the database for ease of convenience(at least)
     const databaseResponse = await addQuoteRequestToDatabase(formData);
@@ -111,10 +83,10 @@ export async function sendRegistrationRequest(requestData) {
   try {
     // ********************************************************************************
     // COMMENTED OUT BECAUSE WE REACHED LIMIT OF EMAILS
-    
+
     // const emailSendResponse = await sendEmailToAdmin(requestData);
     // if (emailSendResponse.status !== 200) {
-    //   throw new Error(emailSendResponse.text); // if it's not successful, alert user failur of requet
+    //   throw new Error(emailSendResponse.text); // if it's not successful, alert user failure of request
     // }
     // if it's successful, attempt to add handyman to the database for ease of convenience(at least)
     const databaseResponse = await addHandymanToDatabase(formData);
@@ -122,12 +94,12 @@ export async function sendRegistrationRequest(requestData) {
     // console.error(databaseResponse.status)
     if (databaseResponse.status === 400) {
       const result = await databaseResponse.json();
-      alert(result.message)
+      alert(result.message);
       throw new Error(result.message);
     }
     alert(registrationRequestSuccessMessage);
     return true;
-  } catch(err) {
+  } catch (err) {
     console.log(err);
   }
 }
@@ -153,3 +125,62 @@ async function addQuoteRequestToDatabase(formData) {
     headers: { "Content-Type": "application/json" },
   });
 }
+
+/************************* HANDYMAN PROFILE ACTIVATION/DEACTIVATION ***********************/
+
+export async function activateDeactivateHandyman(data) {
+  try {
+    // attempt to update handyman visibility status in database
+    const requiredData = {
+      id: data.handyman.id,
+      newStatus:data.newStatus,
+      token: data.authCtx.token,
+    };
+    const databaseResponse = await updateHandymanVisibilityInDatabase(
+      requiredData
+    );
+    // ********************************************************************************
+    // COMMENTED OUT BECAUSE WE REACHED LIMIT OF EMAILS
+    // WARN: CODE HAS NOT BEEN TESTED FOR FUNCTIONALITY AND EMAIL TEMPLATE IS NOT FULLY DEVELOPED
+    if (databaseResponse.status === 200) {
+      //   // if database has been updated successfully, attempt to send email notification to handyman
+      //   const emailSendResponse = await await sendEmailToHandyman(data.handyman);
+      //   if (emailSendResponse.status !== 200) {
+      //     alert(emailSendResponse.text); // if it's not successful, alert user failure of request
+      //   }
+    }
+    return await databaseResponse.json();
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+async function updateHandymanVisibilityInDatabase(data) {
+  return await fetch(`/api/v1/handyman/handymanprotected/${data.id}`, {
+    method: "PATCH",
+    body: JSON.stringify({ visible: data.newStatus, id: data.id }),
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${data.token}`,
+    },
+  });
+}
+
+// send notification email to handyman about "profile" activation/deactivation (WIP)
+async function sendEmailToHandyman({ id, first_name, last_name, email }) {
+  const formDataEntries = {
+    first_name,
+    last_name,
+    email,
+    profile_link: `https://repairsforyou-release.herokuapp.com/users/handyman/${id}`,
+  };
+
+  return await send(
+    "service_l0m5rpd",
+    "template_2qubr2s",
+    formDataEntries,
+    "user_Z6650OqueHooRxmmi5Geo"
+  );
+}
+
+/***************************************************************************************************************/

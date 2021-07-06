@@ -1,8 +1,10 @@
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation, useParams,Redirect } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import AuthContext from "../../store/authContext";
 import classes from "./AdminPage.module.css";
+
 export default function UpdateForm() {
+	const [isRedirect,setIsRedirect]=useState(false);
   const authCtx = useContext(AuthContext);
   const { id } = useParams();
 
@@ -72,11 +74,13 @@ export default function UpdateForm() {
     }).then((res) => res.json())
     .then((data) => console.log(data))
     .catch((error) => console.log(error)); 
+    alert(`Repairer's detail has been updated`)
+    setIsRedirect(true);
       
   };
 
   return (
-    <div>
+   !isRedirect ? <div>
       <form
         id="form-add-handyman"
         name="form-add-handyman"
@@ -202,8 +206,8 @@ export default function UpdateForm() {
                 type="tel"
                 id="phoneNumber"
                 name="phoneNumber"
-                minLength={11}
-                maxLength={13}
+               // minLength={11}
+                //maxLength={13}
                 required
                 value={phoneNumber}
                 onChange={(e) => setPhoneNumber(e.target.value)}
@@ -230,5 +234,6 @@ export default function UpdateForm() {
         </div>
       </form>
     </div>
+    :  <Redirect to="/admin-panel/handyPeople" />
   );
 }

@@ -65,6 +65,10 @@
     animation-name: fadeIn;
     animation-duration: 1s;
     animation-timing-function: easy-out;
+    @media only screen and (max-width: $bp-small) {
+      display: block;
+      width: 80%;
+    }
 
     &__publish {
       margin-right: 1rem;
@@ -74,6 +78,9 @@
       &:hover {
         color: white;
         background-color: #f49a34;
+      }
+      @media only screen and (max-width: $bp-small) {
+        margin: 0 auto 4rem;
       }
     }
 
@@ -85,6 +92,9 @@
       font-size: 1.6rem;
       &:hover {
         background-color: #d6862b;
+      }
+      @media only screen and (max-width: $bp-small) {
+        margin: 0 auto;
       }
     }
   }

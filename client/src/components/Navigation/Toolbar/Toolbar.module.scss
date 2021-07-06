@@ -1,4 +1,7 @@
+@import "/client/src/assets//styling/base";
+
 .toolbar {
+  position: relative;
   grid-column: main-start / main-end;
   grid-row: 1 / 2;
   background-color: white;
@@ -10,6 +13,12 @@
 
   nav {
     height: 100%;
+  }
+
+  img {
+    @media only screen and (max-width: $bp-medium) {
+padding-right: 3rem;
+    }
   }
 }
 

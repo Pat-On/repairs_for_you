@@ -1,12 +1,11 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link,Redirect } from "react-router-dom";
 import classes from "./Contact.module.css";
-import validateForm from "../../common/js/functions";
-import { permittedCrossDomainPolicies } from "helmet";
 import { send } from "emailjs-com";
 
 
 export default function Contact() {
+	const [isRedirect,setIsRedirect]=useState(false);
 	const [formDetail,setFormDetail]=useState({
 		buyer_name:"",
 		email:"",
@@ -27,10 +26,12 @@ export default function Contact() {
 			"template_ybb8yxc",
 			formDetail,
 			"user_Z6650OqueHooRxmmi5Geo",);
+	alert("Thank you for contacting us! Your message has been sent and we will get back to you soon.")
+	setIsRedirect(true);
 	};
 
-	return (
-		<div className={classes.contact_container}>
+	return  (
+		!isRedirect ?	<div className={classes.contact_container}>
 			<div className="map-form" onSubmit={handleSubmit}>
 				<form
 					id="form-send-quote"
@@ -112,6 +113,8 @@ export default function Contact() {
 			</div>
 			<Link to="/contact"></Link>
 
-		</div>
+		</div> 
+		:
+		 <Redirect to="/home" />
 	);
 }

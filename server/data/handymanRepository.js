@@ -2,7 +2,7 @@ import pool from "../db";
 
 // QUERIES
 // 1. DEDITCATED TO ADMIN
-const getAllHandymenAdminQuery = `SELECT * FROM handyman ORDER BY id`;
+const getAllHandymenAdminQuery = `SELECT * FROM handyman WHERE id > 0 ORDER BY id`;
 const getHandymanByIdAdminQuery = `SELECT * FROM handyman WHERE id = $1`; // used mainly to check if handyman exists
 const changeHandymanVisibilityByIdAdminQuery = `UPDATE handyman SET visible = $1 WHERE id = $2`;
 const editHandymanDetailsByIdAdminQuery = `UPDATE handyman

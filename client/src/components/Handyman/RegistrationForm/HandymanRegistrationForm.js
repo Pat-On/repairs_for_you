@@ -12,7 +12,7 @@ import {
 const defaultHandymanProfilePicture =
   "https://dogtime.com/assets/uploads/2011/03/puppy-development.jpg";
 
-const HandymanRegistrationForm = (props) => {
+const HandymanRegistrationForm = () => {
   // form submission errors
   const [errors, setErrors] = useState([]);
 
@@ -33,6 +33,13 @@ const HandymanRegistrationForm = (props) => {
   const [otherSkill, setOtherSkill] = useState("");
   const [bio, setBio] = useState("");
 
+  // organise fields that need further validation
+  const fieldsToValidate = [
+    { type: "email", value: email },
+    { type: "tel", value: phoneNumber },
+  ];
+
+  // organise the form data to be sent
   const formData = {
     firstName,
     lastName,
@@ -44,12 +51,18 @@ const HandymanRegistrationForm = (props) => {
     skills: [...selectedSkills, otherSkill],
     bio,
   };
+
   // EVENT HANDLERS
   const sendFormData = async (event) => {
     event.preventDefault();
     const form = event.target;
-    const errors = validateForm(form, form.id);
+    const errors = validateForm(fieldsToValidate);
+    if (selectedSkills.length === 0)
+      errors.push("You must select at least one skill.");
+    if (emailConfirm !== email)
+      errors.push("The emails you entered do not match.");
     if (errors.length > 0) {
+      alert("Error(s) on the form. Please check and try again.");
       return setErrors(errors);
     }
 
@@ -60,8 +73,9 @@ const HandymanRegistrationForm = (props) => {
       formData,
       "user_Z6650OqueHooRxmmi5Geo",
     ];
-    const okToResetForm = await sendRegistrationRequest(requestData);
-    if (okToResetForm) form.reset();
+    // check if sending quote request was successful. Navigate to homepage if it was.
+    const okToGoHome = await sendRegistrationRequest(requestData);
+    if (okToGoHome) window.location.assign("/");
   };
 
   return (

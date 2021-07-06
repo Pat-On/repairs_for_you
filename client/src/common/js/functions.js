@@ -13,19 +13,12 @@ const failureMessage = `
 Sorry, but we could not send your request at the moment. Please try again later.
 `;
 
-export function validateForm(form,formId) {
-  const fields = getFormFields(form);
-  const errors = getFormErrors(fields, formId);
+export function validateForm(formFields) {
+  const errors = getFormErrors(formFields);
   return errors.length > 0 ? errors : [];
 }
 
-function getFormFields(form) {
-  return [...form.querySelectorAll("input")].map(
-    (input) => ({ name: input.name, value: input.value, type: input.type })
-  );
-}
-
-function getFormErrors(formFields, formId) {
+function getFormErrors(formFields) {
   const errors = [];
   const emailField = formFields.find((field) => field.type === "email").value;
   const phoneNumber = formFields.find((field) => field.type === "tel").value;
@@ -36,27 +29,6 @@ function getFormErrors(formFields, formId) {
     errors.push(
       "Error: invalid phone format. Please enter a valid phone number."
     );
-  // REQUEST FOR QUOTE
-  // make sure if the user has provided either of estimated man-hour or amount of money for a job
-  //** NOTE: this feature has recieved negative feedback, so needs reviewing
-  if (formId === "form-send-quote") {
-    // if subject form is RequrestFormQuoteForm, check man-hour and price values
-    const manHours = formFields.find((field) => field.name === "man-hours");
-    const price = formFields.find((field) => field.name === "price");
-    const noManHourOrPriceProvided = [manHours, price].every(
-      (item) => item.value === ""
-    );
-    if (noManHourOrPriceProvided)
-      errors.push("Please enter your estimated man-hour or  is required.");
-  }
-  // HANDYMAN REGISTRATION
-  // make sure the user has confirmed their email
-  if (formId === "form-add-handyman") {
-    // if subject form is RequrestFormQuoteForm, check man-hour and price values
-    const emails = formFields.filter((field) => field.type === "email");
-    if(emails[0].value !==emails[1].value)
-    errors.push("The emails you entered do not match.");
-  }
   return errors;
 }
 
@@ -111,7 +83,7 @@ export async function sendRegistrationRequest(requestData) {
   try {
     // ********************************************************************************
     // COMMENTED OUT BECAUSE WE REACHED LIMIT OF EMAILS
-    
+
     // const emailSendResponse = await sendEmailToAdmin(requestData);
     // if (emailSendResponse.status !== 200) {
     //   throw new Error(emailSendResponse.text); // if it's not successful, alert user failur of requet
@@ -122,12 +94,12 @@ export async function sendRegistrationRequest(requestData) {
     // console.error(databaseResponse.status)
     if (databaseResponse.status === 400) {
       const result = await databaseResponse.json();
-      alert(result.message)
+      alert(result.message);
       throw new Error(result.message);
     }
     alert(registrationRequestSuccessMessage);
     return true;
-  } catch(err) {
+  } catch (err) {
     console.log(err);
   }
 }

@@ -20,33 +20,42 @@ const RequestForQuoteForm = () => {
   const [jobDescription, setJobDescription] = useState("");
   const [jobStartDate, setJobStartDate] = useState("");
 
+  // organise fields that need further validation
+  const fieldsToValidate = [
+    { type: "email", value: buyerEmail },
+    { type: "tel", value: buyerPhoneNumber },
+  ];
+
+  // organise the form data to be sent
+  const formData = {
+    handymanId,
+    handymanName,
+    buyerName,
+    buyerEmail,
+    buyerPhoneNumber,
+    jobDescription,
+    jobStartDate,
+  };
+
   // EVENT HANDLERS
-  const sendFormData = (event) => {
+  const sendFormData = async (event) => {
     event.preventDefault();
     const form = event.target;
-    const errors = validateForm(form);
+    const errors = validateForm(fieldsToValidate);
     if (errors.length > 0) {
       return setErrors(errors);
     }
-    
+
     setErrors([]);
-    const formData = {
-      handymanId,
-      handymanName,
-      buyerName,
-      buyerEmail,
-      buyerPhoneNumber,
-      jobDescription,
-      jobStartDate,
-    };
     const requestData = [
       "service_l0m5rpd",
       "template_elv94vx",
       formData,
       "user_Z6650OqueHooRxmmi5Geo",
     ];
-    sendQuoteRequest(requestData);
-    form.reset();
+    // check if sending quote request was successful. Navigate to homepage if it was.
+    const okToGoHome = await sendQuoteRequest(requestData);
+    if (okToGoHome) window.location.assign("/");
   };
 
   return (
@@ -83,7 +92,7 @@ const RequestForQuoteForm = () => {
           </p> */}
         </div>
       )}
-      
+
       <div>
         <em className="required">
           <span className="required">*</span>&nbsp;Required field

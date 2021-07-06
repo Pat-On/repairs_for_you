@@ -47,7 +47,7 @@ function validateQuoteData(qData) {
   try {
     const { buyerName, buyerEmail, jobDescription, jobStartDate, handymanId } =
       qData;
-
+    
     const dataToValidate = {
       buyerName,
       buyerEmail,
@@ -56,7 +56,7 @@ function validateQuoteData(qData) {
       handymanId,
     };
 
-    return Object.values(dataToValidate).every((item) => item);
+    return Object.values(dataToValidate).every((value) => value!=="");
   } catch (err) {
     console.log(err);
   }

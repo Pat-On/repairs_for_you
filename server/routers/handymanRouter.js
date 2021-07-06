@@ -21,8 +21,8 @@ router.get("/handymannotprotected", async (_, res) => {
 // ...who would like to rgister as handyman on the site)
 router.post("/handymannotprotected", async (req, res) => {
   const result = await services.addNewHandyman(req.body);
-  console.log("********************************************* I hit post");
-  const resultStatus = result.status === "OK" ? 201 : 400;
+  const resultStatus =
+    result.status === "OK" ? 200 : result.status === "FAIL" ? 400 : 500;
   return res.status(resultStatus).send({ message: result.message });
 });
 
@@ -64,8 +64,10 @@ router
   .put(async (req, res) => {
     const result = await services.editHandymanDetailsByIdAdmin(req.body);
     console.log(result);
-    const resultStatus = result.status === "OK" ? 200 : 400;
-    return res.status(resultStatus).json({ message: result.message }); })
+    const resultStatus =
+      result.status === "OK" ? 200 : result.status === "FAIL" ? 400 : 500;
+    return res.status(resultStatus).json({ message: result.message });
+  })
 
   //// GET "/{id}" SERVE DATA OF INDIVIDUAL HANDYMAN
   .get(async (req, res) => {
@@ -77,17 +79,18 @@ router
   // PATCH "/" LET ADMIN CONTROL THE VISIBILITY OF A HANDYMAN'S PROFILE ON THE SITE(?)
   .patch(async (req, res) => {
     const result = await services.changeHandymanVisibilityByAdmin(req.body);
-    const resultStatus = result.status === "OK" ? 200 : 400;
+    const resultStatus =
+      result.status === "OK" ? 200 : result.status === "FAIL" ? 400 : 500;
     return res.status(resultStatus).json({ message: result.message });
   })
 
-  // ADMIN CAN DELETE HANDYMAN RECORD  
+  // ADMIN CAN DELETE HANDYMAN RECORD
   .delete(async (req, res) => {
     const result = await services.deleteHandymanByIdAdmin(
       parseInt(req.params.id)
     );
     return !result ? res.status(204).send(result) : res.sendStatus(404);
-  })
+  });
 /******************************************************************************************************/
 
 module.exports = router;

@@ -16,7 +16,11 @@
   width: 100%;
   text-align: center;
   @media only screen and (max-width: $bp-medium) {
-    grid-template-rows: repeat(6, min-content);
+    // grid-template-rows: min-content repeat(5, repeat(minmax(min-content, 80vh)))
+    grid-template-rows: min-content min-content minmax(
+        min-content,
+        1fr
+      ) min-content  minmax(min-content, 1fr)  
   }
   &__header {
     grid-row: 1 / 2;
@@ -25,7 +29,7 @@
     margin: 3rem 0 2rem;
     font-size: 4rem;
     font-family: $font-primary;
-    font-weight: 400;
+    font-weight: 700;
 
     &__sub__1 {
       grid-row: 2 / 3;
@@ -53,6 +57,7 @@
     height: 3.5rem;
     @media only screen and (max-width: $bp-medium) {
       transform: rotate(90deg);
+      margin: 1rem 0 1rem;
     }
   }
 
@@ -77,6 +82,7 @@
       width: 15rem;
       @media only screen and (max-width: $bp-medium) {
         width: 80%;
+        margin: 1rem 0 1rem;
       }
     }
   }

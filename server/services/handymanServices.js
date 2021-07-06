@@ -34,7 +34,11 @@ async function addNewHandyman(hData) {
       };
     } catch (error) {
       // if there is database connection issue
-      return console.log(error);
+      console.log(error);
+      return {
+        status: "Error",
+        message: "Internal server error.",
+      };
     }
   }
   return {
@@ -54,7 +58,6 @@ async function getReviewsByHandymanId(hId) {
 // ...who would like to rgister as handyman on the site)
 function validateHandymanData(hData) {
   // required handyman data fields
-  console.log(hData);
   try {
     const {
       firstName,
@@ -136,7 +139,7 @@ async function changeHandymanVisibilityByAdmin(hData) {
   try {
     // check if the requested handyman is found in the database
     const result = await repository.getHandymanByIdForAdmin(hData.id);
-    if (result.rowCount===0) {
+    if (result.rowCount === 0) {
       return {
         status: "FAIL",
         message: `Sorry, but the handyman with id "${hData.id}" could not be found.`,
@@ -149,7 +152,11 @@ async function changeHandymanVisibilityByAdmin(hData) {
     };
   } catch (error) {
     // if there is database connection issue
-    return console.log(error);
+    console.log(error);
+    return {
+      status: "Error",
+      message: "Internal server error.",
+    };
   }
 }
 
@@ -171,12 +178,15 @@ async function editHandymanDetailsByIdAdmin(hData) {
       }
       return {
         status: "FAIL",
-        message:
-          "A user with this id does not exist.",
+        message: "A user with this id does not exist.",
       };
     } catch (error) {
       // if there is database connection issue
-      return console.log(error);
+      console.log(error);
+      return {
+        status: "Error",
+        message: "Internal server error.",
+      };
     }
   }
   return {
@@ -188,8 +198,7 @@ async function editHandymanDetailsByIdAdmin(hData) {
 
 async function deleteHandymanByIdAdmin(hId) {
   const result = await repository.deleteHandymanByIdAdmin(hId);
-  console.log(result)
-  return result.rows[0];   
+  return result.rows[0];
 }
 
 function validateUpdateData(hData) {
@@ -199,7 +208,7 @@ function validateUpdateData(hData) {
   // if all informaiton has been provided, validate each data
   if (typeof visible !== "boolean") return false;
   if (isNaN(parseInt(id))) return false;
-  //
+  // upon successful data validation
   return true;
 }
 
@@ -213,5 +222,5 @@ module.exports = {
   getReviewsByHandymanId,
   getThreeRandomHandyman,
   editHandymanDetailsByIdAdmin,
-  deleteHandymanByIdAdmin
+  deleteHandymanByIdAdmin,
 };

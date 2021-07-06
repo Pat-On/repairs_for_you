@@ -55,7 +55,7 @@ export async function sendQuoteRequest(requestData) {
   try {
     // const emailSendResponse = await sendEmailToAdmin(requestData);
     // if (emailSendResponse.status !== 200) {
-    //   throw new Error(emailSendResponse.text); // if it's not successful, alert user failure of requet
+    //   throw new Error(emailSendResponse.text); // if it's not successful, alert user failure of request
     // }
     // if it's successful, attempt to add handyman to the database for ease of convenience(at least)
     const databaseResponse = await addQuoteRequestToDatabase(formData);
@@ -86,7 +86,7 @@ export async function sendRegistrationRequest(requestData) {
 
     // const emailSendResponse = await sendEmailToAdmin(requestData);
     // if (emailSendResponse.status !== 200) {
-    //   throw new Error(emailSendResponse.text); // if it's not successful, alert user failur of requet
+    //   throw new Error(emailSendResponse.text); // if it's not successful, alert user failure of request
     // }
     // if it's successful, attempt to add handyman to the database for ease of convenience(at least)
     const databaseResponse = await addHandymanToDatabase(formData);
@@ -125,3 +125,62 @@ async function addQuoteRequestToDatabase(formData) {
     headers: { "Content-Type": "application/json" },
   });
 }
+
+/************************* HANDYMAN PROFILE ACTIVATION/DEACTIVATION ***********************/
+
+export async function activateDeactivateHandyman(data) {
+  try {
+    // attempt to update handyman visibility status in database
+    const requiredData = {
+      id: data.handyman.id,
+      newStatus:data.newStatus,
+      token: data.authCtx.token,
+    };
+    const databaseResponse = await updateHandymanVisibilityInDatabase(
+      requiredData
+    );
+    // ********************************************************************************
+    // COMMENTED OUT BECAUSE WE REACHED LIMIT OF EMAILS
+    // WARN: CODE HAS NOT BEEN TESTED FOR FUNCTIONALITY AND EMAIL TEMPLATE IS NOT FULLY DEVELOPED
+    if (databaseResponse.status === 200) {
+      //   // if database has been updated successfully, attempt to send email notification to handyman
+      //   const emailSendResponse = await await sendEmailToHandyman(data.handyman);
+      //   if (emailSendResponse.status !== 200) {
+      //     alert(emailSendResponse.text); // if it's not successful, alert user failure of request
+      //   }
+    }
+    return await databaseResponse.json();
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+async function updateHandymanVisibilityInDatabase(data) {
+  return await fetch(`/api/v1/handyman/handymanprotected/${data.id}`, {
+    method: "PATCH",
+    body: JSON.stringify({ visible: data.newStatus, id: data.id }),
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${data.token}`,
+    },
+  });
+}
+
+// send notification email to handyman about "profile" activation/deactivation (WIP)
+async function sendEmailToHandyman({ id, first_name, last_name, email }) {
+  const formDataEntries = {
+    first_name,
+    last_name,
+    email,
+    profile_link: `https://repairsforyou-release.herokuapp.com/users/handyman/${id}`,
+  };
+
+  return await send(
+    "service_l0m5rpd",
+    "template_2qubr2s",
+    formDataEntries,
+    "user_Z6650OqueHooRxmmi5Geo"
+  );
+}
+
+/***************************************************************************************************************/

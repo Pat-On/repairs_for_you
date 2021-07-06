@@ -5,7 +5,7 @@
   align-items: center;
   align-content: center;
   flex-direction: column;
-  justify-content: flex start;
+  justify-content: center;
   text-align: center;
   position: relative;
   width: 24%;
@@ -13,7 +13,7 @@
   padding: 1rem;
   height: 100%;
 
-  @media only screen and (max-width: $bp-medium) {
+  @media only screen and (max-width: $bp-large) {
     margin: 1rem 0 1rem;
     flex-direction: row;
     width: 80%;

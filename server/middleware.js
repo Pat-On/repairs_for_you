@@ -8,6 +8,7 @@ export const configuredHelmet = () => helmet({
 			objectSrc: ["'none'"],
 			scriptSrc: ["'self'", "unpkg.com", "polyfill.io"],
 			styleSrc: ["'self'", "https: 'unsafe-inline'"],
+			fontSrc:   ["'self'", "data: 'https://fonts.gstatic.com'"],
 			upgradeInsecureRequests: [],
 		},
 	},

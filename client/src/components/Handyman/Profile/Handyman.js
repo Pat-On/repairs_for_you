@@ -29,36 +29,50 @@ const Handyman = ({ userData }) => {
   // }, [id]);
 
   return (
-    <div className="card handy-man">
-      <div className="profile-image-bio">
-        <figure className="profile-image">
-          <figcaption>{`${userData.first_name} ${userData.last_name}`}</figcaption>
-          <img
-            src={userDefaultImg} // WARN: TEMPORARY SOLUTION
-            alt={`${userData.first_name} ${userData.last_name}`}
-          />
+    <div className="handyman">
+      {/* <div className="profile-image-bio"> */}
+      <figure>
+        <img
+          className="profile-image"
+          src={userDefaultImg} // WARN: TEMPORARY SOLUTION
+          alt={`${userData.first_name} ${userData.last_name}`}
+        />
+        <figcaption>
+          <p className="handyman-name">{`${userData.first_name} ${userData.last_name}`}</p>
 
           {/* NOTE: COMMENTED OUT SECTION BELOW IS HOPED TO BE PART OF FUTURE SITE IMPROVEMENTS */}
 
-          {/* <span className="label">Rating:</span>&nbsp;
-          <span className="stars">{userData.rating}&nbsp;stars</span>{" "} */}
-        </figure>
-        <div className="bio bio-handy-man">
-          <h2>About Me</h2>
-          <p>{userData.bio}</p>
-        </div>
-      </div>
-      <Link to={{ pathname: `${url}/forms/request-for-quote`, state: data }}>
+          {/* <p>
+              <span className="label">Rating:</span>&nbsp;
+              <span className="stars">{userData.rating}&nbsp;stars</span>
+            </p> */}
+        </figcaption>
+      </figure>
+      <Link
+        to={{ pathname: `${url}/forms/request-for-quote`, state: data }}
+        className="link-btn-quote top-link"
+      >
         <button id="btn-quote">Get a Quote</button>
       </Link>
+      <div className="bio-handyman">
+        <h2>About Me</h2>
+        <p>{userData.bio}</p>
+      </div>
+      {/* </div> */}
       <div className="skills">
-        <h3>Skills</h3>
+        <h3>My Skills</h3>
         <ul className="skills-list">
           {skills.map((skill, index) => (
             <li key={index}>{skill}</li>
           ))}
         </ul>
       </div>
+      <Link
+        to={{ pathname: `${url}/forms/request-for-quote`, state: data }}
+        className="link-btn-quote buttom-link"
+      >
+        <button id="btn-quote">Get a Quote</button>
+      </Link>
 
       {/* NOTE: COMMENTED OUT SECTION BELOW IS HOPED TO BE PART OF FUTURE SITE IMPROVEMENTS */}
 

@@ -20,3 +20,5 @@ process.on("SIGTERM", () => server.close(() => disconnectDb()));
 connectDb().then(() => server.listen(port));
 
 //
+
+// small test of linux push sorry for it :>

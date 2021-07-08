@@ -74,7 +74,7 @@ const RequestForQuoteForm = () => {
       <h1 className="title">Request For Quote</h1>
       {data && (
         <div className="handyman-summary">
-          <h2>Handyman Info</h2>
+          <h2>Repairer Info</h2>
           <p>
             <span>Name:</span> <span className="bold">{data.first_name}</span>{" "}
             <span className="bold">{data.last_name}</span>

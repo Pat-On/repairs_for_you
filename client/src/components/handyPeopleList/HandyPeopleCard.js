@@ -47,7 +47,7 @@ export default function handyPeopleCard({ onelist }) {
         }}
         className="link-profile"
       >
-        <button>See Profile</button>
+        <button>View Profile</button>
       </Link>
 
       {onelist.skills.length <= 3 ? (

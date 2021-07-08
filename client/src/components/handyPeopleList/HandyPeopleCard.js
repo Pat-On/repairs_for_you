@@ -17,24 +17,67 @@ export default function handyPeopleCard({ onelist }) {
         </Link>
       </div>
       <div className="bio">
-        <p className="card-text">{onelist.bio}</p>
+        {onelist.bio.length > 150 ? (
+          <p className="card-text">
+            {onelist.bio.substring(0, 150)}
+            <Link
+              to={{ pathname: `${url}/${onelist.id}`, state: onelist }}
+              className="see-more"
+            >
+              &nbsp;...Read more
+            </Link>
+          </p>
+        ) : (
+          <p className="card-text">{onelist.bio}</p>
+        )}
       </div>
       <Link
         to={{
           pathname: `${url}/${onelist.id}/forms/request-for-quote`,
           state: onelist,
         }}
+        className="link-quote"
       >
-        quote
+        <button>Get a Quote</button>
+      </Link>
+      <Link
+        to={{
+          pathname: `${url}/${onelist.id}`,
+          state: onelist,
+        }}
+        className="link-profile"
+      >
+        <button>View Profile</button>
       </Link>
 
-      <ul className="list-group list-group-flush skills">
-        {onelist.skills.map((skill, index) => (
-          <li key={index} className="list-group-item">
-            {skill}
+      {onelist.skills.length <= 3 ? (
+        <ul className="list-group list-group-flush skills">
+          {onelist.skills.map((skill, index) => (
+            <li key={index} className="list-group-item">
+              {skill}
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <ul className="list-group list-group-flush skills">
+          {onelist.skills.slice(0, 3).map((skill, index) => (
+            <li key={index} className="list-group-item">
+              {skill}
+            </li>
+          ))}
+          <li>
+            <Link
+              to={{
+                pathname: `${url}/${onelist.id}`,
+                state: onelist,
+              }}
+              className="see-more"
+            >
+              ...more
+            </Link>
           </li>
-        ))}
-      </ul>
+        </ul>
+      )}
     </div>
   );
 }

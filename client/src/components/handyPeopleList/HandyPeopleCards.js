@@ -46,7 +46,7 @@ export default function HandyPeopleCards() {
   return !list && !search ? (
     <h1 className="message">Loading, please wait...</h1>
   ) : (
-    <div className="cards-container">
+    <div className="handymen-list">
       <InputFields handleChange={handleChange} />
       {/* during search/filter action... */}
       {search && search.length > 0 ? (
@@ -58,9 +58,11 @@ export default function HandyPeopleCards() {
             <p className="message results-found-message">{`${list.length} result(s) found.`}</p>
           )}
           {/* {display the list of handymen found} */}
-          {search.map((oneList, index) => (
-            <HandyPeopleCard key={index} onelist={oneList} />
-          ))}
+          <div className="cards-container">
+            {search.map((oneList, index) => (
+              <HandyPeopleCard key={index} onelist={oneList} />
+            ))}
+          </div>
         </div>
       ) : search && search.length === 0 ? (
         // if there are no search results, display 'No results found' message
@@ -71,9 +73,11 @@ export default function HandyPeopleCards() {
         // default: display list of all handymen
         <div>
           <p className="message results-found-message">{`${list.length} result(s) found.`}</p>
-          {list.map((oneList, index) => (
-            <HandyPeopleCard key={index} onelist={oneList} />
-          ))}
+          <div className="cards-container">
+            {list.map((oneList, index) => (
+              <HandyPeopleCard key={index} onelist={oneList} />
+            ))}
+          </div>
         </div>
       )}
     </div>

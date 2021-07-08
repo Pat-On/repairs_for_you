@@ -241,7 +241,7 @@ const HandymanRegistrationForm = () => {
             id="other-skills"
             name="other-skills"
             onChange={(event) => setOtherSkill(event.target.value)}
-            placeholder={`What other handyman skill do you have?`}
+            placeholder={`What other repairer skill do you have?`}
           />
         </div>
       </fieldset>

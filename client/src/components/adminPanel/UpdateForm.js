@@ -82,12 +82,12 @@ export default function UpdateForm() {
   return (
    !isRedirect ? <div>
       <form
-        id="form-add-handyman"
-        name="form-add-handyman"
+      className={classes.updateForm}
+        name="form-edit-repairer"
         onSubmit={submitData}
       >
         <fieldset className={classes.input_field_group_details}>
-          <legend className={classes.subtitle}>Edit User details</legend>
+          <legend className={classes.subtitle}>Edit repairer details</legend>
           <div className={classes.basic_details}>
             <h3>Basic Details</h3>
             <div className={classes.input_field}>
@@ -215,7 +215,7 @@ export default function UpdateForm() {
             </div>
           </div>
         </fieldset>
-        <fieldset className={classes.input_field}>
+        <fieldset className={classes.input_field_skills}>
           <legend className="subtitle">
             Skills<span className="required">*</span>
           </legend>
@@ -230,7 +230,7 @@ export default function UpdateForm() {
           ></input>
         </fieldset>
         <div className={classes.edit_button}>
-          <input type="submit" id="btn-submit" name="btn-submit" value="Edit" />
+          <input type="submit" id="btn-submit" name="btn-submit" value="Update" />
         </div>
       </form>
     </div>

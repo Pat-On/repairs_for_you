@@ -1,4 +1,13 @@
 /* ADMIN PAGE STYLES  */
+.adminpanel {
+  text-align: center;
+  margin-top: 3rem;
+  margin-bottom: 2rem;
+}
+.adminpanel > h1 {
+  font-size: 3.5rem;
+  font-style: italic;
+}
 .admin_page {
   display: flex;
   justify-content: center;
@@ -31,20 +40,52 @@
 }
 table {
   display: block;
-  margin: 0 auto 5rem;
+  width: 100%;
   border-collapse: separate;
+  margin: 0 auto 5rem;
   border-spacing: 3rem 0;
   font-size: 1.7rem;
-  background-color: rgb(236, 243, 243);
   table-layout: fixed;
-  width: 100%;
+  text-align: left;
 }
 
-th {
-  height: 5%;
-}
+th,
 td {
-  height: 5%;
+  padding: 1rem;
+}
+
+/* END OF TABLE STYLE */
+
+/* INPUT FIELD STYLES */
+.searchField {
+  margin: 2rem 25%;
+}
+.searchField input {
+  height: 3.5rem;
+  width: 40%;
+}
+.searchField span {
+  font-size: 1.7rem;
+  padding-left: 3rem;
+  color: blue;
+}
+/* UPDATE FORM STYLE */
+
+label {
+  font-weight: 600;
+  padding-right: 1rem;
+}
+.input_field_group_details {
+  text-align: left;
+  font-size: larger;
+}
+.subtitle {
+  text-align: center;
+  font-size: 2.7rem;
+}
+.input_field_skills {
+  text-align: left;
+  font-size: larger;
 }
 .edit_button input {
   background-color: #0275d8;
@@ -55,18 +96,4 @@ td {
   border: none;
   border-radius: 2px;
   margin-top: 1.2rem;
-}
-/* INPUT FIELD STYLES */
-.searchField {
-  width: 75%;
-  margin: 2rem 25%;
-}
-.searchField input {
-  height: 3.5rem;
-  width: 30%;
-}
-.searchField span {
-  font-size: 1.7rem;
-  padding-left: 3rem;
-  color: blue;
 }

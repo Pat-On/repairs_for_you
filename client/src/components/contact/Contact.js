@@ -56,7 +56,6 @@ export default function Contact() {
 								<label>Name: {" "}</label>
 								<input
 									type="text"
-									id="buyer_name"
 									name="buyer_name"
 									maxLength={60}
 									required
@@ -68,7 +67,6 @@ export default function Contact() {
 								<label>Email Address: {" "}</label>
 								<input
 									type="text"
-									id="email"
 									name="email"
 									maxLength={60}
 									required
@@ -82,7 +80,6 @@ export default function Contact() {
 								<label> Message: {" "}</label>
 								<textarea
 									type="text"
-									id="message"
 									name="message"
 									required
 									placeholder="Your message here"
@@ -99,7 +96,6 @@ export default function Contact() {
 						<input
 							className={classes.btn_submit}
 							type="submit"
-							id="buyer_name"
 							name="buyer_name"
 							maxLength={60}
 							required

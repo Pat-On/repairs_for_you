@@ -4,19 +4,15 @@
   grid-row: 4 / 5;
   grid-column: 1 / -1;
   background-color: lightgrey;
-
   display: grid;
   grid-template-columns: 0.3fr repeat(5, 1fr) 0.3fr;
   grid-template-rows: repeat(6, 1fr);
-
   justify-items: center;
   align-items: center;
-
   height: 100%;
   width: 100%;
   text-align: center;
   @media only screen and (max-width: $bp-medium) {
-    // grid-template-rows: min-content repeat(5, repeat(minmax(min-content, 80vh)))
     grid-template-rows: min-content min-content minmax(
         min-content,
         1fr

@@ -11,14 +11,14 @@
   letter-spacing: 1.2px;
 }
 
-figure {
+.profile-figure {
   order: 1;
   width: 30%;
   text-align: center;
   border-radius: 1.5rem;
 }
 
-figure p.handyman-name {
+.profile-figure p.handyman-name {
   font-size: 3rem;
   font-weight: 600;
   color: #b16611;
@@ -91,12 +91,12 @@ a.top-link {
     flex-flow: column wrap;
   }
 
-  figure,
+  .profile-figure,
   .bio-handyman {
     width: 100%;
   }
 
-  figure .profile-image {
+  .profile-figure .profile-image {
     width: 70%;
   }
 
@@ -104,7 +104,7 @@ a.top-link {
     width: 90%;
   }
 
-  figure {
+  .profile-figure {
     order: 1;
   }
 
@@ -131,7 +131,7 @@ a.top-link {
   .handyman {
     width: 95%;
   }
-  figure,
+  .profile-figure,
   .handyman .skills {
     width: 27%;
   }
@@ -139,7 +139,7 @@ a.top-link {
   a.link-btn-quote {
     width: 68%;
   }
-  figure {
+  .profile-figure {
     order: 2;
   }
 

@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Route, Redirect, useRouteMatch, Switch, Link } from "react-router-dom";
-
 import UserManagements from "./usersManagements/UsersManagements";
 import classes from "./AdminPage.module.css";
 import UserDetailedProfile from "./usersManagements/UserDetailedProfile/UserDetailedProfile";
 import Adminpage from "./Adminpage";
 import AdminButton from "./AdminButton";
+import Classes from "./AdminPage.module.css";
+
 
 
 
@@ -23,7 +24,7 @@ const AdminPanel = (props) => {
     It need to go to global state
 */
 	return (
-		<div>
+		<div className={classes.adminpanel}>
 			<h1>Welcome to Your admin dashboard</h1>
 			{/* <h2>Please chose one of the option</h2> */}
 			<h1>What do you want to do next</h1>

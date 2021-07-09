@@ -3,6 +3,7 @@ import { Link,Redirect } from "react-router-dom";
 import classes from "./Contact.module.css";
 import { send } from "emailjs-com";
 
+
 export default function Contact() {
 	const [isRedirect,setIsRedirect]=useState(false);
 	const [formDetail,setFormDetail]=useState({
@@ -31,15 +32,15 @@ export default function Contact() {
 
 	return  (
 		!isRedirect ?	<div className={classes.contact_container}>
-			<div className="map-form" onSubmit={handleSubmit}>
+			<div  onSubmit={handleSubmit}>
 				<form
-					id="form-send-quote"
-					name="form-send-quote"
+					name="form-query"
 					className="form"
 				>
 					<div>
 						<div className={classes.contact_text}>
 							<h1>Contact Us</h1>
+							<hr></hr>
 							<p>Got a question, we would love to hear from you.</p>
 							<p>Drop us a message and one of our team members will get in touch with you</p>
 
@@ -55,11 +56,10 @@ export default function Contact() {
 								<label>Name: {" "}</label>
 								<input
 									type="text"
-									id="buyer_name"
 									name="buyer_name"
 									maxLength={60}
 									required
-									placeholder="Enter your name here"
+									placeholder="Your name "
 									onChange={handleChange}
 								/>
 							</div>
@@ -67,37 +67,35 @@ export default function Contact() {
 								<label>Email Address: {" "}</label>
 								<input
 									type="text"
-									id="email"
 									name="email"
 									maxLength={60}
 									required
-									placeholder="Enter your email here"
+									placeholder="Your email address"
 									onChange={handleChange}
 
 
 								/>
 							</div>
 							<div className={classes.message}>
-								<label> Message: {" "}</label><span><textarea
+								<label> Message: {" "}</label>
+								<textarea
 									type="text"
-									id="message"
 									name="message"
 									required
-									placeholder="Enter your message here"
+									placeholder="Your message here"
 									onChange={handleChange}
 
-								/></span>
+								/>
 
 							</div>
 						</div>
 
 
 
-					<div>
+					<div className={classes.button_div}>
 						<input
 							className={classes.btn_submit}
 							type="submit"
-							id="buyer_name"
 							name="buyer_name"
 							maxLength={60}
 							required

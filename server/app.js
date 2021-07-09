@@ -1,12 +1,11 @@
 import express from "express";
 import morgan from "morgan";
 import path from "path";
-
 import {
-  configuredHelmet,
-  httpsOnly,
-  logErrors,
-  pushStateRouting,
+	configuredHelmet,
+	httpsOnly,
+	logErrors,
+	pushStateRouting,
 } from "./middleware";
 
 import bookingRouter from "./routers/bookingRouter";
@@ -26,9 +25,10 @@ app.use(configuredHelmet());
 app.use(logErrors());
 app.use(morgan("dev"));
 
+
 if (app.get("env") === "production") {
-  app.enable("trust proxy");
-  app.use(httpsOnly());
+	app.enable("trust proxy");
+	app.use(httpsOnly());
 }
 
 app.use((req, res, next) => {

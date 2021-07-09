@@ -16,9 +16,6 @@ const Footer = (props) => {
     <footer className={classes.footer}>
       <ul className={classes.footer__listOfIcons}>
         <li>
-         {/*  <a className={classes.links} href="mailto: patryk.nowak@gmail.com">
-            <img src={email} alt="Email icon made by Pixel Perfect" />
-          </a> */}
            <Link to={"/contact"}> <img src={email} alt="Email icon made by Pixel Perfect" /></Link>
         </li>
         <li>
@@ -32,7 +29,7 @@ const Footer = (props) => {
           </a>
         </li>
         <li>
-          <a rel="noreferrer" className={classes.links} target="_blank" href="">
+          <a rel="noreferrer" className={classes.links} target="_blank" href="https://www.linkedin.com/company/coventry-refugee-and-migrant-centre/">
             <img src={linkedin} alt="LinkedIn icon made by Pixel Perfect" />
           </a>
         </li>

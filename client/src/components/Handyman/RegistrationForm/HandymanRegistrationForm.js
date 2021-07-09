@@ -89,7 +89,7 @@ const HandymanRegistrationForm = () => {
           {e}
         </p>
       ))}
-      <h1 className="title">Become a Handyman</h1>
+      <h1 className="title">Become a Repairer</h1>
       <fieldset className="input-field-group details">
         <legend className="subtitle">Your Details</legend>
         <div className="basic-details">
@@ -241,7 +241,7 @@ const HandymanRegistrationForm = () => {
             id="other-skills"
             name="other-skills"
             onChange={(event) => setOtherSkill(event.target.value)}
-            placeholder={`What other handyman skill do you have?`}
+            placeholder={`What other repairer skill do you have?`}
           />
         </div>
       </fieldset>

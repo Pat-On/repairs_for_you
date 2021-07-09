@@ -69,7 +69,6 @@ export default function AdminHandyPeopleTable(props) {
             <th scope="col">Telephone</th>
             <th scope="col">postcode</th>
             <th scope="col">street-name</th>
-            <th scope="col">Joined</th>
             <th scope="col">status</th>
             <th scope="col">Action</th>
           </tr>

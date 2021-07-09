@@ -11,7 +11,7 @@ export default function AdminButton() {
 
 		<div className={classes.admin_page}>
 			<button>
-				<Link to={`${url}/handyPeople`}>View Repair Person</Link>
+				<Link to={`${url}/handyPeople`}>View Repairers</Link>
 			</button>
 			<button>
 				<Link to={`${url}/buyers`}>View Buyers</Link>
@@ -20,7 +20,7 @@ export default function AdminButton() {
 				<Link to={`${url}/buyersrequests`}>View Pending buyer requests</Link>
 			</button>
 			<button>
-				<Link to={`${url}/repairrequest`}>View Pending repair person requests</Link>
+				<Link to={`${url}/repairrequest`}>View Pending repairer requests</Link>
 			</button>
 			
 		</div>

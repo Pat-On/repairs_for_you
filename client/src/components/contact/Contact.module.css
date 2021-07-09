@@ -1,4 +1,4 @@
-/*contact container*/
+/*CONTACT CONTAINER STYLE */
 
 .contact_container {
   width: 70%;
@@ -14,20 +14,14 @@
   background-repeat: no-repeat;
   background-size: cover;
 }
+
 .contact_container h1 {
   text-align: center;
   font-style: italic;
+  font-size: 3.5rem;
   font-weight: 600;
   padding-bottom: 2rem;
   color: rgb(211, 113, 1);
-}
-
-.contact_text {
-  text-align: justify;
-  padding-top: 5rem;
-  padding-bottom: 2rem;
-  font-weight: 300;
-  font-size: larger;
 }
 
 hr {
@@ -36,23 +30,29 @@ hr {
   margin-right: auto;
 }
 
+.contact_text {
+  text-align: justify;
+  padding-top: 5rem;
+  padding-bottom: 2rem;
+  font-size: 1.8rem;
+}
+
 .contact_info {
   padding-top: 2rem;
   padding-bottom: 2rem;
   font-weight: 400;
-  font-size: larger;
+  font-size: 1.8rem;
 }
 .input_fields_container input {
   margin-top: 3rem;
   height: 3rem;
   border: 1px solid rgb(12, 12, 12);
 }
-
-.input_fields_container > .input_field > label,
-.message label {
-  padding-right: 2rem;
-  font-size: large;
-  font-weight: 600;
+.name,
+.email,
+.message > label {
+  font-weight: 400;
+  font-size: 1.8rem;
 }
 .message textarea {
   height: 8rem;
@@ -65,15 +65,15 @@ hr {
 .button_div {
   background-color: white;
 }
+
 .btn_submit {
-  height: 3.5rem;
   background-color: rgb(211, 113, 1);
   color: white;
   font-weight: 600;
   font-size: large;
   border: none;
   border-radius: 5px;
-  width: 10rem;
-  height: 5rem;
-  padding: 1.3rem;
+  width: 9rem;
+  height: 4rem;
+  padding: 1.1rem;
 }

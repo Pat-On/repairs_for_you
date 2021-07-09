@@ -52,7 +52,7 @@ export default function Contact() {
 						</div>
 
 						<div className={classes.input_fields_container }>
-							<div className="input-field">
+							<div className={classes.name}>
 								<label>Name: {" "}</label>
 								<input
 									type="text"
@@ -63,7 +63,7 @@ export default function Contact() {
 									onChange={handleChange}
 								/>
 							</div>
-							<div className={classes.input_field}>
+							<div className={classes.email}>
 								<label>Email Address: {" "}</label>
 								<input
 									type="text"

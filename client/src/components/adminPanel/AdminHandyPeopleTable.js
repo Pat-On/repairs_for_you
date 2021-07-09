@@ -59,6 +59,7 @@ export default function AdminHandyPeopleTable(props) {
   return (
     <div>
       <SearchField list={list} setSearch={setSearch} search={search} />
+      <div className={classes.table_container}>
       <table className={classes.table}>
         <thead>
           <tr>
@@ -89,6 +90,7 @@ export default function AdminHandyPeopleTable(props) {
               />
             ))}
       </table>
+    </div>
     </div>
   );
 }

@@ -83,8 +83,6 @@ export const AuthContextProvide = (props) => {
   // Setting the timer to auto logout
   useEffect(() => {
     if (tokenData) {
-      // TODO: delete in production
-      console.log(tokenData.duration);
       logoutTimer = setTimeout(logoutHandler, tokenData.duration);
     }
   }, [tokenData, logoutHandler]);

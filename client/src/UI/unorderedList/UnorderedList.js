@@ -1,7 +1,6 @@
 import React from "react";
 
 import ListElement from "./listElement/ListElement";
-
 import classes from "./UnorderedList.module.scss";
 
 /**

@@ -27,7 +27,7 @@ router.use(authController.protect);
 router.use(authController.restrictTo("admin"));
 
 /**
- * NOTE: code commented out as the functionallity has not been implemented yet.
+ * NOTE: code commented out as the functionality has not been implemented yet.
  *       They are expected to be accessible only by admin
  */
 // GET "/" SERVE DATA OF ALL QUOTES (currently accessible only to admin)

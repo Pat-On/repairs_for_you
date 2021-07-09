@@ -12,11 +12,9 @@
     margin: 0 auto;
     display: flex;
     align-items: center;
-
     shape-outside: circle(50% at 50% 50%);
     clip-path: circle(50% at 50% 50%);
     overflow: hidden;
-
     position: relative;
 
     &:hover figcaption {
@@ -37,7 +35,6 @@
     transform: translate(-50%, 30%);
     color: white;
     text-transform: uppercase;
-
     font-size: 2rem;
     text-align: center;
     font-weight: 400;

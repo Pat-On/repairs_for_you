@@ -61,14 +61,14 @@ function getHandymanById(hId) {
 
 // FETCH DATA OF ALL HANDYMEN FROM DATABASE BY HANDYMAN EMAIL
 // Note: this is used only during the initial stage of handyman registration process (accessible to anyone...
-// ...who would like to rgister as handyman on the site)
+// ...who would like to register as handyman on the site)
 function getHandymanByEmail(hEmail) {
   return pool.query(getHandymanByEmailQuery, [hEmail]);
 }
 
 // STORE HANDYMAN DATA IN THE DATABASE (handypeople table)
 // Note: this is used only during the initial stage of handyman registration process (accessible to anyone...
-// ...who would like to rgister as handyman on the site)
+// ...who would like to register as handyman on the site)
 function addNewHandyman(hData) {
   const {
     firstName,
@@ -137,7 +137,7 @@ function deleteHandymanByIdAdmin(hId){
 /******************************************************************************************************/
 
 /***************** THE FOLLOWING METHODS ARE DEDICATED TO ADMIN-ACCESSIBLE ROUTES *******************/
-// WARN: ANY REQUIRED AUTHORISATION LOGIC IS YET TO BE ADDED
+// WARN: ANY REQUIRED AUTHORIZATION LOGIC IS YET TO BE ADDED
 
 // FETCH DATA OF ALL HANDYMEN FROM DATABASE (accessible to admin only)
 function getAllHandymenForAdmin() {

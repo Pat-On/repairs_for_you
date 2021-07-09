@@ -8,6 +8,7 @@ import MainPage from "./components/mainPage/mainPage";
 import SignOut from "./containers/signOut/signOut";
 import AuthContext from "./store/authContext";
 import Spinner from "./UI/Spinner/Spinner";
+import ScrollToTop from "./components/ScrollToTop";
 
 //Lazy loading
 const AdminPanel = React.lazy(() => {
@@ -29,6 +30,7 @@ const App = () => {
   return (
     <div className={classes.container}>
       <Layout>
+        <ScrollToTop />
         <Suspense
           className={classes.container__test}
           fallback={

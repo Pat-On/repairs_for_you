@@ -2,8 +2,9 @@ import React from "react";
 
 import Input from "../../UI/input/Input";
 import Button from "../../UI/button/Button";
+import Spinner from "../../UI/Spinner/Spinner"
 
-import classes from "./SignUpForm.module.css";
+import classes from "./SignUpForm.module.scss";
 
 // I left it because we may decide to use logo, but it was not looking good in that version
 // import LogoRFY from "../logo/Logo"
@@ -18,7 +19,6 @@ import classes from "./SignUpForm.module.css";
  */
 const signUpForm = (props) => {
   const flexClassStyleArr = [classes.flexContainerGeneral];
-
   /**
    * If condition which are going to change the CSS classes
    * in relation to how many buttons need to be rendered, base on number of the passed event handlers
@@ -34,6 +34,7 @@ const signUpForm = (props) => {
         <p className={classes.inputFieldName}>{item.config.name}</p>
         <Input
           id={"input" + index}
+          incorrectEmOrPass={props.wrongPasswordEmail}
           invalid={!item.config.valid}
           shouldValidate={item.config.validation}
           touched={item.config.touched}
@@ -81,6 +82,10 @@ const signUpForm = (props) => {
       {/* <LogoRFY /> */}
       <h1 className={classes.title}>{props.nameOfTheForm}</h1>
       {inputForms}
+      {props.loading && <div className={classes.spinnerContainer}><Spinner /></div>}
+      {props.wrongPasswordEmail && (
+        <p className={classes.wrongPassOrEmail}>Incorrect Password or Email</p>
+      )}
       {buttonsPart}
     </div>
   );

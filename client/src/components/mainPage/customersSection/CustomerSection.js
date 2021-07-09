@@ -1,62 +1,43 @@
 import React, { useEffect, useState } from "react";
-import { Route, Redirect, useRouteMatch, Switch, Link } from "react-router-dom";
-
 import classes from "./CustomerSection.module.scss";
 
 import backgroundVideo from "../../../public/ConstructionWorkersDESKTOP.mp4";
 import CustomerCommentMain from "./customerCommentMain/CustomerCommentMain";
+import HandymanProfileMain from "./handymanProfileMain/handymanProfileMain";
 
-import customer1 from "../../../public/5.jpg";
-import customer2 from "../../../public/17.jpg";
-import customer3 from "../../../public/81.jpg";
-
-
+import Spinner from "../../../UI/Spinner/Spinner";
 
 /**
  * @DescriptionFunction Sub component used in MainPage component
  */
 const CustomerSection = (props) => {
-  // !TODO: HARD CODED CUSTOMER next step randomize comments from DB
-  const commentArray = [
-    {
-      photo: customer1,
-      comment: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod 
-      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud 
-      exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-       in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.`,
-      review: 5,
-      user_name: "Name1",
-      user_surname: "Surname1"
-    },
-    {
-      photo: customer2,
-      comment: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod 
-    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud 
-    exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-     in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.`,
-      review: 3,
-      user_name: "Name2",
-      user_surname: "Surname2"
-    },
-    {
-      photo: customer3,
-      comment: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod 
-  tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud 
-  exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-   in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.`,
-      review: 4,
-      user_name: "Name3",
-      user_surname: "Surname3"
-    },
-  ];
+  const [handymenProfiles, setHandymanProfiles] = useState([]);
+  useEffect(async () => {
+    try {
+      const dataRAW = await fetch(
+        "/api/v1/handyman/handymannotprotected/randomthree"
+      );
+      const data = await dataRAW.json();
+      const threeHandyman = data.data;
+      setHandymanProfiles(threeHandyman);
+    } catch (error) {
+      // after functionality TODO: error handling
+      console.log(error);
+    }
+  }, []);
 
-  //!TODO: proper spinner
-  let usersComments = <p> LOADING... </p>;
+  //!TODO: style in nice way spinner or to put it into the container (?)
+  // but first functionality!
+  let usersComments = <Spinner />;
 
-  if (commentArray.length === 3) {
-    usersComments = commentArray.map((item) => (
-      <CustomerCommentMain key={item.user_name} item={item} />
+  if (handymenProfiles && handymenProfiles.length > 0) {
+    // if handymen profiles could be fetched from database, load profiles (max 3) at random
+    usersComments = handymenProfiles.map((item) => (
+      <HandymanProfileMain key={item.id} item={item} />
     ));
+  } else {
+    // otherwise, replace the handymenProfiles area with other content
+    usersComments = ""; // hopefully this will be replaced by some text related to handymen
   }
 
   return (
@@ -72,10 +53,8 @@ const CustomerSection = (props) => {
           Your browser is not supported!
         </video>
       </div>
-      <h2 className={classes.customers__heading}> Happy Customers </h2>
-      <div className={classes.customers__commentContainer}>
-        {usersComments}
-      </div>
+      <h2 className={classes.customers__heading}> Our Repairers </h2>
+      <div className={classes.customers__commentContainer}>{usersComments}</div>
     </div>
   );
 };

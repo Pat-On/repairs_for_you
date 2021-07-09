@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import "./Contact.css";
-import validateForm from "../../common/js/functions";
-import { permittedCrossDomainPolicies } from "helmet";
+import { Link,Redirect } from "react-router-dom";
+import classes from "./Contact.module.css";
 import { send } from "emailjs-com";
 
+
 export default function Contact() {
+	const [isRedirect,setIsRedirect]=useState(false);
 	const [formDetail,setFormDetail]=useState({
 		buyer_name:"",
 		email:"",
@@ -26,77 +26,76 @@ export default function Contact() {
 			"template_ybb8yxc",
 			formDetail,
 			"user_Z6650OqueHooRxmmi5Geo",);
+	alert("Thank you for contacting us! Your message has been sent and we will get back to you soon.")
+	setIsRedirect(true);
 	};
 
-	return (
-		<div className="contact-container">
-			<div className="map-form" onSubmit={handleSubmit}>
+	return  (
+		!isRedirect ?	<div className={classes.contact_container}>
+			<div  onSubmit={handleSubmit}>
 				<form
-					id="form-send-quote"
-					name="form-send-quote"
+					name="form-query"
 					className="form"
 				>
 					<div>
-						<div className="contact-text">
+						<div className={classes.contact_text}>
 							<h1>Contact Us</h1>
+							<hr></hr>
 							<p>Got a question, we would love to hear from you.</p>
 							<p>Drop us a message and one of our team members will get in touch with you</p>
 
 						</div>
-						<div className="contact-info">
+						<div className={classes.contact_info}>
 							<p>Tele-+4470000000</p>
 							<p>repairsyou@gmail.com</p>
 							<a href="https://goo.gl/maps/KaWYzgRdgEwHb9xHA">Coventry refugee and migrant center</a>
 						</div>
 
-						<div className="input-fields-container">
+						<div className={classes.input_fields_container }>
 							<div className="input-field">
 								<label>Name: {" "}</label>
 								<input
 									type="text"
-									id="buyer_name"
 									name="buyer_name"
 									maxLength={60}
 									required
-									placeholder="Enter your name here"
+									placeholder="Your name "
 									onChange={handleChange}
 								/>
 							</div>
-							<div className="input-field">
+							<div className={classes.input_field}>
 								<label>Email Address: {" "}</label>
 								<input
 									type="text"
-									id="email"
 									name="email"
 									maxLength={60}
 									required
-									placeholder="Enter your email here"
+									placeholder="Your email address"
 									onChange={handleChange}
 
 
 								/>
 							</div>
-							<div className="message">
-								<label> Message: {" "}</label><span><textarea
+							<div className={classes.message}>
+								<label> Message: {" "}</label>
+								<textarea
 									type="text"
-									id="message"
 									name="message"
 									required
-									placeholder="Enter your message here"
+									placeholder="Your message here"
 									onChange={handleChange}
 
-								/></span>
+								/>
 
 							</div>
 						</div>
 
 
 
-					<div className="input-field">
+					<div className={classes.button_div}>
 						<input
-							className="btn-submit"
+							className={classes.btn_submit}
 							type="submit"
-							id="buyer_name"
 							name="buyer_name"
 							maxLength={60}
 							required
@@ -111,6 +110,8 @@ export default function Contact() {
 			</div>
 			<Link to="/contact"></Link>
 
-		</div>
+		</div> 
+		:
+		 <Redirect to="/home" />
 	);
 }

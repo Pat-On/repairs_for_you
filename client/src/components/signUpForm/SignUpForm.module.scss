@@ -1,3 +1,5 @@
+//TODO: change it into rem 
+
 .title {
     font-size: 36px;
     margin-bottom: 25px;
@@ -16,6 +18,7 @@
     padding: 2vh 0 3vh;
     text-align: center;
     width: 90%;
+    position: relative;
 }
 
 .inputContainer {
@@ -39,7 +42,7 @@
 .invalidInputMsg {
     position: absolute;
     margin-left: 5%;
-    bottom: -38px;
+    bottom: -20px;
     color: red;
     font-style: italic;
     text-align: left;
@@ -67,7 +70,22 @@
     margin: 0;
     padding: 0;
 }
+.spinnerContainer{
+    position: absolute;
+    top: 53%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 100;
+}
 
+.wrongPassOrEmail {
+    position: absolute;
+    font-size: 2rem;
+    color: red;
+    top: 53%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
 
 @media (max-width: 700px) and (min-width: 481px){
     .container {

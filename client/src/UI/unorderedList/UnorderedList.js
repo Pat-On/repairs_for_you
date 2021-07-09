@@ -2,7 +2,7 @@ import React from "react";
 
 import ListElement from "./listElement/ListElement";
 
-import classes from "./UnorderedList.module.css";
+import classes from "./UnorderedList.module.scss";
 
 /**
  * @DescriptionFunction Component responsible for rendering the unordered list created for need of the ConfirmationFormPage component

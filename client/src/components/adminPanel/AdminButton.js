@@ -1,23 +1,26 @@
 import React from "react";
+import classes from './AdminPage.module.css'
 import { Route, Redirect, useRouteMatch, Switch, Link } from "react-router-dom";
 
-export default function AminButton() {
+
+
+export default function AdminButton() {
 	let { path, url } = useRouteMatch();
 
 	return (
 
-		<div className="admin-page">
+		<div className={classes.admin_page}>
 			<button>
-				<Link to={`${url}/users/handyman`}>View Repair Person</Link>
+				<Link to={`${url}/handyPeople`}>View Repairers</Link>
 			</button>
 			<button>
-				<Link to={`${url}/users/buyers`}>View Buyers</Link>
+				<Link to={`${url}/buyers`}>View Buyers</Link>
 			</button>
 			<button>
-				<Link to={`${url}/users/buyers`}>View Pending buyer requests</Link>
+				<Link to={`${url}/buyersrequests`}>View Pending buyer requests</Link>
 			</button>
 			<button>
-				<Link to={`${url}/users/buyers`}>View Pending repair person requests</Link>
+				<Link to={`${url}/repairrequest`}>View Pending repairer requests</Link>
 			</button>
 			
 		</div>

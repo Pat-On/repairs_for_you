@@ -1,137 +1,96 @@
 // ROUTES RELATED TO HANDYMEN
-import { pool } from "./../db";
-import authController from "./../controller/authController";
 
 const express = require("express");
 const router = express.Router();
 const services = require("../services/handymanServices");
+import authController from "./../controller/authController";
+import handymanController from "./../controller/handymanController";
 
-router.use(express.json());
+// router.use(express.json()); // You Do not need to put it here because You already have it in app.js
 
-// GET "/"
-router.get("/", async (_, res) => {
-  try {
-    const allHandymans = await pool.query(
-      `SELECT * FROM handyman WHERE visible=True`
-    );
+/***************** THE FOLLOWING METHODS ARE ACCESSIBLE TO ALL PUBLIC ROUTES *******************/
 
-    // const testJSON = await JSON.parse(allHandymans.rows[0].address_offer);
-    // return res.status(200).json({
-    //   data: testJSON,
-    // });
-
-    return res.status(200).json({
-      length: allHandymans.rowCount,
-      data: allHandymans.rows,
-    });
-  } catch (error) {
-    //TODO ERROR HANDLER
-    console.log(error);
-  }
-});
-
-router.get("/", async (_, res) => {
+// GET "/" SERVE DATA OF ALL HANDYMEN (accessible to anyone visiting the site)
+router.get("/handymannotprotected", async (_, res) => {
   const result = await services.getAllHandymen();
   return res.status(200).json(result);
 });
 
-// GET "/{id}"
-// router.get("/:id", async (req, res) => {
-//   const result = await services.getHandymanById(parseInt(req.params.id));
-//   result ? res.status(200).send(result) : res.sendStatus(404);
-// });
-
-// !TODO: auth controller and the protection - base on the role
-router.get("/adminsacceshandymans", async (_, res, next) => {
-  try {
-    const allHandymans = await pool.query(`SELECT * FROM handyman`);
-
-    // const testJSON = await JSON.parse(allHandymans.rows[0].address_offer);
-    // return res.status(200).json({
-    //   data: testJSON,
-    // });
-
-    return res.status(200).json({
-      length: allHandymans.rowCount,
-      data: allHandymans.rows,
-    });
-  } catch (error) {
-    //TODO ERROR HANDLER
-    console.log(error);
-  }
+// POST "/" ALLOW HANDYMAN DATA STORAGE
+// Note: this is used only during the initial stage of handyman registration process (accessible to anyone...
+// ...who would like to rgister as handyman on the site)
+router.post("/handymannotprotected", async (req, res) => {
+  const result = await services.addNewHandyman(req.body);
+  const resultStatus =
+    result.status === "OK" ? 200 : result.status === "FAIL" ? 400 : 500;
+  return res.status(resultStatus).send({ message: result.message });
 });
 
-router.get("/:id", async (req, res) => {
-  try {
-    const { id } = req.params;
-    console.log(id);
-    const oneHandyman = await pool.query(
-      "SELECT * FROM handyman WHERE handyman_id = $1 ",
-      [id]
+// Serving three random handyman which has set visibility to true
+router.get(
+  "/handymannotprotected/randomthree",
+  handymanController.threeRandomHandyman
+);
+
+// GET ALL REVIEWS BY HANDYMAN ID
+// WARN: THIS ENDPOINT IS CURRENTLY NOT BEING USED. IT IS INCLUDED IN LIGHT OF PROBABLE FUTURE NEEDS
+router.get("/handymannotprotected/:id/reviews", async (req, res) => {
+  const result = await services.getReviewsByHandymanId(parseInt(req.params.id));
+  return result ? res.status(200).send(result) : res.sendStatus(404);
+});
+
+// GET "/{id}" SERVE DATA OF INDIVIDUAL HANDYMAN
+router.get("/handymannotprotected/:id", async (req, res) => {
+  const result = await services.getHandymanById(parseInt(req.params.id));
+  return result ? res.status(200).send(result) : res.sendStatus(404);
+});
+
+/***************** THE FOLLOWING METHODS ARE DEDICATED TO ADMIN-ACCESSIBLE ROUTES *******************/
+
+/**
+ * Routes are only accessible for logged in admin
+ */
+router.use(authController.protect);
+router.use(authController.restrictTo("admin"));
+
+// GET "/" SERVE DATA OF ALL HANDYMEN (accessible to anyone visiting the site)
+router.get("/handymanprotected", async (_, res) => {
+  const result = await services.getAllHandymenForAdmin();
+  return res.status(200).json(result);
+});
+
+router
+  .route("/handymanprotected/:id")
+  .put(async (req, res) => {
+    const result = await services.editHandymanDetailsByIdAdmin(req.body);
+    console.log(result);
+    const resultStatus =
+      result.status === "OK" ? 200 : result.status === "FAIL" ? 400 : 500;
+    return res.status(resultStatus).json({ message: result.message });
+  })
+
+  //// GET "/{id}" SERVE DATA OF INDIVIDUAL HANDYMAN
+  .get(async (req, res) => {
+    const result = await services.getHandymanByIdForAdmin(
+      parseInt(req.params.id)
     );
-    res.status(200).json({
-      status: "success",
-      length: oneHandyman.rowCount,
-      data: oneHandyman.rows[0],
-    });
-  } catch (err) {
-    res.status(400).json({
-      status: "fail",
-      msg: err.message,
-    });
-  }
-});
+    return result ? res.status(200).send(result) : res.sendStatus(404);
+  })
+  // PATCH "/" LET ADMIN CONTROL THE VISIBILITY OF A HANDYMAN'S PROFILE ON THE SITE(?)
+  .patch(async (req, res) => {
+    const result = await services.changeHandymanVisibilityByAdmin(req.body);
+    const resultStatus =
+      result.status === "OK" ? 200 : result.status === "FAIL" ? 400 : 500;
+    return res.status(resultStatus).json({ message: result.message });
+  })
 
-// POST "/"
-// router.post("/", async (req, res) => {
-//   console.log(req.body)
-//   const result = await services.addNewHandyman(req.body);
-//   const resultStatus = result.status === "OK" ? 201 : 400;
-//   res.status(resultStatus).send({ message: result.message });
-// });
-
-// POST "/"
-router.post("/", async (req, res) => {
-  try {
-    console.log(req.body);
-    // address - object, skills - array
-    const {
-      firstName,
-      lastName,
-      // img,
-      address,
-      postcode,
-      email,
-      phoneNumber,
-      skills,
-      bio,
-    } = req.body;
-    console.log(bio);
-
-    // '{"sector1", "sector2"}'
-    const newArrayString = skills.map((item) => `"${item}"`);
-    console.log(newArrayString.join(", "));
-
-    const _ = await pool.query(
-      `INSERT INTO handyman (first_name, last_name,  address_offer, postcode, email, phone_number, skills, bio)
-                  VALUES ($1, $2, $3, $4, $5, $6, $7, $8)`,
-      [
-        firstName,
-        lastName,
-        [JSON.stringify(address)],
-        postcode,
-        email,
-        phoneNumber,
-        skills,
-        bio,
-      ]
+  // ADMIN CAN DELETE HANDYMAN RECORD
+  .delete(async (req, res) => {
+    const result = await services.deleteHandymanByIdAdmin(
+      parseInt(req.params.id)
     );
-  } catch (error) {
-    //TODO ERROR HANDLER
-    console.log(error);
-  }
-});
-
-
+    return !result ? res.status(204).send(result) : res.sendStatus(404);
+  });
+/******************************************************************************************************/
 
 module.exports = router;

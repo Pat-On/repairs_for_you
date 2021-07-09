@@ -1,30 +1,8 @@
-import { useEffect, useState } from "react";
+import { Redirect, useLocation } from "react-router-dom";
 import Handyman from "../components/Handyman/Profile/Handyman";
 
-const HandymanProfile = ({ id }) => {
-	const [user, setUser] = useState();
-	const [message, setMessage] = useState("Loading...");
-	useEffect(() => {
-		fetch(`/api/users/handyman/${id}`)
-			.then((res) => {
-				if (!res.ok) {
-					throw new Error(res.statusText);
-				}
-				return res.json();
-			})
-			.then((userData) => {
-				setUser(userData);
-			})
-			.catch((err) => {
-				console.error(err);
-				setMessage(err);
-			});
-	}, [id]);
-
-	return !user ? (
-		<h1 className="loading message-loading">{message}</h1>
-	) : (
-		<Handyman userData={user} />
-	);
+const HandymanProfile = () => {
+  const { state } = useLocation();
+  return state ? <Handyman userData={state} /> : <Redirect to="/" />;
 };
 export default HandymanProfile;

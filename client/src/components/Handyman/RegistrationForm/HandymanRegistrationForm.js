@@ -1,36 +1,18 @@
 import { useState } from "react";
 import "./HandymanRegistrationForm.css";
-import Skills from "../SubComponents/Skills";
+import Skills from "./Skills";
 
 import {
   sendRegistrationRequest,
   validateForm,
 } from "../../../common/js/functions";
 
-const allSkills = [
-  { name: "brickLaying", value: "Brick laying" },
-  { name: "carpentry", value: "Carpentry" },
-  { name: "electricalWork", value: "Electrical Work" },
-  {
-    name: "intallAndRepair",
-    value: "Appliance installation and repair",
-  },
-  {
-    name: "propertyMaintenance",
-    value: "Interior and exterior property maintenance",
-  },
-  { name: "tiling", value: "Tiling" },
-  { name: "plastering", value: "Plastering" },
-  { name: "plumbing", value: "Plumbing" },
-  { name: "painting", value: "Painting" },
-  { name: "decorating", value: "Decorating" },
-];
-
 // default profile picture
+
 const defaultHandymanProfilePicture =
   "https://dogtime.com/assets/uploads/2011/03/puppy-development.jpg";
 
-const HandymanRegistrationForm = (props) => {
+const HandymanRegistrationForm = () => {
   // form submission errors
   const [errors, setErrors] = useState([]);
 
@@ -42,13 +24,22 @@ const HandymanRegistrationForm = (props) => {
   );
   const [addressLineOne, setAddressLineOne] = useState("");
   const [addressLineTwo, setAddressLineTwo] = useState("");
-  const [city, setCity] = useState("");
+  const [city, setCity] = useState("Coventry");
   const [postcode, setPostcode] = useState("");
   const [email, setEmail] = useState("");
+  const [emailConfirm, setEmailConfirm] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [selectedSkills, setSelectedSkills] = useState([]);
+  const [otherSkill, setOtherSkill] = useState("");
   const [bio, setBio] = useState("");
 
+  // organise fields that need further validation
+  const fieldsToValidate = [
+    { type: "email", value: email },
+    { type: "tel", value: phoneNumber },
+  ];
+
+  // organise the form data to be sent
   const formData = {
     firstName,
     lastName,
@@ -57,15 +48,21 @@ const HandymanRegistrationForm = (props) => {
     postcode,
     email,
     phoneNumber,
-    skills: selectedSkills,
+    skills: [...selectedSkills, otherSkill],
     bio,
   };
+
   // EVENT HANDLERS
   const sendFormData = async (event) => {
     event.preventDefault();
     const form = event.target;
-    const errors = validateForm(form,form.id);
+    const errors = validateForm(fieldsToValidate);
+    if (selectedSkills.length === 0)
+      errors.push("You must select at least one skill.");
+    if (emailConfirm !== email)
+      errors.push("The emails you entered do not match.");
     if (errors.length > 0) {
+      alert("Error(s) on the form. Please check and try again.");
       return setErrors(errors);
     }
 
@@ -76,8 +73,9 @@ const HandymanRegistrationForm = (props) => {
       formData,
       "user_Z6650OqueHooRxmmi5Geo",
     ];
-    const okToResetForm = await sendRegistrationRequest(requestData);
-    if (okToResetForm) form.reset();
+    // check if sending quote request was successful. Navigate to homepage if it was.
+    const okToGoHome = await sendRegistrationRequest(requestData);
+    if (okToGoHome) window.location.assign("/");
   };
 
   return (
@@ -91,7 +89,7 @@ const HandymanRegistrationForm = (props) => {
           {e}
         </p>
       ))}
-      <h1 className="title">Become a Handyman</h1>
+      <h1 className="title">Become a Repairer</h1>
       <fieldset className="input-field-group details">
         <legend className="subtitle">Your Details</legend>
         <div className="basic-details">
@@ -201,6 +199,20 @@ const HandymanRegistrationForm = (props) => {
             />
           </div>
           <div className="input-field">
+            <label htmlFor="email">
+              Confirm Your Email<span className="required">*</span>
+            </label>{" "}
+            <input
+              type="email"
+              id="email"
+              name="email"
+              maxLength={50}
+              required
+              onChange={(event) => setEmailConfirm(event.target.value)}
+              placeholder="someone@example.com"
+            />
+          </div>
+          <div className="input-field">
             <label htmlFor="phone-number">
               Phone Number<span className="required">*</span>
             </label>{" "}
@@ -221,10 +233,17 @@ const HandymanRegistrationForm = (props) => {
           Skills<span className="required">*</span>
         </legend>
         <em className="required">Please select at least one skill</em>
-        <Skills
-          skills={allSkills}
-          onChangeHandler={(list) => setSelectedSkills(list)}
-        />
+        <Skills onChangeHandler={(list) => setSelectedSkills(list)} />
+        <div className="input-field">
+          <label htmlFor="other-skills">Other:</label>{" "}
+          <input
+            type="text"
+            id="other-skills"
+            name="other-skills"
+            onChange={(event) => setOtherSkill(event.target.value)}
+            placeholder={`What other repairer skill do you have?`}
+          />
+        </div>
       </fieldset>
       <div className="input-field-bio">
         <h2 className="subtitle">

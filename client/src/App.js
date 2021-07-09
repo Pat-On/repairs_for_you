@@ -1,102 +1,96 @@
 import { Route, Switch, Redirect, withRouter } from "react-router-dom";
-import React, { useContext } from "react";
+import React, { useContext, Suspense } from "react";
 
-import "./App.scss";
-import HandyPeople from "./pages/HandyPeople";
+import classes from "./App.module.scss";
 import Layout from "./hoc/Layout/Layout";
-import AdminPanel from "./components/adminPanel/AdminPanel";
 import Login from "./containers/signUp/SignUp";
 import MainPage from "./components/mainPage/mainPage";
-import HandymanProfile from "./pages/HandymanProfile";
-import RegistrationForm from "./pages/RegistrationForm";
-import SignIn from "./containers/signIn/SignIn";
-import Contact from "../src/components/contact/Contact";
 import SignOut from "./containers/signOut/signOut";
-
-import RequestForQuote from "./pages/RequestForQuote";
-
 import AuthContext from "./store/authContext";
+import Spinner from "./UI/Spinner/Spinner";
+import ScrollToTop from "./components/ScrollToTop";
+
+//Lazy loading
+const AdminPanel = React.lazy(() => {
+  return import("./components/adminPanel/AdminPanel");
+});
+const HandymanRoutes = React.lazy(() => {
+  return import("./components/Handyman/HandymanRoutes");
+});
+const Contact = React.lazy(() => {
+  return import("../src/components/contact/Contact");
+});
+const SignIn = React.lazy(() => {
+  return import("./containers/signIn/SignIn");
+});
 
 const App = () => {
   const authCtx = useContext(AuthContext);
 
   return (
-    <div className="App container">
+    <div className={classes.container}>
       <Layout>
-        <Switch>
-          <Route
-            path="/"
-            exact
-            component={(props) => <MainPage {...props} />}
-          />
-          <Route
-            path="/buyers"
-            exact
-            component={() => (
-              <div>
-                <h1>PLACEHOLDER buyers</h1>
-              </div>
-            )}
-          />
-          <Route
-            path="/users/handyman"
-            exact
-            component={() => (
-              <div>
-                <HandyPeople />{" "}
-              </div>
-            )}
-          />
-
-          <Route
-            path="/contact"
-            exact
-            component={() => (
-              <div>
-                <h1>
-                  <Contact />{" "}
-                </h1>
-              </div>
-            )}
-          />
-
-          <Route
-            path="/signinout"
-            component={(props) => <SignOut {...props} />}
-          />
-          <Route path="/signin" component={(props) => <SignIn {...props} />} />
-
-          {authCtx.isLoggedIn && (
+        <ScrollToTop />
+        <Suspense
+          className={classes.container__test}
+          fallback={
+            <div className={classes.spinner__container}>
+              <Spinner />
+            </div>
+          }
+        >
+          <Switch>
             <Route
-              path="/admin-panel"
-              component={(props) => <AdminPanel {...props} />}
+              path="/"
+              exact
+              component={(props) => <MainPage {...props} />}
             />
-          )}
+            <Route
+              path="/buyers"
+              component={() => (
+                <div>
+                  <h1>PLACEHOLDER buyers</h1>
+                </div>
+              )}
+            />
 
-          <Route path="/login" component={(props) => <Login {...props} />} />
+            <Route
+              path="/users/handyman"
+              render={(props) => <HandymanRoutes {...props} />}
+            />
 
-          {/* Sub-routes which should be outsources to the nester router */}
-          <Route
-            path="/users/:usergroup/register"
-            exact
-            render={({ match }) => (
-              <RegistrationForm formId={match.params.usergroup} />
+            <Route
+              path="/contact"
+              render={() => (
+                <div>
+                  <h1>
+                    <Contact />{" "}
+                  </h1>
+                </div>
+              )}
+            />
+
+            <Route
+              path="/signinout"
+              component={(props) => <SignOut {...props} />}
+            />
+            <Route
+              path="/signin"
+              component={(props) => <SignIn {...props} />}
+            />
+
+            {authCtx.isLoggedIn && (
+              <Route
+                path="/admin-panel"
+                render={(props) => <AdminPanel {...props} />}
+              />
             )}
-          />
 
-          <Route
-            path="/users/handyman/:id"
-            exact
-            render={({ match }) => <HandymanProfile id={match.params.id} />}
-          />
+            <Route path="/login" component={(props) => <Login {...props} />} />
 
-          <Route
-            path="/forms/request-for-quote"
-            render={(props) => <RequestForQuote {...props} isAuthed={true} />}
-          />
-
-          <Redirect to="/" />
-        </Switch>
+            <Redirect to="/" />
+          </Switch>
+        </Suspense>
       </Layout>
     </div>
   );

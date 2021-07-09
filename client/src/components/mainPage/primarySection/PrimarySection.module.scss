@@ -1,3 +1,6 @@
+@import "/client/src/assets//styling/base";
+@import "/client/src/assets/styling/animation";
+
 .primary {
   grid-row: 1 / 2;
   grid-column: 1 / -1;
@@ -20,42 +23,79 @@
   background-position: top;
 
   &__heading {
+    font-family: $font-primary;
     color: white;
-    text-transform: uppercase;
+    letter-spacing: 3px;
+    text-transform: capitalize;
     margin-bottom: 6rem;
-    font-size: 6rem;
+    margin-top: 6rem;
 
     &__main {
       display: block;
+      font-size: 5rem;
+      animation-name: moveFromLeft;
+      animation-duration: 1s;
+      animation-timing-function: easy-out;
     }
 
     &__sub {
       display: block;
+      font-size: 6rem;
+      animation-name: moveFromRight;
+      animation-duration: 1s;
+      animation-timing-function: easy-out;
+
+      span {
+        font-size: 7rem;
+      }
     }
   }
 
+  //TODO: styling of this button is not the same
   &__button {
+    display: inline-block;
+    font-family: $font-secondary;
     text-transform: uppercase;
     text-decoration: none;
     padding: 1.5rem 4rem;
     font-weight: 600;
-    
+    width: 28rem;
+    letter-spacing: 1px;
+
+    animation-name: fadeIn;
+    animation-duration: 1s;
+    animation-timing-function: easy-out;
+    @media only screen and (max-width: $bp-small) {
+      display: block;
+      width: 80%;
+    }
 
     &__publish {
-        margin-right: 1rem;
-        background-color: #F49A34;
-        color: rgb(3, 3, 3);
-        font-size: 1.6rem;
+      margin-right: 1rem;
+      border: 1px solid #f49a34;
+      color: #f49a34;
+      font-size: 1.6rem;
+      &:hover {
+        color: white;
+        background-color: #f49a34;
+      }
+      @media only screen and (max-width: $bp-small) {
+        margin: 0 auto 4rem;
+      }
     }
 
     &__hire {
-        margin-left: 1rem;
-        background-color: #F49A34;
-        padding: 1.5rem 8rem;
-        color: rgb(7, 7, 7);
-        font-size: 1.7rem;
-
-
+      margin-left: 1rem;
+      border: 1px solid #f49a34; //added border to make them the same size
+      background-color: #f49a34;
+      color: white;
+      font-size: 1.6rem;
+      &:hover {
+        background-color: #d6862b;
+      }
+      @media only screen and (max-width: $bp-small) {
+        margin: 0 auto;
+      }
     }
   }
 }

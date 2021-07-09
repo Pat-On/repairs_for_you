@@ -22,15 +22,15 @@ const SignIn = (props) => {
       invalidInputInfo: "Enter valid email address",
       name: "E-mail",
       placeholder: "example@email.com",
-      value: "admin@admin.uk",
+      value: "",
 
       validation: {
         required: true,
         isEmail: true,
       },
       //TODO: change valid in production for false
-      valid: true,
-      // valid: false,
+      // valid: true,
+      valid: false,
       touched: false,
       incorrect: false,
     },
@@ -38,17 +38,17 @@ const SignIn = (props) => {
       invalidInputInfo: "You have to input password",
       name: "Password",
       placeholder: "Password",
-      value: "password",
+      value: "",
       objectConfig: { type: "password" },
       //!IMPORTANT detailed validation of password is not required now
       validation: {
         required: true,
         //TODO: important in production to turn on validation password in utility.js
-        // isPassword: true,
+        isPassword: true,
       },
       //TODO: change valid in production for false
-      // valid: false,
-      valid: true,
+      valid: false,
+      // valid: true,
       touched: false,
       incorrect: false,
     },

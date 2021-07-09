@@ -27,7 +27,7 @@ function getBuyerById(bId) {
 
 // FETCH DATA OF ALL BUYER FROM DATABASE BY BUYER EMAIL
 // Note: this is used only during the initial stage of quote requesting process (accessible to anyone...
-// ...who would like to send quote reqeust to a handyman on the site)
+// ...who would like to send quote request to a handyman on the site)
 function getBuyerByEmail(bEmail) {
   return pool.query(getBuyerByEmailQuery, [bEmail]);
 }

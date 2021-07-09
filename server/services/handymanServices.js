@@ -55,7 +55,7 @@ async function getReviewsByHandymanId(hId) {
 
 // VALIDATE INCOMING HANDYMAN DATA
 // Note: this is used only during the initial stage of handyman registration process (accessible to anyone...
-// ...who would like to rgister as handyman on the site)
+// ...who would like to register as handyman on the site)
 function validateHandymanData(hData) {
   // required handyman data fields
   try {

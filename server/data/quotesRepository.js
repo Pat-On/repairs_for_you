@@ -9,7 +9,7 @@ INSERT INTO jobs (client_name, client_email, job_description, job_start_date, ha
 
 /***************** THE FOLLOWING METHODS ARE DEDICATED TO ADMIN-ACCESSIBLE ROUTES *******************/
 
-// WARN: ANY REQUIRED AUTHORISATION LOGIC IS YET TO BE ADDED
+// WARN: ANY REQUIRED AUTHORIZATION LOGIC IS YET TO BE ADDED
 
 // FETCH DATA OF ALL JOBS FROM DATABASE BY JOB ID (currently accessible only to admin)
 function getAllQuotes() {

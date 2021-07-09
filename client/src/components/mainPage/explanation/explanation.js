@@ -36,7 +36,7 @@ const Explanation = (props) => {
 
       <h3 className={classes.explanation__header__sub__2}>
         {" "}
-        For Handyperson:{" "}
+        For Repairers:{" "}
       </h3>
       <div
         className={`${classes.explanation__flexContainer} ${classes.explanation__listGridPos2}`}

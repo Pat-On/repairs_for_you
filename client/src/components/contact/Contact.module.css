@@ -1,56 +1,72 @@
 
+/*contact container*/
+
 .contact_container{
-    width: 50%;
+    width: 70%;
     margin-left: auto;
     margin-right: auto;
-    background-color: rgba(236, 142, 248, 0.075);
+    margin-bottom: 10rem;
+    background-image: url("./julie-molliver-Z3vFp7szCAY-unsplash.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
 }
+/* title  */
+
 .contact_container h1{
     text-align: center;
     font-style: italic;
-    font-weight: 400;
-}
-.contact_text{
-    text-align: justify;
+    font-weight: 600;
     padding-top: 2rem;
     padding-bottom: 2rem;
-   font-weight: 300;
-   font-size: large;
+    color: rgb(211, 113, 1);
+  }
 
-
+.contact_text{
+    text-align: justify;
+    padding-top: 5rem;
+    padding-bottom: 2rem;
+    font-weight: 300;
+    font-size: large;
 }
+
+hr{
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .contact_info{
    padding-top: 2rem;
    padding-bottom: 2rem;
    font-weight: 400;
    font-size: large;
 }
-.input_fields_container{
+ .input_fields_container input{
+ margin-top: 3rem;
+ height: 3rem;
+ border: 1px solid rgb(12, 12, 12);
 
-    margin-top: 3rem;
-}
+} 
 
-.button_submit_form {
-    margin-top: 1rem;;
-    padding: 1rem 1.8rem;
-    padding-top: 2rem;
-    padding-bottom: 2rem;
-    text-align: justify;
-}
 .input_fields_container > .input_field > label,.message label{
     padding-right: 2rem;
     font-size: large;
-    font-weight: 400;
+    font-weight: 600;
 }
 .message textarea{
-    height: 7rem;
+    height: 8rem;
     width: 100%;
     overflow-x: hidden;
     overflow-y: scroll;
+    border: 1px solid rgb(0, 0, 0);
+}
+
+.button_div{
+    background-color: white;
 }
 .btn_submit{
     height: 3.5rem;
-    background-color: rgb(43, 43, 206);
+    background-color: #f49a34;
     color: white;
     font-weight: 400;
     font-size: medium;
@@ -58,5 +74,12 @@
     border-radius: 5px;
     padding:1rem;
 
-
 }
+@media only screen and (max-width: 600px) {
+    
+.contact_container{
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}
+  }

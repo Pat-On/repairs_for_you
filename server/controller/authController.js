@@ -30,7 +30,6 @@ const createSendToken = (user, statusCode, res) => {
     httpOnly: true,
   };
   if (process.env.DATABASE_URL) cookieOptions.secure = true;
-  console.log(expirationTime);
   res.cookie("jwt", token, cookieOptions);
   res.status(statusCode).json({
     status: "success",
@@ -93,8 +92,6 @@ exports.protect = async (req, res, next) => {
   try {
     // 1 - getting token and check if it exist
     let token;
-    console.log("*************************************************")
-    console.log(req.headers.authorization)
     if (
       req.headers.authorization &&
       req.headers.authorization.startsWith("Bearer")
@@ -118,8 +115,6 @@ exports.protect = async (req, res, next) => {
 
     //GRANTING ACCESS TO PROTECTED ROUTE
     req.user = fetchedUser;
-    console.log("******************************************************************")
-    console.log(fetchedUser)
     next();
   } catch (error) {
     res.status(401).json({
@@ -136,7 +131,6 @@ exports.protect = async (req, res, next) => {
  */
 exports.restrictTo = (...roles) => {
   return (req, res, next) => {
-    console.log(req.user.user_role)
     //!TODO it should send error 403 -> We need to specify the global error handling or introduce temporary solution
     if (!roles.includes(req.user.user_role))
       throw new Error("You do not have permission to perform this action");

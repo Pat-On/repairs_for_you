@@ -31,7 +31,7 @@ const Handyman = ({ userData }) => {
   return (
     <div className="handyman">
       {/* <div className="profile-image-bio"> */}
-      <figure>
+      <figure className="profile-figure">
         <img
           className="profile-image"
           src={userDefaultImg} // WARN: TEMPORARY SOLUTION

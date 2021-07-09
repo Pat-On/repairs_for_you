@@ -18,7 +18,7 @@ const Explanation = (props) => {
         className={`${classes.explanation__flexContainer} ${classes.explanation__listGridPos1}`}
       >
         <p className={classes.explanation__p1}>
-          Register by email Your request
+          Register Your request by email 
         </p>
         <img
           className={classes.explanation__arrowSVG}
@@ -31,12 +31,12 @@ const Explanation = (props) => {
           src={svgArrow}
           alt="Arrow icon made by Roundicons"
         />
-        <p className={classes.explanation__p3}>Get Service From US</p>
+        <p className={classes.explanation__p3}>Get Service From Us</p>
       </div>
 
       <h3 className={classes.explanation__header__sub__2}>
         {" "}
-        For Handyperson:{" "}
+        For Repairers:{" "}
       </h3>
       <div
         className={`${classes.explanation__flexContainer} ${classes.explanation__listGridPos2}`}
@@ -47,7 +47,7 @@ const Explanation = (props) => {
           src={svgArrow}
           alt="Arrow icon made by Roundicons"
         />
-        <p className={classes.explanation__p2}>Get Acceptation</p>
+        <p className={classes.explanation__p2}>Get Accepted</p>
         <img
           className={classes.explanation__arrowSVG}
           src={svgArrow}

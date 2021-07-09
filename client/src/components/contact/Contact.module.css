@@ -1,77 +1,79 @@
-
 /*contact container*/
 
-.contact_container{
-    width: 70%;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 10rem;
-    
-  background-image: linear-gradient(to right, rgba(255, 255, 255, 0.6), rgba(236, 236, 236, 0.6)), url('./julie-molliver-Z3vFp7szCAY-unsplash.jpg');
+.contact_container {
+  width: 70%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 10rem;
+  background-image: linear-gradient(
+      to right,
+      rgba(255, 255, 255, 0.6),
+      rgba(236, 236, 236, 0.6)
+    ),
+    url("./julie-molliver-Z3vFp7szCAY-unsplash.jpg");
   background-repeat: no-repeat;
-    background-size: cover;
-   
+  background-size: cover;
 }
-.contact_container h1{
-    text-align: center;
-    font-style: italic;
-    font-weight: 600;
-    padding-bottom: 2rem;
-    color: rgb(211, 113, 1);
-  }
-
-.contact_text{
-    text-align: justify;
-    padding-top: 5rem;
-    padding-bottom: 2rem;
-    font-weight: 300;
-    font-size: larger;
+.contact_container h1 {
+  text-align: center;
+  font-style: italic;
+  font-weight: 600;
+  padding-bottom: 2rem;
+  color: rgb(211, 113, 1);
 }
 
-hr{
-    width: 60%;
-    margin-left: auto;
-    margin-right: auto;
+.contact_text {
+  text-align: justify;
+  padding-top: 5rem;
+  padding-bottom: 2rem;
+  font-weight: 300;
+  font-size: larger;
 }
 
-.contact_info{
-   padding-top: 2rem;
-   padding-bottom: 2rem;
-   font-weight: 400;
-   font-size: larger;
-}
- .input_fields_container input{
- margin-top: 3rem;
- height: 3rem;
- border: 1px solid rgb(12, 12, 12);
-
-} 
-
-.input_fields_container > .input_field > label,.message label{
-    padding-right: 2rem;
-    font-size: large;
-    font-weight: 600;
-}
-.message textarea{
-    height: 8rem;
-    width: 100%;
-    overflow-x: hidden;
-    overflow-y: scroll;
-    border: 1px solid rgb(0, 0, 0);
+hr {
+  width: 60%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-.button_div{
-    background-color: white;
+.contact_info {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  font-weight: 400;
+  font-size: larger;
 }
-.btn_submit{
-    height: 3.5rem;
-    background-color: rgb(211, 113, 1);
-    color: white;
-    font-weight: 600;
-    font-size: large;
-    border: none;
-    border-radius: 5px;
-    width: 10rem;
-    height: 5rem;
-    padding:1.3rem;
+.input_fields_container input {
+  margin-top: 3rem;
+  height: 3rem;
+  border: 1px solid rgb(12, 12, 12);
+}
+
+.input_fields_container > .input_field > label,
+.message label {
+  padding-right: 2rem;
+  font-size: large;
+  font-weight: 600;
+}
+.message textarea {
+  height: 8rem;
+  width: 100%;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  border: 1px solid rgb(0, 0, 0);
+}
+
+.button_div {
+  background-color: white;
+}
+.btn_submit {
+  height: 3.5rem;
+  background-color: rgb(211, 113, 1);
+  color: white;
+  font-weight: 600;
+  font-size: large;
+  border: none;
+  border-radius: 5px;
+  width: 10rem;
+  height: 5rem;
+  padding: 1.3rem;
 }

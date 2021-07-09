@@ -32,28 +32,6 @@ const AdminPanel = (props) => {
 				<AdminButton />
 				<Adminpage {...props} />
 			</div>
-
-			{/*
-      <button>
-        <Link to={`${url}/usersmanagement`}>Users Management Panel</Link>
-      </button>
-
-      <Switch>
-        <Route
-          path="/"
-          exact
-          component={() => <h1>You are now In the Admin Panel Component</h1>}
-        />
-        <Route
-          path={`${path}/usersmanagement/:id`}
-          component={(props) => <UserDetailedProfile {...props}/>}
-        />
-        <Route
-          path={`${path}/usersmanagement`}
-          component={(props) => <UserManagements {...props} />}
-        />
-      </Switch>
-      */}
 		</div>
 	);
 };

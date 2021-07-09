@@ -53,22 +53,12 @@ const App = () => {
                 </div>
               )}
             />
-
             <Route
               path="/users/handyman"
               render={(props) => <HandymanRoutes {...props} />}
             />
 
-            <Route
-              path="/contact"
-              render={() => (
-                <div>
-                  <h1>
-                    <Contact />{" "}
-                  </h1>
-                </div>
-              )}
-            />
+            <Route path="/contact" render={() => <Contact />} />
 
             <Route
               path="/signinout"

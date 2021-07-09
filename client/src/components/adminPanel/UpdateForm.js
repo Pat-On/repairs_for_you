@@ -122,7 +122,7 @@ export default function UpdateForm() {
               />
             </div>
           </div>
-          <div className="input-field-group address-details">
+          <div  className={classes.input_field_group_details}>
             <h3>Address</h3>
             <div className={classes.input_field}>
               <label htmlFor="address-line-one">

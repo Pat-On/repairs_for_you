@@ -6,9 +6,6 @@ import Spinner from "../../UI/Spinner/Spinner"
 
 import classes from "./SignUpForm.module.scss";
 
-// I left it because we may decide to use logo, but it was not looking good in that version
-// import LogoRFY from "../logo/Logo"
-
 /**
  * @DescriptionFunction Component responsible for rendering the sign-up forms including the input fields
  * @param {Function} props.back [function which should return user to previous page. Function is attached to button to "onClick" event]
@@ -44,7 +41,6 @@ const signUpForm = (props) => {
           elementConfig={item.config.objectConfig}
         />
         {!item.config.valid &&
-          // props.shouldValidate &&
           item.config.touched && (
             <p className={classes.invalidInputMsg}>
               {item.config.invalidInputInfo}
@@ -79,7 +75,6 @@ const signUpForm = (props) => {
 
   return (
     <div className={classes.container}>
-      {/* <LogoRFY /> */}
       <h1 className={classes.title}>{props.nameOfTheForm}</h1>
       {inputForms}
       {props.loading && <div className={classes.spinnerContainer}><Spinner /></div>}

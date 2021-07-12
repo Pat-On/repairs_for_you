@@ -8,7 +8,7 @@ import MainPage from "./components/mainPage/mainPage";
 import SignOut from "./containers/signOut/signOut";
 import AuthContext from "./store/authContext";
 import Spinner from "./UI/Spinner/Spinner";
-import ScrollToTop from "./components/ScrollToTop";
+import ScrollToTop from "./components/Navigation/ScrollToTop";
 
 //Lazy loading
 const AdminPanel = React.lazy(() => {
